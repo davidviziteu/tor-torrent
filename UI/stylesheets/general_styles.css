@@ -1,5 +1,5 @@
 :root {
-  --sections-space: 15px;
+  --sections-space: 30px;
   --weak-purple: #bfa6cb;
   --accent-purple: rgb(107, 75, 136);
   --blue: rgb(100,131,172);
@@ -47,16 +47,23 @@ body {
     height: calc(100vh - var(--sections-space));
 }
 
-menu {
+#menu-bar {
     margin: 0;
     grid-area: "menu";
     grid-column: 1;
     background-color: var(--accent-purple);
-    border-radius: 2em;
+    border-radius: 3em;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
 }
 
 main {
     grid-area: "torrent-list";
     grid-column: 2;
     background-color: rgba(255, 255, 255, 0.527);
+}
+
+#menu{
+
 }

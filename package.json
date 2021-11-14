@@ -1,0 +1,30 @@
+{
+  "name": "tor-torrent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "windev": "$env:NODE_ENV=\"development\"&&electron .",
+    "macdev": "export NODE_ENV=development&&electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidviziteu/tor-torrent.git"
+  },
+  "keywords": [
+    "tor",
+    "torrent"
+  ],
+  "author": "David-Andrei Viziteu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidviziteu/tor-torrent/issues"
+  },
+  "homepage": "https://github.com/davidviziteu/tor-torrent#readme",
+  "devDependencies": {
+    "electron": "^15.3.1",
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-reloader": "^1.2.1"
+  }
+}

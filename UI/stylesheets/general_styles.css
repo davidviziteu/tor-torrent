@@ -1,0 +1,62 @@
+:root {
+  --sections-space: 15px;
+  --weak-purple: #bfa6cb;
+  --accent-purple: rgb(107, 75, 136);
+  --blue: rgb(100,131,172);
+  --light-turqoise: rgb(58, 133, 145);
+  --accent-turqoise: rgb(30,74,74);
+}
+
+html{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Monaco', 'Courier New', 'monospace';
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    background: rgb(238,174,202);
+    background: linear-gradient(
+        90deg, rgba(238,174,202,0.6740897042410714) 0%, 
+        rgba(194,180,217,0.7357143541010154) 49%, 
+        rgba(148,187,233,0.7217087518601191) 100%); 
+}
+
+.container {
+    width: 100%;
+    display: grid;
+    grid-column-gap: calc(var(--sections-space));
+    padding: var(--sections-space);
+    /* grid-template-columns: 1fr 3fr; */
+    grid-template-columns: 150px calc(100vw - 2 * var(--sections-space) - 150px);
+    justify-content: center;    
+    align-content: center; 
+    grid-template-areas: "menu torrent-list";
+}
+
+.positioning-stuff{
+    height: calc(100vh - var(--sections-space));
+}
+
+menu {
+    margin: 0;
+    grid-area: "menu";
+    grid-column: 1;
+    background-color: var(--accent-purple);
+    border-radius: 2em;
+}
+
+main {
+    grid-area: "torrent-list";
+    grid-column: 2;
+    background-color: rgba(255, 255, 255, 0.527);
+}

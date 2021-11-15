@@ -53,10 +53,10 @@ var(--menu-list-width) calc(100vw - 2 * var(--sections-space) - var(--menu-list-
 }
 
 .positioning-stuff{
-    height: calc(100vh - var(--sections-space));
 }
 
 #menu-bar {
+    height: calc(100vh - var(--sections-space));
     margin: 0;
     grid-area: "menu";
     grid-column: 1;
@@ -67,14 +67,19 @@ var(--menu-list-width) calc(100vw - 2 * var(--sections-space) - var(--menu-list-
     align-items: center;
 }
 
-main {
-    grid-area: "torrent-list";
-    grid-column: 2;
+#torrent-list {
+
+    --top-space: 4em;
+
+    grid-area: torrent-list;
     overflow: scroll;
+    height: calc(100vh - var(--sections-space) - var(--top-space));
+
+    margin-top: var(--top-space);
     /* background-color: rgba(255, 255, 255, 0.527); */
 }
 
-#menu{
+menu{
 
 }
 

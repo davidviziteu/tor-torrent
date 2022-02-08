@@ -1,0 +1,14 @@
+{
+  "name": "tor-torrent-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tracker.js",
+  "scripts": {
+    "dev": "nodemon tracker.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

@@ -37,3 +37,6 @@ app.on('window-all-closed', (event) => {
     event.preventDefault()
     app.hide()
 })
+var os = require('os');
+
+console.log(os.type());

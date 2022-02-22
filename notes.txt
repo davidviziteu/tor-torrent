@@ -1,7 +1,9 @@
 clientii fac 2 tipuri de announce la tracker:
 
-tip 1) normal (se anunta ca eu, clientul cu id=cheia publica, ip=ip si port=port, am torrentul Y, bucatile [2,3,...])
+tip 1) normal (se anunta ca eu, clientul cu id=cheia publica, ip=ip si port=port, am/descarc torrentul Y)
 
 tip 2) announce ca e nod care face fwd la cells 
 
-cel care uploadeaza poate uploada oricand, cei care descarca trebuie ei sa se protejeze prin anonimat
+https://www.sohamkamani.com/nodejs/rsa-encryption/
+
+to start a config: py runall.py then you have to kill the terminal

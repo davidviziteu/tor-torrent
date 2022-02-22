@@ -1,39 +1,47 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-// const router = require('./routes')
+const models = require('./models')
 const router = require('express').Router()
-const fs = require('fs');
-const config = JSON.parse(process.argv[2].replaceAll(`'`, `"`));
+const fs = require('fs')
+let config
+try {
+    config = JSON.parse(process.argv[2].replaceAll(`'`, `"`))
+} catch {
+    config = {
+        "ip": "localhost",
+        "port": 6969
+    }
+}
+const Joi = require('joi')
 
-const app = express();
+const {StatusCodes} = require('http-status-codes') 
 
-app.use(bodyParser.json())
+const app = express()
+
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 let nodes = new Map()
 
-
-router.post('/announce', (req, res) => {
-    if (!req.body.ip) //schimbi cu validate
-        return res.status(400).end('no body')
-    let newAnnounce = {
-        ip: req.body.ip,
-        publicKey: req.body.publicKey,
-        port: req.body.port
-    };
-    console.log(`new peer ip: ${newAnnounce.ip}`);
+router.post('/announce/node', (req, res) => {
+    const { error, value } = models.trackerAnnounceSchema.validate(req.body);
+    if (error) 
+        return res.status(StatusCodes.BAD_REQUEST).end(JSON.stringify({
+            error: error
+        }))
+    let newAnnounce = new models.Announce(value)
+    console.log(`new peer ip: ${newAnnounce.ip}`)
     nodes.set(`${newAnnounce.ip}:${newAnnounce.port}`, newAnnounce)
-    return res.status(200).end('ok');
+    return res.status(StatusCodes.OK).end(JSON.stringify({
+        result: "ok"
+    }))
 })
 
 router.get('/scrape/peers', (req, res) => {
-    res.end(JSON.stringify(Object.fromEntries(nodes)));
-})
-
-router.post('/route', (req, res) => {
-
+    res.status(StatusCodes.OK).end(JSON.stringify(Object.fromEntries(nodes)))
 })
 
 app.use('/', router)
+
 app.listen(config.port, () =>
     console.log(`Listening on ${config.ip}:${config.port}...`)
 )

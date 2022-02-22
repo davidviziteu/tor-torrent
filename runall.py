@@ -1,15 +1,16 @@
 import os
 import json
+import sys
 import multiprocessing
-
+import subprocess
 
 def checkdir():
     os.system(f'start /B start cmd.exe @cmd /k cd')
 
 
-def client1():
+def client(proc_args: str):
     print('client1')
-    d = str(data["client1"]).replace("\n", "").replace(' ', '')
+    d = str(proc_args).replace("\n", "").replace(' ', '')
     os.system(f'cd client && start /B start cmd.exe @cmd /k npm run dev -- {d}')
 
 
@@ -28,28 +29,13 @@ with open('makefiles/common_models.js') as common_models:
     update_file('tracker/models/index.js', lines)
     update_file('client/models/index.js', lines)
 
-
 with open('makefiles/setup.json') as config_file:
     data = json.load(config_file)
-    # print(data['tracker'])
-    client1 = multiprocessing.Process(target=client1)
     tracker = multiprocessing.Process(target=tracker)
-
-    client1.run()
     tracker.run()
-#
-# def main():
-#     while 1:
-#         usrin = input()
-#         if usrin == 'r':
-#             client1.kill()
-#             client1.start()
-#             tracker.kill()
-#             tracker.start()
-#
-#         if usrin == 'e':
-#             client1.kill()
-#             tracker.kill()
-#
-# if __name__ == '__main__':
-#     main()
+    if 'tracker' not in sys.argv:
+        for client_args in data['clients']:
+            cli = multiprocessing.Process(target=client, args=(str(client_args),))
+            cli.run()
+
+

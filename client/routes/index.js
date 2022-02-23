@@ -1,0 +1,1 @@
+exports.testingRoutes = require('./testing')

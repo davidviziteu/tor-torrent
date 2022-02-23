@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const models = require('./models')
 const router = require('express').Router()
 const fs = require('fs')
+const { StatusCodes } = require('http-status-codes') 
+
 let config
 try {
     config = JSON.parse(process.argv[2].replaceAll(`'`, `"`))
@@ -14,7 +16,6 @@ try {
 }
 const Joi = require('joi')
 
-const {StatusCodes} = require('http-status-codes') 
 
 const app = express()
 
@@ -36,7 +37,7 @@ router.post('/announce/node', (req, res) => {
     }))
 })
 
-router.get('/scrape/peers', (req, res) => {
+router.get('/scrape/nodes', (req, res) => {
     res.status(StatusCodes.OK).end(JSON.stringify(Object.fromEntries(nodes)))
 })
 

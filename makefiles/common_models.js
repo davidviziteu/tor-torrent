@@ -7,18 +7,33 @@ exports.cellValidationSchema = Joi.object().keys({
     nextNodePort: Joi.number().min(6000).required(),
     signature: Joi.string(),
     payload: Joi.required(), //data. json or encrypted stringyfied json
+    returnNodeIp: Joi.string().required(),//ip of next node
+    returnNodePort: Joi.number().min(6000).required(),
+    returnOnion: Joi.string().required(),
+    //TO DO
 });
 
 exports.Cell = class {
-    task = '' //task for reader
-    nextNodeIp = '' //ip of next node
-    nextNodePort = '' //port of next node
     signature = ''
-    payload = '' //data. json or encrypted stringyfied json
+    payload = '' //plain text
+    return = {
+        ip: '',
+        port: 0,
+        onion: ''
+    }
 };
 
+exports.TransitCell = class {
+    next = {
+        ip: '',
+        port: 0
+    }
+    encriptDataWithKey = ''
+    payload = '' //another cell/onion
+}
+
 exports.PostObject = class {
-    cell = exports.Cell
+    cell = ''
     data = ''
 }
 

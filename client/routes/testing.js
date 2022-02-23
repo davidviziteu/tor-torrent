@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const fetch = require('cross-fetch');
+const crypto = require("crypto");
 
 router.get('/peers', async (req, res) => {
     const response = await fetch('http://localhost:6969/scrape/nodes');
@@ -9,6 +10,9 @@ router.get('/peers', async (req, res) => {
         data
     ))
 })
+
+
+const prepOnion = (hops, data)
 
 router.post('/sendmessage', async (req, res) => {
     /*

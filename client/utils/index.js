@@ -1,6 +1,8 @@
 const crypto = require("crypto");
-const models = require('../models')
 const fetch = require(`node-fetch`)
+
+exports.trackerApi = require('./trackerAPI.js')
+exports.comm = require('./comm.js')
 
 exports.encrpytTextRsa = (text, publicKey) => {
     //works with string public key as well
@@ -69,59 +71,5 @@ exports.properFetchPost = (url, body) => {
         },
         body: JSON.stringify(body)
     })
-}
-
-
-exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload) => {
-    //hop: [{ip, port, publicKey, aesKey}, {same}]
-
-    let finalOnion = new models.Onion()
-    finalOnion.message = message // != fwd
-    finalOnion.next.ip = 'TODO ip of the first node in the return path'
-    finalOnion.next.port = 'TODO port of the first node in the return path'
-    finalOnion.next.encryptedAesKey = 'TODO aes key used to decypt the first layer of the return onion'
-    finalOnion.onionLayer = 'TODO this will be the return onion'
-    let allHops = [{
-        ip: destip,
-        port: destport,
-        publicKey: destPbKey
-    }].concat(hops)
-
-    let portsOrder = []
-    let keysOrder = []
-
-    let currentOnion = new models.Onion()
-    let currentAesKey = this.generateAesKey()
-    let prevAesKeyObj = currentAesKey
-    // currentOnion.onionLayer = 
-    prevOnion = finalOnion
-    let i
-    for (i = 0; i < allHops.length - 1; i++) {
-        const hop = allHops[i];
-        currentOnion = new models.Onion()
-        currentOnion.onionLayer = this.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
-        currentOnion.next.encryptedAesKey = this.encrpytTextRsa(JSON.stringify(prevAesKeyObj), hop.publicKey)
-        currentOnion.next.aesPublicKey = hop.publicKey
-        currentOnion.next.ip = hop.ip
-        currentOnion.next.port = hop.port
-        portsOrder = [hop.port].concat(portsOrder)
-        keysOrder = [hop.publicKey].concat(keysOrder)
-        ip = hop.ip
-        port = hop.port
-        currentOnion.message = 'fwd'
-        currentOnion.encryptExternalPayload = false //tre vazut ce pun aici..
-        prevOnion = JSON.parse(JSON.stringify(currentOnion))
-        prevAesKeyObj = this.generateAesKey()
-    }
-
-    let transitCell = new models.TransitCell()
-    transitCell.externalPayload = payload
-    transitCell.onion = this.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
-    transitCell.encryptedAesKey = this.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey)
-    transitCell.aesPublicKey = allHops[i].publicKey
-    keysOrder = [allHops[i].publicKey].concat(keysOrder)
-    portsOrder = [allHops[i].port].concat(portsOrder) //for debugging
-    console.log(portsOrder);
-    return { transitCell: transitCell, nextIp: allHops[i].ip, nextPort: allHops[i].port }
 }
 

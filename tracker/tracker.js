@@ -78,7 +78,7 @@ router.get('/scrape/nodes/:count', (req, res) => {
         idx = randomNumber(nodesMap.size)
         randomKey = keysArray[idx]
         selectedNode = nodesMap.get(randomKey)
-        if (usedIndexes.indexOf(idx) == -1) {
+        if (usedIndexes.indexOf(idx) == -1 && req.ip != selectedNode.ip) {
             usedIndexes.push(idx)
             nodes.push(selectedNode)
             i++

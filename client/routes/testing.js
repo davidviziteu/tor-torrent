@@ -1,26 +1,20 @@
 const router = require('express').Router()
-const fetch = require('cross-fetch');
+const fetch = require('node-fetch');
 const crypto = require("crypto");
-
-router.get('/peers', async (req, res) => {
-    const response = await fetch('http://localhost:6969/scrape/nodes');
-    const data = await response.json();
-    console.log(data);
-    return res.status(200).end(JSON.stringify(
-        data
-    ))
-})
-
-
-const prepOnion = (hops, data)
+const utils = require('../utils')
 
 router.post('/sendmessage', async (req, res) => {
     /*
     body: arrays of keys and ips/ports for routing
     message: text for now
     */
+    console.log(global.config.privateKey)
 })
 
+//probably useful in production as well
+router.post('/testNode', async (req, res) => {
+    //sends an onion to a node. the respective node should forward the onion back
+})
 
 
 module.exports = router

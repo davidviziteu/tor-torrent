@@ -1,3 +1,4 @@
+//unused
 const Joi = require('joi');
 
 exports.cellValidationSchema = Joi.object().keys({
@@ -15,7 +16,7 @@ exports.cellValidationSchema = Joi.object().keys({
 
 exports.Cell = class {
     signature = ''
-    payload = '' //plain text
+    message = '' //plain text
     return = {
         ip: '',
         port: 0,
@@ -28,8 +29,8 @@ exports.TransitCell = class {
         ip: '',
         port: 0
     }
-    encriptDataWithKey = ''
-    payload = '' //another cell/onion
+    encriptDataWithKey = null
+    message = null //another cell/onion
 }
 
 exports.PostObject = class {

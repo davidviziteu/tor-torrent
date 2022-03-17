@@ -7,3 +7,6 @@ tip 2) announce ca e nod care face fwd la cells
 https://www.sohamkamani.com/nodejs/rsa-encryption/
 
 to start a config: py runall.py then you have to kill the terminal
+
+
+https://github.com/jgranstrom/zipson#stringifydata-options

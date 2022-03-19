@@ -1,9 +1,8 @@
+
 const crypto = require("crypto");
 const fetch = require(`node-fetch`)
-
 exports.trackerApi = require('./trackerAPI.js')
 exports.comm = require('./comm.js')
-
 exports.encrpytTextRsa = (text, publicKey) => {
     //works with string public key as well
     const encryptedData = crypto.publicEncrypt(
@@ -62,14 +61,3 @@ exports.decryptTextAes = (text, key) => {
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
 }
-
-exports.properFetchPost = (url, body) => {
-    return fetch(url, {
-        method: `POST`,
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-    })
-}
-

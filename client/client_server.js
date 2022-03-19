@@ -6,6 +6,7 @@ const { testingRoutes } = require(`./routes`)
 const fs = require(`fs`)
 const { StatusCodes, ReasonPhrases, getReasonPhrase } = require(`http-status-codes`)
 const utils = require(`./utils`)
+const { trackerApi } = require(`./utils`)
 const models = require(`./models`)
 require(`./utils/keyInit`)
 const app = express()
@@ -45,21 +46,40 @@ router.post(`/route`, async function routeOnion(req, res) {
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             console.log(`[${config.port}][id: ${currentId}] got onion to fwd to ${onion.next.ip}:${onion.next.port}`)
-            let nextPeerReponse = await utils.properFetchPost(`http://[${onion.next.ip}]:${onion.next.port}/route`, transitCell)
+            let fetchStatus = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
             //if timing ok
-            console.log(`[${config.port}][id: ${currentId}] onion fwd reponse status: ${nextPeerReponse.status}`)
-            switch (nextPeerReponse.status) {
+            console.log(`[${config.port}][id: ${currentId}] onion fwd reponse status: ${fetchStatus}`)
+            switch (fetchStatus) {
                 case StatusCodes.OK:
                 case StatusCodes.BAD_REQUEST:
                 case StatusCodes.REQUEST_TIMEOUT:
-                    return res.status(nextPeerReponse.status).end()
+                    return res.status(fetchStatus).end()
                 default:
                     return res.status(StatusCodes.REQUEST_TIMEOUT).end() //mark node as `out` 
             }
         }
         //onion for me
-        console.log(onion.message);
         res.status(200).end()
+        console.log(`got an onion for me:`);
+        console.log(onion);
+        //store the return onion while prep-ing an answer
+        //...
+        if (onion.onionLayer) { // return onion
+            let transitCell = new models.TransitCell()
+            transitCell.externalPayload = utils.encrpytTextAes('yes?', onion.encryptExternalPayload)
+            transitCell.onion = onion.onionLayer
+            let recv = await utils.comm.fetchOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
+                console.log(`error occured when sending response: ${err}`);
+            })
+            if (!recv.ok)
+                console.log(`response did not reach it's desinatary: ${recv.status}`);
+            console.log(`reponse sent`);
+        }
+        if (onion.message.startsWith(`key `)) {
+            let key = onion.message.slice(4)
+            console.log(`reponse onion for key: ${key}`);
+            console.log(`todo: decypt payload`);
+        }
     } catch (error) {
         //Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
         //  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
@@ -78,15 +98,24 @@ router.get(`/test`, (req, res) => {
 })
 
 router.post(`/testRouting`, async (req, res) => {
-    let data = req.body //trb dest ip si dest port, hopsNumber, message si payload
-
-    data.publicKey = responseJson.publicKey
-    console.log(hops);
-    let { transitCell, nextIp, nextPort } = utils.prepTransitCell(hops.nodes, data.destip, data.destport, responseJson.publicKey, data.message, data.payload)
-    let peerFetchRes = await utils.properFetchPost(`http://[${nextIp}]:${nextPort}/route`, transitCell)
-    return res.status(peerFetchRes.status).end(
-        getReasonPhrase(peerFetchRes.status)
-    )
+    //trb dest ip si dest port, hopsNumber, message si payload
+    console.log(`test routing`);
+    try {
+        const { destip, destport, hopsNumber, message, payload } = req.body
+        let hops = await trackerApi.fetchHops(hopsNumber, destip, destport)
+        let destNodePbKey = await trackerApi.getPublicKeyOfNode(destip, destport)
+        console.log(hops);
+        
+        let { transitCell, nextIp, nextPort } = utils.comm.prepTransitCell(hops, destip, destport, destNodePbKey, message, payload)
+        let fetchStatus = await utils.comm.sendOnion(nextIp, nextPort, transitCell)
+        res.status(fetchStatus).end(
+            getReasonPhrase(fetchStatus)
+        )
+    }
+    catch (error) {
+        console.log(error);
+        res.status(StatusCodes.BAD_REQUEST).end()
+    }
 })
 
 

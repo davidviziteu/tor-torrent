@@ -1,12 +1,14 @@
 const fetch = require('node-fetch')
 
-exports.fetchNodes = async (count, destip, destport) => {
+exports.fetchHops = async (count, destip, destport) => {
     count++ // to avoid the destination node in the hops list. tracker already does not return a node with the sender's ip addr
     return new Promise((resolve, reject) => {
+        console.log(`promise`);
         fetch(`http://localhost:6969/scrape/nodes/${count}`).then(res => {
-            if (res.status != 200)
-                return reject(`fetching ${count} hops failed. tracker status code: ${responsePbKey.status}`)
-            return res.json().then(_json => {
+            console.log(`fetched from tracker`);
+            if (!res.ok)
+                reject(`fetching ${count} hops failed. tracker status code: ${res.status}`)
+            res.json().then(_json => {
                 _json = _json.nodes
                 const foundIndex = _json.findIndex(itm => itm.ip == destip && itm.port == destport)
                 if (foundIndex >= 0)
@@ -15,17 +17,40 @@ exports.fetchNodes = async (count, destip, destport) => {
                     _json.pop()
                 resolve(_json)
             }) //TODO filter the destination node from the hops list provided by the tracker
+        }, error => {
+            reject(`fetching ${count} hops failed. tracker status code: ${error}`)
         })
     })
 }
+
+
+
+// exports.fetchHops = async (count, destip, destport) => {
+//     count++ // to avoid the destination node in the hops list. tracker already does not return a node with the sender's ip addr
+//     console.log(`promise build`);
+//     let res = await fetch(`http://localhost:6969/scrape/nodes/${count}`)
+//     console.log(`fetched from tracker`);
+//     if (!res.ok)
+//         throw `fetching ${count} hops failed. tracker status code: ${res.status}`
+//     let _json = await res.json()
+//     //TODO filter the destination node from the hops list provided by the tracker
+//     _json = _json.nodes
+//     const foundIndex = _json.findIndex(itm => itm.ip == destip && itm.port == destport)
+//     if (foundIndex >= 0)
+//         _json.splice(foundIndex, 1)
+//     else
+//         _json.pop()
+//     return _json
+// }
+
 
 exports.getPublicKeyOfNode = async (destip, destport) => {
     return new Promise((resolve, reject) => {
         fetch(`http://localhost:6969/publickeyof/${destip}/${destport}`).then(res => {
             if (res.status != 200)
                 return reject(`fetch public key of destination node ${destip}:${destport} ` +
-                    `failed. tracker status code: ${responsePbKey.status}`)
-            return res.json().then(_json => resolve(_json))
+                    `failed. tracker status code: ${res.status}`)
+            return res.json().then(_json => resolve(_json.publicKey))
         })
     })
 }

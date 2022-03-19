@@ -20,8 +20,9 @@ exports.Onion = class {
         port: 0
     }
     message = '' //'fwd' or 'do you have byte x?'
-    encryptExternalPayload = null
-    newEncryptedAesKey = ''
+    encryptExternalPayload = null  //aes key
+    newEncryptedAesKey = '' //here is the aes key of the onion layer field. it is encrypted with the next node's pb key
+    //must pe placed in the transit cell's encryptedAesKey field
     onionLayer = ''
 }
 

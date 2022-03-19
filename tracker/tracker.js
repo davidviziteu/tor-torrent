@@ -24,6 +24,11 @@ const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use((req, res, next) => {
+    if (req.socket.localAddress === res.socket.remoteAddress)
+        req._ip = `localhost`
+    next()
+})
 let nodesMap = new Map()
 let nodesArray = new Array()
 
@@ -33,9 +38,12 @@ router.post('/announce/node', (req, res) => {
         return res.status(StatusCodes.BAD_REQUEST).end(JSON.stringify({
             error: error
         }))
-    value.ip = req.ip
-    console.log(`new peer: ${req.ip}:${value.port}`) //ip ul il iei din req.ip nu din body
-    nodesMap.set(`${req.ip}:${value.port}`, value) //change here from body
+    if (req.isLocalIp)
+        value.ip = `localhost`
+    else
+        value.ip = req._ip
+    console.log(`new peer: ${value.ip}:${value.port}`) //ip ul il iei din req.ip nu din body
+    nodesMap.set(`${value.ip}:${value.port}`, value) //change here from body
     return res.status(StatusCodes.OK).end(JSON.stringify({
         result: "ok"
     }))
@@ -60,7 +68,7 @@ router.get('/publickeyof/:ip/:port', (req, res) => {
 
 
 router.get('/scrape/nodes/:count', (req, res) => {
-    //the requester should ask a +2 node in case the list contains itself and the destinatary node
+    //the requester should ask a +1 node in case the list contains itself and the destinatary node
     console.log('scraping nodes count');
     let nodes = []
     if (nodesMap.size < req.params.count)
@@ -78,7 +86,9 @@ router.get('/scrape/nodes/:count', (req, res) => {
         idx = randomNumber(nodesMap.size)
         randomKey = keysArray[idx]
         selectedNode = nodesMap.get(randomKey)
-        if (usedIndexes.indexOf(idx) == -1 && req.ip != selectedNode.ip) {
+        if (usedIndexes.indexOf(idx) == -1) {
+            if (req._ip == selectedNode.ip && req._ip != `localhost`)
+                continue
             usedIndexes.push(idx)
             nodes.push(selectedNode)
             i++

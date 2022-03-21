@@ -18,31 +18,32 @@ let id = 0
 router.post(`/route`, async function routeOnion(req, res) {
     console.log(`/route`);
     //req body of shape json(transit cell)
+    let onion
+    let currentTransitCell
+    let newExtPayload
     try {
         let currentId = ++id
         console.log(`req.body`)
         console.log(req.body)
-        let cell = req.body
+        currentTransitCell = req.body
         let aesKey
-        let foundKey = false
 
         console.log(`attempting decrypt`);
-        if (cell.encryptedAesKey == '') { //dev
-            console.log(`cell.encryptedAesKey too small ${cell.encryptedAesKey}`);
+        if (currentTransitCell.encryptedAesKey == '') { //dev
+            console.log(`cell.encryptedAesKey too small ${currentTransitCell.encryptedAesKey}`);
             return res.status(StatusCodes.BAD_REQUEST).end()
         }
-        aesKey = utils.decrpytTextRsa(cell.encryptedAesKey)
-        foundKey = true
+        aesKey = utils.decrpytTextRsa(currentTransitCell.encryptedAesKey)
 
-        let onion = JSON.parse(utils.decryptTextAes(req.body.onion, aesKey))
+        onion = JSON.parse(utils.decryptTextAes(req.body.onion, aesKey))
         //validate onion, if not ok send bad request status code (1)
         console.log(`rey.body decrypted onion layer`);
         console.log(onion);
         if (onion.message == `fwd`) {
             if (onion.encryptExternalPayload)
-                extPayload = utils.encrpytTextRsa(extPayload, onion.encryptExternalPayload)
+                currentTransitCell.externalPayload = utils.encrpytTextAes(currentTransitCell.externalPayload, onion.encryptExternalPayload)
             let transitCell = new models.TransitCell()
-            transitCell.externalPayload = req.body.externalPayload
+            transitCell.externalPayload = currentTransitCell.externalPayload
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             console.log(`[${config.port}][id: ${currentId}] got onion to fwd to ${onion.next.ip}:${onion.next.port}`)
@@ -60,15 +61,25 @@ router.post(`/route`, async function routeOnion(req, res) {
         }
         //onion for me
         res.status(200).end()
+    } catch (error) {
+        //Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+        //  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+        //inseamna ca am dat decode la ceva ce a fost criptat cu alta cheie
+        console.log(error)
+        return res.status(StatusCodes.BAD_REQUEST).end(ReasonPhrases.BAD_REQUEST)
+    }
+    try {
         console.log(`got an onion for me:`);
         console.log(onion);
         //store the return onion while prep-ing an answer
         //...
         if (onion.onionLayer) { // return onion
+            console.log(`got return onion`);
             let transitCell = new models.TransitCell()
             transitCell.externalPayload = utils.encrpytTextAes('yes?', onion.encryptExternalPayload)
             transitCell.onion = onion.onionLayer
-            let recv = await utils.comm.fetchOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
+            transitCell.encryptedAesKey = onion.next.encryptedAesKey
+            let recv = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
                 console.log(`error occured when sending response: ${err}`);
             })
             if (!recv.ok)
@@ -77,15 +88,11 @@ router.post(`/route`, async function routeOnion(req, res) {
         }
         if (onion.message.startsWith(`key `)) {
             let key = onion.message.slice(4)
-            console.log(`reponse onion for key: ${key}`);
-            console.log(`todo: decypt payload`);
+            console.log(`[RESPONSE] reponse onion for key: ${key}`);
         }
     } catch (error) {
-        //Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
-        //  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
-        //inseamna ca am dat decode la ceva ce a fost criptat cu alta cheie
         console.log(error)
-        return res.status(StatusCodes.BAD_REQUEST).end(ReasonPhrases.BAD_REQUEST)
+        console.log(`error when using the return onion`);
     }
 })
 
@@ -105,8 +112,8 @@ router.post(`/testRouting`, async (req, res) => {
         let hops = await trackerApi.fetchHops(hopsNumber, destip, destport)
         let destNodePbKey = await trackerApi.getPublicKeyOfNode(destip, destport)
         console.log(hops);
-        
-        let { transitCell, nextIp, nextPort } = utils.comm.prepTransitCell(hops, destip, destport, destNodePbKey, message, payload)
+        let returnData = utils.comm.prepReturnOnion(hops)
+        let { transitCell, nextIp, nextPort } = utils.comm.prepTransitCell(hops, destip, destport, destNodePbKey, message, payload, returnData)
         let fetchStatus = await utils.comm.sendOnion(nextIp, nextPort, transitCell)
         res.status(fetchStatus).end(
             getReasonPhrase(fetchStatus)

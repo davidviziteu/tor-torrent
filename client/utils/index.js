@@ -46,6 +46,7 @@ const parseAesKey = key => {
 }
 
 exports.encrpytTextAes = (text, key) => {
+    console.log(`key: ${key}`); //bug: aici intra key cu null
     key = parseAesKey(key)
     let cipher = crypto.createCipheriv(algorithm, Buffer.from(key.key, 'base64'), Buffer.from(key.iv, 'base64'));
     let encrypted = cipher.update(text);

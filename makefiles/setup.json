@@ -6,10 +6,6 @@
   "clients": [
     {
       "ip": "localhost",
-      "port": 6000
-    },
-    {
-      "ip": "localhost",
       "port": 6001
     },
     {
@@ -19,14 +15,6 @@
     {
       "ip": "localhost",
       "port": 6003
-    },
-    {
-      "ip": "localhost",
-      "port": 6004
-    },
-    {
-      "ip": "localhost",
-      "port": 6005
     }
   ]
 }

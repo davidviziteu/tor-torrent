@@ -4,19 +4,21 @@ const fetch = require(`node-fetch`)
 
 let encr_keys_map = new Map()
 
+exports.decryptPayloadForKey = (mapK)
+
 exports.prepReturnOnion = hops => {
     //build array of aes keys to be stored
     //hop: [{ip, port, publicKey}, {same}]
 
     //CLEAR MAP KEYS
     let now = new Date()
-    let aesKyes = []
-    for (let index = 0; index < hops.length; index++) {
-        aesKyes.push(utils.generateAesKey())
+    let aesKeys = []
+    for (let index = 0; index < hops.length + 1; index++) {
+        aesKeys.push(utils.generateAesKey())
     }
-    let hoursDiff = Math.abs(Date.parse(lastTimeComputed) - Date.now()) / 36e5;
-    let mapKey = `${now.getMinutes()}:${now.getSeconds}:${now.getMilliseconds()}`
-    encr_keys_map.set(mapKey, aesKyes)
+    // let hoursDiff = Math.abs(Date.parse(lastTimeComputed) - Date.now()) / 36e5;
+    let mapKey = `${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}` //asta nu e bun, scrie in cod o ciudatenie
+    encr_keys_map.set(mapKey, aesKeys)
 
 
     let finalOnion = new models.Onion()
@@ -54,15 +56,18 @@ exports.prepReturnOnion = hops => {
         ip = hop.ip
         port = hop.port
         currentOnion.message = 'fwd'
-        currentOnion.encryptExternalPayload = aesKyes[allHops.length - i - 1] //aes keys in reversed order
+        currentOnion.encryptExternalPayload = aesKeys[allHops.length - i - 1] //aes keys in reversed order
         prevOnion = JSON.parse(JSON.stringify(currentOnion))
         prevAesKeyObj = utils.generateAesKey()
     }
+
+
     return {
-        onion: prevOnion,
-        port: hops[i].port,
-        ip: hops[i].ip,
-        encryptExternalPayload: aesKyes[allHops.length - i - 1] //first aes key
+        onion: utils.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj),
+        ecryptedAesKey: utils.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
+        port: allHops[i].port,
+        ip: allHops[i].ip,
+        encryptExternalPayload: aesKeys[allHops.length - i - 1] //first aes key
     }
 }
 
@@ -74,9 +79,9 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
     finalOnion.message = message // != fwd
     if (returnData) {
         finalOnion.next.ip = returnData.ip
-        finalOnion.next.port = returnData.ip
-        finalOnion.next.encryptedAesKey = undefined
-        finalOnion.onionLayer = returnData
+        finalOnion.next.port = returnData.port
+        finalOnion.next.encryptedAesKey = returnData.ecryptedAesKey
+        finalOnion.onionLayer = returnData.onion
         finalOnion.encryptExternalPayload = returnData.encryptExternalPayload
     }
 

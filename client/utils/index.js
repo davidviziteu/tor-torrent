@@ -62,3 +62,8 @@ exports.decryptTextAes = (text, key) => {
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
 }
+
+exports.logTimestamp = msg => {
+    let now = new Date()
+    console.log(`${msg} ${now.getMinutes()}m ${now.getSeconds()}s ${now.getMilliseconds()}ms`)
+}

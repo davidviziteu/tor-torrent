@@ -1,7 +1,7 @@
 const crypto = require(`crypto`)
 
 let config = {}
-console.log(`\n\n\n\n\n\n\n\n\n\n\n`);
+console.log(`\n\n\n\n\n\n`);
 try {
     config = JSON.parse(process.argv[2].replaceAll(`'`, `"`))
 } catch {
@@ -32,8 +32,6 @@ global.publicKeyPayloadString = publicKey.export({
     type: `spki`
 })
 global.privateKeyPayload = privateKeyPayload
-console.log(`generated public private key pair`)
 
 global.config = config
-console.log(`public key: ` + global.publicKeyString)
 

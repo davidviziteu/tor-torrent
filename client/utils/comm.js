@@ -4,7 +4,15 @@ const fetch = require(`node-fetch`)
 
 let encr_keys_map = new Map()
 
-exports.decryptPayloadForKey = (mapK)
+exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
+    let keysArray = encr_keys_map.get(mapKey)
+    if (!keysArray)
+        throw new Error(`no such key (${mapKey}) in encrpytion keys map`)
+    for (const key of keysArray) {
+        encryptedPayload = utils.decryptTextAes(encryptedPayload, key)
+    }
+    return encryptedPayload
+}
 
 exports.prepReturnOnion = hops => {
     //build array of aes keys to be stored
@@ -28,11 +36,17 @@ exports.prepReturnOnion = hops => {
     finalOnion.next.encryptedAesKey = undefined
     finalOnion.onionLayer = undefined
 
-    let allHops = [{
+    // let allHops = [{ //original
+    //     ip: config.ip,
+    //     port: config.port,
+    //     publicKey: publicKeyString //debug
+    // }].concat(hops)
+
+    let allHops = hops.concat([{
         ip: config.ip,
         port: config.port,
         publicKey: publicKeyString //debug
-    }].concat(hops)
+    }])
 
     let portsOrder = []
     let keysOrder = []
@@ -43,7 +57,7 @@ exports.prepReturnOnion = hops => {
     // currentOnion.onionLayer = 
     prevOnion = finalOnion
     let i
-    for (i = 0; i < allHops.length - 1; i++) {
+    for (i = allHops.length - 1; i > 0; i--) {
         const hop = allHops[i];
         currentOnion = new models.Onion()
         currentOnion.onionLayer = utils.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
@@ -56,7 +70,7 @@ exports.prepReturnOnion = hops => {
         ip = hop.ip
         port = hop.port
         currentOnion.message = 'fwd'
-        currentOnion.encryptExternalPayload = aesKeys[allHops.length - i - 1] //aes keys in reversed order
+        currentOnion.encryptExternalPayload = aesKeys[allHops.length - i - 1] //aes keys in normal order
         prevOnion = JSON.parse(JSON.stringify(currentOnion))
         prevAesKeyObj = utils.generateAesKey()
     }
@@ -67,7 +81,7 @@ exports.prepReturnOnion = hops => {
         ecryptedAesKey: utils.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
         port: allHops[i].port,
         ip: allHops[i].ip,
-        encryptExternalPayload: aesKeys[allHops.length - i - 1] //first aes key
+        encryptExternalPayload: aesKeys[allHops.length - i - 1] //last aes key
     }
 }
 

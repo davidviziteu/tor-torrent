@@ -20,28 +20,26 @@ router.post(`/route`, async function routeOnion(req, res) {
     //req body of shape json(transit cell)
     let onion
     let currentTransitCell
-    let newExtPayload
     try {
         let currentId = ++id
-        console.log(`req.body`)
-        console.log(req.body)
+
         currentTransitCell = req.body
         let aesKey
-
-        console.log(`attempting decrypt`);
-        if (currentTransitCell.encryptedAesKey == '') { //dev
-            console.log(`cell.encryptedAesKey too small ${currentTransitCell.encryptedAesKey}`);
-            return res.status(StatusCodes.BAD_REQUEST).end()
-        }
         aesKey = utils.decrpytTextRsa(currentTransitCell.encryptedAesKey)
 
         onion = JSON.parse(utils.decryptTextAes(req.body.onion, aesKey))
         //validate onion, if not ok send bad request status code (1)
-        console.log(`rey.body decrypted onion layer`);
-        console.log(onion);
+
         if (onion.message == `fwd`) {
-            if (onion.encryptExternalPayload)
+            if (onion.encryptExternalPayload) {
+                utils.logTimestamp(`return msg`)
                 currentTransitCell.externalPayload = utils.encrpytTextAes(currentTransitCell.externalPayload, onion.encryptExternalPayload)
+                await new Promise(r => setTimeout(r, 2000));
+            }
+            else {
+                utils.logTimestamp(`fwd msg`)
+                await new Promise(r => setTimeout(r, 2000));
+            }
             let transitCell = new models.TransitCell()
             transitCell.externalPayload = currentTransitCell.externalPayload
             transitCell.onion = onion.onionLayer
@@ -69,30 +67,32 @@ router.post(`/route`, async function routeOnion(req, res) {
         return res.status(StatusCodes.BAD_REQUEST).end(ReasonPhrases.BAD_REQUEST)
     }
     try {
-        console.log(`got an onion for me:`);
-        console.log(onion);
+        console.log(`got an onion for me`);
         //store the return onion while prep-ing an answer
         //...
+        let transitCell = new models.TransitCell()
         if (onion.onionLayer) { // return onion
-            console.log(`got return onion`);
-            let transitCell = new models.TransitCell()
+            utils.logTimestamp(`got a message for me with a return onion`)
             transitCell.externalPayload = utils.encrpytTextAes('yes?', onion.encryptExternalPayload)
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
+            await new Promise(r => setTimeout(r, 2000));
             let recv = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
-                console.log(`error occured when sending response: ${err}`);
+                console.log(`error occured when sending response: ${err}`)
             })
             if (!recv.ok)
-                console.log(`response did not reach it's desinatary: ${recv.status}`);
+                console.log(`response did not reach it's desinatary: ${recv.status}`)
             console.log(`reponse sent`);
         }
         if (onion.message.startsWith(`key `)) {
             let key = onion.message.slice(4)
-            console.log(`[RESPONSE] reponse onion for key: ${key}`);
+            console.log(`[RESPONSE] reponse onion for key: ${key}`)
+            let decryptedData = utils.comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
+            utils.logTimestamp(`[DECR]: ${decryptedData}`);
         }
     } catch (error) {
         console.log(error)
-        console.log(`error when using the return onion`);
+        console.log(`error when decrypting the return onion`)
     }
 })
 

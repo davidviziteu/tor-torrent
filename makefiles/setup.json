@@ -15,6 +15,22 @@
     {
       "ip": "localhost",
       "port": 6003
+    },
+    {
+      "ip": "localhost",
+      "port": 6004
+    },
+    {
+      "ip": "localhost",
+      "port": 6005
+    },
+    {
+      "ip": "localhost",
+      "port": 6006
+    },
+    {
+      "ip": "localhost",
+      "port": 10000
     }
   ]
 }

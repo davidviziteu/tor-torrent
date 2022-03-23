@@ -2,35 +2,47 @@ const models = require('../models')
 const utils = require('./index')
 const fetch = require(`node-fetch`)
 
-let encr_keys_map = new Map()
-
+let encriptionKeysArrayMap = new Map() //cache for payload encryption keys
+let currentHits = 0;
+let refreshMapHitsCount = 1 //at 100 hits map should be refreshed
+let mapCacheTimeHours = 1 //termenul de valabilitate al unui item in encr_keys_map. in ore.
 exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
-    let keysArray = encr_keys_map.get(mapKey)
+    let keysArray = encriptionKeysArrayMap.get(mapKey)
     if (!keysArray)
         throw new Error(`no such key (${mapKey}) in encrpytion keys map`)
     for (const key of keysArray) {
         encryptedPayload = utils.decryptTextAes(encryptedPayload, key)
     }
+    encriptionKeysArrayMap.delete(mapKey)
     return encryptedPayload
 }
 /**
- * the hops are being iterated in reverse order.
- * @param {*} hops array of {ip, port, publicKey} that represents the 
+ * adds in the encriptionKeysArrayMap a key - time when computed and a value - array of AES keys
+ *                                          that the response payload should be encrypted with)
+ * refreshes the map cache every 100 insertions: deletes the values that were computed more than 
+ *                                                                      {mapCacheTimeHours} hours
+ * the hops are being iterated in reverse order. 
+ * the aes keys array are generated and iterated in the same order
+ * @param {*} hops array of {ip, port, publicKey} that represents the path of a transit cell in the network
  * @returns an ecrypted return onion that contains aes keys to encrypt a cell's external payload
  */
 exports.prepReturnOnion = hops => {
-    //build array of aes keys to be stored
-    //hop: 
-
-    //CLEAR MAP KEYS
-    let now = new Date()
+    currentHits++
+    if (currentHits == refreshMapHitsCount) {
+        let mapKeys = [...encriptionKeysArrayMap.keys()]
+        for (const key in mapKeys) {
+            let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
+            if (hoursDiff > mapCacheTimeHours)
+                encriptionKeysArrayMap.delete(key)
+        }
+        currentHits = 0
+    }
     let aesKeys = []
     for (let index = 0; index < hops.length + 1; index++) {
         aesKeys.push(utils.generateAesKey())
     }
-    // let hoursDiff = Math.abs(Date.parse(lastTimeComputed) - Date.now()) / 36e5;
-    let mapKey = `${now.getMinutes()}:${now.getSeconds()}:${now.getMilliseconds()}` //asta nu e bun, scrie in cod o ciudatenie
-    encr_keys_map.set(mapKey, aesKeys)
+    let mapKey = `${Date.now()}`
+    encriptionKeysArrayMap.set(mapKey, aesKeys)
 
 
     let finalOnion = new models.Onion()

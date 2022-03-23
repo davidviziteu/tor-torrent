@@ -15,6 +15,10 @@ exports.fetchHops = async (count, destip, destport) => {
                     _json.splice(foundIndex, 1)
                 else
                     _json.pop()
+                if (!global.myIp) {
+                    console.log('[WARNING] announce was not succesful. global.myIp is not defined')
+                    resolve(_json)
+                }
                 foundIndex = _json.findIndex(itm => itm.ip == global.myIp && itm.port == global.config.port)
                 if (foundIndex >= 0)
                     _json.splice(foundIndex, 1)

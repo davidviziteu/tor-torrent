@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 
 exports.fetchHops = async (count, destip, destport) => {
-    count++ // to avoid the destination node in the hops list. tracker already does not return a node with the sender's ip addr
+    count += 2 // to avoid the me and destination node in the hops list. tracker already does not return a node with the sender's ip addr
     return new Promise((resolve, reject) => {
         console.log(`promise`);
         fetch(`http://localhost:6969/scrape/nodes/${count}`).then(res => {
@@ -10,7 +10,12 @@ exports.fetchHops = async (count, destip, destport) => {
                 reject(`fetching ${count} hops failed. tracker status code: ${res.status}`)
             res.json().then(_json => {
                 _json = _json.nodes
-                const foundIndex = _json.findIndex(itm => itm.ip == destip && itm.port == destport)
+                let foundIndex = _json.findIndex(itm => itm.ip == destip && itm.port == destport)
+                if (foundIndex >= 0)
+                    _json.splice(foundIndex, 1)
+                else
+                    _json.pop()
+                foundIndex = _json.findIndex(itm => itm.ip == global.myIp && itm.port == global.config.port)
                 if (foundIndex >= 0)
                     _json.splice(foundIndex, 1)
                 else
@@ -75,7 +80,9 @@ exports.announce = async () => {
             let json = await response.json()
             throw json.error
         }
+        let json = await response.json()
         console.log(`announce ok`);
+        global.myIp = json.yourIp
     } catch (error) {
         console.error(error)
         console.log(`error at announce`);

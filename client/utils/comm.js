@@ -13,10 +13,14 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     }
     return encryptedPayload
 }
-
+/**
+ * the hops are being iterated in reverse order.
+ * @param {*} hops array of {ip, port, publicKey} that represents the 
+ * @returns an ecrypted return onion that contains aes keys to encrypt a cell's external payload
+ */
 exports.prepReturnOnion = hops => {
     //build array of aes keys to be stored
-    //hop: [{ip, port, publicKey}, {same}]
+    //hop: 
 
     //CLEAR MAP KEYS
     let now = new Date()
@@ -36,12 +40,6 @@ exports.prepReturnOnion = hops => {
     finalOnion.next.encryptedAesKey = undefined
     finalOnion.onionLayer = undefined
 
-    // let allHops = [{ //original
-    //     ip: config.ip,
-    //     port: config.port,
-    //     publicKey: publicKeyString //debug
-    // }].concat(hops)
-
     let allHops = hops.concat([{
         ip: config.ip,
         port: config.port,
@@ -54,9 +52,9 @@ exports.prepReturnOnion = hops => {
     let currentOnion = new models.Onion()
     let currentAesKey = utils.generateAesKey()
     let prevAesKeyObj = currentAesKey
-    // currentOnion.onionLayer = 
     prevOnion = finalOnion
     let i
+
     for (i = allHops.length - 1; i > 0; i--) {
         const hop = allHops[i];
         currentOnion = new models.Onion()

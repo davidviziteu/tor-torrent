@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use((req, res, next) => {
     if (req.socket.localAddress === res.socket.remoteAddress)
-        req._ip = `localhost`
+        req.isLocalIp = true
     next()
 })
 let nodesMap = new Map()
@@ -41,11 +41,12 @@ router.post('/announce/node', (req, res) => {
     if (req.isLocalIp)
         value.ip = `localhost`
     else
-        value.ip = req._ip
+        value.ip = req.ip
     console.log(`new peer: ${value.ip}:${value.port}`) //ip ul il iei din req.ip nu din body
     nodesMap.set(`${value.ip}:${value.port}`, value) //change here from body
     return res.status(StatusCodes.OK).end(JSON.stringify({
-        result: "ok"
+        result: "ok",
+        yourIp: value.ip
     }))
 })
 
@@ -74,7 +75,6 @@ router.get('/scrape/nodes/:count', (req, res) => {
     if (nodesMap.size < req.params.count)
         return res.status(StatusCodes.PARTIAL_CONTENT).json({ nodes: nodesArray })
 
-
     let i = 0
 
     let usedIndexes = []
@@ -87,8 +87,6 @@ router.get('/scrape/nodes/:count', (req, res) => {
         randomKey = keysArray[idx]
         selectedNode = nodesMap.get(randomKey)
         if (usedIndexes.indexOf(idx) == -1) {
-            if (req._ip == selectedNode.ip && req._ip != `localhost`)
-                continue
             usedIndexes.push(idx)
             nodes.push(selectedNode)
             i++

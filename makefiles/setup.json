@@ -27,10 +27,6 @@
     {
       "ip": "localhost",
       "port": 6006
-    },
-    {
-      "ip": "localhost",
-      "port": 10000
     }
   ]
 }

@@ -20,13 +20,27 @@ router.post(`/route`, async function routeOnion(req, res) {
     //req body of shape json(transit cell)
     let onion
     let currentTransitCell
+    let aesKey
+    let currentId = ++id
+    let prevPubKey
     try {
-        let currentId = ++id
-
+        prevPubKey = await utils.comm.getPublicKey(req.ip, req.body.requesterPort)
+    } catch (error) {
+        console.log(error)
+        console.log(`cannot fetch prev node's publickey`)
+        res.status(StatusCodes.BAD_REQUEST).end(`cannot fetch prev node's publickey`)
+        return
+    }
+    try {
         currentTransitCell = req.body
-        let aesKey
         aesKey = utils.decrpytTextRsa(currentTransitCell.encryptedAesKey)
-
+    } catch (error) {
+        console.log(error)
+        console.log(`error while decryptiong aes key`)
+        res.status(StatusCodes.BAD_REQUEST).end(`error while decryptiong aes key`)
+        return
+    }
+    try {
         onion = JSON.parse(utils.decryptTextAes(req.body.onion, aesKey))
         //validate onion, if not ok send bad request status code (1)
 
@@ -34,37 +48,37 @@ router.post(`/route`, async function routeOnion(req, res) {
             if (onion.encryptExternalPayload) {
                 utils.logTimestamp(`return msg`)
                 currentTransitCell.externalPayload = utils.encrpytTextAes(currentTransitCell.externalPayload, onion.encryptExternalPayload)
-                await new Promise(r => setTimeout(r, 2000));
+                await new Promise(r => setTimeout(r, 500));
             }
             else {
                 utils.logTimestamp(`fwd msg`)
-                await new Promise(r => setTimeout(r, 2000));
+                await new Promise(r => setTimeout(r, 500));
             }
             let transitCell = new models.TransitCell()
             transitCell.externalPayload = currentTransitCell.externalPayload
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             console.log(`[${config.port}][id: ${currentId}] got onion to fwd to ${onion.next.ip}:${onion.next.port}`)
-            let fetchStatus = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
-            //if timing ok
-            console.log(`[${config.port}][id: ${currentId}] onion fwd reponse status: ${fetchStatus}`)
-            switch (fetchStatus) {
-                case StatusCodes.OK:
-                case StatusCodes.BAD_REQUEST:
-                case StatusCodes.REQUEST_TIMEOUT:
-                    return res.status(fetchStatus).end()
-                default:
-                    return res.status(StatusCodes.REQUEST_TIMEOUT).end() //mark node as `out` 
-            }
+            let response = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
+
+            console.log(`[${config.port}][id: ${currentId}] onion fwd reponse message: ${response}`)
+            // switch (fetchStatus) {
+            //     case StatusCodes.OK:
+            //     case StatusCodes.BAD_REQUEST:
+            //     case StatusCodes.REQUEST_TIMEOUT:
+            //         return res.status(fetchStatus).end()
+            //     default:
+            //         return res.status(StatusCodes.REQUEST_TIMEOUT).end() //mark node as `out` 
+            // }
         }
         //onion for me
-        res.status(200).end()
+        res.status(200).end(utils.encrpytTextRsa('ok', prevPubKey))
     } catch (error) {
         //Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
         //  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
         //inseamna ca am dat decode la ceva ce a fost criptat cu alta cheie
         console.log(error)
-        return res.status(StatusCodes.BAD_REQUEST).end(ReasonPhrases.BAD_REQUEST)
+        return res.status(200).end(utils.encrpytTextRsa('failed', prevPubKey))
     }
     try {
         console.log(`got an onion for me`);
@@ -77,12 +91,11 @@ router.post(`/route`, async function routeOnion(req, res) {
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             await new Promise(r => setTimeout(r, 2000));
-            let recv = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
+            let nextNodeResponse = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
                 console.log(`error occured when sending response: ${err}`)
             })
-            if (!recv.ok)
-                console.log(`response did not reach it's desinatary: ${recv.status}`)
-            console.log(`reponse sent`);
+
+            console.log(`reponse: ${nextNodeResponse}`);
         }
         if (onion.message.startsWith(`key `)) {
             let key = onion.message.slice(4)
@@ -92,7 +105,6 @@ router.post(`/route`, async function routeOnion(req, res) {
         }
     } catch (error) {
         console.log(error)
-        console.log(`error when decrypting the return onion`)
     }
 })
 
@@ -125,6 +137,11 @@ router.post(`/testRouting`, async (req, res) => {
     }
 })
 
+router.get(`/publicKey`, async (req, res) => {
+    res.status(200).json({
+        publicKey: global.publicKeyString
+    })
+})
 
 router.get(`/peers`, async (req, res) => {
     const response = await fetch(`http://localhost:6969/scrape/nodes`) // cred ca ar trebui facut la tracker endpoint sa dea n ips random

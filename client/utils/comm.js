@@ -160,20 +160,46 @@ exports.buildUrl = (ip, port) => {
 }
 
 exports.sendOnion = async (ip, port, body) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let url = this.buildUrl(ip, port)
         fetch(`${url}/route`, {
             method: `POST`,
-            body: JSON.stringify(body),
+            body: JSON.stringify({
+                ...body,
+                requesterPort: global.config.port
+            }),
             headers: { 'Content-Type': 'application/json' }
-        }).then(req_res => {
-            if (req_res.ok)
-                resolve(req_res.status)
-            reject(` sending onion to ${ip} : ${port} failed with status code ${req_res.status}`)
+        }).then(async req_res => {
+            let responseEncriptedText = await req_res.text();
+            let response
+            if (responseEncriptedText != '') {
+                try {
+                    response = utils.decrpytTextRsa(responseEncriptedText)
+                } catch (error) {
+                    response = ''
+                }
+            }
+            if (!req_res.ok) {
+                if (response)
+                    reject(`sending onion to ${ip} : ${port} failed with error ${response}`)
+                reject(`sending onion to ${ip} : ${port} failed with status code ${req_res.status}`)
+            }
+            resolve(response)
         })
     })
 
 }
 
-
+exports.getPublicKey = async (ip, port) => {
+    return new Promise((resolve, reject) => {
+        let url = this.buildUrl(ip, port)
+        fetch(`${url}/publicKey`).then(async req_res => {
+            if (req_res.ok) {
+                let pbJson = await req_res.json()
+                resolve(pbJson.publicKey)
+            }
+            reject(`getting public key from ${ip} : ${port} failed with status code ${req_res.status}`)
+        })
+    })
+}
 

@@ -55,7 +55,7 @@ exports.prepReturnOnion = hops => {
     let allHops = hops.concat([{
         ip: config.ip,
         port: config.port,
-        publicKey: publicKeyString //debug
+        publicKey: publicKeyString
     }])
 
     let portsOrder = []

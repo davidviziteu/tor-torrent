@@ -1,7 +1,7 @@
 const express = require(`express`)
 const bodyParser = require(`body-parser`)
-const fetch = require(`node-fetch`)
 const router = require(`express`).Router()
+const fetch = require(`node-fetch`)
 const { testingRoutes } = require(`./routes`)
 const fs = require(`fs`)
 const { StatusCodes, ReasonPhrases, getReasonPhrase } = require(`http-status-codes`)
@@ -127,9 +127,8 @@ router.post(`/testRouting`, async (req, res) => {
         let returnData = utils.comm.prepReturnOnion(hops)
         let { transitCell, nextIp, nextPort } = utils.comm.prepTransitCell(hops, destip, destport, destNodePbKey, message, payload, returnData)
         let fetchStatus = await utils.comm.sendOnion(nextIp, nextPort, transitCell)
-        res.status(fetchStatus).end(
-            getReasonPhrase(fetchStatus)
-        )
+        console.log(`send onion status: ${fetchStatus}`)
+        res.status(200).end()
     }
     catch (error) {
         console.log(error);

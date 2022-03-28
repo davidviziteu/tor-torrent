@@ -1,10 +1,11 @@
 const models = require('../models')
 const utils = require('./index')
 const fetch = require(`node-fetch`)
+const { AbortError } = require(`node-fetch`)
 
 let encriptionKeysArrayMap = new Map() //cache for payload encryption keys
 let currentHits = 0;
-let refreshMapHitsCount = 1 //at 100 hits map should be refreshed
+let refreshMapHitsCount = 10 //at 100 hits map should be refreshed
 let mapCacheTimeHours = 1 //termenul de valabilitate al unui item in encr_keys_map. in ore.
 exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     let keysArray = encriptionKeysArrayMap.get(mapKey)
@@ -159,7 +160,7 @@ exports.buildUrl = (ip, port) => {
     return `http://${ip}:${port}`
 }
 
-exports.sendOnion = async (ip, port, body) => {
+exports.sendOnion = async (ip, port, body, timeout = 5000) => {
     return new Promise(async (resolve, reject) => {
         let url = this.buildUrl(ip, port)
         fetch(`${url}/route`, {

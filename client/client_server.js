@@ -16,6 +16,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 let id = 0
 router.post(`/route`, async function routeOnion(req, res) {
+    if (global.config.port == 6001)
+        return
     console.log(`/route`);
     //req body of shape json(transit cell)
     let onion
@@ -60,16 +62,8 @@ router.post(`/route`, async function routeOnion(req, res) {
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             console.log(`[${config.port}][id: ${currentId}] got onion to fwd to ${onion.next.ip}:${onion.next.port}`)
             let response = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
-
             console.log(`[${config.port}][id: ${currentId}] onion fwd reponse message: ${response}`)
-            // switch (fetchStatus) {
-            //     case StatusCodes.OK:
-            //     case StatusCodes.BAD_REQUEST:
-            //     case StatusCodes.REQUEST_TIMEOUT:
-            //         return res.status(fetchStatus).end()
-            //     default:
-            //         return res.status(StatusCodes.REQUEST_TIMEOUT).end() //mark node as `out` 
-            // }
+            return res.status(200).end(utils.encrpytTextRsa(response, prevPubKey))
         }
         //onion for me
         res.status(200).end(utils.encrpytTextRsa('ok', prevPubKey))
@@ -86,7 +80,7 @@ router.post(`/route`, async function routeOnion(req, res) {
         //...
         let transitCell = new models.TransitCell()
         if (onion.onionLayer) { // return onion
-            utils.logTimestamp(`got a message for me with a return onion`)
+            utils.logTimestamp(`got a message for me with a return onion: "${onion.message}" `)
             transitCell.externalPayload = utils.encrpytTextAes('yes?', onion.encryptExternalPayload)
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey

@@ -161,6 +161,10 @@ exports.buildUrl = (ip, port) => {
 }
 
 exports.sendOnion = async (ip, port, body, timeout = 5000) => {
+    const controller = new AbortController();
+    const tm = setTimeout(() => {
+        controller.abort();
+    }, timeout);
     return new Promise(async (resolve, reject) => {
         let url = this.buildUrl(ip, port)
         fetch(`${url}/route`, {
@@ -169,8 +173,10 @@ exports.sendOnion = async (ip, port, body, timeout = 5000) => {
                 ...body,
                 requesterPort: global.config.port
             }),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal
         }).then(async req_res => {
+            clearTimeout(tm)
             let responseEncriptedText = await req_res.text();
             let response
             if (responseEncriptedText != '') {
@@ -182,10 +188,16 @@ exports.sendOnion = async (ip, port, body, timeout = 5000) => {
             }
             if (!req_res.ok) {
                 if (response)
-                    reject(`sending onion to ${ip} : ${port} failed with error ${response}`)
+                    return reject(`sending onion to ${ip} : ${port} failed with error ${response}`)
                 reject(`sending onion to ${ip} : ${port} failed with status code ${req_res.status}`)
             }
             resolve(response)
+        }).catch(error => {
+            //add error handling in case of connreset error
+            if (error.type && error.type == 'aborted') {
+                return reject('timeout');
+            }
+            reject(error);
         })
     })
 

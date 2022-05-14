@@ -10,3 +10,9 @@ to start a config: py runall.py then you have to kill the terminal
 
 
 https://github.com/jgranstrom/zipson#stringifydata-options
+
+
+
+encoding the .torrent file: (cel mai neeficient -> cel mai eficient)
+-cand e vb de fisiere mici: compress-json(5 linii), json stringify(5 linii), bencode (3 linii)
+ 

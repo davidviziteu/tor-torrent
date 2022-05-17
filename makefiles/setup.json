@@ -6,27 +6,33 @@
   "clients": [
     {
       "ip": "localhost",
-      "port": 6001
+      "port": 6001,
+      "announceCount": 3
     },
     {
       "ip": "localhost",
-      "port": 6002
+      "port": 6002,
+      "announceCount": 4
     },
     {
       "ip": "localhost",
-      "port": 6003
+      "port": 6003,
+      "announceCount": 2
     },
     {
       "ip": "localhost",
-      "port": 6004
+      "port": 6004,
+      "announceCount": 1
     },
     {
       "ip": "localhost",
-      "port": 6005
+      "port": 6005,
+      "announceCount": 10
     },
     {
       "ip": "localhost",
-      "port": 6006
+      "port": 6006,
+      "announceCount": 3
     }
   ]
 }

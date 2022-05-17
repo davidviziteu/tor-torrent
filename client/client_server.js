@@ -84,7 +84,7 @@ router.post(`/route`, async function routeOnion(req, res) {
             transitCell.externalPayload = utils.encrpytTextAes('yes?', onion.encryptExternalPayload)
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
-            await new Promise(r => setTimeout(r, 2000));
+            await new Promise(r => setTimeout(r, 2000))
             let nextNodeResponse = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
                 console.log(`error occured when sending response: ${err}`)
             })
@@ -95,7 +95,7 @@ router.post(`/route`, async function routeOnion(req, res) {
             let key = onion.message.slice(4)
             console.log(`[RESPONSE] reponse onion for key: ${key}`)
             let decryptedData = utils.comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
-            utils.logTimestamp(`[DECR]: ${decryptedData}`);
+            utils.logTimestamp(`[DECR]: ${decryptedData}`)
         }
     } catch (error) {
         console.log(error)
@@ -151,4 +151,10 @@ app.listen(config.port, () =>
     console.log(`Listening on ${config.ip}:${config.port}...`)
 )
 
-setTimeout(utils.trackerApi.announce, 1000)
+setTimeout(async ()=>{
+    await utils.trackerApi.announce()
+    global.announceIds = []
+    for (let index = 0; index < config.announceCount; index++) {
+        announceIds.append(utils.generateId(global.publicIp))
+    }
+}, 1000)

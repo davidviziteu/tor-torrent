@@ -46,7 +46,7 @@ router.post('/announce/node', (req, res) => {
     nodesMap.set(`${value.ip}:${value.port}`, value) //change here from body
     return res.status(StatusCodes.OK).end(JSON.stringify({
         result: "ok",
-        yourIp: value.ip
+        publicIp: value.ip
     }))
 })
 

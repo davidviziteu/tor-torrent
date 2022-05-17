@@ -1,5 +1,6 @@
 
 const crypto = require("crypto");
+const CRC32 = require("crc-32");
 const fetch = require(`node-fetch`)
 exports.trackerApi = require('./trackerAPI.js')
 exports.comm = require('./comm.js')
@@ -66,4 +67,12 @@ exports.decryptTextAes = (text, key) => {
 exports.logTimestamp = msg => {
     let now = new Date()
     console.log(`${msg} ${now.getMinutes()}m ${now.getSeconds()}s ${now.getMilliseconds()}ms`)
+}
+
+exports.getRandomArbitrary = (min, max) => {
+    return Math.random() * (max - min) + min;
+}
+
+exports.getId = (ipaddr) =>{
+    return CRC32.str(ipaddr + this.getRandomArbitrary(100,1000))
 }

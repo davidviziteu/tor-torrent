@@ -32,9 +32,13 @@ exports.prepReturnOnion = hops => {
     if (currentHits == refreshMapHitsCount) {
         let mapKeys = [...encriptionKeysArrayMap.keys()]
         for (const key in mapKeys) {
-            let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
-            if (hoursDiff > mapCacheTimeHours)
-                encriptionKeysArrayMap.delete(key)
+            try {
+                let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
+                if (hoursDiff > mapCacheTimeHours)
+                    encriptionKeysArrayMap.delete(key)
+            } catch (error) {
+                continue //in case there are other keys. ex: announce key
+            }
         }
         currentHits = 0
     }

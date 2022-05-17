@@ -66,6 +66,7 @@ exports.getPublicKeyOfNode = async (destip, destport) => {
 
 
 exports.announce = async () => {
+    
     try {
         const response = await fetch(`http://localhost:6969/announce/node`,
             {
@@ -86,7 +87,8 @@ exports.announce = async () => {
         }
         let json = await response.json()
         console.log(`announce ok`);
-        global.myIp = json.yourIp
+        global.publicIp = json.publicIp
+        console.log(`tracker ip: ${global.publicIp}`);
     } catch (error) {
         console.error(error)
         console.log(`error at announce`);

@@ -2,8 +2,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const models = require('./models')
 const router = require('express').Router()
+const crypto = require(`crypto`)
 const fs = require('fs')
 const { StatusCodes } = require('http-status-codes')
+const rsaModulusLength = 1024
 console.log(`\n\n\n\n\n\n\n\n\n\n\n`);
 let config
 try {
@@ -30,6 +32,7 @@ app.use((req, res, next) => {
     next()
 })
 let nodesMap = new Map()
+let rsaKeyMap = new Map()
 let nodesArray = new Array()
 
 router.post('/announce/node', (req, res) => {
@@ -47,6 +50,37 @@ router.post('/announce/node', (req, res) => {
     return res.status(StatusCodes.OK).end(JSON.stringify({
         result: "ok",
         publicIp: value.ip
+    }))
+})
+
+router.post('/announce/piece', (req, res) => {
+    //need id in the req body or in the url
+
+    return res.status(StatusCodes.OK).end(JSON.stringify({
+        result: "ok - mock",
+    }))
+})
+
+router.post(`/public-key`, (req, res) => {
+    try {
+        const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
+            modulusLength: rsaModulusLength,
+        })
+        rsaKeyMap.set(publicKey, privateKey)
+        return res.status(200).json({
+            publicKey: publicKey
+        })
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error: error
+        })
+    }
+})
+
+router.post('/announce/id', (req, res) => {
+
+    return res.status(StatusCodes.OK).end(JSON.stringify({
+        result: "ok - mock",
     }))
 })
 

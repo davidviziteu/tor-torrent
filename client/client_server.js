@@ -16,8 +16,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 let id = 0
 router.post(`/route`, async function routeOnion(req, res) {
-    if (global.config.port == 6001)
-        return
     console.log(`/route`);
     //req body of shape json(transit cell)
     let onion
@@ -65,6 +63,12 @@ router.post(`/route`, async function routeOnion(req, res) {
             console.log(`[${config.port}][id: ${currentId}] onion fwd reponse message: ${response}`)
             return res.status(200).end(utils.encrpytTextRsa(response, prevPubKey))
         }
+
+        if (onion.message.type == 'announce') {
+            let result = await trackerApi.announcePiece(JSON.stringify(onion.message))
+            return res.status(200).end(utils.encrpytTextRsa(result, prevPubKey))
+        }
+
         //onion for me
         res.status(200).end(utils.encrpytTextRsa('ok', prevPubKey))
     } catch (error) {
@@ -130,6 +134,51 @@ router.post(`/testRouting`, async (req, res) => {
     }
 })
 
+router.post(`/announce`, async (req, res) => {
+    //trb dest ip si dest port, hopsNumber, message si payload
+    console.log(`test announce`);
+    let trackerRsaPbKey = await trackerApi.generatePublicKey()
+    if (!trackerRsaPbKey)
+        return res.status(StatusCodes.CONFLICT).json({ error: 'tracker returned nothing' })
+    let aesKey = utils.generateAesKey()
+    console.log(JSON.stringify(aesKey));
+    let messageForTracker = {
+        encrypedAesKey: utils.encrpytTextRsa(JSON.stringify(aesKey), trackerRsaPbKey),
+        rsaPublicKey: trackerRsaPbKey,
+        payload: 'return onion'
+    }
+
+    try {
+        const { destip, destport, hopsNumber, payload } = req.body
+        let hops = await trackerApi.fetchHops(hopsNumber, destip, destport)
+        let destNodePbKey = await trackerApi.getPublicKeyOfNode(destip, destport)
+        /** can do more queries just to protect the destinatary */
+        console.log(hops);
+        let returnOnion = utils.comm.prepReturnOnion(hops)
+        let stringifiedPayload = JSON.stringify({
+            announce: "ceva",
+            returnOnion: JSON.stringify(returnOnion)
+        })
+        messageForTracker.payload = utils.encrpytTextAes(stringifiedPayload, aesKey)
+        messageForTracker.type = 'announce'
+
+
+        let { transitCell, nextIp, nextPort } = utils.comm.prepTransitCell(hops, destip, destport, destNodePbKey, messageForTracker)
+        let fetchStatus = await utils.comm.sendOnion(nextIp, nextPort, transitCell)
+        console.log(`send onion status: ${fetchStatus}`)
+        res.status(200).json({
+            "send onion status": fetchStatus
+        })
+    }
+    catch (error) {
+        console.log(error);
+        res.status(StatusCodes.BAD_REQUEST).json({
+            error: error
+        })
+    }
+})
+
+
 router.get(`/publicKey`, async (req, res) => {
     res.status(200).json({
         publicKey: global.publicKeyString
@@ -151,10 +200,10 @@ app.listen(config.port, () =>
     console.log(`Listening on ${config.ip}:${config.port}...`)
 )
 
-setTimeout(async ()=>{
-    await utils.trackerApi.announce()
+setTimeout(async () => {
+    await utils.trackerApi.announceAsNode()
     global.announceIds = []
     for (let index = 0; index < config.announceCount; index++) {
-        announceIds.append(utils.generateId(global.publicIp))
+        global.announceIds.push(utils.generateId(global.publicIp))
     }
 }, 1000)

@@ -55,7 +55,7 @@ exports.fetchHops = async (count, destip, destport) => {
 
 exports.getPublicKeyOfNode = async (destip, destport) => {
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:6969/publickeyof/${destip}/${destport}`).then(res => {
+        fetch(`http://localhost:6969/public-key/${destip}/${destport}`).then(res => {
             if (res.status != 200)
                 return reject(`fetch public key of destination node ${destip}:${destport} ` +
                     `failed. tracker status code: ${res.status}`)
@@ -65,8 +65,7 @@ exports.getPublicKeyOfNode = async (destip, destport) => {
 }
 
 
-exports.announce = async () => {
-    
+exports.announceAsNode = async () => {
     try {
         const response = await fetch(`http://localhost:6969/announce/node`,
             {
@@ -87,10 +86,61 @@ exports.announce = async () => {
         }
         let json = await response.json()
         console.log(`announce ok`);
-        global.publicIp = json.publicIp
-        console.log(`tracker ip: ${global.publicIp}`);
+        global.myIp = json.publicIp
+        console.log(`tracker ip: ${global.myIp}`);
     } catch (error) {
         console.error(error)
         console.log(`error at announce`);
+    }
+}
+
+exports.generatePublicKey = async () => {
+    /**
+     * aici conexiunea poate fi facuta mai sercure in urmatorul fel:
+     * clientul genereaza o pereche de chei publice-private. cheia privata
+     * este trimisa tracker-ului in body-ul request-ului de mai jos
+     * tracker-ul cripteaza raspunsul (folosind AES sau chiar cheia publica, daca merge)
+     * iar clientul il decripteaza.
+     */
+    try {
+        const response = await fetch(`http://localhost:6969/public-key`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: `POST`,
+        })
+        if (response.status != 200) {
+            console.log(await response.text());
+            let json = await response.json()
+            throw json.error
+        }
+        let json = await response.json()
+        return json.publicKey
+    } catch (error) {
+        console.error(error)
+        console.log(`error at fetching public key from tracker`);
+    }
+}
+
+exports.announcePiece = async (data) => {
+    //check
+    try {
+        const response = await fetch(`http://localhost:6969/announce/piece`,
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                method: `POST`,
+                body: data
+            })
+        if (response.status != 200) {
+            console.log(await response.text());
+            return undefined
+        }
+        return 'ok'
+    } catch (error) {
+        console.error(error)
+        console.log(`error at announce piece`);
+        return error
     }
 }

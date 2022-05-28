@@ -8,7 +8,7 @@ try {
     config.ip = `localhost`
     config.port = 10000
 }
-const modulusLength = 1024 * 2
+const modulusLength = 1024
 const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
     modulusLength: modulusLength,
 })

@@ -63,6 +63,7 @@ router.post('/announce/piece', (req, res) => {
 
 let hitsCount = 0
 let refreshMapHitsCount = 10
+let mapCacheTimeHours = 5
 router.post(`/public-key`, (req, res) => {
     hitsCount++
     if (hitsCount == refreshMapHitsCount) {

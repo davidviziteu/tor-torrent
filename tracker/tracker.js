@@ -87,7 +87,10 @@ router.post(`/public-key`, (req, res) => {
             dateAdded: Date.now()
         })
         return res.status(200).json({
-            publicKey: publicKey
+            publicKey: publicKey.export({
+                format: `pem`,
+                type: `spki`
+            })
         })
     } catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

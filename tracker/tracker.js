@@ -61,12 +61,31 @@ router.post('/announce/piece', (req, res) => {
     }))
 })
 
+let hitsCount = 0
+let refreshMapHitsCount = 10
 router.post(`/public-key`, (req, res) => {
+    hitsCount++
+    if (hitsCount == refreshMapHitsCount) {
+        let mapKeys = [...rsaKeyMap.keys()]
+        for (const { dateAdded } in mapKeys) {
+            try {
+                let hoursDiff = Math.abs(Date.parse(dateAdded) - Date.now()) / 36e5;
+                if (hoursDiff > mapCacheTimeHours)
+                    rsaKeyMap.delete(dateAdded)
+            } catch (error) {
+                continue
+            }
+        }
+        hitsCount = 0 //resets counter
+    }
     try {
         const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
             modulusLength: rsaModulusLength,
         })
-        rsaKeyMap.set(publicKey, privateKey)
+        rsaKeyMap.set(publicKey, {
+            privateKey: privateKey,
+            dateAdded: Date.now()
+        })
         return res.status(200).json({
             publicKey: publicKey
         })

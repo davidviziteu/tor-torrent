@@ -84,7 +84,7 @@ exports.prepReturnOnion = hops => {
         keysOrder = [hop.publicKey].concat(keysOrder)
         ip = hop.ip
         port = hop.port
-        currentOnion.message = 'fwd'
+        // currentOnion.message = 'fwd'
         currentOnion.encryptExternalPayload = aesKeys[allHops.length - i - 1] //aes keys in normal order
         prevOnion = JSON.parse(JSON.stringify(currentOnion))
         prevAesKeyObj = utils.generateAesKey()
@@ -105,7 +105,7 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
     //hop: [{ip, port, publicKey}, {same}]
 
     let finalOnion = new models.Onion()
-    finalOnion.message = message // != fwd
+    finalOnion.message = message // != false/undefined or null
     if (returnData) {
         finalOnion.next.ip = returnData.ip
         finalOnion.next.port = returnData.port
@@ -141,7 +141,7 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
         keysOrder = [hop.publicKey].concat(keysOrder)
         ip = hop.ip
         port = hop.port
-        currentOnion.message = 'fwd'
+        // currentOnion.message = 'fwd'
         currentOnion.encryptExternalPayload = undefined //nimic momentan
         prevOnion = JSON.parse(JSON.stringify(currentOnion))
         prevAesKeyObj = utils.generateAesKey()

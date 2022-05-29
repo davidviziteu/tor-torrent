@@ -44,7 +44,7 @@ router.post(`/route`, async function routeOnion(req, res) {
         onion = JSON.parse(utils.decryptTextAes(req.body.onion, aesKey))
         //validate onion, if not ok send bad request status code (1)
 
-        if (onion.message == `fwd`) {
+        if (!onion.message) { //means its onion to be forwarded
             if (onion.encryptExternalPayload) {
                 utils.logTimestamp(`return msg`)
                 currentTransitCell.externalPayload = utils.encrpytTextAes(currentTransitCell.externalPayload, onion.encryptExternalPayload)

@@ -16,7 +16,7 @@
 
 
     /* spaces / width of elements */
-    --top-bar-height: 1em;
+    --top-bar-height: 1.2em;
     --main-ui-padding-left: 6em;
     --main-ui-padding-top: 4em;
     --sections-space: 30px;
@@ -95,7 +95,7 @@ body {
 }
 
 #left-main-section {
-
+    height: 100vh;
 }
 
 

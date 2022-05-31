@@ -1,9 +1,9 @@
 :root{
     --torrent-list-head-padding-botton: 1em;
-    /* --torrent-list-height: calc(80vh - var(--torrent-list-head-padding-botton)); */
+    /* --torrent-list-height: calc(100vh - 100vh * ( 1 / (100vh))); */
     --torrent-filter-btns-height: 3em;
     --torrent-list-head-height: 2em;
-    --torrent-list-height: 80vh;
+    --torrent-list-height: unset;
 }
 
 #torrent-list-head {
@@ -20,10 +20,17 @@
     width: var(--torrent-list-width);
 }
 
+body{
+    height: 100vh;
+}
+
+.container {
+    height: 100vh;
+}
 
 #torrent-list::-webkit-scrollbar {
     width: 5px;
-    position: relative;
+    position: absolute;
     left: 100px;
 }
 
@@ -68,6 +75,7 @@
     display: grid;
     grid-template-areas: "1 2 3";
     grid-template-columns: [first] 50fr [line2] 40fr [line3] 10fr [end];
+    /* margin-right: 0.5em; */
 }
 
 .torrent-list-grid>* {

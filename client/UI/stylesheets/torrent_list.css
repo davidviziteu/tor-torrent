@@ -15,9 +15,11 @@
 }
 
 #torrent-list {
+    flex: 2;
     height: var(--torrent-list-height);
     overflow: auto;
     width: var(--torrent-list-width);
+    margin-bottom: calc(var(--main-ui-padding-top)/3);
 }
 
 body{
@@ -87,6 +89,7 @@ body{
 }
 
 #torrent-filter-buttons {
+    padding-top: var(--main-ui-padding-top);
     height: var(--torrent-filter-btns-height);
     width: var(--torrent-list-width);
     display: flex;

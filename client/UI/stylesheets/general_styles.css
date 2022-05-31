@@ -1,17 +1,38 @@
 :root {
-    --sections-space: 30px;
+    /* colors */
     --weak-purple: #bfa6cb;
     --accent-purple: rgb(107, 75, 136);
-    --blue: rgb(100,131,172);
-    --light-turqoise: rgb(58, 133, 145);
+    --blue: rgb(0, 122, 204);
     --accent-turqoise: rgb(30,74,74);
-    --container-padding: 30px;
+    --light-turqoise: #02d2b3;
+    --accent-orange: rgb(244, 130, 36);
+    --vs-code-font-white: rgb(212, 212, 212);
+    --vs-code-gray: rgb(30, 30, 30);
+    --stackoverflow-gray: #2d2d2d;
+    --stackoverflow-font-color: #e7e9eb;
     
-    --menu-list-width: 150px;
+    /* corner radius all elements */
+    --corner-radius: 0.6em;
 
+
+    /* spaces / width of elements */
+    --top-bar-height: 1em;
+    --main-ui-padding-left: 6em;
+    --main-ui-padding-top: 4em;
+    --sections-space: 30px;
+    --container-padding: 30px;
+    --left-menu-width: 4em;
+    --torrent-list-width: 60%;
     --torrent-items-margin: 0.2em;
     --torrent-items-padding: 3px;
     --torrent-items-scroll-bar-max-width: calc(var(--sections-space)/2);
+    
+
+    /* settings / configs */
+    --font-color: var(--stackoverflow-font-color);
+    --darker-font-color: rgb(105, 111, 117);
+    --main-ui-bg: var(--stackoverflow-gray);
+    --accent-color: var(--accent-orange);
 }
 
 html{
@@ -19,10 +40,12 @@ html{
     padding: 0;
     height: 100vh;
     width: 100vw;
-    font-family: 'Monaco', 'Courier New', 'monospace';
+    font-family: 'Whitney', 'Courier New', 'monospace';
 }
 
 body {
+    /* need to round corners */
+    border-radius: 50px; 
     margin: 0;
     padding: 0;
     height: 100%;
@@ -31,75 +54,122 @@ body {
     display: flex;
     justify-content: center;
     justify-items: center;
-    background: rgb(238,174,202);
-    background: linear-gradient(
-        90deg, rgba(238,174,202,0.6740897042410714) 0%, 
-        rgba(194,180,217,0.7357143541010154) 49%, 
-        rgba(148,187,233,0.7217087518601191) 100%); 
+    background-color: var(--accent-color);
+    color: var(--font-color)
 }
 
 .container {
-    
     width: 100%;
-    display: grid;
-    grid-column-gap: calc(var(--sections-space));
-    grid-row-gap: 0;
+    display: flex;
+    flex-direction: row;
     padding: 0;
-    grid-template-columns: 
-var(--menu-list-width) calc(100vw - 2 * var(--sections-space) - var(--menu-list-width));
     justify-content: center;    
     align-content: center; 
-    grid-template-areas: "menu torrent-list";
+    align-items: stretch;
 }
 
-.positioning-stuff{
+#main-ui {
+    padding-top: var(--main-ui-padding-top);
+    padding-left: var(--main-ui-padding-left);
+    background-color: var(--main-ui-bg);
+    height: auto;
+    border-radius: var(--corner-radius) 0 0 var(--corner-radius);
+    width: calc(100vw - var(--left-menu-width)); 
+    display: flex;
+    flex-direction: column;
 }
+
+
+
+#top-bar {
+    
+    height: var(--top-bar-height);
+    width: 100vw;
+    position: absolute;
+    background: transparent;
+    /* border: solid;
+    border-color: aliceblue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#left-main-section {
+
+}
+
+
 
 #menu-bar {
-    height: calc(100vh - var(--sections-space));
-    margin: 0;
-    grid-area: "menu";
-    grid-column: 1;
-    background-color: var(--accent-purple);
-    border-radius: 3em;
+    display: flex;
     flex-direction: column;
-    display: flex;
+    justify-content: center;
     align-items: center;
-}
 
-#torrent-list {
-
-    --top-space: 4em;
-
-    grid-area: torrent-list;
-    overflow: scroll;
-    height: calc(100vh - var(--sections-space) - var(--top-space));
-
-    margin-top: var(--top-space);
-    /* background-color: rgba(255, 255, 255, 0.527); */
-}
-
-menu{
-
+    margin: 0;
+    height: 100vh;
+    border-radius: var(--corner-radius) 0 0 var(--corner-radius);
+    width: var(--left-menu-width);
 }
 
 
-.torrent-item{
-    width: auto;
+
+
+.menu-bar-button {
+    padding: 0.4em;
+    margin: 0.6em;
+    border-radius: 0.55em;
+
+
+    background-color: rgb(167, 88, 24); /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.menu-bar-button:hover {
     background-color: white;
-    height: 3em;
-    margin-top: var(--torrent-items-margin);
-    margin-bottom: var(--torrent-items-margin);
-    margin-right: var(--torrent-items-scroll-bar-max-width);
-    border-radius: 10px;
-    padding: var(--torrent-items-padding);
-    display: flex;
-    align-items: center;
+    color: var(--stackoverflow-gray);
 }
 
-.torrent-item:first-of-type{
-    margin-top: 0;
+
+.drag{
+    -webkit-app-region: drag;
 }
-.torrent-item:last-of-type{
-    margin-top: 0;
+.no-drag {
+    -webkit-app-region: no-drag;
+}
+.top-right-button-group{
+    display: flex;
+    flex-direction: row;
+}
+
+.top-right-button-group .top-right-buttons {
+    background-color: transparent;
+    border: none;
+    color: var(--font-color);
+    padding-left: calc(var(--top-bar-height)/1.8);
+    padding-right: calc(var(--top-bar-height)/1.8);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    float: left;
+}
+
+.top-right-button-group .top-right-buttons:hover {
+    background-color: rgb(82, 82, 82);
+}
+
+.top-right-button-group .top-right-buttons:last-child:hover {
+    background-color: rgb(237, 66, 69);
+}
+
+#app-title{
+    /* padding-left: calc(var(--left-menu-width) *1.1); */ /*long title*/
+    padding-left: calc(var(--left-menu-width) *0.05); /*shirt title*/
 }

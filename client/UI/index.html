@@ -2,50 +2,66 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>:(</title>
-    <link rel="stylesheet" href="stylesheets/general_styles.css">
-    <link rel="stylesheet" href="stylesheets/torrent_list.css">
-    <link rel="stylesheet" href="stylesheets/menu_items.css">
+  <meta charset="UTF-8" />
+  <title>:(</title>
+  <link rel="stylesheet" href="stylesheets/general_styles.css" />
+  <link rel="stylesheet" href="stylesheets/torrent_list.css" />
+  <link rel="stylesheet" href="stylesheets/menu_items.css" />
 </head>
 
 <body>
-    <div class="container">
-        <div class="positioning-stuff" id="menu-bar">
-            <section id="logo">
-                logo
-            </section>
-            <menu>
-                <li>buton1</li>
-                <li>buton2</li>
-                <li>buton3</li>
-                <li>buton4</li>
-            </menu>
-        </div>
-
-        <main class="positioning-stuff" id="torrent-list">
-
-            <div class="torrent-item">
-                item
-            </div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-            <div class="torrent-item">item</div>
-        </main>
+  <div id="top-bar" class="drag">
+    <div id="app-title" class="drag">
+      TORrent
     </div>
+    <div class="top-right-button-group">
+      <button class="top-right-buttons no-drag">_</button>
+      <button class="top-right-buttons no-drag">M</button>
+      <button class="top-right-buttons no-drag">x</button>
+    </div>
+  </div>
+  <div class="container">
+    <div id="menu-bar" class="drag">
+      <button class="no-drag menu-bar-button">📁</button>
+      <button class="no-drag menu-bar-button">Load</button>
+      <button class="no-drag menu-bar-button">➕</button>
+      <button class="no-drag menu-bar-button">⚙️</button>
+    </div>
+
+    <main id="main-ui">
+      <section id="left-main-section">
+        <div id="torrent-filter-buttons">
+          <h1>All</h1>
+          <h4>Downloading</h4>
+          <h4>Downloaded</h4>
+        </div>
+        <div id="torrent-list-head" class="torrent-list-grid">
+          <span>Name & size</span>
+          <span>Speed & status</span>
+          <span>Time</span>
+        </div>
+        <div id="torrent-list">
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>333333</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>34</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>5</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>6</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>7</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>8</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>9</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>10</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>11</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>12</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>13</span></div>
+          <div class="torrent-item torrent-list-grid"><span>1</span><span>2</span><span>14</span></div>
+        </div>
+      </section>
+      <section id="right-main-section">
+        <div class="panel">
+
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 
 </html>

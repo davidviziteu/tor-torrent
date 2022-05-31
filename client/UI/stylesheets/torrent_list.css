@@ -1,4 +1,93 @@
 :root{
+    --torrent-list-head-padding-botton: 1em;
+    /* --torrent-list-height: calc(80vh - var(--torrent-list-head-padding-botton)); */
+    --torrent-filter-btns-height: 3em;
+    --torrent-list-head-height: 2em;
+    --torrent-list-height: 80vh;
+}
+
+#torrent-list-head {
+    font-size: small;
+    color: var(--darker-font-color);
+    width: var(--torrent-list-width);
+    padding-bottom: var(--torrent-list-head-padding-botton);
+    height: var(--torrent-list-head-height);
+}
+
+#torrent-list {
+    height: var(--torrent-list-height);
+    overflow: auto;
+    width: var(--torrent-list-width);
+}
+
+
+#torrent-list::-webkit-scrollbar {
+    width: 5px;
+    position: relative;
+    left: 100px;
+}
+
+/* Track */
+#torrent-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+#torrent-list::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+#torrent-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.torrent-item {
+    border-width: 1px;
+    border-top-style: solid;
+    border-top-color: var(--vs-code-gray);
+    width: auto;
+    height: 6em;
+    margin-top: var(--torrent-items-margin);
+    margin-bottom: var(--torrent-items-margin);
+    /* margin-right: var(--torrent-items-scroll-bar-max-width); */
+    padding: var(--torrent-items-padding);
 
 }
 
+.torrent-item:first-of-type {
+    margin-top: 0;
+    border-top-color: unset;
+    border-top-style: unset;
+}
+
+.torrent-item:last-of-type {
+    margin-top: 0;
+}
+.torrent-list-grid {
+    display: grid;
+    grid-template-areas: "1 2 3";
+    grid-template-columns: [first] 50fr [line2] 40fr [line3] 10fr [end];
+}
+
+.torrent-list-grid>* {
+    align-self: center;
+}
+
+.torrent-list-grid span:last-child {
+    justify-self: end;
+}
+
+#torrent-filter-buttons {
+    height: var(--torrent-filter-btns-height);
+    width: var(--torrent-list-width);
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+
+#torrent-filter-buttons>* {
+    padding-right: 2em;
+    margin: 0px;
+}

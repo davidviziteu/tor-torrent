@@ -49,7 +49,7 @@ body {
 var(--menu-list-width) calc(100vw - 2 * var(--sections-space) - var(--menu-list-width));
     justify-content: center;    
     align-content: center; 
-    grid-template-areas: "menu torrent-list";
+    grid-template-areas: "menu main-ui";
 }
 
 .positioning-stuff{
@@ -67,11 +67,11 @@ var(--menu-list-width) calc(100vw - 2 * var(--sections-space) - var(--menu-list-
     align-items: center;
 }
 
-#torrent-list {
+#main-ui {
 
     --top-space: 4em;
 
-    grid-area: torrent-list;
+    grid-area: main-ui;
     overflow: scroll;
     height: calc(100vh - var(--sections-space) - var(--top-space));
 

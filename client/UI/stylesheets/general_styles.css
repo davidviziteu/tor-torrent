@@ -18,16 +18,19 @@
 
     /* spaces / width of elements */
     --top-bar-height: 1.2em;
-    --main-ui-padding-left: 6em;
+    --main-ui-padding-left: 5em;
     --main-ui-padding-top: 4em;
     --sections-space: 30px;
     --container-padding: 30px;
     --left-menu-width: 4em;
-    --torrent-list-width: 63%;
+    /* --torrent-list-width: 63%;*/
+    --torrent-list-width: 100%; /*100% of parent element that is flex:2*/
     --torrent-items-margin: 0.2em;
     --torrent-items-padding: 3px;
     --torrent-items-scroll-bar-max-width: calc(var(--sections-space)/2);
     
+    --flex-left: 2;
+    --flex-right: 1;
 
     /* settings / configs */
     --font-color: var(--stackoverflow-font-color);
@@ -75,14 +78,13 @@ body {
     height: auto;
     border-radius: var(--corner-radius) 0 0 var(--corner-radius);
     width: calc(100vw - var(--left-menu-width)); 
+    /* display: grid;
+    grid-template-columns: [first] 63% [line1] 33% [end] ; */
     display: flex;
-    flex-direction: column;
+    flex-flow: row;
 }
 
-
-
-#top-bar {
-    
+#top-bar {  
     height: var(--top-bar-height);
     width: 100vw;
     position: absolute;
@@ -99,9 +101,8 @@ body {
     /* padding-top: var(--main-ui-padding-top); */
     display: flex;
     flex-flow: column;
+    flex: var(--flex-left);
 }
-
-
 
 #menu-bar {
     display: flex;
@@ -114,9 +115,6 @@ body {
     border-radius: var(--corner-radius) 0 0 var(--corner-radius);
     width: var(--left-menu-width);
 }
-
-
-
 
 .menu-bar-button {
     padding: 0.4em;
@@ -175,4 +173,14 @@ body {
 #app-title{
     /* padding-left: calc(var(--left-menu-width) *1.1); */ /*long title*/
     padding-left: calc(var(--left-menu-width) *0.05); /*shirt title*/
+}
+
+#right-main-section {
+    height: 100vh;
+    /* padding-top: var(--main-ui-padding-top); */
+    display: flex;
+    flex-flow: column;
+    flex: var(--flex-right);
+    justify-content: center;
+    align-items: center;
 }

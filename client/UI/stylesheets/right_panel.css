@@ -1,0 +1,9 @@
+.panel{
+    background-color: var(--accent-color);
+    border-radius: var(--corner-radius);
+    /* width: 80%; */
+    height: 83%;
+    width: 18em;
+    justify-self: center;
+}
+

@@ -14,7 +14,7 @@ function createWindow() {
     const appInstance = new BrowserWindow({
         width: 800,
         height: 600,
-        minWidth: 800,
+        minWidth: 900,
         minHeight: 600,
         frame: false,
         // transparent: true,

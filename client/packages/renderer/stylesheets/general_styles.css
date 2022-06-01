@@ -52,7 +52,6 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    width: 100% !important;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -62,14 +61,13 @@ body {
 }
 
 .container {
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: row;
     padding: 0;
     justify-content: center;    
     align-content: center; 
     align-items: stretch;
-    max-width: unset !important;
 }
 
 #main-ui {
@@ -78,9 +76,8 @@ body {
     background-color: var(--main-ui-bg);
     height: auto;
     border-radius: var(--corner-radius) 0 0 var(--corner-radius);
-    width: calc(100vw - var(--left-menu-width)); 
-    /* display: grid;
-    grid-template-columns: [first] 63% [line1] 33% [end] ; */
+    /* width: calc(100vw - var(--left-menu-width)); */
+    flex: 2;
     display: flex;
     flex-flow: row;
 }

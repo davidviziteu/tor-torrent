@@ -1,13 +1,11 @@
 /* @refresh reload */
-import "tailwindcss/tailwind.css";
-
 import "./samples/electron-store";
 
 import { onMount } from "solid-js";
 import { render } from "solid-js/web";
 import { Router, createIntegration } from "solid-app-router";
 import App from "./app";
-
+import TopBar from "./components/TopBar";
 function bindEvent(target: EventTarget, type: string, handler: EventListener) {
   target.addEventListener(type, handler);
   return () => target.removeEventListener(type, handler);
@@ -40,6 +38,7 @@ render(() => {
 
   return (
     <Router source={electronIntegration()}>
+      <TopBar />
       <App />
     </Router>
   );

@@ -2,7 +2,6 @@ const express = require(`express`)
 const bodyParser = require(`body-parser`)
 const router = require(`express`).Router()
 const fetch = require(`node-fetch`)
-const { testingRoutes } = require(`./routes`)
 const fs = require(`fs`)
 const { StatusCodes, ReasonPhrases, getReasonPhrase } = require(`http-status-codes`)
 const utils = require(`./utils`)
@@ -195,7 +194,6 @@ router.get(`/peers`, async (req, res) => {
 })
 
 app.use(`/`, router)
-app.use(`/testing`, testingRoutes)
 app.listen(config.port, () =>
     console.log(`Listening on ${config.ip}:${config.port}...`)
 )

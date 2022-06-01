@@ -62,7 +62,7 @@
 .progress {
     display: -ms-flexbox;
     display: flex;
-    height: 1em;
+    height: 0.5em;
     overflow: hidden;
     font-size: .75rem;
     background-color: #e9ecef;

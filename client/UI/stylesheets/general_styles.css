@@ -10,6 +10,7 @@
     --vs-code-gray: rgb(30, 30, 30);
     --stackoverflow-gray: #2d2d2d;
     --stackoverflow-font-color: #e7e9eb;
+    --darker-font-color: rgb(105, 111, 117);
     
     /* corner radius all elements */
     --corner-radius: 0.6em;
@@ -22,7 +23,7 @@
     --sections-space: 30px;
     --container-padding: 30px;
     --left-menu-width: 4em;
-    --torrent-list-width: 60%;
+    --torrent-list-width: 63%;
     --torrent-items-margin: 0.2em;
     --torrent-items-padding: 3px;
     --torrent-items-scroll-bar-max-width: calc(var(--sections-space)/2);
@@ -30,7 +31,6 @@
 
     /* settings / configs */
     --font-color: var(--stackoverflow-font-color);
-    --darker-font-color: rgb(105, 111, 117);
     --main-ui-bg: var(--stackoverflow-gray);
     --accent-color: var(--accent-orange);
 }

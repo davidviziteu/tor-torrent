@@ -4,6 +4,7 @@
     --torrent-filter-btns-height: 3em;
     --torrent-list-head-height: 2em;
     --torrent-list-height: unset;
+    --scroll-bar-max-width: 0.3em;
 }
 
 #torrent-list-head {
@@ -13,6 +14,7 @@
     padding-bottom: var(--torrent-list-head-padding-botton);
     height: var(--torrent-list-head-height);
 }
+
 
 #torrent-list {
     flex: 2;
@@ -31,24 +33,19 @@ body{
 }
 
 #torrent-list::-webkit-scrollbar {
-    width: 5px;
+    width: var(--scroll-bar-max-width);
     position: absolute;
     left: 100px;
 }
-
+ 
 /* Track */
 #torrent-list::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: var(--darker-font-color);
 }
 
 /* Handle */
 #torrent-list::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-/* Handle on hover */
-#torrent-list::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgb(34, 34, 34);
 }
 
 .torrent-item {
@@ -59,7 +56,7 @@ body{
     height: 6em;
     margin-top: var(--torrent-items-margin);
     margin-bottom: var(--torrent-items-margin);
-    /* margin-right: var(--torrent-items-scroll-bar-max-width); */
+    margin-right: calc(var(--torrent-items-scroll-bar-max-width)/2);
     padding: var(--torrent-items-padding);
 
 }
@@ -76,7 +73,7 @@ body{
 .torrent-list-grid {
     display: grid;
     grid-template-areas: "1 2 3";
-    grid-template-columns: [first] 50fr [line2] 40fr [line3] 10fr [end];
+    grid-template-columns: [first] 50fr [line2] 40fr [line3] auto [end];
     /* margin-right: 0.5em; */
 }
 
@@ -86,6 +83,7 @@ body{
 
 .torrent-list-grid span:last-child {
     justify-self: end;
+    padding-right: var(--scroll-bar-max-width);
 }
 
 #torrent-filter-buttons {
@@ -101,4 +99,8 @@ body{
 #torrent-filter-buttons>* {
     padding-right: 2em;
     margin: 0px;
+}
+
+#torrent-list-head span:last-child {
+    padding-right: calc(3*var(--scroll-bar-max-width));
 }

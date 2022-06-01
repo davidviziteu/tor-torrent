@@ -8,7 +8,7 @@
 }
 
 #torrent-list-head {
-    font-size: small;
+    font-size: smaller;
     color: var(--darker-font-color);
     width: var(--torrent-list-width);
     padding-bottom: var(--torrent-list-head-padding-botton);
@@ -73,7 +73,7 @@ body{
 .torrent-list-grid {
     display: grid;
     grid-template-areas: "1 2 3";
-    grid-template-columns: [first] 50fr [line2] 40fr [line3] auto [end];
+    grid-template-columns: [first] 50fr [line2] 40fr [line3] 10fr [end];
     /* margin-right: 0.5em; */
 }
 

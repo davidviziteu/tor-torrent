@@ -8,17 +8,17 @@
 }
 
 #torrent-list-head {
-    font-size: smaller;
+    font-size: 0.7em;
     color: var(--darker-font-color);
     width: var(--torrent-list-width);
     padding-bottom: var(--torrent-list-head-padding-botton);
+    padding-top: var(--torrent-list-head-padding-botton);
     height: var(--torrent-list-head-height);
     margin-right: calc(var(--torrent-items-scroll-bar-max-width)/2);
 }
 
 
 #torrent-list {
-    flex: 2;
     height: var(--torrent-list-height);
     overflow: auto;
     width: var(--torrent-list-width);
@@ -74,7 +74,7 @@ body{
 .torrent-list-grid {
     display: grid;
     grid-template-areas: "1 2 3";
-    grid-template-columns: [first] 50% [line2] 40% [line3] 10% [end];
+    grid-template-columns: [first] 50% [line2] 30% [line3] 20% [end];
     /* margin-right: 0.5em; */
 }
 

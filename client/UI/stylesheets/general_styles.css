@@ -29,7 +29,7 @@
     --torrent-items-padding: 3px;
     --torrent-items-scroll-bar-max-width: calc(var(--sections-space)/2);
     
-    --flex-left: 2;
+    --flex-left: 3;
     --flex-right: 1;
 
     /* settings / configs */

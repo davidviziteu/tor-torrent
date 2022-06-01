@@ -8,11 +8,11 @@
 }
 
 #torrent-list-head {
-    font-size: 0.7em;
+    font-size: 1em;
     color: var(--darker-font-color);
     width: var(--torrent-list-width);
     padding-bottom: var(--torrent-list-head-padding-botton);
-    padding-top: var(--torrent-list-head-padding-botton);
+    /* padding-top: var(--torrent-list-head-padding-botton); */
     height: var(--torrent-list-head-height);
     margin-right: calc(var(--torrent-items-scroll-bar-max-width)/2);
 }
@@ -62,7 +62,7 @@ body{
 
     display: flex;
     flex-flow: column;
-    justify-content: center;
+    
 }
 
 .torrent-item:first-of-type {

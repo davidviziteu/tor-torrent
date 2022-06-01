@@ -41,12 +41,12 @@ body{
  
 /* Track */
 #torrent-list::-webkit-scrollbar-track {
-    background: var(--darker-font-color);
+    background: rgb(39, 39, 39);
 }
 
 /* Handle */
 #torrent-list::-webkit-scrollbar-thumb {
-    background: rgb(34, 34, 34);
+    background: rgb(20, 20, 20);
 }
 
 .torrent-item {
@@ -60,6 +60,9 @@ body{
     margin-right: calc(var(--torrent-items-scroll-bar-max-width)/2);
     padding: var(--torrent-items-padding);
 
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 
 .torrent-item:first-of-type {
@@ -71,6 +74,7 @@ body{
 .torrent-item:last-of-type {
     margin-top: 0;
 }
+
 .torrent-list-grid {
     display: grid;
     grid-template-areas: "1 2 3";

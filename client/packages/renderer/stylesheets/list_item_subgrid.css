@@ -50,13 +50,12 @@
     padding-left: 0.2em;
     display: flex;
     flex-flow: column;
-    justify-content: space-between;
+    justify-content: center;
     height: 100%;
 }
 
 .progress-text{
     color: var(--accent-color);    
-
 }
 
 .progress {
@@ -66,7 +65,8 @@
     overflow: hidden;
     font-size: .75rem;
     background-color: #e9ecef;
-    border-radius: .25rem
+    border-radius: .25rem;
+    margin-top: .75rem;
 }
 
 .progress-bar {

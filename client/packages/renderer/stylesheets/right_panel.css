@@ -3,8 +3,39 @@
     border-radius: var(--corner-radius);
     /* width: 80%; */
     height: 83%;
-    width: 15em;
+    /* height: auto; */
+    width: 19em;
     justify-self: center;
     margin: 0.8em;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-end;
+    /* font-size: 1.2em; */
 }
 
+.panel > *{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.right-panel-line-left-text{
+    margin-right: 0.4em;
+}
+.right-panel-line{
+    display: flex;
+    flex-flow: row;
+    font-family: 'Consolas',
+        'Monaco',
+        'Lucida Console',
+        'Liberation Mono',
+        'DejaVu Sans Mono',
+        'Bitstream Vera Sans Mono',
+        'Courier New',
+        'monospace',
+        'serif';
+    padding-right: 2%;
+}
+
+.right-panel-line-right-text{
+    color: var(--vs-code-gray);
+}

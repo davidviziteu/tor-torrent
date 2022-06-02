@@ -112,6 +112,7 @@ body {
     height: 100vh;
     border-radius: var(--corner-radius) 0 0 var(--corner-radius);
     width: var(--left-menu-width);
+    min-width: var(--left-menu-width);
 }
 
 .menu-bar-button {

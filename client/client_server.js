@@ -14,6 +14,10 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 let id = 0
+router.get('/echo', (req, res) => {
+    console.log(`client on echo. ip: ${req.ip} port: ${req.port}`);
+    return res.status(200).end('echo')
+})
 router.post(`/route`, async function routeOnion(req, res) {
     console.log(`/route`);
     //req body of shape json(transit cell)

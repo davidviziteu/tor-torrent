@@ -38,7 +38,6 @@ render(() => {
 
   return (
     <Router source={electronIntegration()}>
-      <TopBar />
       <App />
     </Router>
   );

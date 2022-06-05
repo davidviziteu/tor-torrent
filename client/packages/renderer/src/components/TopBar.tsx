@@ -4,7 +4,7 @@ export default function TopBar() {
     return (
         <div id="top-bar" class="drag">
             <div id="app-title" class="drag">
-                TORrent
+                Torano
             </div>
             <div class="top-right-button-group">
                 <button class="top-right-buttons no-drag">

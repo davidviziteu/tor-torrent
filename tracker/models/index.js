@@ -11,3 +11,7 @@ exports.trackerTorrentAnnounceSchema = Joi.object().keys({
     infoHash: Joi.string().required(),
     replyOnions: Joi.array().min(1).required(),
 })
+
+exports.scrapeRequestSchema = Joi.object().keys({
+    encryptedKey: Joi.string().required(),
+})

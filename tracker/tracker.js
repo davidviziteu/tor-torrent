@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 })
 
 router.get('/session', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema.validate)
+    let data = cryptoApi.decryptValidateBody(req, res, null, true)
     if (!data) return
 
     cryptoApi.sendDataEncrypted(res, data.key, {
@@ -81,14 +81,14 @@ router.post('/announce/', (req, res) => {
 router.get('/scrape/relay', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res)
     if (!data) return
-    let dataToReturn = cryptoApi.randomOfArray(global.relaysArray, global.maxRelayNodesReturned)
+    let dataToReturn = cryptoApi.randomOfArray(global.relaysArray)
     cryptoApi.sendDataEncrypted(res, data.key, {
         relaysArray: dataToReturn
     })
 })
 
 router.get('/scrape', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res, models.trackerTorrentAnnounceSchema.validate)
+    let data = cryptoApi.decryptValidateBody(req, res)
     if (!data) return
     if (global.torrentsLeechers.has(data.infoHash)) {
         let leechers = global.torrentsLeechers.get(data.infoHash)

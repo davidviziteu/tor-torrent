@@ -77,10 +77,10 @@ exports.generateId = (ipaddr) => {
 }
 
 
-exports.decryptValidateBody = (req, res, validate = null) => {
+exports.decryptValidateBody = (req, res, validate = null, keyOnly = false) => {
     const { encryptedKey, encryptedData } = req.body
 
-    if (!req.body || !encryptedData || !encryptedKey) {
+    if (!req.body || !encryptedKey || keyOnly ? false : !encryptedData) {
         if (global.dev) {
             res.status(400).json({
                 error: 'no body'
@@ -91,10 +91,14 @@ exports.decryptValidateBody = (req, res, validate = null) => {
         return null
     }
 
-    let key, data
+
+
+    let key, data = {}
     if (global.dev && encryptedKey === 'postman')
         try {
-            data = JSON.parse(encryptedData)
+            if (encryptedData)
+                data = JSON.parse(encryptedData)
+            key = encryptedKey
         } catch (error) {
             res.json({
                 error: "json parse failed"
@@ -104,7 +108,8 @@ exports.decryptValidateBody = (req, res, validate = null) => {
     else {
         try {
             key = this.decrpytTextRsa(encryptedKey, global.privateKey)
-            data = JSON.parse(cryptoApi.decryptTextAes(encryptedData, key))
+            if (encryptedData)
+                data = JSON.parse(cryptoApi.decryptTextAes(encryptedData, key))
         } catch (error) {
             console.log(error)
             if (global.dev)

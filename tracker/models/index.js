@@ -7,14 +7,7 @@ exports.trackerAnnounceSchema = Joi.object().keys({
     privateKey: Joi.string()
 });
 
-exports.Announce = class {
-    ip = ''
-    publicKey = ''
-    port = 0
-
-    constructor(reqBody) {
-        this.ip = reqBody.ip
-        this.publicKey = reqBody.publicKey
-        this.port = reqBody.port
-    }
-}
+exports.trackerTorrentAnnounceSchema = Joi.object().keys({
+    infoHash: Joi.string().required(),
+    replyOnions: Joi.array().min(1).required(),
+})

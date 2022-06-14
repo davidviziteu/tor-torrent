@@ -1,11 +1,21 @@
 const fs = require('fs');
 const crypto = require(`crypto`)
-
-let json = fs.readFileSync('./config.json', 'utf8');
-configurations = JSON.parse(json);
+let configurations
+try {
+    let json = fs.readFileSync('./config.json', 'utf8');
+    configurations = JSON.parse(json);
+} catch (error) {
+    console.err(error);
+    console.log('loading default configs');
+    configurations = {}
+}
 global.ip = configurations.ip ? configurations.ip : 'localhost'
 global.port = configurations.port ? configurations.port : 6969
 global.sessionDurationMinutes = configurations.sessionDurationMinutes ? configurations.sessionDurationMinutes * 60000 : 30 * 60000
+global.maxRelayNodesReturned = configurations.maxRelayNodesReturned ? configurations.maxRelayNodesReturned : 30
+global.maxLeechersReturned = configurations.maxLeechersReturned ? configurations.maxLeechersReturned : 30
+global.dev = configurations.dev ? configurations.dev : false
+
 function generatePbKeyAndSessionId() {
     try {
         const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
@@ -18,8 +28,8 @@ function generatePbKeyAndSessionId() {
             type: `spki`
         })
         global.sessionId = crypto.randomBytes(16).toString(`hex`)
-        global.nodesMap = new Map()
-        global.nodesArray = new Array()
+        global.relaysArray = new Array()
+        global.torrentsLeechers = new Map()
         console.log('ok refresh');
         global.lastSessionRefresh = Date.now()
     } catch (error) {

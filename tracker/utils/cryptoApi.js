@@ -77,4 +77,64 @@ exports.generateId = (ipaddr) => {
 }
 
 
+exports.decryptValidateBody = (req, res, validate = null) => {
+    const { encryptedKey, encryptedData } = req.body
 
+    if (!req.body || !encryptedData || !encryptedKey) {
+        if (global.dev) {
+            res.status(400).json({
+                error: 'no body'
+            })
+            return null
+        }
+        res.end()
+        return null
+    }
+
+    let key, data
+    if (global.dev && encryptedKey === 'postman')
+        try {
+            data = JSON.parse(encryptedData)
+        } catch (error) {
+            res.json({
+                error: "json parse failed"
+            })
+            return null
+        }
+    else {
+        try {
+            key = this.decrpytTextRsa(encryptedKey, global.privateKey)
+            data = JSON.parse(cryptoApi.decryptTextAes(encryptedData, key))
+        } catch (error) {
+            console.log(error)
+            res.status(200).json({
+                error: 'invalid key',
+            })
+            return null
+        }
+    }
+
+    if (validate) {
+        const { error, value } = validate(data)
+        if (error) {
+            res.status(200).json({
+                error: error,
+            })
+            return null
+        }
+        return value
+    }
+    return data
+}
+
+
+exports.randomOfArray = (array, count) => {
+    if (array.length <= count) {
+        return array
+    }
+    let dataToReturn = []
+    for (let index = 0; index < count; index++) {
+        dataToReturn.push(array[this.getRandomArbitrary(0, array.length - 1)])
+    }
+    return dataToReturn
+}

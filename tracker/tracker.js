@@ -7,8 +7,6 @@ const cryptoApi = require('./utils/cryptoApi')
 const router = require('express').Router()
 const crypto = require(`crypto`)
 const { StatusCodes } = require('http-status-codes')
-global.nodesMap = new Map()
-global.nodesArray = new Array()
 const Joi = require('joi')
 
 function randomNumber(max) {
@@ -26,6 +24,10 @@ app.use((req, res, next) => {
 })
 
 router.get('/session', (req, res) => {
+    // let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema.validate)
+    // if (!data) return
+
+    // TODO encrypt with aes from body
     res.status(200).json({
         sessionId: global.sessionId,
         timeLeftMs: (global.lastSessionRefresh + global.sessionDurationMinutes) - Date.now(),
@@ -40,107 +42,64 @@ router.get('/public-key', (req, res) => {
 })
 
 router.post('/announce/relay', (req, res) => {
-    const { encryptedKey, encryptedData } = req.body
-    let key, data
-    try {
-        key = cryptoApi.decrpytTextRsa(encryptedKey, global.privateKey)
-        data = JSON.parse(cryptoApi.decryptTextAes(encryptedData, key))
-    } catch (error) {
-        console.log(error)
-        res.status(StatusCodes.OK).json({
-            error: 'invalid key',
-        })
-    }
-    const { error, value } = models.trackerAnnounceSchema.validate(data);
-    if (error)
-        return res.status(StatusCodes.BAD_REQUEST).end(JSON.stringify({       //TODO CRIPTEAZA CU AES
-            error: error
-        }))
+    let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema.validate)
+    if (!data) return
+
     if (req.isLocalIp)
-        value.ip = `localhost`
+        data.ip = `localhost`
     else
-        value.ip = req.ip
-    console.log(`new peer: ${value.ip}:${value.port}`)
-    nodesMap.set(`${value.ip}:${value.port}`, value)
+        data.ip = req.ip
+    console.log(`new peer: ${data.ip}:${data.port}`)
+    relaysArray.push(data)
     return res.status(StatusCodes.OK).end(JSON.stringify({                 //TODO CRIPTEAZA CU AES
         result: "ok",
-        publicIp: value.ip
+        publicIp: data.ip
     }))
 })
 
 
-router.post('/announce/:torrent', (req, res) => {
-    //need id in the req body or in the url
+router.post('/announce/', (req, res) => {
+    let data = cryptoApi.decryptValidateBody(req, res, models.trackerTorrentAnnounceSchema.validate)
+    if (!data) return
     try {
-        console.log(`POST on /announce/torrent`);
-        let { encrypedAesKey, rsaPublicKey, payload } = req.body
-        const { privateKey } = rsaKeyMap.get(rsaPublicKey)
-        console.log('\tbody:');
-        let aesKey = decrpytTextRsa(encrypedAesKey, privateKey)
-        payload = JSON.parse(decryptTextAes(payload, aesKey))
-        console.log(JSON.stringify(payload));
-        return res.status(StatusCodes.OK).end(JSON.stringify({
-            result: `ok - mock`,
-        }))
-    } catch (error) {
-        console.log('\tno key in map');
-        return res.status(StatusCodes.BAD_REQUEST).end()
-    }
-})
-
-router.post('/announce/:torrent', (req, res) => {
-
-    return res.status(StatusCodes.OK).json({
-        uid: "ok - mock",
-    })
-})
-
-router.get('/scrape/nodes', (req, res) => {
-    res.status(StatusCodes.OK).json({
-        peersArray: [...nodesMap.values()]
-    })
-})
-
-const getRandomKeyOfMap = map => [...map.keys()][Math.floor(Math.random() * map.size)]
-
-router.get('/public-key/:ip/:port', (req, res) => {
-    let node = nodesMap.get(`${req.params.ip}:${req.params.port}`)
-    if (node)
-        return res.status(200).json({
-            publicKey: node.publicKey
-        })
-    return res.status(StatusCodes.NOT_FOUND).end()
-})
-
-
-router.get('/scrape/nodes/:count', (req, res) => {
-    //the requester should ask a +1 node in case the list contains itself and the destinatary node
-    console.log('scraping nodes count');
-    let nodes = []
-    if (nodesMap.size < req.params.count)
-        return res.status(StatusCodes.PARTIAL_CONTENT).json({ nodes: nodesArray })
-
-    let i = 0
-
-    let usedIndexes = []
-    let keysArray = [...nodesMap.keys()]
-    let idx
-    let randomKey
-    let selectedNode
-    while (i < req.params.count) {
-        idx = randomNumber(nodesMap.size)
-        randomKey = keysArray[idx]
-        selectedNode = nodesMap.get(randomKey)
-        if (usedIndexes.indexOf(idx) == -1) {
-            usedIndexes.push(idx)
-            nodes.push(selectedNode)
-            i++
+        if (global.torrentsLeechers.has(data.infoHash)) {
+            let leechers = global.torrentsLeechers.get(data.infoHash)
+            if (leechers)
+                global.torrentsLeechers.set(data.infoHash, [...leechers, ...data])
+            else
+                global.torrentsLeechers.set(data.infoHash, data)
         }
+        return res.status(200).end()
+    } catch (error) {
+        console.log(error);
+        console.log(`error when adding leecher to torrentsLeechers for infoHash: ${data.infoHash}`);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
     }
+})
 
-    res.status(StatusCodes.OK).json({
-        nodes: nodes
+router.get('/scrape/relay', (req, res) => {
+    let data = cryptoApi.decryptValidateBody(req, res)
+    if (!data) return
+    let dataToReturn = cryptoApi.randomOfArray(global.relaysArray, global.maxRelayNodesReturned)
+    return res.status(200).json({   //TODO CRIPTEAZA ASTA
+        relaysArray: dataToReturn
     })
+})
+
+router.get('/scrape', (req, res) => {
+    let data = cryptoApi.decryptValidateBody(req, res, models.trackerTorrentAnnounceSchema.validate)
+    if (!data) return
+    if (global.torrentsLeechers.has(data.infoHash)) {
+        let leechers = global.torrentsLeechers.get(data.infoHash)
+        let dataToReturn = cryptoApi.randomOfArray(leechers, global.maxLeechersReturned)
+        return res.status(200).json({   //TODO CRIPTEAZA ASTA
+            leechersArray: dataToReturn
+        })
+    }
+    else
+        res.status(StatusCodes.OK).json({
+            leechersArray: []
+        })
 })
 
 router.all('*', (req, res) => {

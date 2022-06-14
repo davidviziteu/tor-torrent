@@ -24,11 +24,10 @@ app.use((req, res, next) => {
 })
 
 router.get('/session', (req, res) => {
-    // let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema.validate)
-    // if (!data) return
+    let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema.validate)
+    if (!data) return
 
-    // TODO encrypt with aes from body
-    res.status(200).json({
+    cryptoApi.sendDataEncrypted(res, data.key, {
         sessionId: global.sessionId,
         timeLeftMs: (global.lastSessionRefresh + global.sessionDurationMinutes) - Date.now(),
         refreshPeriosMinutes: global.sessionDurationMinutes / 60000,
@@ -51,10 +50,10 @@ router.post('/announce/relay', (req, res) => {
         data.ip = req.ip
     console.log(`new peer: ${data.ip}:${data.port}`)
     relaysArray.push(data)
-    return res.status(StatusCodes.OK).end(JSON.stringify({                 //TODO CRIPTEAZA CU AES
+    cryptoApi.sendDataEncrypted(res, data.key, {
         result: "ok",
         publicIp: data.ip
-    }))
+    })
 })
 
 
@@ -73,7 +72,9 @@ router.post('/announce/', (req, res) => {
     } catch (error) {
         console.log(error);
         console.log(`error when adding leecher to torrentsLeechers for infoHash: ${data.infoHash}`);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR)
+        cryptoApi.sendDataEncrypted(res, data.key, {
+            error: error
+        })
     }
 })
 
@@ -81,7 +82,7 @@ router.get('/scrape/relay', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res)
     if (!data) return
     let dataToReturn = cryptoApi.randomOfArray(global.relaysArray, global.maxRelayNodesReturned)
-    return res.status(200).json({   //TODO CRIPTEAZA ASTA
+    cryptoApi.sendDataEncrypted(res, data.key, {
         relaysArray: dataToReturn
     })
 })
@@ -92,12 +93,12 @@ router.get('/scrape', (req, res) => {
     if (global.torrentsLeechers.has(data.infoHash)) {
         let leechers = global.torrentsLeechers.get(data.infoHash)
         let dataToReturn = cryptoApi.randomOfArray(leechers, global.maxLeechersReturned)
-        return res.status(200).json({   //TODO CRIPTEAZA ASTA
+        cryptoApi.sendDataEncrypted(res, data.key, {
             leechersArray: dataToReturn
         })
     }
     else
-        res.status(StatusCodes.OK).json({
+        cryptoApi.sendDataEncrypted(res, data.key, {
             leechersArray: []
         })
 })

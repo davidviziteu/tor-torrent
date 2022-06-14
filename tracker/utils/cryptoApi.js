@@ -107,9 +107,10 @@ exports.decryptValidateBody = (req, res, validate = null) => {
             data = JSON.parse(cryptoApi.decryptTextAes(encryptedData, key))
         } catch (error) {
             console.log(error)
-            res.status(200).json({
-                error: 'invalid key',
-            })
+            if (global.dev)
+                res.status(200).json({
+                    error: 'invalid key',
+                })
             return null
         }
     }
@@ -117,16 +118,40 @@ exports.decryptValidateBody = (req, res, validate = null) => {
     if (validate) {
         const { error, value } = validate(data)
         if (error) {
-            res.status(200).json({
-                error: error,
-            })
+            if (global.dev)
+                res.status(200).json({
+                    error: error,
+                })
             return null
         }
+        value.key = key
         return value
     }
+    data.key = key
     return data
 }
 
+exports.sendDataEncrypted = (res, key, data) => {
+    try {
+        if (global.dev) {
+            if (key === 'postman')
+                res.json(data)
+            return
+        }
+        const encryptedData = cryptoApi.encrpytTextAes(JSON.stringify(data), key)
+        return res.json({
+            encryptedData: encryptedData,
+        })
+    } catch (error) {
+        console.log(error)
+        if (global.dev) {
+            return res.json({
+                error: error,
+            })
+        }
+        return res.end()
+    }
+}
 
 exports.randomOfArray = (array, count) => {
     if (array.length <= count) {

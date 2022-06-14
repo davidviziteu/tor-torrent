@@ -1,8 +1,5 @@
 
 const crypto = require("crypto");
-const CRC32 = require("crc-32");
-const fetch = require(`node-fetch`)
-exports.comm = require('./comm.js')
 exports.encrpytTextRsa = (text, publicKey) => {
     //works with string public key as well
 

@@ -5,7 +5,7 @@ const fetch = require(`node-fetch`)
 const fs = require(`fs`)
 const { StatusCodes, ReasonPhrases, getReasonPhrase } = require(`http-status-codes`)
 const utils = require(`./utils`)
-const { trackerApi } = require(`./utils`)
+const trackerApi = require(`./trackerAPI`)
 const models = require(`./models`)
 require(`./utils/keyInit`)
 const app = express()
@@ -16,10 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 let id = 0
 router.get('/echo', (req, res) => {
     console.log(`client on echo. ip: ${req.ip} port: ${req.port}`);
-    return res.status(200).end('echo')
+    return res.status(200).end(`client on echo. ip: ${req.ip} port: ${req.port}`)
 })
-router.post(`/route`, async function routeOnion(req, res) {
-    console.log(`/route`);
+router.post(`/relay`, async function routeOnion(req, res) {
+    console.log(`/relay`);
     //req body of shape json(transit cell)
     let onion
     let currentTransitCell
@@ -198,12 +198,15 @@ router.get(`/peers`, async (req, res) => {
 })
 
 app.use(`/`, router)
+
 app.listen(config.port, () =>
     console.log(`Listening on ${config.ip}:${config.port}...`)
 )
 
 setTimeout(async () => {
-    await utils.trackerApi.announceAsNode()
+    const pbKey = (await (await fetch(`http://localhost:6969/public-key`)).json()).publicKey
+
+    await trackerApi.announceAsNode()
     global.announceIds = []
     for (let index = 0; index < config.announceCount; index++) {
         global.announceIds.push(utils.generateId(global.publicIp))

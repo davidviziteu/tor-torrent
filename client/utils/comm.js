@@ -171,7 +171,7 @@ exports.sendOnion = async (ip, port, body, timeout = 5000) => {
     }, timeout);
     return new Promise(async (resolve, reject) => {
         let url = this.buildUrl(ip, port)
-        fetch(`${url}/route`, {
+        fetch(`${url}/relay`, {
             method: `POST`,
             body: JSON.stringify({
                 ...body,

@@ -1,5 +1,5 @@
-const fetch = require('node-fetch')
-
+const fetch = require('node-fetch');
+const { encrpytTextAes, generateAesKey, encrpytTextRsa } = require('../utils')
 exports.fetchHops = async (count, destip, destport) => {
     count += 2 // to avoid the me and destination node in the hops list. tracker already does not return a node with the sender's ip addr
     return new Promise((resolve, reject) => {
@@ -67,20 +67,26 @@ exports.getPublicKeyOfNode = async (destip, destport) => {
 
 exports.announceAsNode = async () => {
     try {
-        const response = await fetch(`http://localhost:6969/announce/node`,
+        const pbKey = (await (await fetch(`http://localhost:6969/public-key`)).json()).publicKey
+        let dataToEncrypt = {
+            port: config.port,
+            publicKey: global.publicKeyString,
+        }
+        const key = generateAesKey()
+        let dataToSend = encrpytTextAes(JSON.stringify(dataToEncrypt), key)
+        console.log(`pbKey: ${pbKey}`)
+        const response = await fetch(`http://localhost:6969/announce/relay`,
             {
                 headers: {
                     "Content-Type": "application/json"
                 },
                 method: `POST`,
                 body: JSON.stringify({
-                    port: config.port,
-                    publicKey: global.publicKeyString,
-                    privateKey: global.privateKeyString
+                    encryptedKey: encrpytTextRsa(JSON.stringify(key), pbKey),
+                    encryptedData: dataToSend
                 })
             })
         if (response.status != 200) {
-            console.log(await response.text());
             let json = await response.json()
             throw json.error
         }

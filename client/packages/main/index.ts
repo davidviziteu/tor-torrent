@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell } from 'electron'
+import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 import './samples/electron-store'
@@ -55,8 +55,20 @@ async function createWindow() {
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
-  win = null
-  if (process.platform !== 'darwin') app.quit()
+})
+
+ipcMain.on('close', () => {
+  win?.minimize()
+})
+
+ipcMain.on('minimise', () => {
+  win?.minimize()
+})
+
+ipcMain.on('maximize', () => {
+  if (win) {
+    win.isMaximized()?win.maximize():win.unmaximize()
+  }
 })
 
 app.on('second-instance', () => {

@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "crc-32": "^1.2.2",
-    "express": "^4.17.2",
-    "node-fetch": "^3.2.3"
-  }
-}

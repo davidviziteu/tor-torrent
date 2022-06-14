@@ -6,7 +6,7 @@ try {
     config = JSON.parse(process.argv[2].replaceAll(`'`, `"`))
 } catch {
     config.ip = `localhost`
-    config.port = 10000
+    config.port = 100
 }
 const modulusLength = 1024 * 2
 const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {

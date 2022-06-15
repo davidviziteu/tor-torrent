@@ -2,6 +2,7 @@ import fs from 'fs'
 import { contextBridge, ipcRenderer } from 'electron'
 import { domReady } from './utils'
 import { useLoading } from './loading'
+
 const { appendLoading, removeLoading } = useLoading()
 
 ;(async () => {
@@ -10,11 +11,15 @@ const { appendLoading, removeLoading } = useLoading()
   appendLoading()
 })()
 
+
 // --------- Expose some API to the Renderer process. ---------
 contextBridge.exposeInMainWorld('fs', fs)
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
-
+contextBridge.exposeInMainWorld('electron', {
+  // @ts-ignore
+  openDialog: (method, config) => ipcRenderer.invoke('dialog', method, config)
+});
 // `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.
 function withPrototype(obj: Record<string, any>) {
   const protos = Object.getPrototypeOf(obj)

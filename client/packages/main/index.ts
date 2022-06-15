@@ -1,8 +1,7 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 import './samples/electron-store'
-
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
 
@@ -52,10 +51,18 @@ async function createWindow() {
   })
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow()
+  ipcMain.handle('dialog', async (event, method, params) => {
+    // @ts-ignore
+    return await dialog[method](params);
+  });
+})
 
 app.on('window-all-closed', () => {
 })
+
+
 
 ipcMain.on('close', () => {
   app.quit()

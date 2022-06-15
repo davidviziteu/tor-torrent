@@ -1,6 +1,0 @@
-{
-    "announcesPerTorrent": 3,
-    "circuitLength": 3,
-    "maxPiecesPerMessage": 10,
-    "dev": true
-}

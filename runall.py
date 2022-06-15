@@ -11,7 +11,7 @@ def checkdir():
 def client(proc_args: str):
     print('client1')
     d = str(proc_args).replace("\n", "").replace(' ', '')
-    os.system(f'cd client && start /B start cmd.exe @cmd /k npm run backend-only -- {d}')
+    os.system(f'cd client && start /B start cmd.exe @cmd /k npm run backend -- {d}')
 
 
 def tracker():

@@ -1,6 +1,3 @@
-const crypto = require(`crypto`)
-const fs = require('fs')
-
 let config = {}
 console.log(`\n\n\n\n\n\n`);
 try {
@@ -12,14 +9,13 @@ try {
 
 global.config = config
 
-try {
-    let json = fs.readFileSync('./config.json', 'utf8');
-    configurations = JSON.parse(json);
-} catch (error) {
-    console.err(error);
-    console.log('loading default configs');
-    configurations = {}
+configurations = {
+    "announcesPerTorrent": 3,
+    "circuitLength": 3,
+    "maxPiecesPerMessage": 10,
+    "dev": true
 }
+
 global.iannouncesPerTorrentp = configurations.announcesPerTorrent ? configurations.announcesPerTorrent : 3
 global.circuitLength = configurations.circuitLength ? configurations.circuitLength : 3
 global.maxPiecesPerMessage = configurations.maxPiecesPerMessage ? configurations.maxPiecesPerMessage : 10

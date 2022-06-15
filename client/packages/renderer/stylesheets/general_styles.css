@@ -171,7 +171,7 @@ body {
 
 #app-title{
     /* padding-left: calc(var(--left-menu-width) *1.1); */ /*long title*/
-    padding-left: calc(var(--left-menu-width) *0.05); /*shirt title*/
+    padding-left: calc(var(--left-menu-width) *0.15); /*shirt title*/
 }
 
 #right-main-section {

@@ -13,11 +13,17 @@ const app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use((req, res, next) => {
+    if (req.socket.localAddress === res.socket.remoteAddress)
+        req.isLocalIp = true
+    next()
+})
 let id = 0
 router.get('/echo', (req, res) => {
     console.log(`client on echo. ip: ${req.ip} port: ${req.port}`);
     return res.status(200).end(`client on echo. ip: ${req.ip} port: ${req.port}`)
 })
+
 router.post(`/relay`, async function routeOnion(req, res) {
     console.log(`/relay`);
     //req body of shape json(transit cell)
@@ -189,6 +195,7 @@ router.get(`/publicKey`, async (req, res) => {
 })
 
 router.get(`/peers`, async (req, res) => {
+    // demo
     const response = await fetch(`http://localhost:6969/scrape/nodes`) // cred ca ar trebui facut la tracker endpoint sa dea n ips random
     const data = await response.json();
     console.log(data);
@@ -197,18 +204,31 @@ router.get(`/peers`, async (req, res) => {
     ))
 })
 
+router.post('/trackerUrl', async (req, res) => {
+    const { trackerUrl } = req.body
+    global.trackerUrl = trackerUrl
+    try {
+        await utils.refreshPbKeys()
+    } catch (error) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            error: error
+        })
+    }
+    res.status(200).end()
+})
+
 app.use(`/`, router)
 
 app.listen(config.port, () =>
     console.log(`Listening on ${config.ip}:${config.port}...`)
 )
 
-setTimeout(async () => {
-    const pbKey = (await (await fetch(`http://localhost:6969/public-key`)).json()).publicKey
 
-    await trackerApi.announceAsNode()
-    global.announceIds = []
-    for (let index = 0; index < config.announceCount; index++) {
-        global.announceIds.push(utils.generateId(global.publicIp))
-    }
-}, 1000)
+if (global.dev) {
+    console.log(`dev mode enabled, tracker addr localhost`);
+    setTimeout(async () => {
+        await utils.updateTrackerPublicKey()
+        await utils.refreshPbKeys()
+        await trackerApi.announceAsNode()
+    }, 1000)
+}

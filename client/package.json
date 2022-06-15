@@ -19,7 +19,8 @@
   "dependencies": {
     "crc-32": "^1.2.2",
     "create-torrent": "^5.0.2",
-    "electron-store": "^8.0.1"
+    "electron-store": "^8.0.1",
+    "get-port": "^6.1.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.39",

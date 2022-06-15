@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 import { createTorrent } from 'create-torrent'
-TODO AICI
+
 
 export default function LeftBar() {
     const addNewTorrentItem = () => {

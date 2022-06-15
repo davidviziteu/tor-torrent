@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { encrpytTextAes, generateAesKey, encrpytTextRsa } = require('../utils')
+const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = require('../utils')
 exports.fetchHops = async (count, destip, destport) => {
     count += 2 // to avoid the me and destination node in the hops list. tracker already does not return a node with the sender's ip addr
     return new Promise((resolve, reject) => {
@@ -66,68 +66,44 @@ exports.getPublicKeyOfNode = async (destip, destport) => {
 
 
 exports.announceAsNode = async () => {
+    if (!trackerAddress) {
+        console.log(`tracker address is not defined`);
+    }
+
     try {
-        const pbKey = (await (await fetch(`http://localhost:6969/public-key`)).json()).publicKey
         let dataToEncrypt = {
             port: config.port,
             publicKey: global.publicKeyString,
         }
         const key = generateAesKey()
-        let dataToSend = encrpytTextAes(JSON.stringify(dataToEncrypt), key)
-        console.log(`pbKey: ${pbKey}`)
-        const response = await fetch(`http://localhost:6969/announce/relay`,
+        let dataToSend = encrpytTextAes(dataToEncrypt, key)
+        const response = await (await fetch(trackerAddress + `/announce/relay`,
             {
                 headers: {
                     "Content-Type": "application/json"
                 },
                 method: `POST`,
                 body: JSON.stringify({
-                    encryptedKey: encrpytTextRsa(JSON.stringify(key), pbKey),
+                    encryptedKey: encrpytTextRsa(key, global.trackerPbKey),
                     encryptedData: dataToSend
                 })
-            })
-        if (response.status != 200) {
-            let json = await response.json()
-            throw json.error
+            })).json()
+        if (!response.encryptedData) {
+            console.log(`announce as node failed, tracker error`);
+            return undefined
         }
-        let json = await response.json()
-        console.log(`announce ok`);
-        global.myIp = json.publicIp
-        console.log(`tracker ip: ${global.myIp}`);
+        reponse = JSON.parse(decryptTextAes(response.encryptedData, key))
+        global.myIp = response.publicIp
+        global.relayNode = true
+        console.log(`announce as node ok`);
     } catch (error) {
         console.error(error)
         console.log(`error at announce`);
     }
 }
 
-exports.generatePublicKey = async () => {
-    /**
-     * aici conexiunea poate fi facuta mai sercure in urmatorul fel:
-     * clientul genereaza o pereche de chei publice-private. cheia privata
-     * este trimisa tracker-ului in body-ul request-ului de mai jos
-     * tracker-ul cripteaza raspunsul (folosind AES sau chiar cheia publica, daca merge)
-     * iar clientul il decripteaza.
-     */
-    try {
-        const response = await fetch(`http://localhost:6969/public-key`, {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: `POST`,
-        })
-        if (response.status != 200) {
-            console.log(await response.text());
-            let json = await response.json()
-            throw json.error
-        }
-        let json = await response.json()
-        return json.publicKey
-    } catch (error) {
-        console.error(error)
-        console.log(`error at fetching public key from tracker`);
-    }
-}
 
+//TODO
 exports.announcePiece = async (data) => {
     //check
     try {

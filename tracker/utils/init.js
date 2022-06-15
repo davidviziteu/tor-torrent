@@ -16,7 +16,7 @@ global.maxRelayNodesReturned = configurations.maxRelayNodesReturned ? configurat
 global.maxLeechersReturned = configurations.maxLeechersReturned ? configurations.maxLeechersReturned : 30
 global.dev = configurations.dev ? configurations.dev : false
 
-function generatePbKeyAndSessionId() {
+function generatePbKey() {
     try {
         const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
             modulusLength: configurations.modulusLength ? configurations.modulusLength : 2048,
@@ -27,7 +27,6 @@ function generatePbKeyAndSessionId() {
             format: `pem`,
             type: `spki`
         })
-        global.sessionId = crypto.randomBytes(16).toString(`hex`)
         global.relaysArray = new Array()
         global.torrentsLeechers = new Map()
         console.log('ok refresh');
@@ -39,6 +38,6 @@ function generatePbKeyAndSessionId() {
     }
 }
 
-generatePbKeyAndSessionId()
-setTimeout(generatePbKeyAndSessionId, sessionDurationMinutes);
+generatePbKey()
+setTimeout(generatePbKey, sessionDurationMinutes);
 console.log('ok init');

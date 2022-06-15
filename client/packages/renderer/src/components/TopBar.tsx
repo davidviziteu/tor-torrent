@@ -1,23 +1,34 @@
 import { createSignal } from 'solid-js';
-
+// const { ipcRenderer } = window.require("electron");
+// const { ipcRenderer } = require("electron");
 export default function TopBar() {
+
     return (
         <div id="top-bar" class="drag">
             <div id="app-title" class="drag">
                 Torano
             </div>
             <div class="top-right-button-group">
-                <button class="top-right-buttons no-drag">
+                <button class="top-right-buttons no-drag" onClick={(e) => {
+                    e.preventDefault();
+                    window.ipcRenderer.send('minimize');
+                }}>
                     <svg width="18" height="18">
                         <line x1="3" y1="9" x2="15" y2="9" style="fill:transparent;stroke:currentColor;stroke-width:1;" />
                     </svg>
                 </button>
-                <button class="top-right-buttons no-drag">
+                <button class="top-right-buttons no-drag" onClick={(e) => {
+                    e.preventDefault();
+                    window.ipcRenderer.send('maximize');
+                }}>
                     <svg width="18" height="18">
                         <rect x="4.5" y="4.5" width="9" height="9" style="fill:transparent;stroke:currentColor;stroke-width:1;" />
                     </svg>
                 </button>
-                <button class="top-right-buttons no-drag">
+                <button class="top-right-buttons no-drag" onClick={(e) => {
+                    e.preventDefault();
+                    window.ipcRenderer.send('close');
+                }}>
                     <svg width="18" height="18">
                         <g fill="none" fill-rule="evenodd">
                             <path d="M0 0h18v18H0"></path>

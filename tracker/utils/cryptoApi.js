@@ -77,10 +77,10 @@ exports.generateId = (ipaddr) => {
 }
 
 
-exports.decryptValidateBody = (req, res, validate = null, keyOnly = false) => {
+exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
     const { encryptedKey, encryptedData } = req.body
 
-    if (!req.body || !encryptedKey || keyOnly ? false : !encryptedData) {
+    if (!encryptedKey || keyOnly ? false : !encryptedData) {
         if (global.dev) {
             res.status(400).json({
                 error: 'no body'
@@ -109,7 +109,7 @@ exports.decryptValidateBody = (req, res, validate = null, keyOnly = false) => {
         try {
             key = this.decrpytTextRsa(encryptedKey, global.privateKey)
             if (encryptedData)
-                data = JSON.parse(cryptoApi.decryptTextAes(encryptedData, key))
+                data = JSON.parse(this.decryptTextAes(encryptedData, key))
         } catch (error) {
             console.log(error)
             if (global.dev)
@@ -120,8 +120,8 @@ exports.decryptValidateBody = (req, res, validate = null, keyOnly = false) => {
         }
     }
 
-    if (validate) {
-        const { error, value } = validate(data)
+    if (schema) {
+        const { error, value } = schema.validate(data)
         if (error) {
             if (global.dev)
                 res.status(200).json({
@@ -139,11 +139,12 @@ exports.decryptValidateBody = (req, res, validate = null, keyOnly = false) => {
 exports.sendDataEncrypted = (res, key, data) => {
     try {
         if (global.dev) {
-            if (key === 'postman')
+            if (key === 'postman') {
                 res.json(data)
-            return
+                return
+            }
         }
-        const encryptedData = cryptoApi.encrpytTextAes(JSON.stringify(data), key)
+        const encryptedData = this.encrpytTextAes(JSON.stringify(data), key)
         return res.json({
             encryptedData: encryptedData,
         })

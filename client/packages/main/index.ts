@@ -26,7 +26,7 @@ async function createWindow() {
     frame: false,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: join(__dirname, '../preload/index.cjs')
+      preload: join(__dirname, '../preload/index.cjs'),
     },
   })
 
@@ -58,7 +58,7 @@ app.on('window-all-closed', () => {
 })
 
 ipcMain.on('close', () => {
-  win?.minimize()
+  app.quit()
 })
 
 ipcMain.on('minimise', () => {
@@ -87,3 +87,4 @@ app.on('activate', () => {
     createWindow()
   }
 })
+

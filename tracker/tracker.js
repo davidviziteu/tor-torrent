@@ -23,14 +23,13 @@ app.use((req, res, next) => {
     next()
 })
 
-router.get('/session', (req, res) => {
+router.post('/session', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res, null, true)
     if (!data) return
 
     cryptoApi.sendDataEncrypted(res, data.key, {
-        sessionId: global.sessionId,
         timeLeftMs: (global.lastSessionRefresh + global.sessionDurationMinutes) - Date.now(),
-        refreshPeriosMinutes: global.sessionDurationMinutes / 60000,
+        refreshPeriodMs: global.sessionDurationMinutes, //este de fapt in ms
     })
 })
 
@@ -41,7 +40,7 @@ router.get('/public-key', (req, res) => {
 })
 
 router.post('/announce/relay', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema.validate)
+    let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema)
     if (!data) return
 
     if (req.isLocalIp)
@@ -51,7 +50,6 @@ router.post('/announce/relay', (req, res) => {
     console.log(`new peer: ${data.ip}:${data.port}`)
     relaysArray.push(data)
     cryptoApi.sendDataEncrypted(res, data.key, {
-        result: "ok",
         publicIp: data.ip
     })
 })
@@ -78,7 +76,7 @@ router.post('/announce/', (req, res) => {
     }
 })
 
-router.get('/scrape/relay', (req, res) => {
+router.post('/scrape/relay', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res)
     if (!data) return
     let dataToReturn = cryptoApi.randomOfArray(global.relaysArray)
@@ -87,7 +85,7 @@ router.get('/scrape/relay', (req, res) => {
     })
 })
 
-router.get('/scrape', (req, res) => {
+router.post('/scrape', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res)
     if (!data) return
     if (global.torrentsLeechers.has(data.infoHash)) {
@@ -103,9 +101,9 @@ router.get('/scrape', (req, res) => {
         })
 })
 
-router.all('*', (req, res) => {
+router.all('/*', (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({
-        error: 'route not found'
+        error: `${req.method} on ${req.path} not avilable / found`
     })
 })
 

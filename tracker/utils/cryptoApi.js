@@ -159,7 +159,7 @@ exports.sendDataEncrypted = (res, key, data) => {
     }
 }
 
-exports.randomOfArray = (array, count) => {
+exports.randomOfArray = (array, count = 30) => {
     if (array.length <= count) {
         return array
     }

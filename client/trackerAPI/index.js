@@ -1,71 +1,37 @@
 const fetch = require('node-fetch');
 const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = require('../utils')
 
-exports.fetchHops = async (count, destip, destport) => {
-    count += 2 // to avoid the me and destination node in the hops list. tracker already does not return a node with the sender's ip addr
-    return new Promise((resolve, reject) => {
-        console.log(`promise`);
-        fetch(`http://localhost:6969/scrape/nodes/${count}`).then(res => {
-            console.log(`fetched from tracker`);
-            if (!res.ok)
-                reject(`fetching ${count} hops failed. tracker status code: ${res.status}`)
-            res.json().then(_json => {
-                _json = _json.nodes
-                let foundIndex = _json.findIndex(itm => itm.ip == destip && itm.port == destport)
-                if (foundIndex >= 0)
-                    _json.splice(foundIndex, 1)
-                else
-                    _json.pop()
-                if (!global.myIp) {
-                    console.log('[WARNING] announce was not succesful. global.myIp is not defined')
-                    resolve(_json)
-                }
-                foundIndex = _json.findIndex(itm => itm.ip == global.myIp && itm.port == global.config.port)
-                if (foundIndex >= 0)
-                    _json.splice(foundIndex, 1)
-                else
-                    _json.pop()
-                resolve(_json)
-            }) //TODO filter the destination node from the hops list provided by the tracker
-        }, error => {
-            reject(`fetching ${count} hops failed. tracker status code: ${error}`)
-        })
-    })
+//done
+exports.fetchHops = async () => {
+    if (!trackerAddress) {
+        console.log(`trackerAddress is not defined`)
+        process.exit(1)
+    }
+    try {
+        aesKey = generateAesKey()
+        const r = await fetch(global.trackerAddress + `/scrape/relay`,
+            {
+                headers: { "Content-Type": "application/json" },
+                method: `POST`,
+                body: JSON.stringify({
+                    encryptedKey: encrpytTextRsa(aesKey, global.trackerPbKey),
+                })
+            })
+        const response = await (r).json()
+
+        if (!response.encryptedData || response.error) {
+            console.log(`error tracker didnt return relay list`);
+            console.log(`\terror: ${response.error}`);
+            throw `error tracker didnt return relay list`
+        }
+        return JSON.parse(decryptTextAes(response.encryptedData, aesKey))
+    } catch (error) {
+        console.error(error)
+        console.log(`error at fetching relay list from tracker`);
+    }
 }
 
-
-
-// exports.fetchHops = async (count, destip, destport) => {
-//     count++ // to avoid the destination node in the hops list. tracker already does not return a node with the sender's ip addr
-//     console.log(`promise build`);
-//     let res = await fetch(`http://localhost:6969/scrape/nodes/${count}`)
-//     console.log(`fetched from tracker`);
-//     if (!res.ok)
-//         throw `fetching ${count} hops failed. tracker status code: ${res.status}`
-//     let _json = await res.json()
-//     //TODO filter the destination node from the hops list provided by the tracker
-//     _json = _json.nodes
-//     const foundIndex = _json.findIndex(itm => itm.ip == destip && itm.port == destport)
-//     if (foundIndex >= 0)
-//         _json.splice(foundIndex, 1)
-//     else
-//         _json.pop()
-//     return _json
-// }
-
-
-exports.getPublicKeyOfNode = async (destip, destport) => {
-    return new Promise((resolve, reject) => {
-        fetch(`http://localhost:6969/public-key/${destip}/${destport}`).then(res => {
-            if (res.status != 200)
-                return reject(`fetch public key of destination node ${destip}:${destport} ` +
-                    `failed. tracker status code: ${res.status}`)
-            return res.json().then(_json => resolve(_json.publicKey))
-        })
-    })
-}
-
-
+//done
 exports.announceAsNode = async () => {
     if (!trackerAddress) {
         console.log(`tracker address is not defined`);
@@ -103,9 +69,6 @@ exports.announceAsNode = async () => {
     }
 }
 
-
-
-//TODO
 exports.announcePiece = async (data) => {
     //check
     try {
@@ -130,7 +93,7 @@ exports.announcePiece = async (data) => {
 }
 
 
-
+//done
 exports.getTrackerPublicKey = async () => {
     if (!trackerAddress) {
         console.log(`trackerAddress is not defined`)

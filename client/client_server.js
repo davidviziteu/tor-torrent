@@ -115,7 +115,7 @@ router.post(`/relay`, async function routeOnion(req, res) {
     }
 })
 
-router.get(`/test`, (req, res) => {
+router.get(`/relays-from-tr`, (req, res) => {
     let encr_text = utils.encrpytTextRsa(`ala bala porto cala`, global.publicKey)
     return res.status(201).json({
         encr_text: encr_text,
@@ -228,5 +228,7 @@ if (global.dev) {
     console.log(`dev mode enabled, tracker addr localhost`);
     setTimeout(async () => {
         await procedures.startRefreshingLoop()
+        let hops = await trackerApi.fetchHops()
+        console.log(hops);
     }, 1000)
 }

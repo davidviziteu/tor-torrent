@@ -70,7 +70,7 @@ const refreshProcedure = async () => {
         process.exit(1);
     }
 }
-
+//poate poti sa dai emitter ul ca param
 exports.startRefreshingLoop = async () => {
     await refreshProcedure()
     let refreshObject = await getRefreshPeriod()
@@ -83,9 +83,11 @@ exports.startRefreshingLoop = async () => {
     setTimeout(async () => {
         await refreshProcedure()
         console.log('refresh');
+        myEmitter.emit('refreshed')
         setInterval(async () => {
             await refreshProcedure()
             console.log('refresh');
+            myEmitter.emit('refreshed')
         }, refreshObject.refreshPeriodMs)
     }, refreshObject.timeLeftMs + 10)
 }

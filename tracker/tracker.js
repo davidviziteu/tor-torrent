@@ -77,12 +77,10 @@ router.post('/announce/', (req, res) => {
 })
 
 router.post('/scrape/relay', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res)
+    let data = cryptoApi.decryptValidateBody(req, res, null, true)
     if (!data) return
-    let dataToReturn = cryptoApi.randomOfArray(global.relaysArray)
-    cryptoApi.sendDataEncrypted(res, data.key, {
-        relaysArray: dataToReturn
-    })
+    let dataToReturn = cryptoApi.randomOfArray(global.relaysArray, global.maxRelayNodesReturned)
+    cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
 
 router.post('/scrape', (req, res) => {

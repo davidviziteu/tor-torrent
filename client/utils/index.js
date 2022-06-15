@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 const crypto = require("crypto");
 exports.encrpytTextRsa = (text, publicKey) => {
     //works with string public key as well
@@ -78,92 +76,7 @@ exports.getRandomArbitrary = (min, max) => {
 }
 
 
-function sleep(ms) {
+exports.sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-exports.refreshPbKeys = async (refreshPeriodMs = null) => {
-    if (!trackerAddress) {
-        console.log(`trackerAddress is not defined`)
-        process.exit(1)
-    }
-    await updateTrackerPublicKey()
-    try {
-        const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
-            modulusLength: configurations.modulusLength ? configurations.modulusLength : 2048,
-        })
-        global.publicKey = publicKey
-        global.privateKey = privateKey
-        global.publicKeyString = publicKey.export({
-            format: `pem`,
-            type: `spki`
-        })
-        console.log('ok key refresh');
-
-        if (refreshPeriodMs) {
-            setInterval(() => { refreshPbKeys(refreshPeriodMs) }, refreshPeriodMs)
-        }
-        else {
-            let refreshPeriodObj = await getRefreshPeriod(trackerPbKey)
-            if (refreshPeriodObj.timeLeftMs < 5000) {
-                await sleep(5010)
-                refreshPbKeys()
-            }
-            setTimeout(() => refreshPbKeys(refreshPeriodObj.refreshPeriodMs),
-                refreshPeriodObj.timeLeftMs
-            )
-        }
-
-
-    } catch (error) {
-        console.log(error);
-        console.log('error when generating keys, exiting..');
-        process.exit(1);
-    }
-}
-
-
-let updateTrackerPublicKey = async () => {
-    try {
-        const response = await (await fetch(global.trackerAddress + `/public-key`)).json()
-        global.trackerPbKey = response.publicKey
-        return true
-    } catch (error) {
-        console.error(error)
-        console.log(`error at fetching public key from tracker, setting it to undefined..`);
-        global.trackerPbKey = undefined
-        return false
-    }
-}
-
-exports.updateTrackerPublicKey = updateTrackerPublicKey
-
-
-let getRefreshPeriod = async (trackerPbKey) => {
-    //if not updated...
-    await updateTrackerPublicKey()
-    try {
-        aesKey = this.generateAesKey()
-        const r = await fetch(global.trackerAddress + `/session`,
-            {
-                headers: { "Content-Type": "application/json" },
-                method: `POST`,
-                body: JSON.stringify({
-                    encryptedKey: this.encrpytTextRsa(aesKey, trackerPbKey),
-                })
-            })
-        const response = await (r).json()
-
-        if (!response.encryptedData || response.error) {
-            console.log(`error tracker didnt return refresh period`);
-            console.log(`error: ${response.error}`);
-            throw `error tracker didnt return refresh period`
-        }
-        return JSON.parse(this.decryptTextAes(response.encryptedData, aesKey))
-    } catch (error) {
-        console.error(error)
-        console.log(`error at fetching refresh period from tracker`);
-    }
-}
-
-global.getRefreshPeriod = getRefreshPeriod

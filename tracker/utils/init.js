@@ -39,5 +39,6 @@ function generatePbKey() {
 }
 
 generatePbKey()
-setTimeout(generatePbKey, sessionDurationMinutes);
+setInterval(generatePbKey, sessionDurationMinutes);
 console.log('ok init');
+console.log(`session duration is ${sessionDurationMinutes / 60000} minutes`);

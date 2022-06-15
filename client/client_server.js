@@ -9,7 +9,7 @@ const trackerApi = require(`./trackerAPI`)
 const models = require(`./models`)
 require(`./utils/keyInit`)
 const app = express()
-
+const procedures = require(`./procedures/keyrefresh`)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -207,8 +207,8 @@ router.get(`/peers`, async (req, res) => {
 router.post('/trackerUrl', async (req, res) => {
     const { trackerUrl } = req.body
     global.trackerUrl = trackerUrl
-    try {
-        await utils.refreshPbKeys()
+    try {//will anounce as node
+        await procedures.startRefreshingLoop()
     } catch (error) {
         return res.status(StatusCodes.BAD_REQUEST).json({
             error: error
@@ -227,8 +227,6 @@ app.listen(config.port, () =>
 if (global.dev) {
     console.log(`dev mode enabled, tracker addr localhost`);
     setTimeout(async () => {
-        await utils.updateTrackerPublicKey()
-        await utils.refreshPbKeys()
-        await trackerApi.announceAsNode()
+        await procedures.startRefreshingLoop()
     }, 1000)
 }

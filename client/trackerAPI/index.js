@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = require('../utils')
+
 exports.fetchHops = async (count, destip, destport) => {
     count += 2 // to avoid the me and destination node in the hops list. tracker already does not return a node with the sender's ip addr
     return new Promise((resolve, reject) => {
@@ -103,6 +104,7 @@ exports.announceAsNode = async () => {
 }
 
 
+
 //TODO
 exports.announcePiece = async (data) => {
     //check
@@ -124,5 +126,24 @@ exports.announcePiece = async (data) => {
         console.error(error)
         console.log(`error at announce piece`);
         return error
+    }
+}
+
+
+
+exports.getTrackerPublicKey = async () => {
+    if (!trackerAddress) {
+        console.log(`trackerAddress is not defined`)
+        process.exit(1)
+    }
+    try {
+        const response = await (await fetch(global.trackerAddress + `/public-key`)).json()
+        global.trackerPbKey = response.publicKey
+        return response.publicKey
+    } catch (error) {
+        console.error(error)
+        console.log(`error at fetching public key from tracker, setting it to undefined..`);
+        global.trackerPbKey = undefined
+        return undefined
     }
 }

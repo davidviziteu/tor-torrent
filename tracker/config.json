@@ -1,5 +1,5 @@
 {
-    "sessionDurationMinutes": 30,
+    "sessionDurationMinutes": 1,
     "rsaModulusLength": 2048,
     "port": 6969,
     "maxRelayNodesReturned": 30,

@@ -1,0 +1,72 @@
+
+
+1655329561564Error: spawn ../client_server.js ENOENTchild process exited with code -4058
+
+1655329601350
+
+1655329641939
+
+1655329700783
+
+1655330080427child process exited with code 1
+1655330166273
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker, setting it to undefined..
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\index.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\trackerAPI\index.js:54:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\procedures\keyrefresh.js:65:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\procedures\keyrefresh.js:75:5)
+    at async Timeout._onTimeout (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:230:13) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at Object.exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\index.js:8:34)
+    at getRefreshPeriod (C:\Users\David\OneDrive\facultate\tor-torrent\client\procedures\keyrefresh.js:20:41)
+    at Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\procedures\keyrefresh.js:76:31)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Timeout._onTimeout (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:230:13) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at fetching refresh period from tracker
+C:\Users\David\OneDrive\facultate\tor-torrent\client\procedures\keyrefresh.js:77
+    console.log(`tracker session time: ${refreshObject.refreshPeriodMs / 60000} minutes`);
+                                                       ^
+
+TypeError: Cannot read properties of undefined (reading 'refreshPeriodMs')
+    at Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\procedures\keyrefresh.js:77:56)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Timeout._onTimeout (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:230:13)
+child process exited with code 1

@@ -3,18 +3,21 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { domReady } from './utils'
 import { useLoading } from './loading'
 
-const { appendLoading, removeLoading } = useLoading()
 
+const { appendLoading, removeLoading } = useLoading()
+let port
 ;(async () => {
   await domReady()
-
   appendLoading()
 })()
+
+
 
 
 // --------- Expose some API to the Renderer process. ---------
 contextBridge.exposeInMainWorld('fs', fs)
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
+contextBridge.exposeInMainWorld('port', 10000)
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
 contextBridge.exposeInMainWorld('electron', {
   // @ts-ignore

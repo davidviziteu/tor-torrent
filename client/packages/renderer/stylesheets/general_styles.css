@@ -183,3 +183,9 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.center-text-main-ui{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

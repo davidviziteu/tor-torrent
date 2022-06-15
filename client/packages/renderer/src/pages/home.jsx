@@ -23,9 +23,9 @@ export default function Home() {
       <main id="main-ui">
         <section id="left-main-section">
           <div id="torrent-filter-buttons">
-            <h1>All</h1>
-            <h4>Downloading</h4>
-            <h4>Downloaded</h4>
+            <h1>All active torrents</h1>
+            <h4></h4>
+            <h4></h4>
           </div>
           <div id="torrent-list-head" class="torrent-list-grid">
             <span>Name & size</span>

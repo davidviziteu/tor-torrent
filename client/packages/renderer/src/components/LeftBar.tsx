@@ -8,6 +8,10 @@ export default function LeftBar() {
         <div id="menu-bar" class="drag">
             <button class="no-drag menu-bar-button" title='Load .torano file' onClick={async () => {
 
+                //@ts-ignore
+                console.log(`window.port: ${window.port}`);
+                //@ts-ignore
+                console.log(`electron.port: ${electron.port}`);
 
                 const dialogConfig = {
                     title: 'Select a file or a folder',

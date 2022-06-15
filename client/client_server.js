@@ -4,8 +4,8 @@ const router = require(`express`).Router()
 const fetch = require(`node-fetch`)
 const fs = require(`fs`)
 const { StatusCodes, ReasonPhrases, getReasonPhrase } = require(`http-status-codes`)
-const utils = require(`./utils`)
 const trackerApi = require(`./trackerAPI`)
+const utils = require(`./utils`)
 const models = require(`./models`)
 require(`./utils/keyInit`)
 const app = express()
@@ -219,16 +219,23 @@ router.post('/trackerUrl', async (req, res) => {
 
 app.use(`/`, router)
 
-app.listen(config.port, () =>
-    console.log(`Listening on ${config.ip}:${config.port}...`)
-)
+if (require.main === module) {
+    app.listen(config.port, () =>
+        console.log(`Listening on ${config.ip}:${config.port}...`)
+    )
 
-
-if (global.dev) {
-    console.log(`dev mode enabled, tracker addr localhost`);
-    setTimeout(async () => {
-        await procedures.startRefreshingLoop()
-        let hops = await trackerApi.fetchHops()
-        console.log(hops);
-    }, 1000)
+    if (global.dev) {
+        console.log(`dev mode enabled, tracker addr localhost`);
+        setTimeout(async () => {
+            await procedures.startRefreshingLoop()
+            let hops = await trackerApi.fetchHops()
+            console.log(hops);
+        }, 1000)
+    }
 }
+
+module.exports = {
+    appServer: app,
+    startRefreshingLoop: procedures.startRefreshingLoop,
+}
+

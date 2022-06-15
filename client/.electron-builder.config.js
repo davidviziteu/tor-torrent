@@ -3,15 +3,23 @@
  * @see https://www.electron.build/configuration/configuration
  */
 module.exports = {
-  appId: "YourAppID",
-  productName: "YourAppName",
+  appId: "torano client 1.0",
+  productName: "Torano client",
   copyright: "Copyright © 2022 ${author}",
   asar: true,
   directories: {
     output: "release/${version}",
     buildResources: "build",
   },
-  files: ["dist"],
+  files: [
+    "dist",
+    "client_server.js",
+    "models",
+    "utils",
+    "trackerAPI",
+    "procedures",
+    "node_modules",
+  ],
   win: {
     target: [
       {
@@ -35,4 +43,12 @@ module.exports = {
     target: ["AppImage"],
     artifactName: "${productName}-${version}-Installer.${ext}",
   },
+  extraFiles: [
+    "client_server.js",
+    "models",
+    "utils",
+    "trackerAPI",
+    "procedures",
+    "node_modules",
+  ],
 }

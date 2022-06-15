@@ -67,7 +67,7 @@ const refreshProcedure = async () => {
     } catch (error) {
         console.log(error);
         console.log('error when refreshing keys, exiting..');
-        process.exit(1);
+        throw 'refreshProcedureError'
     }
 }
 //poate poti sa dai emitter ul ca param

@@ -105,8 +105,7 @@ exports.getTrackerPublicKey = async () => {
         return response.publicKey
     } catch (error) {
         console.error(error)
-        console.log(`error at fetching public key from tracker, setting it to undefined..`);
-        global.trackerPbKey = undefined
-        return undefined
+        console.log(`error at fetching public key from tracker, quitting..`);
+        process.exit(1)
     }
 }

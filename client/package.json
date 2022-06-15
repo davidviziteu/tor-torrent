@@ -9,7 +9,7 @@
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
-    "backend": "node packages/main/backend/client_server.js",
+    "backend": "node packages/main/client_server.js",
     "build": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
     "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json"
   },
@@ -20,19 +20,20 @@
     "crc-32": "^1.2.2",
     "create-torrent": "^5.0.2",
     "electron-store": "^8.0.1",
-    "get-port": "^6.1.2"
+    "express": "^4.17.3",
+    "get-port": "^6.1.2",
+    "http-status-codes": "^2.2.0",
+    "joi": "^17.6.0",
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
     "@vitejs/plugin-react": "^1.2.0",
     "autoprefixer": "^10.4.2",
     "electron": "^17.0.0",
     "electron-builder": "^22.14.13",
-    "express": "^4.17.3",
-    "http-status-codes": "^2.2.0",
-    "joi": "^17.6.0",
-    "node-fetch": "^2.6.7",
     "nodemon": "^2.0.15",
     "postcss": "^8.4.6",
     "solid-app-router": "^0.3.0",

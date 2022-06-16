@@ -1,5 +1,5 @@
 const models = require('../models')
-const utils = require('./index')
+const cryptoApi = require('./cryptoApi')
 const fetch = require(`node-fetch`)
 const { AbortError } = require(`node-fetch`)
 
@@ -12,7 +12,7 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     if (!keysArray)
         throw new Error(`no such key (${mapKey}) in encrpytion keys map`)
     for (const key of keysArray) {
-        encryptedPayload = utils.decryptTextAes(encryptedPayload, key)
+        encryptedPayload = cryptoApi.decryptTextAes(encryptedPayload, key)
     }
     encriptionKeysArrayMap.delete(mapKey)
     return encryptedPayload
@@ -44,7 +44,7 @@ exports.prepReturnOnion = hops => {
     }
     let aesKeys = []
     for (let index = 0; index < hops.length + 1; index++) {
-        aesKeys.push(utils.generateAesKey())
+        aesKeys.push(cryptoApi.generateAesKey())
     }
     let mapKey = `${Date.now()}`
     encriptionKeysArrayMap.set(mapKey, aesKeys)
@@ -67,7 +67,7 @@ exports.prepReturnOnion = hops => {
     let keysOrder = []
 
     let currentOnion = new models.Onion()
-    let currentAesKey = utils.generateAesKey()
+    let currentAesKey = cryptoApi.generateAesKey()
     let prevAesKeyObj = currentAesKey
     prevOnion = finalOnion
     let i
@@ -75,8 +75,8 @@ exports.prepReturnOnion = hops => {
     for (i = allHops.length - 1; i > 0; i--) {
         const hop = allHops[i];
         currentOnion = new models.Onion()
-        currentOnion.onionLayer = utils.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
-        currentOnion.next.encryptedAesKey = utils.encrpytTextRsa(JSON.stringify(prevAesKeyObj), hop.publicKey)
+        currentOnion.onionLayer = cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
+        currentOnion.next.encryptedAesKey = cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), hop.publicKey)
         currentOnion.next.aesPublicKey = hop.publicKey
         currentOnion.next.ip = hop.ip
         currentOnion.next.port = hop.port
@@ -87,13 +87,13 @@ exports.prepReturnOnion = hops => {
         // currentOnion.message = 'fwd'
         currentOnion.encryptExternalPayload = aesKeys[allHops.length - i - 1] //aes keys in normal order
         prevOnion = JSON.parse(JSON.stringify(currentOnion))
-        prevAesKeyObj = utils.generateAesKey()
+        prevAesKeyObj = cryptoApi.generateAesKey()
     }
 
 
     return {
-        onion: utils.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj),
-        ecryptedAesKey: utils.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
+        onion: cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj),
+        ecryptedAesKey: cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
         port: allHops[i].port,
         ip: allHops[i].ip,
         encryptExternalPayload: aesKeys[allHops.length - i - 1] //last aes key
@@ -124,7 +124,7 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
     let keysOrder = []
 
     let currentOnion = new models.Onion()
-    let currentAesKey = utils.generateAesKey()
+    let currentAesKey = cryptoApi.generateAesKey()
     let prevAesKeyObj = currentAesKey
 
     prevOnion = finalOnion
@@ -132,8 +132,8 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
     for (i = 0; i < allHops.length - 1; i++) {
         const hop = allHops[i];
         currentOnion = new models.Onion()
-        currentOnion.onionLayer = utils.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
-        currentOnion.next.encryptedAesKey = utils.encrpytTextRsa(JSON.stringify(prevAesKeyObj), hop.publicKey)
+        currentOnion.onionLayer = cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
+        currentOnion.next.encryptedAesKey = cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), hop.publicKey)
         currentOnion.next.aesPublicKey = hop.publicKey //dev
         currentOnion.next.ip = hop.ip
         currentOnion.next.port = hop.port
@@ -144,13 +144,13 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
         // currentOnion.message = 'fwd'
         currentOnion.encryptExternalPayload = undefined //nimic momentan
         prevOnion = JSON.parse(JSON.stringify(currentOnion))
-        prevAesKeyObj = utils.generateAesKey()
+        prevAesKeyObj = cryptoApi.generateAesKey()
     }
 
     let transitCell = new models.TransitCell()
     transitCell.externalPayload = payload
-    transitCell.onion = utils.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
-    transitCell.encryptedAesKey = utils.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey)
+    transitCell.onion = cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
+    transitCell.encryptedAesKey = cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey)
     transitCell.aesPublicKey = allHops[i].publicKey
     keysOrder = [allHops[i].publicKey].concat(keysOrder)
     portsOrder = [allHops[i].port].concat(portsOrder) //for debugging
@@ -185,7 +185,7 @@ exports.sendOnion = async (ip, port, body, timeout = 5000) => {
             let response
             if (responseEncriptedText != '') {
                 try {
-                    response = utils.decrpytTextRsa(responseEncriptedText)
+                    response = cryptoApi.decrpytTextRsa(responseEncriptedText)
                 } catch (error) {
                     response = ''
                 }

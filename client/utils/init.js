@@ -1,3 +1,5 @@
+const AppManager = require('./appDataManager');
+
 let config = {}
 console.log(`\n\n\n\n\n\n`);
 try {
@@ -8,14 +10,14 @@ try {
 }
 
 global.config = config
-
+global.port = config.port
 configurations = {
     "announcesPerTorrent": 3,
     "circuitLength": 3,
     "maxPiecesPerMessage": 10,
     "dev": true
 }
-
+AppManager.loadProgress()
 global.iannouncesPerTorrentp = configurations.announcesPerTorrent ? configurations.announcesPerTorrent : 3
 global.circuitLength = configurations.circuitLength ? configurations.circuitLength : 3
 global.maxPiecesPerMessage = configurations.maxPiecesPerMessage ? configurations.maxPiecesPerMessage : 10

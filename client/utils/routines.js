@@ -2,13 +2,14 @@ const crypto = require("crypto");
 const fetch = require('node-fetch');
 const EventEmitter = require('node:events');
 const myEmitter = new EventEmitter();
-const { announceAsNode, getTrackerPublicKey } = require('../trackerAPI')
-const utils = require(`../utils`)
+const { announceAsNode, getTrackerPublicKey } = require('./trackerApi')
+const utils = require(`./cryptoApi`)
+const AppManager = require('./appDataManager');
 
 const getRefreshPeriod = async () => {
-    if (!trackerAddress) {
-        console.log(`trackerAddress is not defined`)
-        process.exit(1)
+    if (!trackerAddress || !global.trackerPbKey) {
+        console.log(`trackerAddress or pb key is not defined. cannot get refresh period`)
+        throw (`trackerAddress or pb key is not defined. cannot get refresh period`)
     }
     try {
         aesKey = utils.generateAesKey()
@@ -29,16 +30,13 @@ const getRefreshPeriod = async () => {
         }
         return JSON.parse(utils.decryptTextAes(response.encryptedData, aesKey))
     } catch (error) {
-        console.error(error)
+        console.log(error)
         console.log(`error at fetching refresh period from tracker`);
+        throw (`error at fetching refresh period from tracker`);
     }
 }
 
 const refreshOwnPbKey = async () => {
-    if (!trackerAddress) {
-        console.log(`trackerAddress is not defined`)
-        process.exit(1)
-    }
     try {
         const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
             modulusLength: configurations.modulusLength ? configurations.modulusLength : 2048,
@@ -52,8 +50,8 @@ const refreshOwnPbKey = async () => {
         console.log('own public key refreshed');
     } catch (error) {
         console.log(error);
-        console.log('error when generating keys, exiting..');
-        process.exit(1);
+        console.log('error when generating keys');
+        throw ('error when generating keys');
     }
 }
 
@@ -65,29 +63,35 @@ const refreshProcedure = async () => {
         await announceAsNode()
         myEmitter.emit('tracker key refreshed')
     } catch (error) {
-        console.log(error);
-        console.log('error when refreshing keys, exiting..');
-        throw 'refreshProcedureError'
+        console.log('^ error at refreshProcedure');
+        throw error
     }
 }
 //poate poti sa dai emitter ul ca param
 exports.startRefreshingLoop = async () => {
-    await refreshProcedure()
-    let refreshObject = await getRefreshPeriod()
-    console.log(`tracker session time: ${refreshObject.refreshPeriodMs / 60000} minutes`);
-    if (refreshObject.timeLeftMs < 3000) {
-        await utils.sleep(refreshObject.timeLeftMs + 100)
-        refreshObject = await getRefreshPeriod()
-    }
-    console.log(`refreshing every ${refreshObject.refreshPeriodMs / 60000} minutes in ${refreshObject.timeLeftMs} ms`);
-    setTimeout(async () => {
+    try {
+        AppManager.saveProgress()
         await refreshProcedure()
-        console.log('refresh');
-        myEmitter.emit('refreshed')
-        setInterval(async () => {
+        let refreshObject = await getRefreshPeriod()
+        console.log(`tracker session time: ${refreshObject.refreshPeriodMs / 60000} minutes`);
+        if (refreshObject.timeLeftMs < 3000) {
+            await utils.sleep(refreshObject.timeLeftMs + 100)
+            refreshObject = await getRefreshPeriod()
+        }
+        console.log(`refreshing every ${refreshObject.refreshPeriodMs / 60000} minutes in ${refreshObject.timeLeftMs} ms`);
+        setTimeout(async () => {
+            AppManager.saveProgress()
             await refreshProcedure()
             console.log('refresh');
             myEmitter.emit('refreshed')
-        }, refreshObject.refreshPeriodMs)
-    }, refreshObject.timeLeftMs + 10)
+            setInterval(async () => {
+                await refreshProcedure()
+                console.log('refresh');
+                myEmitter.emit('refreshed')
+            }, refreshObject.refreshPeriodMs)
+        }, refreshObject.timeLeftMs + 10)
+    } catch (error) {
+        console.log('error at startRefreshingLoop');
+        throw error
+    }
 }

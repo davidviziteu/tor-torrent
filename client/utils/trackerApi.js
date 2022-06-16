@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = require('../utils')
+const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = require('./cryptoApi')
 
 //done
 exports.fetchHops = async () => {
@@ -97,7 +97,7 @@ exports.announcePiece = async (data) => {
 exports.getTrackerPublicKey = async () => {
     if (!trackerAddress) {
         console.log(`trackerAddress is not defined`)
-        process.exit(1)
+        throw (`trackerAddress is not defined`);
     }
     try {
         const response = await (await fetch(global.trackerAddress + `/public-key`)).json()
@@ -105,7 +105,7 @@ exports.getTrackerPublicKey = async () => {
         return response.publicKey
     } catch (error) {
         console.error(error)
-        console.log(`error at fetching public key from tracker, quitting..`);
-        process.exit(1)
+        console.log(`error at fetching public key from tracker`);
+        throw (`error at fetching public key from tracker`);
     }
 }

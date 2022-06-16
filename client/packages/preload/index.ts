@@ -2,22 +2,21 @@ import fs from 'fs'
 import { contextBridge, ipcRenderer } from 'electron'
 import { domReady } from './utils'
 import { useLoading } from './loading'
-
+import {spawn} from 'child_process'
 
 const { appendLoading, removeLoading } = useLoading()
-let port
+
 ;(async () => {
   await domReady()
   appendLoading()
 })()
 
 
-
-
 // --------- Expose some API to the Renderer process. ---------
 contextBridge.exposeInMainWorld('fs', fs)
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
-contextBridge.exposeInMainWorld('port', 10000)
+contextBridge.exposeInMainWorld('bport', 10000)
+contextBridge.exposeInMainWorld('spawn', spawn)
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
 contextBridge.exposeInMainWorld('electron', {
   // @ts-ignore

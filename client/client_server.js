@@ -4,13 +4,18 @@ const router = require(`express`).Router()
 const fetch = require(`node-fetch`)
 const fs = require(`fs`)
 const { StatusCodes, ReasonPhrases, getReasonPhrase } = require(`http-status-codes`)
-const trackerApi = require(`./trackerAPI`)
-const utils = require(`./utils`)
+const trackerApi = require(`./utils/trackerApi`)
+const cryptoApi = require(`./utils/cryptoApi`)
 const models = require(`./models`)
-require(`./utils/keyInit`)
+require(`./utils/init`)
 const app = express()
-const procedures = require(`./procedures/keyrefresh`)
+const procedures = require(`./utils/routines`)
+const bencode = require(`bencode`)
+const createTorrent = require('create-torrent')
+const cors = require('cors');
+const AppManager = require('./appDataManager');
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use((req, res, next) => {
@@ -20,8 +25,56 @@ app.use((req, res, next) => {
 })
 let id = 0
 router.get('/echo', (req, res) => {
-    console.log(`client on echo. ip: ${req.ip} port: ${req.port}`);
-    return res.status(200).end(`client on echo. ip: ${req.ip} port: ${req.port}`)
+    console.log(`client on echo. ip: ${req.ip}`);
+    return res.status(200).end(`client on echo. ip: ${req.ip}`)
+})
+
+router.post(`/load-torrent`, (req, res) => {
+    const { file } = req.body
+    if (!file) return res.status(StatusCodes.BAD_REQUEST).end()
+    //test if file exists
+    fs.access(file, fs.constants.R_OK, (err) => {
+        if (err) {
+            return res.status(StatusCodes.BAD_REQUEST).end()
+        }
+
+        const torrent = bencode.decode(fs.readFileSync(file));
+        //validate
+
+    })
+
+})
+
+router.post(`/create-torrent`, (req, res) => {
+    const { sourcePath, destPath } = req.body
+    if (!sourcePath || !destPath) return res.status(StatusCodes.BAD_REQUEST).end({
+        error: `sourcePath or destPath is missing`
+    })
+    //test if file exists
+    fs.access(sourcePath, fs.constants.R_OK, (err) => {
+        if (err) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                error: `file ${sourcePath} not found`
+            })
+        }
+        createTorrent(sourcePath, {
+            comment: 'torano',
+            announceList: [[global.trackerAddress]],
+        }, (err, torrent) => {
+            if (!err) {
+                // `torrent` is a Buffer with the contents of the new .torrent file
+                fs.writeFile(destPath, torrent, (err) => {
+                    if (err) {
+                        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                            error: `error writing file ${destPath}`
+                        })
+                    }
+                    return res.status(StatusCodes.OK).end()
+                })
+            }
+        })
+
+    })
 })
 
 router.post(`/relay`, async function routeOnion(req, res) {
@@ -33,7 +86,7 @@ router.post(`/relay`, async function routeOnion(req, res) {
     let currentId = ++id
     let prevPubKey
     try {
-        prevPubKey = await utils.comm.getPublicKey(req.ip, req.body.requesterPort)
+        prevPubKey = await cryptoApi.comm.getPublicKey(req.ip, req.body.requesterPort)
     } catch (error) {
         console.log(error)
         console.log(`cannot fetch prev node's publickey`)
@@ -42,7 +95,7 @@ router.post(`/relay`, async function routeOnion(req, res) {
     }
     try {
         currentTransitCell = req.body
-        aesKey = utils.decrpytTextRsa(currentTransitCell.encryptedAesKey)
+        aesKey = cryptoApi.decrpytTextRsa(currentTransitCell.encryptedAesKey)
     } catch (error) {
         console.log(error)
         console.log(`error while decryptiong aes key`)
@@ -50,17 +103,17 @@ router.post(`/relay`, async function routeOnion(req, res) {
         return
     }
     try {
-        onion = JSON.parse(utils.decryptTextAes(req.body.onion, aesKey))
+        onion = JSON.parse(cryptoApi.decryptTextAes(req.body.onion, aesKey))
         //validate onion, if not ok send bad request status code (1)
 
         if (!onion.message) { //means its onion to be forwarded
             if (onion.encryptExternalPayload) {
-                utils.logTimestamp(`return msg`)
-                currentTransitCell.externalPayload = utils.encrpytTextAes(currentTransitCell.externalPayload, onion.encryptExternalPayload)
+                cryptoApi.logTimestamp(`return msg`)
+                currentTransitCell.externalPayload = cryptoApi.encrpytTextAes(currentTransitCell.externalPayload, onion.encryptExternalPayload)
                 await new Promise(r => setTimeout(r, 500));
             }
             else {
-                utils.logTimestamp(`fwd msg`)
+                cryptoApi.logTimestamp(`fwd msg`)
                 await new Promise(r => setTimeout(r, 500));
             }
             let transitCell = new models.TransitCell()
@@ -68,24 +121,24 @@ router.post(`/relay`, async function routeOnion(req, res) {
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             console.log(`[${config.port}][id: ${currentId}] got onion to fwd to ${onion.next.ip}:${onion.next.port}`)
-            let response = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
+            let response = await cryptoApi.comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
             console.log(`[${config.port}][id: ${currentId}] onion fwd reponse message: ${response}`)
-            return res.status(200).end(utils.encrpytTextRsa(response, prevPubKey))
+            return res.status(200).end(cryptoApi.encrpytTextRsa(response, prevPubKey))
         }
 
         if (onion.message.type == 'announce') {
             let result = await trackerApi.announcePiece(JSON.stringify(onion.message))
-            return res.status(200).end(utils.encrpytTextRsa(result, prevPubKey))
+            return res.status(200).end(cryptoApi.encrpytTextRsa(result, prevPubKey))
         }
 
         //onion for me
-        res.status(200).end(utils.encrpytTextRsa('ok', prevPubKey))
+        res.status(200).end(cryptoApi.encrpytTextRsa('ok', prevPubKey))
     } catch (error) {
         //Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
         //  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
         //inseamna ca am dat decode la ceva ce a fost criptat cu alta cheie
         console.log(error)
-        return res.status(200).end(utils.encrpytTextRsa('failed', prevPubKey))
+        return res.status(200).end(cryptoApi.encrpytTextRsa('failed', prevPubKey))
     }
     try {
         console.log(`got an onion for me`);
@@ -93,12 +146,12 @@ router.post(`/relay`, async function routeOnion(req, res) {
         //...
         let transitCell = new models.TransitCell()
         if (onion.onionLayer) { // return onion
-            utils.logTimestamp(`got a message for me with a return onion: "${onion.message}" `)
-            transitCell.externalPayload = utils.encrpytTextAes('yes?', onion.encryptExternalPayload)
+            cryptoApi.logTimestamp(`got a message for me with a return onion: "${onion.message}" `)
+            transitCell.externalPayload = cryptoApi.encrpytTextAes('yes?', onion.encryptExternalPayload)
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             await new Promise(r => setTimeout(r, 2000))
-            let nextNodeResponse = await utils.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
+            let nextNodeResponse = await cryptoApi.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
                 console.log(`error occured when sending response: ${err}`)
             })
 
@@ -107,8 +160,8 @@ router.post(`/relay`, async function routeOnion(req, res) {
         if (onion.message.startsWith(`key `)) {
             let key = onion.message.slice(4)
             console.log(`[RESPONSE] reponse onion for key: ${key}`)
-            let decryptedData = utils.comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
-            utils.logTimestamp(`[DECR]: ${decryptedData}`)
+            let decryptedData = cryptoApi.comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
+            cryptoApi.logTimestamp(`[DECR]: ${decryptedData}`)
         }
     } catch (error) {
         console.log(error)
@@ -116,10 +169,10 @@ router.post(`/relay`, async function routeOnion(req, res) {
 })
 
 router.get(`/relays-from-tr`, (req, res) => {
-    let encr_text = utils.encrpytTextRsa(`ala bala porto cala`, global.publicKey)
+    let encr_text = cryptoApi.encrpytTextRsa(`ala bala porto cala`, global.publicKey)
     return res.status(201).json({
         encr_text: encr_text,
-        decr_text: utils.decrpytTextRsa(encr_text, global.privateKey)
+        decr_text: cryptoApi.decrpytTextRsa(encr_text, global.privateKey)
     })
 })
 
@@ -131,9 +184,9 @@ router.post(`/testRouting`, async (req, res) => {
         let hops = await trackerApi.fetchHops(hopsNumber, destip, destport)
         let destNodePbKey = await trackerApi.getPublicKeyOfNode(destip, destport)
         console.log(hops);
-        let returnData = utils.comm.prepReturnOnion(hops)
-        let { transitCell, nextIp, nextPort } = utils.comm.prepTransitCell(hops, destip, destport, destNodePbKey, message, payload, returnData)
-        let fetchStatus = await utils.comm.sendOnion(nextIp, nextPort, transitCell)
+        let returnData = cryptoApi.comm.prepReturnOnion(hops)
+        let { transitCell, nextIp, nextPort } = cryptoApi.comm.prepTransitCell(hops, destip, destport, destNodePbKey, message, payload, returnData)
+        let fetchStatus = await cryptoApi.comm.sendOnion(nextIp, nextPort, transitCell)
         console.log(`send onion status: ${fetchStatus}`)
         res.status(200).end()
     }
@@ -149,10 +202,10 @@ router.post(`/announce`, async (req, res) => {
     let trackerRsaPbKey = await trackerApi.generatePublicKey()
     if (!trackerRsaPbKey)
         return res.status(StatusCodes.CONFLICT).json({ error: 'tracker returned nothing' })
-    let aesKey = utils.generateAesKey()
+    let aesKey = cryptoApi.generateAesKey()
     console.log(JSON.stringify(aesKey));
     let messageForTracker = {
-        encrypedAesKey: utils.encrpytTextRsa(JSON.stringify(aesKey), trackerRsaPbKey),
+        encrypedAesKey: cryptoApi.encrpytTextRsa(JSON.stringify(aesKey), trackerRsaPbKey),
         rsaPublicKey: trackerRsaPbKey,
         payload: 'return onion'
     }
@@ -163,17 +216,17 @@ router.post(`/announce`, async (req, res) => {
         let destNodePbKey = await trackerApi.getPublicKeyOfNode(destip, destport)
         /** can do more queries just to protect the destinatary */
         console.log(hops);
-        let returnOnion = utils.comm.prepReturnOnion(hops)
+        let returnOnion = cryptoApi.comm.prepReturnOnion(hops)
         let stringifiedPayload = JSON.stringify({
             announce: "ceva",
             returnOnion: JSON.stringify(returnOnion)
         })
-        messageForTracker.payload = utils.encrpytTextAes(stringifiedPayload, aesKey)
+        messageForTracker.payload = cryptoApi.encrpytTextAes(stringifiedPayload, aesKey)
         messageForTracker.type = 'announce'
 
 
-        let { transitCell, nextIp, nextPort } = utils.comm.prepTransitCell(hops, destip, destport, destNodePbKey, messageForTracker)
-        let fetchStatus = await utils.comm.sendOnion(nextIp, nextPort, transitCell)
+        let { transitCell, nextIp, nextPort } = cryptoApi.comm.prepTransitCell(hops, destip, destport, destNodePbKey, messageForTracker)
+        let fetchStatus = await cryptoApi.comm.sendOnion(nextIp, nextPort, transitCell)
         console.log(`send onion status: ${fetchStatus}`)
         res.status(200).json({
             "send onion status": fetchStatus
@@ -194,45 +247,52 @@ router.get(`/publicKey`, async (req, res) => {
     })
 })
 
-router.get(`/peers`, async (req, res) => {
-    // demo
-    const response = await fetch(`http://localhost:6969/scrape/nodes`) // cred ca ar trebui facut la tracker endpoint sa dea n ips random
-    const data = await response.json();
-    console.log(data);
-    return res.status(200).end(JSON.stringify(
-        data
-    ))
-})
-
-router.post('/trackerUrl', async (req, res) => {
-    const { trackerUrl } = req.body
-    global.trackerUrl = trackerUrl
-    try {//will anounce as node
-        await procedures.startRefreshingLoop()
-    } catch (error) {
-        return res.status(StatusCodes.BAD_REQUEST).json({
-            error: error
-        })
-    }
+router.post('/override-tracker-url/', async (req, res) => {
+    const { trackerurl } = req.body
+    if (!trackerurl) return res.status(StatusCodes.BAD_REQUEST).json({ error: 'no tracker url provided' })
+    global.trackerAddress = trackerurl
     res.status(200).end()
 })
 
-app.use(`/`, router)
+router.get('/exit', async (req, res) => {
 
-if (require.main === module) {
+    process.exit(0)
+})
+
+router.get('/load', async (req, res) => {
+    const data = AppManager.loadProgress()
+    return res.status(200).json(data)
+})
+
+app.use(`/`, router)
+try {
     app.listen(config.port, () =>
         console.log(`Listening on ${config.ip}:${config.port}...`)
     )
+} catch (error) {
+    if (error.code === 'EADDRINUSE')
+        console.log('Port is already in use, probably debugging.');
+    else
+        console.log(error);
 
-    if (global.dev) {
-        console.log(`dev mode enabled, tracker addr localhost`);
-        setTimeout(async () => {
-            await procedures.startRefreshingLoop()
-            let hops = await trackerApi.fetchHops()
-            console.log(hops);
-        }, 1000)
-    }
 }
+
+if (global.dev) {
+    global.trackerAddress = 'http://localhost:6969'
+}
+
+
+// if (require.main === module) {
+//     if (global.dev) {
+//         console.log(`dev mode enabled, tracker addr localhost`);
+//         global.trackerAddress = 'http://localhost:6969'
+//         setTimeout(async () => {
+//             await procedures.startRefreshingLoop()
+//             let hops = await trackerApi.fetchHops()
+//             console.log(hops);
+//         }, 1000)
+//     }
+// }
 
 module.exports = {
     appServer: app,

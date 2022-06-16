@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js';
 import { useNavigate } from 'solid-app-router';
-import createTorrentPromise from './createtorrent';
+// import createTorrentPromise from './createtorrent';
 
 export default function LeftBar() {
 
@@ -38,43 +38,71 @@ export default function LeftBar() {
     
     async function createToranoFile() {
 
-        const dialogConfig = {
+        let dialogConfig = {
             title: 'Select any file',
             buttonLabel: 'This one will do',
             properties: ['openFile', 'dontAddToRecent'],
         }
-        let result = await electron.openDialog('showOpenDialog', dialogConfig)
-        if (!result.cancelled && result.filePaths[0]) {
-            let filepath = result.filePaths[0]
-            console.log('filepath:');
-            console.log(filepath);
-            let nav = useNavigate();
-            nav('/build')
+        let resultSource = await (await electron.openDialog('showOpenDialog', dialogConfig))
+        // console.log(`result after opening file or folder: ${JSON.stringify(resultSource)}`);
 
-            try {
-                let metainfoContent = await createTorrentPromise(filepath)
-                let dialogConfig = {
-                    //Placeholder 1
-                    title: "Save torano file ",
-                    buttonLabel: "Save torano File",
-                    defaultPath: "C:\\myToranoFile.torano",
-                    filters: [
-                        { name: '.torano', extensions: ['torano'] },
-                    ]
-                }
-                let result = await electron.openDialog('showSaveDialog', dialogConfig)
-                console.log(`result after create torrent file: ${JSON.stringify(result)}`);
+        if (!resultSource || resultSource.canceled) {
+            console.log('cancecled');
+            return;
+        }
 
-            } catch (error) {
-                console.log('create torrent error');
-                console.log(error);
-            }
-
-          
+        dialogConfig = {
+            //Placeholder 1
+            title: "Save torano file ",
+            buttonLabel: "Save torano file here",
+            defaultPath: "C:\\myToranoFile.torano",
+            filters: [
+                { name: '.torano', extensions: ['torano'] },
+            ]
+        }
+        let resultDest = await electron.openDialog('showSaveDialog', dialogConfig)
+        console.log(`result after clicking save: ${JSON.stringify(resultDest)}`);
+        if (!resultDest || resultDest.canceled)
+            return;
+        let nav = useNavigate()
+        nav('/loading')
+        let backendResult
+        try {
+            backendResult = await fetch(`http://localhost:${window.bport}/create-torrent`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sourcePath: resultSource.filePaths[0],
+                    destPath: resultDest.filePath
+                })
+            })
+        } catch (error) {
+            electron.openDialog('showMessageBox', {
+                type: 'error',
+                title: 'Error',
+                message: JSON.stringify(error),
+            })
+            nav('/welcome')
+            return
+        }
+       
+        if (backendResult.ok) {
+            electron.openDialog('showMessageBox', {
+                type: 'info',
+                title: 'Success',
+                message: 'torano file created successfully',
+            })
         }
         else {
-            console.log('cancelled');
+            electron.openDialog('showMessageBox', {
+                type: 'error',
+                title: 'Error',
+                message: 'torano file creation failed',
+            })
         }
+        nav('/welcome')
     }
 
 

@@ -32,3 +32,9 @@ exports.TransitCell = class {
     externalPayload = ''
 }
 
+exports.toranoFileSchema = Joi.object().keys({//todo
+    name: Joi.string().required(),
+    size: Joi.number().required(),
+    hash: Joi.string().required(),
+})
+

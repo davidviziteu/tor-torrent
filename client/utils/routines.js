@@ -80,7 +80,6 @@ exports.startRefreshingLoop = async () => {
         }
         console.log(`refreshing every ${refreshObject.refreshPeriodMs / 60000} minutes in ${refreshObject.timeLeftMs} ms`);
         setTimeout(async () => {
-            AppManager.saveProgress()
             await refreshProcedure()
             console.log('refresh');
             myEmitter.emit('refreshed')
@@ -95,3 +94,8 @@ exports.startRefreshingLoop = async () => {
         throw error
     }
 }
+
+
+setInterval(() => {
+    AppManager.saveProgress()
+}, 1000 * 60);

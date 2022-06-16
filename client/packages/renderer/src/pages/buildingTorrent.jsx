@@ -11,7 +11,7 @@ export default function BuildingTorrent() {
       <LeftBar />
       <main id="main-ui" class='center-text-main-ui'>
         <dir>
-          Making a .torano file...
+          Building a .torano file
         </dir>
       </main>
     </div>

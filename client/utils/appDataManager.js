@@ -29,6 +29,7 @@ class AppManager {
 
         try {
             parsedTorrent = parseTorrent(metainfoContent)
+            this.data.trackerAddress = parsedTorrent.announce[0]
         } catch (error) {
             console.log(error);
             console.log('Error parsing metainfo file. path: ' + metainfoPath);
@@ -41,14 +42,13 @@ class AppManager {
         }
 
         try {
-            let metainfoFileName = metainfoPath.split('/').pop();
-            let metainfoFilePath = `./${metainfoFileName}`;
+            let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
             fs.writeFileSync(metainfoFilePath, metainfoFile);
 
             data.torrents[hash] = {
                 hash: hash,
                 filesPath: filesPath,
-                metainfoFileName: metainfoFileName,
+                metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
@@ -56,6 +56,7 @@ class AppManager {
                 piecesRecieved: new Array(parsedTorrent.pieces.length).fill(false)
             }
             //TODO begin announce procedures and download
+            this.saveProgress()
             return true;
         } catch (error) {
             console.log(error);
@@ -64,31 +65,34 @@ class AppManager {
         }
     }
     //todo
-    createTorrent(filesPath, parsedTorrent, isFolder = false) {
-
+    createTorrent(filesPath, rawTorrent, isFolder = false) {
+        let parsedTorrent = parseTorrent(rawTorrent)
         if (this.data.torrents[parsedTorrent.infoHash]) {
-            throw 'info hash already exists';
+            console.log(`info hash for torrent ${parsedTorrent.name} already exists`);
+            return 'exists'
         }
-
+        this.data.trackerAddress = parsedTorrent.announce[0]
         try {
             //copy metainfo file to "."
-            let metainfoFilePath = `./${parsedTorrent.infoHash}`;
-            fs.writeFileSync(metainfoFilePath, metainfoFile);
+            let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
+            fs.writeFileSync(metainfoFilePath, rawTorrent);
 
-            data.torrents[hash] = {
-                infoHash: infoHash,
+            this.data.torrents[parsedTorrent.infoHash] = {
+                infoHash: parsedTorrent.infoHash,
                 filesPath: filesPath,
-                metainfoFileName: infoHash,
+                metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: true
             }
             //begin announce procedures
-            return true;
+            console.log(`created torrent ${parsedTorrent.name}`);
+            this.saveProgress()
+            return undefined;
         } catch (error) {
             console.log(error);
             console.log('error adding torrent');
-            return false;
+            throw error;
         }
     }
 
@@ -103,13 +107,14 @@ class AppManager {
     removeTorrent(hash) {
         let targetTorrent = this.getTorrent(hash);
         if (targetTorrent) {
-            fs.unlinkSync(`./${targetTorrent.metainfoFileName}`);
+            fs.unlinkSync(`./${targetTorrent.metainfoFilePath}`);
             delete data.torrents[hash];
         }
     }
 
     saveProgress() {
         fs.writeFileSync(`./.data${global.port}.json`, JSON.stringify(this.data));
+        console.log('app manager: saved data');
     }
 
     loadProgress() {

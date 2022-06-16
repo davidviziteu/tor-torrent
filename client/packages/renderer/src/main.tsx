@@ -29,7 +29,10 @@ function electronIntegration() {
 }
 
 render(() => {
-  onMount(() => {
+  onMount(async () => {
+    // wait 2 seconds
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await fetch(`http://localhost:${window.backend_port}/load`)
     window.removeLoading();
   });
   

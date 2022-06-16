@@ -8,25 +8,42 @@ const storageFile = './toranoData.json';
 
 
 const App: Component = () => {
-  const navigate = useNavigate();
   const Route = useRoutes(routes);
-  let data
-  try {
-    window.fs.accessSync(storageFile, window.fs.constants.R_OK)
-    data = JSON.parse(window.fs.readFileSync(storageFile, 'utf8'));
-  } catch (error) {
-    data = {}
-    window.fs.writeFileSync(storageFile, JSON.stringify(data));
-  }
-  
-  if (!data.trackerUrl) {
-    navigate('/welcome')
+  const navigate = useNavigate();
+
+
+  //readfilesync
+  let storageFile = window.cwd + `\\.data${window.backend_port}.json`
+  if (!window.fs.existsSync(storageFile)) {
+    //@ts-ignore
+    window.data = {}
+    navigate('/welcome');
+    console.log(`${storageFile} not found`);
   }
   else {
-    //aici ar treubi incarcate datele
-    navigate('/');
+    try {
+      console.log(`${storageFile} found`);
+      console.log(`reading..`);
+      let fsdata = window.fs.readFileSync(storageFile, 'utf8')//citeste aiurea
+      console.log(`parsing: ${fsdata}`);
+      //@ts-ignore
+      window.data = JSON.parse(fsdata);
+      if (!window.data.trackerAddress) {
+        console.log(`${storageFile} tracker null `);
+        navigate('/welcome');
+      }
+      else{
+        navigate('/')
+        console.log(`${storageFile} tracker ok `);
+        }
+    } catch (error) {
+      console.log(`catch. error: ${JSON.stringify(error)}`);
+      navigate('/welcome');
+    }
   }
 
+ 
+  
   return (
     <>
       <TopBar />

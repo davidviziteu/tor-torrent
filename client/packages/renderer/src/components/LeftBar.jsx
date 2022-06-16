@@ -51,11 +51,13 @@ export default function LeftBar() {
             return;
         }
 
+        let fileName = resultSource.filePaths[0].split('/').pop();
+        fileName = fileName.split('.').slice(0, -1).join('.');
         dialogConfig = {
             //Placeholder 1
             title: "Save torano file ",
             buttonLabel: "Save torano file here",
-            defaultPath: "C:\\myToranoFile.torano",
+            defaultPath: `C:\\${fileName}.torano`,
             filters: [
                 { name: '.torano', extensions: ['torano'] },
             ]
@@ -68,7 +70,8 @@ export default function LeftBar() {
         nav('/loading')
         let backendResult
         try {
-            backendResult = await fetch(`http://localhost:${window.bport}/create-torrent`, {
+            console.log('fetch backend create torrent');
+            backendResult = await fetch(`http://localhost:${window.backend_port}/create-torrent`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -79,6 +82,8 @@ export default function LeftBar() {
                 })
             })
         } catch (error) {
+            console.log(error);
+            console.log('error fetch backend create torrent');
             electron.openDialog('showMessageBox', {
                 type: 'error',
                 title: 'Error',
@@ -94,6 +99,7 @@ export default function LeftBar() {
                 title: 'Success',
                 message: 'torano file created successfully',
             })
+            nav('/')
         }
         else {
             electron.openDialog('showMessageBox', {
@@ -101,8 +107,9 @@ export default function LeftBar() {
                 title: 'Error',
                 message: 'torano file creation failed',
             })
+            nav('/welcome')
         }
-        nav('/welcome')
+
     }
 
 

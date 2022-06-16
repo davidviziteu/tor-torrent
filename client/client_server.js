@@ -13,7 +13,7 @@ const procedures = require(`./utils/routines`)
 const bencode = require(`bencode`)
 const createTorrent = require('create-torrent')
 const cors = require('cors');
-const AppManager = require('./appDataManager');
+const AppManager = require('./utils/appDataManager');
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -61,17 +61,35 @@ router.post(`/create-torrent`, (req, res) => {
             comment: 'torano',
             announceList: [[global.trackerAddress]],
         }, (err, torrent) => {
-            if (!err) {
-                // `torrent` is a Buffer with the contents of the new .torrent file
-                fs.writeFile(destPath, torrent, (err) => {
-                    if (err) {
-                        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                            error: `error writing file ${destPath}`
-                        })
-                    }
-                    return res.status(StatusCodes.OK).end()
+            if (err) {
+                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                    error: `error creating torrent: ${JSON.stringify(err)}`
                 })
             }
+            if (err) {
+                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                    error: `error creating torrent: ${JSON.stringify(err)}`
+                })
+            }
+            // `torrent` is a Buffer with the contents of the new .torrent file
+            try {
+                let exists = AppManager.createTorrent(sourcePath, torrent)
+                if (exists == 'exists') {
+                    fs.writeFile(destPath, torrent, (err) => {
+                        if (err) {
+                            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                                error: `error writing file ${destPath}: ${JSON.stringify(err)}`
+                            })
+                        }
+                    })
+                }
+            } catch (error) {
+                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                    error: `error creating torrent: ${JSON.stringify(error)}`
+                })
+
+            }
+            return res.status(StatusCodes.OK).end()
         })
 
     })
@@ -278,6 +296,7 @@ try {
 }
 
 if (global.dev) {
+    console.log(`dev mode enabled, tracker addr localhost`);
     global.trackerAddress = 'http://localhost:6969'
 }
 

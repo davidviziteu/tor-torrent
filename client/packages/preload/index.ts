@@ -13,9 +13,10 @@ const { appendLoading, removeLoading } = useLoading()
 
 
 // --------- Expose some API to the Renderer process. ---------
+contextBridge.exposeInMainWorld('cwd', process.cwd())
 contextBridge.exposeInMainWorld('fs', fs)
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
-contextBridge.exposeInMainWorld('bport', 10000)
+contextBridge.exposeInMainWorld('backend_port', 10000)
 contextBridge.exposeInMainWorld('spawn', spawn)
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
 contextBridge.exposeInMainWorld('electron', {

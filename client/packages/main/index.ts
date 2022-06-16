@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog, contextBridge } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 import fs from 'fs'
@@ -16,6 +16,47 @@ if (!app.requestSingleInstanceLock()) {
 let win: BrowserWindow | null = null
 
 async function createWindow() {
+  const path = require('path')
+  const { spawn } = require("child_process");
+  let file: number
+  let backendServerProcess: any
+  //https://www.npmjs.com/package/get-port-electron
+  //daca mai e timp...
+  file = fs.openSync('./backendlog.txt', 'a')
+  try {
+    backendServerProcess = spawn("node", [path.resolve('client_server.js')], { stdio: ['ignore', file, file] });
+  } catch (error) {
+    console.log('spawn error');``
+    console.log(error);
+    if (app.isPackaged) {
+      dialog.showErrorBox('Backend server failed to start', JSON.stringify(error));
+      app.quit();
+    }
+  }
+  //openfile for appending and createing a file if it doesn't exist
+  fs.writeFile(file, `\n`, (err) => { });
+  fs.writeFile(file, `\n`, (err) => { });
+  fs.writeFile(file, `${Date.now()}`, (err) => { });
+
+  //@ts-ignore
+  backendServerProcess.on("data", data => {
+    fs.writeFile(file, `${data}`, (err) => { });
+  });
+
+  //@ts-ignore
+  backendServerProcess.on('error', (error) => {
+    fs.writeFile(file, `${error}`, (err) => { });
+  });
+
+  //@ts-ignore
+  backendServerProcess.on("close", code => {
+    fs.writeFile(file, `child process exited with code ${code}`, (err) => { });
+    console.log(`child process exited with code ${code}`);
+  });
+
+
+
+
   win = new BrowserWindow({
     title: 'Main window',
     width: 1200,
@@ -29,31 +70,16 @@ async function createWindow() {
       nodeIntegration: true,
     },
   })
-
-  const path = require('path')
-  const { spawn } = require("child_process");
-  let file: number
-  let ls: any
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
-    file = fs.openSync('./backendlog.txt', 'a')
-    ls = spawn("node", [path.resolve('client_server.js')], {stdio: ['ignore', file, file]});
-
   } else {
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
     const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
     win.loadURL(url)
     win.webContents.openDevTools()
-    file = fs.openSync('./backendlog.txt', 'a')
-    console.log('path: ', path.resolve('client_server.js'));
-    try {
-      ls = spawn("node", [path.resolve('client_server.js')], { stdio: ['ignore', file, file] });
-    } catch (error) {
-      console.log('spawn error');
-      console.log(error);
-            
-    }
   }
+  
+
 
   // Test active push message to Renderer-process
   win.webContents.on('did-finish-load', () => {
@@ -65,46 +91,11 @@ async function createWindow() {
     if (url.startsWith('https:')) shell.openExternal(url)
     return { action: 'deny' }
   })
-
-
-
-
-  //openfile for appending and createing a file if it doesn't exist
-  fs.writeFile(file, `\n`, (err) => { });
-  fs.writeFile(file, `\n`, (err) => { });
-  fs.writeFile(file, `${Date.now()}`, (err) => { });
-
-  //@ts-ignore
-  // ls.on("data", data => {
-  //   fs.writeFile(file, `${data}`, (err) => { });
-  // });
-  //@ts-ignore
-  ls.on("data", data => {
-    fs.writeFile(file, `${data}`, (err) => { });
-  });
-
-  //@ts-ignore
-  ls.on('error', (error) => {
-    fs.writeFile(file, `${error}`, (err) => { });
-  });
-
-  //@ts-ignore
-  ls.on("close", code => {
-    fs.writeFile(file, `child process exited with code ${code}`, (err) => { });
-    console.log(`child process exited with code ${code}`);
-  });
-
-
 }
 
 app.whenReady().then(() => {
-
-
   createWindow()
   console.log('App is ready');
-  const fs = require('fs')
-  fs.writeFileSync('D:/electronout.txt', process.cwd())
-  
   ipcMain.handle('dialog', async (event, method, params) => {
     // @ts-ignore
     return await dialog[method](params);

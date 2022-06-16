@@ -26,6 +26,7 @@ async function createWindow() {
     autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.cjs'),
+      nodeIntegration: true,
     },
   })
 

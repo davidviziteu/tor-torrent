@@ -11,11 +11,14 @@ export default function Home() {
         <div class="container">
             <LeftBar />
             <main id="main-ui" class='center-text-main-ui'>
-                <div>
-                Welcome.
-                </div>
+                <h2>
+                    Welcome.
+                </h2>
                 <dir>
-                Use the left buttons to create a new torano file or to open an existing one.
+                    Use the left 📁 button to open a .torano file. I need that to reach the tracker.
+                </dir>
+                <dir>
+                    Then, you can use the ➕ button to create .torano files from your disk.
                 </dir>
             </main>
         </div>

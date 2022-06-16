@@ -4,6 +4,7 @@ import type { RouteDefinition } from 'solid-app-router';
 import Home from './pages/home';
 import Error from './pages/error';
 import Welcome from './pages/welcome';
+import BuildingTorrent from './pages/buildingTorrent';
 export const routes: RouteDefinition[] = [
   {
     path: '/',
@@ -16,5 +17,9 @@ export const routes: RouteDefinition[] = [
   {
     path: '/welcome',
     component: Welcome
+  },
+  {
+    path: '/build',
+    component: BuildingTorrent
   },
 ];

@@ -62,11 +62,8 @@ router.post(`/create-torrent`, (req, res) => {
             announceList: [[global.trackerAddress]],
         }, (err, torrent) => {
             if (err) {
-                return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                    error: `error creating torrent: ${JSON.stringify(err)}`
-                })
-            }
-            if (err) {
+                console.log(error);
+                console.log(`error createTorrent module`);
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                     error: `error creating torrent: ${JSON.stringify(err)}`
                 })
@@ -77,6 +74,8 @@ router.post(`/create-torrent`, (req, res) => {
                 if (exists == 'exists') {
                     fs.writeFile(destPath, torrent, (err) => {
                         if (err) {
+                            console.log(error);
+                            console.log(`error fs.writeFile(destPath, torrent`);
                             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                                 error: `error writing file ${destPath}: ${JSON.stringify(err)}`
                             })
@@ -84,6 +83,8 @@ router.post(`/create-torrent`, (req, res) => {
                     })
                 }
             } catch (error) {
+                console.log(error);
+                console.log(`error appmanager create torrent`);
                 return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
                     error: `error creating torrent: ${JSON.stringify(error)}`
                 })
@@ -279,7 +280,22 @@ router.get('/exit', async (req, res) => {
 
 router.get('/load', async (req, res) => {
     const data = AppManager.loadProgress()
-    return res.status(200).json(data)
+    //iterate values of data object
+    let returnData = {}
+    for (let [key, value] of Object.entries(data.torrents)) {
+        returnData[key] = {
+            hash: value.hash,
+            completed: value.completed,
+            piecesReceived: value.piecesReceived,
+            requestesSend: value.requestesSend,
+            parsedTorrent: {
+                length: value.parsedTorrent.length,
+                pieceLength: value.parsedTorrent.pieceLength,
+                name: value.parsedTorrent.name,
+            }
+        }
+    }
+    return res.status(200).json(returnData)
 })
 
 app.use(`/`, router)

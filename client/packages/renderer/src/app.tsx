@@ -23,9 +23,7 @@ const App: Component = () => {
   else {
     try {
       console.log(`${storageFile} found`);
-      console.log(`reading..`);
       let fsdata = window.fs.readFileSync(storageFile, 'utf8')//citeste aiurea
-      console.log(`parsing: ${fsdata}`);
       //@ts-ignore
       window.data = JSON.parse(fsdata);
       if (!window.data.trackerAddress) {

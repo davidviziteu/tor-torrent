@@ -44,7 +44,12 @@ class AppManager {
         try {
             let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
             fs.writeFileSync(metainfoFilePath, metainfoFile);
-
+            let preq = []
+            let precv = []
+            for (let i = 0; i < parsedTorrent.files.length; i++) {
+                preq.push(0)
+                precv.push(0)
+            }
             data.torrents[hash] = {
                 hash: hash,
                 filesPath: filesPath,
@@ -52,8 +57,9 @@ class AppManager {
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
-                piecesRequested: new Array(parsedTorrent.pieces.length).fill(false),
-                piecesRecieved: new Array(parsedTorrent.pieces.length).fill(false)
+                piecesRequested: preq,
+                piecesRecieved: precv,
+                requestesSend: 0
             }
             //TODO begin announce procedures and download
             this.saveProgress()
@@ -83,7 +89,8 @@ class AppManager {
                 metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
-                completed: true
+                completed: true,
+                requestesSend: 0
             }
             //begin announce procedures
             console.log(`created torrent ${parsedTorrent.name}`);
@@ -124,6 +131,8 @@ class AppManager {
             if (fs.existsSync(`./.data${global.port}.json`)) {
                 this.data = JSON.parse(fs.readFileSync(`./.data${global.port}.json`));
             }
+            if (!this.data.torrents)
+                this.data.torrents = {}
             return this.data
         } catch (error) {
             console.log(error);

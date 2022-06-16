@@ -7,16 +7,26 @@ import RightPanel from '@/components/home/RightPanel.jsx';
 export default function Home() {
 
   const [torrents, setTorrents] = createSignal([]);
-  const addTorrent = value => {
-    return setTorrents([...torrents(), value]);
-  };
-  const removeTorrent = identifierToRemove => {
-    return setTorrents(torrents().filter(identifier => identifier != identifierToRemove))
+  // const addTorrent = value => {
+  //   return setTorrents([...torrents(), value]);
+  // };
+  const removeTorrent = torrItemToRemove => {
+    return setTorrents(torrents().filter(torrItem => torrItem.hash != torrItemToRemove.hash))
   }
-  // setInterval(() => {
-  //   addTorrent(1)
-  // }, 1000)
-  addTorrent('Fung fu panda')
+
+  const refreshTorrentList = async () => {
+    let arr = []
+    //for values of object
+    if (!window.data || !window.data.torrents)
+      return;
+    for (let [key, value] of Object.entries(window.data.torrents)) {
+      arr.push(value)
+    }
+    setTorrents(arr)
+  }
+  ; (refreshTorrentList)();
+  setInterval(refreshTorrentList, 2000)
+
   return (
     <div class="container">
       <LeftBar/>
@@ -33,8 +43,8 @@ export default function Home() {
             <span>Reach</span>
           </div>
           <div id="torrent-list">
-            {torrents().map(id => (
-              <TorrentItem torrentIdentifier={id} removeTorrent={removeTorrent}/>
+            {torrents().map(torrItem => (
+              <TorrentItem torrentItem={torrItem} removeTorrent={removeTorrent}/>
             ))}
             
           </div>

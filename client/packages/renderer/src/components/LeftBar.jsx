@@ -42,9 +42,9 @@ export default function LeftBar(props) {
         }
         let downloadDir = result.filePaths[0]
         console.log('downloadDir:', downloadDir);
-        console.log('lstat sync ', JSON.stringify(fs.lstatSync(downloadDir)));
         if (window.fs.existsSync(downloadDir)) {
         } else {
+            console.log('err dialog');
             electron.openDialog('showMessageBox', {
                 type: 'error',
                 title: 'Error saving torrent',
@@ -53,7 +53,7 @@ export default function LeftBar(props) {
             return
         }
         try {
-            let json = await fetch(`http://localhost:${window.backend_port}/load-torrent`,
+            let r = await fetch(`http://localhost:${window.backend_port}/load-torrent`,
                 {
                     method: 'POST',
                     headers: {
@@ -64,11 +64,16 @@ export default function LeftBar(props) {
                         downloadPath: downloadDir,
                     })
                 })
-            json = await json.json()
-            if (json.error) {
-                console.log(json.error);
+            if (!r.ok) {
+                r = await r.json()
+                if (r.error) {
+                    console.log(r.error);
+                    throw r.error
+                }
             }
         } catch (error) {
+            console.log(error);
+            console.log('err dialog');
             electron.openDialog('showMessageBox', {
                 type: 'error',
                 title: 'Error opening torrent',
@@ -79,6 +84,7 @@ export default function LeftBar(props) {
         try {
             props.refreshTorrentList()
         } catch (error) {
+            console.log('fl refresh list');
         }
 }
     

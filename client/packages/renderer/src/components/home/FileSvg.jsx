@@ -20,10 +20,7 @@ export default function FileSvg(props) {
             setDeleteSvg('')
             setFileSvg('none')
         }}
-        // onmouseleave={() => {
-        //     setDeleteSvg('none')
-        //     setFileSvg('')
-        // }}
+
     >
         <path
             d="M454.962,110.751c-0.018-0.185-0.05-0.365-0.081-0.545c-0.011-0.06-0.016-0.122-0.028-0.182

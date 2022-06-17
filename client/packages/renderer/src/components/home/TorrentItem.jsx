@@ -42,7 +42,7 @@ export default function TorrentItem(props) {
         <div class="torrent-item torrent-list-grid">
             <span>
                 <FileSvg setDeleteSvg={setDeleteSvg} getFileSvg={getFileSvg} getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} />
-                <DeleteSvg getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} setDeleteSvg={setDeleteSvg} getFileSvg={getFileSvg} />
+                <DeleteSvg getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} setDeleteSvg={setDeleteSvg} delF={removeTorrent} delFArg={torrentHash} />
                 {/* <img src="resources/file.svg" alt="" class="file-img" onmouseover="this.src ='resources/x.svg'"
                     onmouseleave="this.src ='resources/file.svg'" onClick={
                         () => {

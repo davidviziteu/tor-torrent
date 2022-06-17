@@ -1,7 +1,8 @@
 export default function DeleteSvg(props) {
   const setDeleteSvg = props.setDeleteSvg
   const getDeleteSvg = props.getDeleteSvg
-  const getFileSvg = props.getFileSvg
+  const delF = props.delF
+  const delFArg = props.delFArg
   const setFileSvg = props.setFileSvg
   return (<svg
     version="1.1"
@@ -18,6 +19,10 @@ export default function DeleteSvg(props) {
     onmouseleave={() => {
       setDeleteSvg('none')
       setFileSvg('')
+    }}
+    onClick={() => {
+      console.log('icon cliecked');
+      delF(delFArg)
     }}
   >
     <path

@@ -40,6 +40,7 @@ export default function TorrentItem(props) {
                 <img src="./assets/file-svgrepo-com.svg" alt="" class="file-img" onmouseover="this.src ='./assets/x.svg'"
                     onmouseleave="this.src ='./assets/file-svgrepo-com.svg'" onClick={
                         () => {
+                            console.log('icon cliecked');
                             removeTorrent(torrentHash)
                         }
                     }/>

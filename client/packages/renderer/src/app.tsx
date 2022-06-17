@@ -25,7 +25,12 @@ const App: Component = () => {
       console.log(`${storageFile} found`);
       let fsdata = window.fs.readFileSync(storageFile, 'utf8')//citeste aiurea
       //@ts-ignore
-      window.data = JSON.parse(fsdata);
+      window.data = {
+        trackerAddress: JSON.parse(fsdata),
+        //@ts-ignore
+        torrents: {
+        }
+      }
       if (!window.data.trackerAddress) {
         console.log(`${storageFile} tracker null `);
         navigate('/welcome');

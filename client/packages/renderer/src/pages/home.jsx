@@ -11,7 +11,8 @@ export default function Home() {
   //   return setTorrents([...torrents(), value]);
   // };
   const removeTorrent = async torrHashToRemove => {
-    setTorrents(torrents().filter(torrItem => torrItem.hash != torrHashToRemove))
+    console.log(`removing torrent ${torrHashToRemove}`);
+    setTorrents(torrents().filter(torrItem => torrItem.hash == torrHashToRemove))
     fetch(`http://localhost:10000/delete-torrent/${torrHashToRemove}`)
   }
 

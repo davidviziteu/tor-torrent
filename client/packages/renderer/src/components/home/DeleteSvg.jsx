@@ -21,7 +21,6 @@ export default function DeleteSvg(props) {
       setFileSvg('')
     }}
     onClick={() => {
-      console.log('icon cliecked');
       delF(delFArg)
     }}
   >

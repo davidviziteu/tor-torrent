@@ -667,3 +667,115 @@ Emitted 'error' event on Server instance at:
   port: 10000
 }
 child process exited with code 1
+1655459988585
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+created torrent licenta david - torano - torrenting anonimously.pdf
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf
+
+
+1655460159551
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655460182571
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655460236263
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655460255265
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655460268469
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655460326941
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655460342117
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655460358130
+
+1655460377795
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...

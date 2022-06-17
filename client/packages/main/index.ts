@@ -108,22 +108,22 @@ app.on('window-all-closed', () => {
 
 
 ipcMain.on('close', () => {
+  console.log('close');
   app.quit()
 })
 
-ipcMain.on('minimise', () => {
+ipcMain.on('minimize', () => {
   win?.minimize()
 })
 
 ipcMain.on('maximize', () => {
   if (win) {
-    win.isMaximized()?win.maximize():win.unmaximize()
+    win.isMaximized() ? win.unmaximize():win.maximize()
   }
 })
 
 app.on('second-instance', () => {
   if (win) {
-    // Focus on the main window if the user tried to open another
     if (win.isMinimized()) win.restore()
     win.focus()
   }

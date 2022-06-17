@@ -33,24 +33,14 @@ router.post(`/load-torrent`, (req, res) => {
     const { metainfoPath, downloadPath } = req.body
     if (!metainfoPath || !downloadPath) return res.status(StatusCodes.BAD_REQUEST).end()
     //test if download path is a folder
-    if (!fs.existsSync(downloadPath)) {
-        console.log(`download path does not exist`);
-        return res.status(StatusCodes.BAD_REQUEST).json({
-            error: `Path to save the torrent does not exist`,
+    try {
+        AppManager.addTorrent(downloadPath, metainfoPath)
+    } catch (error) {
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error: error,
         })
     }
-    const file = fs.openSync(path, 'w');
-    fs.access(metainfoPath, fs.constants.R_OK, (err) => {
-        if (err) {
-            console.log(err);
-            console.log('error loading .torano file');
-            return res.status(StatusCodes.BAD_REQUEST).end()
-        }
-
-        const torrent = bencode.decode(fs.readFileSync(metainfoPath));
-        //validate
-
-    })
+    return res.status(StatusCodes.OK).end()
 })
 
 router.get('/delete-torrent/:hash', (req, res) => {
@@ -294,7 +284,7 @@ router.get('/load', async (req, res) => {
         torrentsObject[key] = {
             hash: value.hash,
             completed: value.completed,
-            piecesReceived: value.piecesReceived,
+            piecesReceived: value.piecesReceived.reduce((acc, cur) => acc + (cur ? 1 : 0), 0),
             requestesSend: value.requestesSend,
             parsedTorrent: {
                 length: value.parsedTorrent.length,

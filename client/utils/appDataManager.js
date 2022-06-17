@@ -17,14 +17,19 @@ class AppManager {
         return this
     }
 
-    addTorrent(filesPath, metainfoPath, isFolder = false) {
+    addTorrent(downloadPath, metainfoPath, isFolder = false) {
         let metainfoContent, parsedTorrent
         try {
             metainfoContent = fs.readFileSync(metainfoPath)
         } catch (error) {
             console.log(error);
             console.log('Error reading metainfo file. path: ' + metainfoPath);
-            throw ('Error reading metainfo file');
+            throw ('Error reading the metainfo file');
+        }
+
+        if (!fs.existsSync(downloadPath) || !fs.lstatSync(downloadPath).isDirectory()) {
+            console.log(`Path to save the torrent is not a folder`);
+            throw `Path to save the torrent is not a folder`
         }
 
         try {
@@ -40,10 +45,10 @@ class AppManager {
             throw 'This torrent already exists';
         }
 
-        filesPath = filesPath + '/' + parsedTorrent.name
+        downloadPath = downloadPath + '/' + parsedTorrent.name
         let fd
         try {
-            fd = fs.openSync(filesPath, 'w+');
+            fd = fs.openSync(downloadPath, 'w+');
         } catch (error) {
             console.log(error);
             console.log('Error opening file to download torrent. path: ' + this.data.torrents[key].filesPath);
@@ -53,22 +58,22 @@ class AppManager {
 
         try {
             let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
-            fs.writeFileSync(metainfoFilePath, metainfoFile);
+            fs.writeFileSync(metainfoFilePath, metainfoContent);
             let preq = []
             let precv = []
             for (let i = 0; i < parsedTorrent.files.length; i++) {
                 preq.push(0)
                 precv.push(0)
             }
-            data.torrents[hash] = {
-                hash: hash,
-                filesPath: filesPath,
+            this.data.torrents[parsedTorrent.infoHash] = {
+                hash: parsedTorrent.infoHash,
+                filesPath: downloadPath,
                 metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
                 piecesRequested: preq,
-                piecesRecieved: precv,
+                piecesReceived: precv,
                 requestesSend: 0,
                 fd: fd
             }

@@ -8,9 +8,7 @@ export default function LeftBar(props) {
     let nav = useNavigate()
 
     async function openToranoFile() {
-        if (!window.data.trackerAddress)
-            return;
-
+  
         let dialogConfig = {
             title: 'Select a .torano file',
             buttonLabel: 'This one will do',
@@ -85,6 +83,9 @@ export default function LeftBar(props) {
 }
     
     async function createToranoFile() {
+        if (!window.data.trackerAddress)
+            return;
+
         let dialogConfig = {
             title: 'Select any file',
             buttonLabel: 'This one will do',

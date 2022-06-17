@@ -779,3 +779,41 @@ Listening on localhost:10000...
 ok init
 dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
+
+
+1655461738850
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655461770771
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655461820615
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+error unlinking metainfo file./.toranofiles/a8e39cb8a4e83ef5fc1778754766ea8f7271f899
+removed torrent licenta david - torano - torrenting anonimously.pdf

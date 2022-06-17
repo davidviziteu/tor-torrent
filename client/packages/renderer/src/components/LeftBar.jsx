@@ -67,7 +67,7 @@ export default function LeftBar(props) {
         console.log(`result after clicking save: ${JSON.stringify(resultDest)}`);
         if (!resultDest || resultDest.canceled)
             return;
-        nav('/loading')
+        nav('/build')
         let backendResult
         try {
             console.log('fetch backend create torrent');

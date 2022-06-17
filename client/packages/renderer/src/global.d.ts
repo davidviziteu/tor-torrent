@@ -36,5 +36,6 @@ declare global {
     removeLoading: () => void
     data: IBackendDataOject;
     cwd: string;
+    ParseTorrentFile: any
   }
 }

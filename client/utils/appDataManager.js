@@ -36,10 +36,20 @@ class AppManager {
             throw ('Error parsing metainfo file');
         }
 
-
         if (this.data.torrents[parsedTorrent.infoHash]) {
-            throw 'info hash already exists';
+            throw 'This torrent already exists';
         }
+
+        filesPath = filesPath + '/' + parsedTorrent.name
+        let fd
+        try {
+            fd = fs.openSync(filesPath, 'w+');
+        } catch (error) {
+            console.log(error);
+            console.log('Error opening file to download torrent. path: ' + this.data.torrents[key].filesPath);
+            throw 'Error opening file ' + this.data.torrents[key].filesPath
+        }
+
 
         try {
             let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
@@ -60,7 +70,7 @@ class AppManager {
                 piecesRequested: preq,
                 piecesRecieved: precv,
                 requestesSend: 0,
-                fd: 0
+                fd: fd
             }
             //TODO begin announce procedures and download
             this.saveProgress()

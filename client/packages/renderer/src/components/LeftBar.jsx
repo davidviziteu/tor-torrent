@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js';
 import { useNavigate } from 'solid-app-router';
-import routeAccordingly from '@/routeAccordingly';
+
+
 // import createTorrentPromise from './createtorrent';
 
 export default function LeftBar(props) {
@@ -9,12 +10,8 @@ export default function LeftBar(props) {
     async function openToranoFile() {
         if (!window.data.trackerAddress)
             return;
-        //@ts-ignore
-        console.log(`window.port: ${window.port}`);
-        //@ts-ignore
-        console.log(`electron.port: ${electron.port}`);
 
-        const dialogConfig = {
+        let dialogConfig = {
             title: 'Select a .torano file',
             buttonLabel: 'This one will do',
             properties: ['openFile', 'dontAddToRecent'],
@@ -24,18 +21,68 @@ export default function LeftBar(props) {
         };
         //@ts-ignore
         let result = await electron.openDialog('showOpenDialog', dialogConfig)
+        if (!result || result.canceled) {
+            console.log('canceled at load torano file');
+            return;
+        }
+    
+        let toranoFilePath = result.filePaths[0]
+        console.log('filepath:');
+        console.log(toranoFilePath);
 
-        // let filepath = await window.dialog.showOpenDialog({ properties: })
-        if (result.filePaths && !result.cancelled) {
-            let filepath = result.filePaths[0]
-            console.log('filepath:');
-            console.log(filepath);
-            
+
+        dialogConfig = {
+            title: 'Select a folder to store the torrent',
+            buttonLabel: 'Select folder',
+            properties: ['openDirectory'],
+        };
+        //@ts-ignore
+        result = await electron.openDialog('showOpenDialog', dialogConfig)
+        if (!result || result.canceled) {
+            console.log('canceled at save path');
+            return;
         }
-        else {
-            console.log('cancelled');
+        let downloadDir = result.filePaths[0]
+        console.log('downloadDir:', downloadDir);
+        console.log('lstat sync ', JSON.stringify(fs.lstatSync(downloadDir)));
+        if (window.fs.existsSync(downloadDir)) {
+        } else {
+            electron.openDialog('showMessageBox', {
+                type: 'error',
+                title: 'Error saving torrent',
+                message: 'Please select an existing direcotry to save the torrent.',
+            })
+            return
         }
-    }
+        try {
+            let json = await fetch(`http://localhost:${window.backend_port}/load-torrent`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        metainfoPath: toranoFilePath,
+                        downloadPath: downloadDir,
+                    })
+                })
+            json = await json.json()
+            if (json.error) {
+                console.log(json.error);
+            }
+        } catch (error) {
+            electron.openDialog('showMessageBox', {
+                type: 'error',
+                title: 'Error opening torrent',
+                message: JSON.stringify(error),
+            })
+            return
+        }
+        try {
+            props.refreshTorrentList()
+        } catch (error) {
+        }
+}
     
     async function createToranoFile() {
         let dialogConfig = {
@@ -107,6 +154,8 @@ export default function LeftBar(props) {
                 message: 'torano file creation failed',
             })
             nav('/welcome')
+            let error = await backendResult.json()
+            console.log(`error: ${JSON.stringify(error.error)}`);
         }
         try {
             props.refreshTorrentList()

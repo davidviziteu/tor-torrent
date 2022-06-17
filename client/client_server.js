@@ -31,7 +31,7 @@ router.get('/echo', (req, res) => {
 
 router.post(`/load-torrent`, (req, res) => {
     const { metainfoPath, downloadPath } = req.body
-    if (!metainfoPath || downloadPath) return res.status(StatusCodes.BAD_REQUEST).end()
+    if (!metainfoPath || !downloadPath) return res.status(StatusCodes.BAD_REQUEST).end()
     //test if download path is a folder
     if (!fs.existsSync(downloadPath)) {
         console.log(`download path does not exist`);
@@ -201,13 +201,6 @@ router.post(`/relay`, async function routeOnion(req, res) {
     }
 })
 
-router.get(`/relays-from-tr`, (req, res) => {
-    let encr_text = cryptoApi.encrpytTextRsa(`ala bala porto cala`, global.publicKey)
-    return res.status(201).json({
-        encr_text: encr_text,
-        decr_text: cryptoApi.decrpytTextRsa(encr_text, global.privateKey)
-    })
-})
 
 router.post(`/testRouting`, async (req, res) => {
     //trb dest ip si dest port, hopsNumber, message si payload

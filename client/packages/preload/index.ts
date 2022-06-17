@@ -2,14 +2,14 @@ import fs from 'fs'
 import { contextBridge, ipcRenderer } from 'electron'
 import { domReady } from './utils'
 import { useLoading } from './loading'
-import {spawn} from 'child_process'
-
+import { spawn } from 'child_process'
 const { appendLoading, removeLoading } = useLoading()
 
 ;(async () => {
   await domReady()
   appendLoading()
 })()
+
 
 
 // --------- Expose some API to the Renderer process. ---------

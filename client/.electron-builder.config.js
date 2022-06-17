@@ -12,6 +12,7 @@ module.exports = {
     buildResources: "build",
   },
   files: [
+    "routes",
     "dist",
     "client_server.js",
     "models",
@@ -45,6 +46,7 @@ module.exports = {
   },
   extraFiles: [
     "client_server.js",
+    "routes",
     "models",
     "utils",
     "node_modules",
@@ -60,6 +62,5 @@ module.exports = {
       "from": "./packages/renderer/resources/x.svg",
       "to": "./x.svg"
     }
-  ],
-  asar: false
+  ]
 }

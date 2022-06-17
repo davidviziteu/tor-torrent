@@ -23,6 +23,7 @@ interface ITorrentListItem{
 interface IBackendDataOject {
   trackerAddress: string | null;
   torrents: { string: ITorrentListItem };
+  stats: Object;
 }
 
 
@@ -36,6 +37,7 @@ declare global {
     removeLoading: () => void
     data: IBackendDataOject;
     cwd: string;
-    ParseTorrentFile: any
+    ParseTorrentFile: any,
+    refreshAllData: () => void;
   }
 }

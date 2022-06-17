@@ -61,6 +61,7 @@ exports.announceAsNode = async () => {
         }
         reponse = JSON.parse(decryptTextAes(response.encryptedData, key))
         global.myIp = response.publicIp
+        global.config.ip = response.publicIp
         global.relayNode = true
         console.log(`announce as node ok`);
     } catch (error) {

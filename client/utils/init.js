@@ -1,4 +1,5 @@
 const AppManager = require('./appDataManager');
+const AppStatsManager = require('./appStatsManager');
 const fs = require('fs');
 let config = {}
 console.log(`\n\n\n\n\n\n`);
@@ -18,6 +19,10 @@ configurations = {
     "dev": true
 }
 AppManager.loadProgress()
+AppStatsManager.setOnionLayers(configurations.circuitLength)
+AppStatsManager.setFakeAnnounces(configurations.announcesPerTorrent)
+AppStatsManager.setMaxPiecesPerMessage(configurations.maxPiecesPerMessage)
+
 global.iannouncesPerTorrentp = configurations.announcesPerTorrent ? configurations.announcesPerTorrent : 3
 global.circuitLength = configurations.circuitLength ? configurations.circuitLength : 3
 global.maxPiecesPerMessage = configurations.maxPiecesPerMessage ? configurations.maxPiecesPerMessage : 10

@@ -1,12 +1,8 @@
 import { createSignal } from 'solid-js';
 import { useNavigate } from 'solid-app-router';
 
-
-// import createTorrentPromise from './createtorrent';
-
 export default function LeftBar(props) {
     let nav = useNavigate()
-
     async function openToranoFile() {
   
         let dialogConfig = {
@@ -64,6 +60,7 @@ export default function LeftBar(props) {
                         downloadPath: downloadDir,
                     })
                 })
+            console.log(r);
             if (!r.ok) {
                 r = await r.json()
                 if (r.error) {
@@ -77,15 +74,11 @@ export default function LeftBar(props) {
             electron.openDialog('showMessageBox', {
                 type: 'error',
                 title: 'Error opening torrent',
-                message: JSON.stringify(error),
+                message: `${error}`,
             })
             return
         }
-        try {
-            props.refreshTorrentList()
-        } catch (error) {
-            console.log('fl refresh list');
-        }
+        window.refreshAllData()
 }
     
     async function createToranoFile() {
@@ -164,11 +157,7 @@ export default function LeftBar(props) {
             let error = await backendResult.json()
             console.log(`error: ${JSON.stringify(error.error)}`);
         }
-        try {
-            props.refreshTorrentList()
-        } catch (error) {
-            
-        }
+        window.refreshAllData()
     }
 
 

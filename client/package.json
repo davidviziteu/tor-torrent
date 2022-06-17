@@ -1,10 +1,10 @@
 {
-  "name": "vite-solid-electron",
-  "productName": "Electron",
+  "name": "vite-solid-electronn",
+  "productName": "Electronn",
   "private": true,
   "version": "1.0.0",
-  "description": "Vite SolidJS Electron boilerplate.",
-  "author": "ch99q <64793a1a@gmail.com>",
+  "description": "Vite SolidJS Electron boilerplatenn.",
+  "author": "ch99q <64793a1a@gmail.connnm>",
   "license": "MIT",
   "main": "dist/main/index.cjs",
   "scripts": {
@@ -48,6 +48,6 @@
   },
   "env": {
     "//": "Used in build scripts",
-    "PORT": 3344
+    "PORT": 3345
   }
 }

@@ -59,7 +59,8 @@ class AppManager {
                 completed: false,
                 piecesRequested: preq,
                 piecesRecieved: precv,
-                requestesSend: 0
+                requestesSend: 0,
+                fd: 0
             }
             //TODO begin announce procedures and download
             this.saveProgress()
@@ -77,6 +78,15 @@ class AppManager {
             console.log(`info hash for torrent ${parsedTorrent.name} already exists`);
             return 'exists'
         }
+        let fd = 0
+        try {
+            fd = fs.openSync(filesPath, 'r');
+        } catch (error) {
+            console.log(error);
+            console.log('Error opening file at create torrent. path: ' + this.data.torrents[key].filesPath);
+            throw 'Error opening file ' + this.data.torrents[key].filesPath
+        }
+
         this.data.trackerAddress = parsedTorrent.announce[0]
         try {
             //copy metainfo file to "."
@@ -90,7 +100,8 @@ class AppManager {
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: true,
-                requestesSend: 0
+                requestesSend: 0,
+                fd: fd
             }
             //begin announce procedures
             console.log(`created torrent ${parsedTorrent.name}`);
@@ -145,6 +156,25 @@ class AppManager {
             }
             if (!this.data.torrents)
                 this.data.torrents = {}
+            // in this.data.torrents
+            let toRemove = []
+            for (const key in this.data.torrents) {
+                if (Object.hasOwnProperty.call(this.data.torrents, key)) {
+                    if (!this.data.torrents[key].isFolder) {
+                        try {
+                            this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r');
+                        } catch (error) {
+                            console.log(error);
+                            console.log('Error opening file. path: ' + this.data.torrents[key].filesPath);
+                            console.log('removing torrent');
+                            toRemove.push(key)
+                        }
+                    }
+                }
+            }
+            for (let i = 0; i < toRemove.length; i++) {
+                this.removeTorrent(toRemove[i])
+            }
             return this.data
         } catch (error) {
             console.log(error);

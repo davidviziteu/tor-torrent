@@ -7,6 +7,8 @@ export default function LeftBar(props) {
     let nav = useNavigate()
 
     async function openToranoFile() {
+        if (!window.data.trackerAddress)
+            return;
         //@ts-ignore
         console.log(`window.port: ${window.port}`);
         //@ts-ignore
@@ -28,10 +30,7 @@ export default function LeftBar(props) {
             let filepath = result.filePaths[0]
             console.log('filepath:');
             console.log(filepath);
-
-            // createTorrent(filepath).then(torrent => {
-            //     console.log(torrent)
-            // })
+            
         }
         else {
             console.log('cancelled');

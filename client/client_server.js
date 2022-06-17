@@ -30,15 +30,24 @@ router.get('/echo', (req, res) => {
 })
 
 router.post(`/load-torrent`, (req, res) => {
-    const { file } = req.body
-    if (!file) return res.status(StatusCodes.BAD_REQUEST).end()
-    //test if file exists
-    fs.access(file, fs.constants.R_OK, (err) => {
+    const { metainfoPath, downloadPath } = req.body
+    if (!metainfoPath || downloadPath) return res.status(StatusCodes.BAD_REQUEST).end()
+    //test if download path is a folder
+    if (!fs.existsSync(downloadPath)) {
+        console.log(`download path does not exist`);
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            error: `Path to save the torrent does not exist`,
+        })
+    }
+    const file = fs.openSync(path, 'w');
+    fs.access(metainfoPath, fs.constants.R_OK, (err) => {
         if (err) {
+            console.log(err);
+            console.log('error loading .torano file');
             return res.status(StatusCodes.BAD_REQUEST).end()
         }
 
-        const torrent = bencode.decode(fs.readFileSync(file));
+        const torrent = bencode.decode(fs.readFileSync(metainfoPath));
         //validate
 
     })

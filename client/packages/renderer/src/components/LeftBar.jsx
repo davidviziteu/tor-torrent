@@ -109,7 +109,11 @@ export default function LeftBar(props) {
             })
             nav('/welcome')
         }
-        props.refreshTorrentList()
+        try {
+            props.refreshTorrentList()
+        } catch (error) {
+            
+        }
     }
 
 

@@ -286,9 +286,10 @@ router.get('/exit', async (req, res) => {
 router.get('/load', async (req, res) => {
     const data = AppManager.loadProgress()
     //iterate values of data object
-    let returnData = {}
+    let torrentsObject = {
+    }
     for (let [key, value] of Object.entries(data.torrents)) {
-        returnData[key] = {
+        torrentsObject[key] = {
             hash: value.hash,
             completed: value.completed,
             piecesReceived: value.piecesReceived,
@@ -300,7 +301,10 @@ router.get('/load', async (req, res) => {
             }
         }
     }
-    return res.status(200).json(returnData)
+    return res.status(200).json({
+        trackerAddress: data.trackerAddress,
+        torrents: torrentsObject
+    })
 })
 
 app.use(`/`, router)

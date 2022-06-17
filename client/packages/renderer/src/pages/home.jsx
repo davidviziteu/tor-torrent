@@ -16,6 +16,7 @@ export default function Home() {
   }
 
   const refreshTorrentList = async () => {
+    window.data = await fetch('http://localhost:10000/load').then(res => res.json())
     let arr = []
     //for values of object
     if (!window.data || !window.data.torrents)
@@ -26,11 +27,11 @@ export default function Home() {
     setTorrents(arr)
   }
   ; (refreshTorrentList)();
-  setInterval(refreshTorrentList, 2000)
+  setInterval(refreshTorrentList, 60000) //1 min
 
   return (
     <div class="container">
-      <LeftBar/>
+      <LeftBar refreshTorrentList={refreshTorrentList} />
       <main id="main-ui">
         <section id="left-main-section">
           <div id="torrent-filter-buttons">

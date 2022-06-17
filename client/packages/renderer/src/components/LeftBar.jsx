@@ -2,7 +2,8 @@ import { createSignal } from 'solid-js';
 import { useNavigate } from 'solid-app-router';
 // import createTorrentPromise from './createtorrent';
 
-export default function LeftBar() {
+export default function LeftBar(props) {
+    const refreshTorrentList = props.refreshTorrentList;
     let nav = useNavigate()
 
     async function openToranoFile() {
@@ -38,7 +39,6 @@ export default function LeftBar() {
     }
     
     async function createToranoFile() {
-
         let dialogConfig = {
             title: 'Select any file',
             buttonLabel: 'This one will do',
@@ -109,7 +109,7 @@ export default function LeftBar() {
             })
             nav('/welcome')
         }
-
+        refreshTorrentList()
     }
 
 

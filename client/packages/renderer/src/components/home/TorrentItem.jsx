@@ -1,4 +1,6 @@
 import { createSignal } from 'solid-js';
+import DeleteSvg from './DeleteSvg';
+import FileSvg from './FileSvg';
 
 export default function TorrentItem(props) {
     const [currentProgress, setCurrentProgress] = createSignal(0);
@@ -32,18 +34,22 @@ export default function TorrentItem(props) {
 
     updateData()
     setInterval(updateData, 1000)
-   
+
+    const [getDeleteSvg, setDeleteSvg] = createSignal('none');
+    const [getFileSvg, setFileSvg] = createSignal('');
     
     return (
         <div class="torrent-item torrent-list-grid">
             <span>
-                <img src="./resources/file.svg" alt="" class="file-img" onmouseover="this.src ='./resources/x.svg'"
-                    onmouseleave="this.src ='./resources/file.svg'" onClick={
+                <FileSvg setDeleteSvg={setDeleteSvg} getFileSvg={getFileSvg} getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} />
+                <DeleteSvg getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} setDeleteSvg={setDeleteSvg} getFileSvg={getFileSvg} />
+                {/* <img src="resources/file.svg" alt="" class="file-img" onmouseover="this.src ='resources/x.svg'"
+                    onmouseleave="this.src ='resources/file.svg'" onClick={
                         () => {
                             console.log('icon cliecked');
                             removeTorrent(torrentHash)
                         }
-                    }/>
+                    }/> */}
                     <div class="file-data">
                     <div class="file-name-div" onDblClick={
                         () => {

@@ -60,5 +60,6 @@ module.exports = {
       "from": "./packages/renderer/resources/x.svg",
       "to": "./x.svg"
     }
-  ]
+  ],
+  asar: false
 }

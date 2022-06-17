@@ -121,7 +121,8 @@ body {
     border-radius: 0.55em;
 
 
-    background-color: rgb(167, 88, 24); /* Green */
+    /* background-color: rgb(167, 88, 24); */
+    background-color: rgb(45, 45, 45);
     border: none;
     color: white;
     text-align: center;

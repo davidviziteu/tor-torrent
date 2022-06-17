@@ -71,7 +71,7 @@ class AppManager {
             return false;
         }
     }
-    //todo
+    //done
     createTorrent(filesPath, rawTorrent, isFolder = false) {
         let parsedTorrent = parseTorrent(rawTorrent)
         if (this.data.torrents[parsedTorrent.infoHash]) {

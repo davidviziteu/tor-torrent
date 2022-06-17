@@ -126,8 +126,13 @@ class AppManager {
     }
 
     saveProgress() {
-        fs.writeFileSync(`./.data${global.port}.json`, JSON.stringify(this.data));
-        console.log('app manager: saved data');
+        try {
+            fs.writeFileSync(`./.data${global.port}.json`, JSON.stringify(this.data));
+            console.log('app manager: saved data');
+        } catch (error) {
+            console.log(error);
+            console.log('Error saving data_port_.json');
+        }
     }
 
     loadProgress() {

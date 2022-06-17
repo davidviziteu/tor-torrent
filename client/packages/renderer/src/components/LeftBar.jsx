@@ -1,5 +1,6 @@
 import { createSignal } from 'solid-js';
 import { useNavigate } from 'solid-app-router';
+import routeAccordingly from '@/routeAccordingly';
 // import createTorrentPromise from './createtorrent';
 
 export default function LeftBar(props) {
@@ -115,8 +116,11 @@ export default function LeftBar(props) {
 
     return (
         <div id="menu-bar" class="drag">
-            <button class="no-drag menu-bar-button" title='Load .torano file' onClick={openToranoFile}>📁</button>
+            <button class="no-drag menu-bar-button" title='Load a .torano file' onClick={openToranoFile}>📁</button>
             <button class="no-drag menu-bar-button" title='Create and load new .torano file' onClick={createToranoFile}>➕</button>
+            <button class="no-drag menu-bar-button" title='Exit application' onClick={() => {
+                window.ipcRenderer.send('close');
+            }}>❌</button>
         </div>
     );
 }

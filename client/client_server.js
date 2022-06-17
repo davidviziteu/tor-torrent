@@ -47,6 +47,7 @@ router.post(`/load-torrent`, (req, res) => {
 router.get('/delete-torrent/:hash', (req, res) => {
     const { hash } = req.params
     AppManager.removeTorrent(hash)
+    AppManager.removeTorrent(hash)
     return res.status(StatusCodes.OK).end()
 })
 

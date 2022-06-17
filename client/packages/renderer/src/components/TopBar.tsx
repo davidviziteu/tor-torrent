@@ -27,7 +27,7 @@ export default function TopBar() {
                 </button>
                 <button class="top-right-buttons no-drag" onClick={(e) => {
                     e.preventDefault();
-                    window.ipcRenderer.send('close');
+                    window.ipcRenderer.send('minimize');
                 }}>
                     <svg width="18" height="18">
                         <g fill="none" fill-rule="evenodd">

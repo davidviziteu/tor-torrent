@@ -1,22 +1,28 @@
 import { createSignal } from 'solid-js';
-
+import { useNavigate } from 'solid-app-router';
 import TopBar from '../components/TopBar'
 import TorrentItem from '@/components/home/TorrentItem';
 import LeftBar from '@/components/LeftBar';
 import RightPanel from '@/components/home/RightPanel.jsx';
+import routeAccordingly from '@/routeAccordingly';
+import fetchBackendData from '@/routines';
 export default function Home() {
-
-  const [torrents, setTorrents] = createSignal([]);
+  console.log('home navigate');
+  const nav = useNavigate()
+  const [torrents, setTorrents] = createSignal([]); 
   // const addTorrent = value => {
   //   return setTorrents([...torrents(), value]);
   // };
+  setInterval(() => fetchBackendData(nav), 1000 * 60)
   const removeTorrent = async torrHashToRemove => {
     console.log(`removing torrent ${torrHashToRemove}`);
     setTorrents(torrents().filter(torrItem => torrItem.hash == torrHashToRemove))
     fetch(`http://localhost:10000/delete-torrent/${torrHashToRemove}`)
+    delete window.data.torrents[torrHashToRemove]
+    routeAccordingly(nav)
   }
 
-  const refreshTorrentList = async () => {
+  async function refreshTorrentList () {
     window.data = await fetch('http://localhost:10000/load').then(res => res.json())
     let arr = []
     //for values of object
@@ -26,9 +32,11 @@ export default function Home() {
       arr.push(key)
     }
     setTorrents(arr)
+    routeAccordingly(nav)
   }
-  ; (refreshTorrentList)();
-  setInterval(refreshTorrentList, 60000) //1 min
+  
+  // ; (refreshTorrentList())();
+  setInterval(refreshTorrentList, 1000) //1 min
 
   return (
     <div class="container">

@@ -2,25 +2,50 @@ import { createSignal } from 'solid-js';
 
 export default function TorrentItem(props) {
     const [currentProgress, setCurrentProgress] = createSignal(0);
-    const [currentReach, setCurrentReach] = createSignal(0);
-    console.log(`TorrentItem: ${JSON.stringify(props)}`);
-    const torrentItem = props.torrentItem;
-    const parsedTor = torrentItem.parsedTorrent;
-    let percent
-    if (torrentItem.completed)
-        percent = 100
-    else
-        percent = (torrentItem.piecesRecieved.reduce((acc, cur) => acc + (cur ? 1 : 0), 0) / torrentItem.piecesRecieved.length) * 100;
-    setCurrentProgress(percent)
-    
+    const [name, setName] = createSignal('');
+    const [size, setSize] = createSignal('');
+    const [currentRatio, setCurrentRatio] = createSignal('');
+    const torrentHash = props.torrHash;
     const removeTorrent = props.removeTorrent
+    
+    const updateData = () => {
+        const torrentItem = window.data.torrents[torrentHash];
+        if (!torrentItem) {
+            removeTorrent(torrentHash);
+            return
+        }
+        let parsedTor = torrentItem.parsedTorrent;
+        setSize(prettyBytes(parsedTor.length));
+        setName(parsedTor.name);
+        let percent
+        if (torrentItem.completed) {
+            percent = 100
+            setCurrentRatio('-')
+        }
+        else {
+            let pcsRecv = torrentItem.piecesRecieved.reduce((acc, cur) => acc + (cur ? 1 : 0), 0)
+            setCurrentRatio(`${pcsRecv / torrentItem.requestesSend}`)
+            percent = (pcsRecv / torrentItem.piecesRecieved.length) * 100;
+        }
+        setCurrentProgress(percent)
+    }
+
+    updateData()
+    setInterval(updateData, 1000)
+   
+    
     return (
         <div class="torrent-item torrent-list-grid">
             <span>
-                <img src="assets/file-svgrepo-com.svg" alt="" class="file-img"/>
+                <img src="./assets/file-svgrepo-com.svg" alt="" class="file-img" onmouseover="this.src ='./assets/x.svg'"
+                    onmouseleave="this.src ='./assets/file-svgrepo-com.svg'" onClick={
+                        () => {
+                            removeTorrent(torrentHash)
+                        }
+                    }/>
                     <div class="file-data">
-                    <div class="file-name-div">{parsedTor.name}</div>
-                    <div class="file-size-div">{prettyBytes(parsedTor.length)}</div>
+                    <div class="file-name-div">{name()}</div>
+                    <div class="file-size-div">{size()}</div>
                     </div>
             </span>
             <span>
@@ -34,7 +59,7 @@ export default function TorrentItem(props) {
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </span>
-            <span>{currentReach()}</span>
+            <span>{currentRatio()}</span>
         </div>
     );
 }

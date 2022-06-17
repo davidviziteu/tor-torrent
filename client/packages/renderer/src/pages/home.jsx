@@ -10,8 +10,9 @@ export default function Home() {
   // const addTorrent = value => {
   //   return setTorrents([...torrents(), value]);
   // };
-  const removeTorrent = torrItemToRemove => {
-    return setTorrents(torrents().filter(torrItem => torrItem.hash != torrItemToRemove.hash))
+  const removeTorrent = async torrHashToRemove => {
+    setTorrents(torrents().filter(torrItem => torrItem.hash != torrHashToRemove))
+    fetch(`http://localhost:10000/delete-torrent/${torrHashToRemove}`)
   }
 
   const refreshTorrentList = async () => {
@@ -20,7 +21,7 @@ export default function Home() {
     if (!window.data || !window.data.torrents)
       return;
     for (let [key, value] of Object.entries(window.data.torrents)) {
-      arr.push(value)
+      arr.push(key)
     }
     setTorrents(arr)
   }
@@ -33,18 +34,18 @@ export default function Home() {
       <main id="main-ui">
         <section id="left-main-section">
           <div id="torrent-filter-buttons">
-            <h1>All active torrents</h1>
+            <h1>All torrents</h1>
             <h4></h4>
             <h4></h4>
           </div>
           <div id="torrent-list-head" class="torrent-list-grid">
             <span>Name & size</span>
             <span>Status</span>
-            <span>Reach</span>
+            <span title='Responses to request messages ratio'>RtRMR</span>
           </div>
           <div id="torrent-list">
-            {torrents().map(torrItem => (
-              <TorrentItem torrentItem={torrItem} removeTorrent={removeTorrent}/>
+            {torrents().map(torrHash => (
+              <TorrentItem torrHash={torrHash} removeTorrent={removeTorrent}/>
             ))}
             
           </div>

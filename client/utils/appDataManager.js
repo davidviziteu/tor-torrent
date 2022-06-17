@@ -104,19 +104,25 @@ class AppManager {
     }
 
     getTorrents() {
-        return data.torrents;
+        return this.data.torrents;
     }
 
     getTorrent(hash) {
-        return data.torrents[hash]
+        return this.data.torrents[hash]
     }
 
     removeTorrent(hash) {
         let targetTorrent = this.getTorrent(hash);
         if (targetTorrent) {
-            fs.unlinkSync(`./${targetTorrent.metainfoFilePath}`);
-            delete data.torrents[hash];
+            try {
+                fs.unlinkSync(`./${targetTorrent.metainfoFilePath}`);
+            } catch (error) {
+                console.log('error unlinking metainfo file' + targetTorrent.metainfoFilePath);
+            }
+            delete this.data.torrents[hash];
+            return console.log(`removed torrent ${targetTorrent.parsedTorrent.name}`);
         }
+        return console.log(`delete torrent: torrent ${hash} not found`);
     }
 
     saveProgress() {

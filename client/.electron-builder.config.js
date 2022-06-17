@@ -16,9 +16,9 @@ module.exports = {
     "client_server.js",
     "models",
     "utils",
-    "trackerAPI",
-    "procedures",
     "node_modules",
+    ".toranofiles",
+    ".data10000.json"
   ],
   win: {
     target: [
@@ -47,8 +47,8 @@ module.exports = {
     "client_server.js",
     "models",
     "utils",
-    "trackerAPI",
-    "procedures",
     "node_modules",
+    ".toranofiles",
+    ".data10000.json"
   ],
 }

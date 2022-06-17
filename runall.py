@@ -11,7 +11,7 @@ def checkdir():
 def client(proc_args: str):
     print('client1')
     d = str(proc_args).replace("\n", "").replace(' ', '')
-    os.system(f'cd client && start /B start cmd.exe @cmd /k npm run dev -- {d}')
+    os.system(f'cd client && start /B start cmd.exe @cmd /k npm run backend -- {d}')
 
 
 def tracker():
@@ -24,10 +24,10 @@ def update_file(path, new_content):
         for line in new_content:
             f.write(line)
 
-with open('makefiles/common_models.js') as common_models:
-    lines = common_models.readlines()
-    update_file('tracker/models/index.js', lines)
-    update_file('client/models/index.js', lines)
+# with open('makefiles/common_models.js') as common_models:
+#     lines = common_models.readlines()
+#     update_file('tracker/models/index.js', lines)
+#     update_file('client/models/index.js', lines)
 
 with open('makefiles/setup.json') as config_file:
     data = json.load(config_file)
@@ -38,4 +38,4 @@ with open('makefiles/setup.json') as config_file:
             cli = multiprocessing.Process(target=client, args=(str(client_args),))
             cli.run()
 
-
+exit(0)

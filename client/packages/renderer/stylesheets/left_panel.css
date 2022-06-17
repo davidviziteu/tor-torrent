@@ -1,0 +1,112 @@
+:root{
+    --torrent-list-head-padding-botton: 1%;
+    /* --torrent-list-height: calc(100vh - 100vh * ( 1 / (100vh))); */
+    --torrent-filter-btns-height: 3em;
+    --torrent-list-head-height: 2em;
+    --torrent-list-height: unset;
+    --scroll-bar-max-width: 0.3em;
+}
+
+#torrent-list-head {
+    font-size: 1em;
+    color: var(--darker-font-color);
+    width: var(--torrent-list-width);
+    padding-bottom: var(--torrent-list-head-padding-botton);
+    /* padding-top: var(--torrent-list-head-padding-botton); */
+    height: var(--torrent-list-head-height);
+    margin-right: calc(var(--torrent-items-scroll-bar-max-width)/2);
+}
+
+
+#torrent-list {
+    height: var(--torrent-list-height);
+    overflow: auto;
+    width: var(--torrent-list-width);
+    margin-bottom: 2%;
+}
+
+body{
+    height: 100vh;
+}
+
+.container {
+    height: 100vh;
+}
+
+#torrent-list::-webkit-scrollbar {
+    width: var(--scroll-bar-max-width);
+    position: absolute;
+    left: 100px;
+}
+ 
+/* Track */
+#torrent-list::-webkit-scrollbar-track {
+    background: rgb(39, 39, 39);
+}
+
+/* Handle */
+#torrent-list::-webkit-scrollbar-thumb {
+    background: rgb(20, 20, 20);
+}
+
+.torrent-item {
+    border-width: 1px;
+    border-top-style: solid;
+    border-top-color: var(--vs-code-gray);
+    width: auto;
+    height: 6em;
+    margin-top: var(--torrent-items-margin);
+    margin-bottom: var(--torrent-items-margin);
+    margin-right: calc(var(--torrent-items-scroll-bar-max-width)/2);
+    padding: var(--torrent-items-padding);
+
+    display: flex;
+    flex-flow: column;
+    
+}
+
+.torrent-item:first-of-type {
+    margin-top: 0;
+    border-top-color: unset;
+    border-top-style: unset;
+}
+
+.torrent-item:last-of-type {
+    margin-top: 0;
+}
+
+.torrent-list-grid {
+    display: grid;
+    grid-template-areas: "1 2 3";
+    grid-template-columns: [first] 50% [line2] 40% [line3] 10% [end];
+    /* margin-right: 0.5em; */
+}
+
+.torrent-list-grid>* {
+    align-self: center;
+}
+
+.torrent-list-grid span:last-child {
+    justify-self: end;
+    padding-right: var(--scroll-bar-max-width);
+    text-align: end;
+}
+
+#torrent-filter-buttons {
+    padding-top: var(--main-ui-padding-top);
+    height: var(--torrent-filter-btns-height);
+    width: var(--torrent-list-width);
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+
+#torrent-filter-buttons>* {
+    padding-right: 2em;
+    margin: 0px;
+}
+
+#torrent-list-head span:last-child {
+    padding-right: calc(3*var(--scroll-bar-max-width));
+}

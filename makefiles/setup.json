@@ -5,25 +5,34 @@
   },
   "clients": [
     {
-      "publicKey": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMt/fB2v8jA9GkcXfJVpH6mUnC7E6+I/WSilij4sIvwjJm5Qm0N4VvTGMoxbWbZPGMqJDUB63FfFrASeLYWic9UCAwEAAQ==",
-      "privateKey": "MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAy398Ha/yMD0aRxd8lWkfqZScLsTr4j9ZKKWKPiwi/CMmblCbQ3hW9MYyjFtZtk8YyokNQHrcV8WsBJ4thaJz1QIDAQABAkBh/+X8wgPHOVXTULs9lN+boibI2yqhzVIZogb+Q/EhLMs+pdoHDU7Ce6RCKdIc8BHnLtQTQ1uW2PS8wXqrh/5hAiEA/bb/CNXC7TwMxnMwmQ2Wgizj4oXalCK0sif2I/Lr6gkCIQDNVLNx/gm5Hc/YC3VTTgcCa7TLlT7uhOzu0RRw71zebQIhAOfkZl2w4yTqCdMoXXbGkJYSaYcVSJ60yes70yEwWqfhAiEApQ/OIXkiv9mjV/3+FzXGlL+Y23/i00OwZFtXn2IMuhECIFdfzJKwYn5yjGs1uTCLdV2Y7cwY0d+5zcQmgsB2RstS",
       "ip": "localhost",
-      "hops": 1,
-      "port": 6000
+      "port": 6001,
+      "announceCount": 3
     },
     {
-      "publicKey": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJ8PLc55c2fMys0OwFbZzsCfcvix7i+Dh8YmqnsucBTaqE1eXbzLzMm1XYbc3LW/2/DrZYQYhxaSDyPf5bjCN9cCAwEAAQ==",
-      "privateKey": "MIIBUwIBADANBgkqhkiG9w0BAQEFAASCAT0wggE5AgEAAkEAnw8tznlzZ8zKzQ7AVtnOwJ9y+LHuL4OHxiaqey5wFNqoTV5dvMvMybVdhtzctb/b8OtlhBiHFpIPI9/luMI31wIDAQABAkBBV6/+sYAKdWQex1+WjlXUZeyKZDYwSL1/VqUUg6hBuEgJLGdOIk8ZQRRoIPIBLIBFyqN65/1ZOzo9itMYV1pJAiEA1B3YRPnic5fhAfJAnsrsonsjlbRxx1uMI9PVz50Ws7MCIQC/904Hi7Lhhgk1sj7KQ1hoOud0K+2HTe9cPSx5D/+pTQIgIYwa0UXoH7oMlx82Qyb65/OrvBiOyiXbcyskrLI+jesCIGj8VZ5m1oPkjDDjtNdlkXofjOnKBHPVOa0Wf7YN++KZAiAS6oWxjYajwngM3D5mCKibCBMVcmCy4HwaXvjgjPB0pA==",
       "ip": "localhost",
-      "hops": 2,
-      "port": 6001
+      "port": 6002,
+      "announceCount": 4
     },
     {
-      "publicKey": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJydZx3KfnEcHMLxzRzs1v1oitPp2QDdOPvZM4ttpUN2Rj1kX2L7p4okC9GCSzaETH/bwWC+N3V3bwN0OzDQj0ECAwEAAQ==",
-      "privateKey": "MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEAnJ1nHcp+cRwcwvHNHOzW/WiK0+nZAN04+9kzi22lQ3ZGPWRfYvuniiQL0YJLNoRMf9vBYL43dXdvA3Q7MNCPQQIDAQABAkBVtaarHRiZmkL7RQ11mQAHauEfHElQOcFnwvR8h6L8CbBWI76so4Cd/Jw3dnXxzMNEnMAcqs6sotNlUmxzKaSJAiEA2xFSdDueGjWWTrK6wnGwf0Zbj8NVwXIFP46phuXRGXsCIQC3BLKujVjq+vPn8h8L4tuPURywe/CnEUv0q1MxTiNHcwIhALTwH7xlKXbYX+dsdBj6Mh9Ni364hfIbLP6L5LXIx+ZVAiACORBihlz6HaowuwQdhNfd2cJbcmXt4YvmoN4VzzkmeQIhANEx2In3jyyxZUS946xTRGn1LbEftFxv2NoHBLaP/3zZ",
       "ip": "localhost",
-      "hops": 3,
-      "port": 6002
+      "port": 6003,
+      "announceCount": 2
+    },
+    {
+      "ip": "localhost",
+      "port": 6004,
+      "announceCount": 1
+    },
+    {
+      "ip": "localhost",
+      "port": 6005,
+      "announceCount": 10
+    },
+    {
+      "ip": "localhost",
+      "port": 6006,
+      "announceCount": 3
     }
   ]
 }

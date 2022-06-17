@@ -1,0 +1,102 @@
+:root {
+    --sections-space: 30px;
+    --weak-purple: #bfa6cb;
+    --accent-purple: rgb(107, 75, 136);
+    --blue: rgb(100, 131, 172);
+    --light-turqoise: rgb(58, 133, 145);
+    --accent-turqoise: rgb(30, 74, 74);
+    --container-padding: 30px;
+
+    --menu-list-width: 150px;
+
+    --torrent-items-margin: 0.3em;
+    --torrent-items-padding: 3px;
+    --torrent-items-scroll-bar-max-width: calc(var(--sections-space)/2);
+    --top-space: 6em;
+}
+
+html {
+    width: 100%;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(90deg, rgba(238, 174, 202, 0.6740897042410714) 0%,
+            rgba(194, 180, 217, 0.7357143541010154) 49%,
+            rgba(148, 187, 233, 0.7217087518601191) 100%);
+
+    font-family: 'Monaco', 'Courier New', 'monospace';
+}
+
+body {
+    margin: 0 10px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+
+}
+
+.container {
+    /* container with centered elements */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+}
+
+.positioning-stuff {}
+
+#menu-bar {
+    height: calc(100vh - var(--sections-space));
+    margin: 0;
+    background-color: var(--accent-purple);
+    border-radius: 3em;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+
+#nav-bar {
+    width: 100%;
+    height: 5em;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#nav-bar>form {
+    width: inherit;
+}
+
+#nav-bar>form>* {
+    height: 2em;
+}
+
+#search-submit {}
+
+#search-text-box {
+    text-align: center;
+    border: 6px;
+    width: auto;
+    border-radius: 5px;
+    outline-offset: -2px;
+    -webkit-appearance: textfield;
+}
+
+
+menu {}
+
+
+.torrent-item {
+    width: auto;
+    background-color: white;
+    height: 3em;
+    margin-top: var(--torrent-items-margin);
+    margin-bottom: var(--torrent-items-margin);
+    border-radius: 10px;
+    padding: var(--torrent-items-padding);
+    display: flex;
+    align-items: center;
+}

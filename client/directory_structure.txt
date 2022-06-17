@@ -1,0 +1,29 @@
+├
+├── build                     Resources for the production build
+├   ├── icon.icns             Icon for the application on macOS
+├   ├── icon.ico              Icon for the application
+├   ├── installerIcon.ico     Icon for the application installer
+├   ├── uninstallerIcon.ico   Icon for the application uninstaller
+├
+├── dist                      Generated after build according to the "packages" directory
+├   ├── main
+├   ├── preload
+├   ├── renderer
+├
+├── release                   Generated after production build, contains executables
+├   ├── {version}
+├       ├── win-unpacked      Contains unpacked application executable
+├       ├── Setup.exe         Installer for the application
+├
+├── scripts
+├   ├── build.mjs             Develop script -> npm run build
+├   ├── watch.mjs             Develop script -> npm run dev
+├
+├── packages
+├   ├── main                  Main-process source code
+├       ├── vite.config.ts
+├   ├── preload               Preload-script source code
+├       ├── vite.config.ts
+├   ├── renderer              Renderer-process source code
+├       ├── vite.config.ts
+├

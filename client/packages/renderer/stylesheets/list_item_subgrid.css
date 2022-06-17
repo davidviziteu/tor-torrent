@@ -1,0 +1,85 @@
+:root{
+    --file-img-height: 3em;
+}
+
+.torrent-item span:first-child{
+    display: flex;
+    flex-flow: row;
+    height: 100%;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+
+
+.file-data {
+    display: flex;
+    flex-flow: column;
+    height: var(--file-img-height);
+    justify-content: space-around;
+    width: 100%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 0.2em;
+}
+
+.file-size-div{
+    color: var(--darker-font-color);
+    font-size: 0.85em;
+}
+
+.file-img{
+    height: var(--file-img-height);
+    width: 2.5em;
+    padding: 0;
+    margin: 0;
+    border: unset;
+    padding-right: 0.5em;
+}
+
+
+.file-name-div {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.torrent-item span:nth-child(2) {
+    padding-left: 0.2em;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.progress-text{
+    color: var(--accent-color);    
+}
+
+.progress {
+    display: -ms-flexbox;
+    display: flex;
+    height: 0.5em;
+    overflow: hidden;
+    font-size: .75rem;
+    background-color: #e9ecef;
+    border-radius: .25rem;
+    margin-top: .75rem;
+}
+
+.progress-bar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--accent-color);
+    transition: width .6s ease
+}

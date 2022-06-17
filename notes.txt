@@ -7,3 +7,21 @@ tip 2) announce ca e nod care face fwd la cells
 https://www.sohamkamani.com/nodejs/rsa-encryption/
 
 to start a config: py runall.py then you have to kill the terminal
+
+
+https://github.com/jgranstrom/zipson#stringifydata-options
+
+
+
+encoding the .torrent file: (cel mai neeficient -> cel mai eficient)
+-cand e vb de fisiere mici: compress-json(5 linii), json stringify(5 linii), bencode (3 linii)
+
+
+
+cand se face annouce:
+la msg se pune announce-ul + next node ip si asa mai departe pt return onion si 
+la return onion se pune onion ul care va fi folosit pt ca nodul sa fie contactat
+
+
+announce data:
+    return onion, next ip/port cheie publica cu care sa cripteze datele externe initial, date criptate care sa fie atasate de return onion

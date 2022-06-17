@@ -16,10 +16,12 @@ export default function Home() {
   setInterval(() => fetchBackendData(nav), 1000 * 60)
   const removeTorrent = async torrHashToRemove => {
     console.log(`removing torrent ${torrHashToRemove}`);
-    setTorrents(torrents().filter(torrItem => torrItem.hash == torrHashToRemove))
+    setTorrents(torrents().filter(torrItem => torrItem != torrHashToRemove))
+    console.log(`torrents after removing: ${torrents()}`);
     fetch(`http://localhost:10000/delete-torrent/${torrHashToRemove}`)
     delete window.data.torrents[torrHashToRemove]
     routeAccordingly(nav)
+    return
   }
 
   async function refreshTorrentList () {
@@ -34,9 +36,8 @@ export default function Home() {
     setTorrents(arr)
     routeAccordingly(nav)
   }
-  
-  // ; (refreshTorrentList())();
-  setInterval(refreshTorrentList, 1000) //1 min
+  refreshTorrentList();
+  setInterval(refreshTorrentList, 2000) //1 min
 
   return (
     <div class="container">

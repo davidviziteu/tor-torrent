@@ -120,6 +120,7 @@ class AppManager {
                 console.log('error unlinking metainfo file' + targetTorrent.metainfoFilePath);
             }
             delete this.data.torrents[hash];
+            this.saveProgress()
             return console.log(`removed torrent ${targetTorrent.parsedTorrent.name}`);
         }
         return console.log(`delete torrent: torrent ${hash} not found`);

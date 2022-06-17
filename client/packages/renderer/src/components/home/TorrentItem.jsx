@@ -13,7 +13,6 @@ export default function TorrentItem(props) {
     const updateData = () => {
         const torrentItem = window.data.torrents[torrentHash];
         if (!torrentItem) {
-            removeTorrent(torrentHash);
             return
         }
         let parsedTor = torrentItem.parsedTorrent;
@@ -43,13 +42,6 @@ export default function TorrentItem(props) {
             <span>
                 <FileSvg setDeleteSvg={setDeleteSvg} getFileSvg={getFileSvg} getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} />
                 <DeleteSvg getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} setDeleteSvg={setDeleteSvg} delF={removeTorrent} delFArg={torrentHash} />
-                {/* <img src="resources/file.svg" alt="" class="file-img" onmouseover="this.src ='resources/x.svg'"
-                    onmouseleave="this.src ='resources/file.svg'" onClick={
-                        () => {
-                            console.log('icon cliecked');
-                            removeTorrent(torrentHash)
-                        }
-                    }/> */}
                     <div class="file-data">
                     <div class="file-name-div" onDblClick={
                         () => {

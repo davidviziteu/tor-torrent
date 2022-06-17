@@ -4,7 +4,6 @@ import routeAccordingly from '@/routeAccordingly';
 // import createTorrentPromise from './createtorrent';
 
 export default function LeftBar(props) {
-    const refreshTorrentList = props.refreshTorrentList;
     let nav = useNavigate()
 
     async function openToranoFile() {
@@ -110,7 +109,7 @@ export default function LeftBar(props) {
             })
             nav('/welcome')
         }
-        refreshTorrentList()
+        props.refreshTorrentList()
     }
 
 

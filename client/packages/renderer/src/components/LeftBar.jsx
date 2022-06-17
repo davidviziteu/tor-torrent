@@ -3,6 +3,7 @@ import { useNavigate } from 'solid-app-router';
 // import createTorrentPromise from './createtorrent';
 
 export default function LeftBar() {
+    let nav = useNavigate()
 
     async function openToranoFile() {
         //@ts-ignore
@@ -66,7 +67,6 @@ export default function LeftBar() {
         console.log(`result after clicking save: ${JSON.stringify(resultDest)}`);
         if (!resultDest || resultDest.canceled)
             return;
-        let nav = useNavigate()
         nav('/loading')
         let backendResult
         try {

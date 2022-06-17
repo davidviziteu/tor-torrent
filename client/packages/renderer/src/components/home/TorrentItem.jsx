@@ -37,15 +37,23 @@ export default function TorrentItem(props) {
     return (
         <div class="torrent-item torrent-list-grid">
             <span>
-                <img src="./assets/file-svgrepo-com.svg" alt="" class="file-img" onmouseover="this.src ='./assets/x.svg'"
-                    onmouseleave="this.src ='./assets/file-svgrepo-com.svg'" onClick={
+                <img src="./resources/file.svg" alt="" class="file-img" onmouseover="this.src ='./resources/x.svg'"
+                    onmouseleave="this.src ='./resources/file.svg'" onClick={
                         () => {
                             console.log('icon cliecked');
                             removeTorrent(torrentHash)
                         }
                     }/>
                     <div class="file-data">
-                    <div class="file-name-div">{name()}</div>
+                    <div class="file-name-div" onDblClick={
+                        () => {
+                            console.log('name clicked');
+                            window.data.torrents[torrentHash].parsedTorrent.files.forEach(file => {
+                                console.log(file.name);
+                            }
+                            )
+                        }
+                    }>{name()}</div>
                     <div class="file-size-div">{size()}</div>
                     </div>
             </span>

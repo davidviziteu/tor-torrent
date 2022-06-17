@@ -1,5 +1,5 @@
 const AppManager = require('./appDataManager');
-
+const fs = require('fs');
 let config = {}
 console.log(`\n\n\n\n\n\n`);
 try {
@@ -27,7 +27,9 @@ global.trackerPbKey = undefined
 
 console.log('ok init');
 
-
+if (!fs.existsSync(`./.toranofiles`)) {
+    fs.mkdirSync(`./.toranofiles`);
+}
 
 
 

@@ -24,7 +24,7 @@ async function createWindow() {
   //daca mai e timp...
   file = fs.openSync('./backendlog.txt', 'a')
   try {
-    backendServerProcess = spawn("node", [path.resolve('client_server.js')], { stdio: ['ignore', file, file] });
+    backendServerProcess = spawn("node", [path.resolve('client_server.js')], { stdio: ['ignore', file, file], windowsHide: true });
   } catch (error) {
     console.log('spawn error');``
     console.log(error);

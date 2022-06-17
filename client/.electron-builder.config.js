@@ -51,4 +51,14 @@ module.exports = {
     ".toranofiles",
     ".data10000.json"
   ],
+  extraResources: [
+    {
+      "from": "./packages/renderer/resources/file.svg",
+      "to": "./file.svg"
+    },
+    {
+      "from": "./packages/renderer/resources/x.svg",
+      "to": "./x.svg"
+    }
+  ]
 }

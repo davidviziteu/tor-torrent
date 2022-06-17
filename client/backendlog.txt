@@ -1,6 +1,6 @@
 
 
-1655414541491
+1655428655912
 
 
 
@@ -8,44 +8,24 @@
 
 
 ok init
-Listening on localhost:10000...
+C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:30
+if (!fs.existsSync(`./toranofiles`)) {
+^
 
-1655414620890
-
-
-
-
-
-
-
-ok init
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:287:9)
+ReferenceError: fs is not defined
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:30:1)
     at Module._compile (node:internal/modules/cjs/loader:1105:14)
     at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
     at Module.load (node:internal/modules/cjs/loader:981:32)
     at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:10:1)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
 child process exited with code 1
-1655414785030
 
+1655429718577
 
 
 
@@ -53,10 +33,11 @@ child process exited with code 1
 
 
 ok init
+dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
 
 
-1655414795135
+1655429745737
 
 
 
@@ -64,32 +45,53 @@ Listening on localhost:10000...
 
 
 ok init
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+created torrent licenta david - torano - torrenting anonimously.pdf
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf
 
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:287:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655414873789
+
+1655429785199
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+error unlinking metainfo file./.toranofiles/a8e39cb8a4e83ef5fc1778754766ea8f7271f899
+removed torrent licenta david - torano - torrenting anonimously.pdf
+app manager: saved data
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+delete torrent: torrent a8e39cb8a4e83ef5fc1778754766ea8f7271f899 not found
+
+
+1655429861212
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655429876932
 
 
 
@@ -99,33 +101,11 @@ child process exited with code 1
 
 ok init
 dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
+Listening on localhost:10000...
+app manager: saved data
 
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:287:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655415201563
 
+1655430254002
 
 
 
@@ -134,33 +114,13 @@ child process exited with code 1
 
 ok init
 dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
+Listening on localhost:10000...
+created torrent licenta david - torano - torrenting anonimously.pdf
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf
 
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:287:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
 
-1655415395332
+1655430493841
 
 
 
@@ -169,33 +129,22 @@ child process exited with code 1
 
 ok init
 dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
+Listening on localhost:10000...
 
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:287:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
 
-1655418064503
+1655430534866
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655430700401
 
 
 
@@ -208,31 +157,21 @@ Listening on localhost:10000...
 app manager: saved data
 app manager: saved data
 app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
+
+1655430926042
 
 
-1655419624641
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655430975325
 
 
 
@@ -244,35 +183,7 @@ dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
 
 
-1655419653000
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-
-1655419683937
-
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-
-
-1655419950800
+1655430987953
 
 
 
@@ -284,532 +195,7 @@ dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
 
 
-1655420055910
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:287:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655420404814
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:302:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655420480517
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:302:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655420814132
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:302:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655420867074
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:302:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655420928535
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:302:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655421153576
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655421290327
-
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655422378675
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655423016133
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655423259763
-
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655423513562
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655423570343
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655423614273
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655423683757
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655424531876
+1655431003200
 
 
 
@@ -821,7 +207,7 @@ dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
 
 
-1655424706822
+1655431022975
 
 
 
@@ -830,33 +216,10 @@ Listening on localhost:10000...
 
 ok init
 dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
+Listening on localhost:10000...
 
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
 
-1655424779345
+1655431101229
 
 
 
@@ -865,623 +228,4 @@ child process exited with code 1
 
 ok init
 dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655424788638
-
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655424888565
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:303:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425107865
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425245323
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425331128
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655425412462
-
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425527502
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655425568538
-
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425594082
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425788855
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425824271
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:308:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655425980913
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:312:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655426007825
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:312:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655426079491
-
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:312:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655426186533
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:312:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655426316023
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:312:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655426353124
-
-
-
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:312:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
+Listening on localhost:10000...

@@ -274,3 +274,21 @@ ok init
 dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
 app manager: saved data
+
+
+1655547017738
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf
+app manager: saved data
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf

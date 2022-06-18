@@ -1,5 +1,3 @@
-import { createSignal, For } from 'solid-js';
-
 function TableRow(props) {
     const { leftText, rightTextGetter } = props;
     // console.log('rightTextGetter');

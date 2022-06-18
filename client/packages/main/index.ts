@@ -23,7 +23,6 @@ async function createWindow() {
   const { spawn } = require("child_process");
   let file: number
   let backendServerProcess: any
-  //https://www.npmjs.com/package/get-port-electron
 
   file = fs.openSync('./backendlog.txt', 'a')
   try {

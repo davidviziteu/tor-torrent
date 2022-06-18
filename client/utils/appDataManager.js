@@ -1,7 +1,9 @@
 const fs = require('fs')
 const parseTorrent = require('parse-torrent')
+const trackerApi = require('./trackerApi')
+const routines = require('./routines')
 
-let downloaderInstance = null
+let appManagerInstance = null
 let progressLoaded = false
 class AppManager {
     constructor() {
@@ -187,7 +189,13 @@ class AppManager {
         for (let i = 0; i < toRemove.length; i++) {
             this.removeTorrent(toRemove[i])
         }
+        routines.startRefreshingLoop()
         return this.data
+
+    }
+
+    announceAllTorrents() {
+        //neeed some relay nodes
 
     }
 
@@ -195,10 +203,13 @@ class AppManager {
 
 
 function getInstance() {
-    if (downloaderInstance === null) {
-        downloaderInstance = new AppManager();
+    if (appManagerInstance === null) {
+        appManagerInstance = new AppManager();
+        setInterval(() => {
+            appManagerInstance.saveProgress()
+        }, 1000 * 60);
     }
-    return downloaderInstance;
+    return appManagerInstance;
 }
 
 module.exports = getInstance();

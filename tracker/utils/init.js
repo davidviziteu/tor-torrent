@@ -27,7 +27,7 @@ function refreshAll() {
             format: `pem`,
             type: `spki`
         })
-        global.relaysMap = new Map()
+        global.relaysMap = {}
         global.leechersMap = new Map()
         console.log('ok refresh');
         global.lastSessionRefresh = Date.now()

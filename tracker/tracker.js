@@ -38,6 +38,7 @@ router.get('/public-key', (req, res) => {
 
 //ok
 router.post('/announce/relay', (req, res) => {
+    console.log('announce relay')
     let data = cryptoApi.decryptValidateBody(req, res, models.relayNodeAnnouceSchema)
     if (!data) return
 
@@ -46,10 +47,15 @@ router.post('/announce/relay', (req, res) => {
     else
         data.ip = req.ip
     console.log(`new peer: ${data.ip}:${data.port}`)
-    global.relaysMap[`${data.ip}:${data.port}`] = data
+    global.relaysMap[`${data.ip}:${data.port}`] = {
+        publicKey: data.publicKey,
+        port: data.port,
+        ip: data.ip
+    }
     cryptoApi.sendDataEncrypted(res, data.key, {
         publicIp: data.ip
     })
+    console.log(`\trelay added. port: ${data.port}`)
 })
 
 //ok
@@ -81,7 +87,8 @@ router.post('/announce', (req, res) => {
 router.post('/scrape/relay', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res, null, true)
     if (!data) return
-    let dataToReturn = utils.randomOfArray(global.relaysMap.values(), global.maxRelayNodesReturned)
+    const relayArr = Object.values(global.relaysMap)
+    let dataToReturn = utils.randomOfArray(relayArr, global.maxRelayNodesReturned)
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
 

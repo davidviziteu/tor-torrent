@@ -4,7 +4,7 @@ const EventEmitter = require('node:events');
 const myEmitter = new EventEmitter();
 const { announceAsNode, getTrackerPublicKey } = require('./trackerApi')
 const utils = require(`./cryptoApi`)
-const AppManager = require('./appDataManager');
+
 
 const getRefreshPeriod = async () => {
     if (!trackerAddress || !global.trackerPbKey) {
@@ -67,10 +67,14 @@ const refreshProcedure = async () => {
         throw error
     }
 }
+
 //poate poti sa dai emitter ul ca param
 exports.startRefreshingLoop = async () => {
+    if (global.refreshLoopStarted) {
+        return;
+    }
+    global.refreshLoopStarted = true
     try {
-        AppManager.saveProgress()
         await refreshProcedure()
         let refreshObject = await getRefreshPeriod()
         console.log(`tracker session time: ${refreshObject.refreshPeriodMs / 60000} minutes`);
@@ -96,6 +100,3 @@ exports.startRefreshingLoop = async () => {
 }
 
 
-setInterval(() => {
-    AppManager.saveProgress()
-}, 1000 * 60);

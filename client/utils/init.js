@@ -18,6 +18,7 @@ configurations = {
     "dev": true
 }
 
+global.refreshLoopStarted = false
 global.storagePath = config.path ? `${config.path}/data${global.port}.json` : `./data${global.port}.json`
 global.iannouncesPerTorrentp = configurations.announcesPerTorrent ? configurations.announcesPerTorrent : 3
 global.circuitLength = configurations.circuitLength ? configurations.circuitLength : 3

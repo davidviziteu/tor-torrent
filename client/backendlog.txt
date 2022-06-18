@@ -102,3 +102,65 @@ app manager: saved data
 app manager: saved data
 app manager: saved data
 app manager: saved data
+
+
+1655582454511
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+
+
+1655582974616
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+
+
+1655583043885
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655583443365
+
+
+error at startRefreshingLoop
+ok init
+dev mode enabled, tracker addr localhost
+(node:14144) Warning: Accessing non-existent property 'saveProgress' of module exports inside circular dependency
+(Use `node --trace-warnings ...` to show where the warning was created)
+Listening on localhost:10000...
+C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:80
+        AppManager.saveProgress()
+                   ^
+
+TypeError: AppManager.saveProgress is not a function
+    at Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:80:20)
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:192:18)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:31:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:3:1)
+child process exited with code 1

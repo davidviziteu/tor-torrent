@@ -19,15 +19,3 @@ exports.keyOnly = Joi.object().keys({
     encryptedKey: Joi.string().required(),
 })
 
-//{ hash: [..]  }
-exports.seedersBuilder = class {
-    constructor() {
-        this.data = {}
-    }
-    add(hash, seeders, count) {
-        this.data[hash] = utils.randomOfArray(seeders, count)
-    }
-    get() {
-        return this.data
-    }
-}

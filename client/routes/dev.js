@@ -3,9 +3,12 @@ const trackerApi = require(`../utils/trackerApi`)
 const AppManager = require('../utils/appDataManager');
 const { StatusCodes } = require('http-status-codes')
 
-router.get('/echo', (req, res) => {
-    console.log(`client on echo. ip: ${req.ip}`);
-    return res.status(200).end(`client on echo. ip: ${req.ip}`)
+router.get('/dev', (req, res) => {
+    return res.status(200).json({
+        "client ip": req.ip,
+        refreshLoopStarted: global.refreshLoopStarted,
+        trackerAddress: global.trackerAddress
+    })
 })
 
 router.post(`/testRouting`, async (req, res) => {

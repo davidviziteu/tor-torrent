@@ -1,5 +1,4 @@
-const AppManager = require('./appDataManager');
-const AppStatsManager = require('./appStatsManager');
+
 const fs = require('fs');
 let config = {}
 console.log(`\n\n\n\n\n\n`);
@@ -18,18 +17,20 @@ configurations = {
     "maxPiecesPerMessage": 10,
     "dev": true
 }
-AppManager.loadProgress()
-AppStatsManager.setOnionLayers(configurations.circuitLength)
-AppStatsManager.setFakeAnnounces(configurations.announcesPerTorrent)
-AppStatsManager.setMaxPiecesPerMessage(configurations.maxPiecesPerMessage)
 
-global.rootPath = config.rootPath ? config.rootPath : `.`
+global.storagePath = config.path ? `${config.path}/data${global.port}.json` : `./data${global.port}.json`
 global.iannouncesPerTorrentp = configurations.announcesPerTorrent ? configurations.announcesPerTorrent : 3
 global.circuitLength = configurations.circuitLength ? configurations.circuitLength : 3
 global.maxPiecesPerMessage = configurations.maxPiecesPerMessage ? configurations.maxPiecesPerMessage : 10
 global.dev = configurations.dev ? configurations.dev : false
 global.trackerAddress = configurations.dev ? `http://localhost:6969` : undefined
 global.trackerPbKey = undefined
+const AppManager = require('./appDataManager');
+const AppStatsManager = require('./appStatsManager');
+AppManager.loadProgress()
+AppStatsManager.setOnionLayers(configurations.circuitLength)
+AppStatsManager.setFakeAnnounces(configurations.announcesPerTorrent)
+AppStatsManager.setMaxPiecesPerMessage(configurations.maxPiecesPerMessage)
 
 console.log('ok init');
 

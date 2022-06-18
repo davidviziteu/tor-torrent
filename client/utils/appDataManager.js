@@ -143,7 +143,7 @@ class AppManager {
 
     saveProgress() {
         try {
-            fs.writeFileSync(`./.data${global.port}.json`, JSON.stringify(this.data));
+            fs.writeFileSync(global.storagePath, JSON.stringify(this.data));
             console.log('app manager: saved data');
         } catch (error) {
             console.log(error);
@@ -154,39 +154,41 @@ class AppManager {
     loadProgress() {
         if (progressLoaded)
             return this.data
+
         try {
-            if (fs.existsSync(`./.data${global.port}.json`)) {
-                this.data = JSON.parse(fs.readFileSync(`./.data${global.port}.json`));
-            }
-            if (!this.data.torrents)
-                this.data.torrents = {}
-            // in this.data.torrents
-            let toRemove = []
-            for (const key in this.data.torrents) {
-                if (Object.hasOwnProperty.call(this.data.torrents, key)) {
-                    if (!this.data.torrents[key].isFolder) {
-                        try {
-                            if (this.data.torrents[key].completed)
-                                this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r');
-                            else
-                                this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r+');
-                        } catch (error) {
-                            console.log(error);
-                            console.log('Error opening file. path: ' + this.data.torrents[key].filesPath);
-                            console.log('removing torrent');
-                            toRemove.push(key)
-                        }
+            this.data = JSON.parse(fs.readFileSync(global.storagePath));
+        } catch (error) {
+            console.log(error);
+            console.log('Error loading data_port_.json, creating new file');
+            fs.writeFileSync(global.storagePath, JSON.stringify(this.data));
+        }
+
+        if (!this.data.torrents)
+            this.data.torrents = {}
+        // in this.data.torrents
+        let toRemove = []
+        for (const key in this.data.torrents) {
+            if (Object.hasOwnProperty.call(this.data.torrents, key)) {
+                if (!this.data.torrents[key].isFolder) {
+                    try {
+                        if (this.data.torrents[key].completed)
+                            this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r');
+                        else
+                            this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r+');
+                    } catch (error) {
+                        console.log(error);
+                        console.log('Error opening file. path: ' + this.data.torrents[key].filesPath);
+                        console.log('removing torrent');
+                        toRemove.push(key)
                     }
                 }
             }
-            for (let i = 0; i < toRemove.length; i++) {
-                this.removeTorrent(toRemove[i])
-            }
-            return this.data
-        } catch (error) {
-            console.log(error);
-            console.log('Error loading data_port_.json');
         }
+        for (let i = 0; i < toRemove.length; i++) {
+            this.removeTorrent(toRemove[i])
+        }
+        return this.data
+
     }
 
 }

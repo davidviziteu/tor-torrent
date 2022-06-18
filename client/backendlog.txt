@@ -524,3 +524,194 @@ Emitted 'error' event on Server instance at:
   port: 10000
 }
 child process exited with code 1
+
+1655549116813
+
+
+
+
+
+
+ReferenceError: storagePath is not defined
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:161:34)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:21:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:3:1)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+Error loading data_port_.json
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+ReferenceError: storagePath is not defined
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:161:34)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:92:29
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:175:3)
+Error loading data_port_.json
+C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:96
+    for (let [key, value] of Object.entries(data.torrents)) {
+                                                 ^
+
+TypeError: Cannot read properties of undefined (reading 'torrents')
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:96:50
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:47:12)
+child process exited with code 1
+
+1655549133523
+
+
+
+
+
+
+ReferenceError: storagePath is not defined
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:161:34)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:21:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:3:1)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+Error loading data_port_.json
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+ReferenceError: storagePath is not defined
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:161:34)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:92:29
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:175:3)
+Error loading data_port_.json
+C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:96
+    for (let [key, value] of Object.entries(data.torrents)) {
+                                                 ^
+
+TypeError: Cannot read properties of undefined (reading 'torrents')
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:96:50
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:47:12)
+child process exited with code 1
+
+1655549159559
+
+
+
+
+
+
+ReferenceError: storagePath is not defined
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:161:34)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:21:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:3:1)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+Error loading data_port_.json
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+ReferenceError: storagePath is not defined
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:161:34)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:92:29
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:175:3)
+Error loading data_port_.json
+C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:96
+    for (let [key, value] of Object.entries(data.torrents)) {
+                                                 ^
+
+TypeError: Cannot read properties of undefined (reading 'torrents')
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\ui.js:96:50
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\router\index.js:47:12)
+child process exited with code 1
+
+1655549351461
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf
+
+
+1655549381449
+
+
+
+
+
+
+SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:159:30)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:30:12)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Module.require (node:internal/modules/cjs/loader:1005:19)
+    at require (node:internal/modules/cjs/helpers:102:18)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:3:1)
+Error loading data_port_.json, creating new file
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...

@@ -18,8 +18,7 @@ module.exports = {
     "models",
     "utils",
     "node_modules",
-    ".toranofiles",
-    ".data10000.json"
+    "build",
   ],
   win: {
     target: [
@@ -50,17 +49,6 @@ module.exports = {
     "models",
     "utils",
     "node_modules",
-    ".toranofiles",
-    ".data10000.json"
-  ],
-  extraResources: [
-    {
-      "from": "./packages/renderer/resources/file.svg",
-      "to": "./file.svg"
-    },
-    {
-      "from": "./packages/renderer/resources/x.svg",
-      "to": "./x.svg"
-    }
+    "build",
   ]
 }

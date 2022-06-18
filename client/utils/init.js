@@ -1,7 +1,7 @@
 
 const fs = require('fs');
 let config = {}
-console.log(`\n\n\n\n\n\n`);
+console.log(`\n\n`);
 try {
     config = JSON.parse(process.argv[2].replaceAll(`'`, `"`))
 } catch {

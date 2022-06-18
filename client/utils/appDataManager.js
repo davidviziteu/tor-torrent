@@ -2,6 +2,7 @@ const fs = require('fs')
 const parseTorrent = require('parse-torrent')
 const trackerApi = require('./trackerApi')
 const routines = require('./routines')
+const statsManager = require('./appStatsManager')
 
 let appManagerInstance = null
 let progressLoaded = false
@@ -16,6 +17,7 @@ class AppManager {
     setTrackerAddress(trackerAddress) {
         global.trackerAddress = trackerAddress;
         this.data.trackerAddress = trackerAddress;
+        statsManager.setTrackerAddress(trackerAddress);
         routines.startRefreshingLoop()
         return this
     }
@@ -190,8 +192,10 @@ class AppManager {
         for (let i = 0; i < toRemove.length; i++) {
             this.removeTorrent(toRemove[i])
         }
-        if (this.data.trackerAddress)
+        if (this.data.trackerAddress) {
             routines.startRefreshingLoop()
+            this.setTrackerAddress(trackerAddress)
+        }
         return this.data
 
     }

@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js';
 // const { ipcRenderer } = window.require("electron");
 // const { ipcRenderer } = require("electron");
 export default function TopBar() {
-    const [port, setPort] = createSignal(window.backend_port);
+    const [port, setPort] = createSignal(10000);
     const getError = window.getError
     return (
         <div id="top-bar" class="drag">

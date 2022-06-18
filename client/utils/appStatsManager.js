@@ -48,13 +48,14 @@ class AppStatsManager {
     setDirectTrackerContact(bool) {
         this.data['Direct tracker contact: '] = bool ? 'Yes' : 'No'
     }
-    setTracker(url) {
+    setTrackerAddress(url) {
         if (url.includes('http://')) {
             url = url.replace('http://', '')
         }
         if (url.includes('https://')) {
             url = url.replace('https://', '')
         }
+        this.data['Tracker: '] = url
     }
     getData() {
         return this.data

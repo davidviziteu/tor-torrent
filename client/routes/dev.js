@@ -7,7 +7,9 @@ router.get('/dev', (req, res) => {
     return res.status(200).json({
         "client ip": req.ip,
         refreshLoopStarted: global.refreshLoopStarted,
-        trackerAddress: global.trackerAddress
+        trackerAddress: global.trackerAddress,
+        trackerError: global.trackerError,
+        keysError: global.keysError,
     })
 })
 

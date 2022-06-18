@@ -17,7 +17,7 @@ configurations = {
     "maxPiecesPerMessage": config.maxPieces ? config.maxPieces : 3,
     "dev": true
 }
-
+global.keysError = null
 global.refreshLoopStarted = false
 global.storagePath = config.path ? `${config.path}/data${global.port}.json` : `./data${global.port}.json`
 global.iannouncesPerTorrentp = configurations.announcesPerTorrent ? configurations.announcesPerTorrent : 3

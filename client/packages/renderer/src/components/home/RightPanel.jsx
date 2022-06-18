@@ -43,8 +43,6 @@ export default function RightPanel(props) {
     //         'Direct tracker contact: ': 'Yes',
     //     }
     // ) 
-    console.log(props);
-    console.log('rightPanelData');
     return (
         <div class="panel">
             {leftPanelData.map(stringId => (

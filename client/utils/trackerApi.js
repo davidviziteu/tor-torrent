@@ -4,8 +4,8 @@ const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = requi
 //done
 exports.fetchHops = async () => {
     if (!trackerAddress) {
+        global.trackerError = 'tracker address is not known'
         console.log(`trackerAddress is not defined`)
-        process.exit(1)
     }
     try {
         aesKey = generateAesKey()
@@ -24,8 +24,10 @@ exports.fetchHops = async () => {
             console.log(`\terror: ${response.error}`);
             throw `error tracker didnt return relay list`
         }
+        global.trackerError = undefined
         return JSON.parse(decryptTextAes(response.encryptedData, aesKey))
     } catch (error) {
+        global.trackerError = 'tracker seems to be unreachable, retrying...'
         console.error(error)
         console.log(`error at fetching relay list from tracker`);
     }
@@ -34,6 +36,7 @@ exports.fetchHops = async () => {
 //done
 exports.announceAsNode = async () => {
     if (!trackerAddress) {
+        global.trackerError = 'tracker address is not known'
         console.log(`tracker address is not defined`);
     }
 
@@ -64,7 +67,9 @@ exports.announceAsNode = async () => {
         global.config.ip = response.publicIp
         global.relayNode = true
         console.log(`announce as node ok`);
+        global.trackerError = undefined
     } catch (error) {
+        global.trackerError = 'tracker seems to be unreachable, retrying...'
         console.error(error)
         console.log(`error at announce`);
     }
@@ -97,16 +102,17 @@ exports.announcePiece = async (data) => {
 //done
 exports.getTrackerPublicKey = async () => {
     if (!trackerAddress) {
+        global.trackerError = 'tracker address is not known'
         console.log(`trackerAddress is not defined`)
-        throw (`trackerAddress is not defined`);
     }
     try {
         const response = await (await fetch(global.trackerAddress + `/public-key`)).json()
         global.trackerPbKey = response.publicKey
+        global.trackerError = undefined
         return response.publicKey
     } catch (error) {
+        global.trackerError = 'tracker seems to be unreachable, retrying...'
         console.error(error)
         console.log(`error at fetching public key from tracker`);
-        throw (`error at fetching public key from tracker`);
     }
 }

@@ -3,10 +3,14 @@ import { createSignal } from 'solid-js';
 // const { ipcRenderer } = require("electron");
 export default function TopBar() {
     const [port, setPort] = createSignal(window.backend_port);
+    const getError = window.getError
     return (
         <div id="top-bar" class="drag">
-            <div id="app-title" class="no-drag">
-                Torano
+            <div id="app-title" class="no-drag" style='cursor:pointer' title='Click to manually retry'onClick={() => {
+                console.log(`manual refresh`);
+                window.refreshAllData();
+            }}>
+                Torano {getError()}
             </div>
             <div>
                 <input style="display: none" class="no-drag" type="number" id="change-port" onkeypress={(key) => {

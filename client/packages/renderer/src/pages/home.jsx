@@ -52,6 +52,17 @@ export default function Home() {
     setTorrents(arr)
     routeAccordingly(nav)
     setRightPanelData(window.data.stats)
+
+    if (window.data.keysError && window.data.trackerError)
+      window.setError(` -- ${window.data.keysError}; ${window.data.trackerError}`)
+    else
+    if (window.data.keysError)
+      window.setError(` -- ${window.data.keysError}`)
+    else
+    if (window.data.trackerError)
+      window.setError(` -- ${window.data.trackerError}`)
+    else
+      window.setError('')
   }
   window.refreshAllData = refreshAllData
   refreshAllData();

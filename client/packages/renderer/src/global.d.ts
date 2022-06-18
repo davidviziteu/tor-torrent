@@ -24,6 +24,8 @@ interface IBackendDataOject {
   trackerAddress: string | null;
   torrents: { string: ITorrentListItem };
   stats: Object;
+  trackerError: string | null,
+  keysError: string | null,
 }
 
 
@@ -41,5 +43,7 @@ declare global {
     ParseTorrentFile: any,
     refreshAllData: () => void,
     promptUser: any,
+    setError: (error: string) => void,
+    getError: () => string,
   }
 }

@@ -48,13 +48,16 @@ const refreshOwnPbKey = async () => {
             type: `spki`
         })
         console.log('own public key refreshed');
+        global.keysError = null
     } catch (error) {
         console.log(error);
         console.log('error when generating keys');
-        throw ('error when generating keys');
+        throw 'keys generation error'
     }
 }
 
+let refreshIntervalId = null;
+let timeoutId = null;
 
 const refreshProcedure = async () => {
     try {
@@ -63,17 +66,21 @@ const refreshProcedure = async () => {
         await announceAsNode()
         myEmitter.emit('tracker key refreshed')
     } catch (error) {
+        if (error == 'keys generation error') {
+            global.keysError = 'unable to generate public own key...'
+        }
+        global.refreshLoopStarted = false
         console.log('^ error at refreshProcedure');
-        throw error
+        console.log(' cleared interval');
+        clearInterval(refreshIntervalId)
+        clearTimeout(timeoutId)
     }
 }
-
 //poate poti sa dai emitter ul ca param
 exports.startRefreshingLoop = async () => {
     if (global.refreshLoopStarted) {
         return;
     }
-    global.refreshLoopStarted = true
     try {
         await refreshProcedure()
         let refreshObject = await getRefreshPeriod()
@@ -83,19 +90,21 @@ exports.startRefreshingLoop = async () => {
             refreshObject = await getRefreshPeriod()
         }
         console.log(`refreshing every ${refreshObject.refreshPeriodMs / 60000} minutes in ${refreshObject.timeLeftMs} ms`);
-        setTimeout(async () => {
+        timeoutId = setTimeout(async () => {
             await refreshProcedure()
             console.log('refresh');
             myEmitter.emit('refreshed')
-            setInterval(async () => {
+            refreshIntervalId = setInterval(async () => {
                 await refreshProcedure()
                 console.log('refresh');
                 myEmitter.emit('refreshed')
             }, refreshObject.refreshPeriodMs)
         }, refreshObject.timeLeftMs + 10)
+        global.refreshLoopStarted = true
     } catch (error) {
         console.log('error at startRefreshingLoop');
-        throw error
+        clearInterval(refreshIntervalId)
+        clearTimeout(timeoutId)
     }
 }
 

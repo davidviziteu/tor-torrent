@@ -109,7 +109,9 @@ router.get('/load', async (req, res) => {
     return res.status(200).json({
         trackerAddress: data.trackerAddress,
         torrents: torrentsObject,
-        stats: AppStatsManager.getData()
+        stats: AppStatsManager.getData(),
+        ...global.trackerError && { trackerError: global.trackerError },
+        ...global.keysError && { keysError: global.keysError },
     })
 })
 

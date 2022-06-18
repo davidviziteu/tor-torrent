@@ -16,6 +16,7 @@ class AppManager {
     setTrackerAddress(trackerAddress) {
         global.trackerAddress = trackerAddress;
         data.trackerAddress = trackerAddress;
+        routines.startRefreshingLoop()
         return this
     }
 
@@ -36,7 +37,7 @@ class AppManager {
 
         try {
             parsedTorrent = parseTorrent(metainfoContent)
-            this.data.trackerAddress = parsedTorrent.announce[0]
+            this.setTrackerAddress(parsedTorrent.announce[0])
         } catch (error) {
             console.log(error);
             console.log('Error parsing metainfo file. path: ' + metainfoPath);
@@ -189,7 +190,8 @@ class AppManager {
         for (let i = 0; i < toRemove.length; i++) {
             this.removeTorrent(toRemove[i])
         }
-        routines.startRefreshingLoop()
+        if (this.data.trackerAddress)
+            routines.startRefreshingLoop()
         return this.data
 
     }

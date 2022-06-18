@@ -1,17 +1,12 @@
-console.log(`\n\n\n\n\n\n\n\n\n\n\n`);
+console.log(`\n\n\n\n\n\n\n\n`);
 require('./utils/init')
 const express = require('express')
 const bodyParser = require('body-parser')
 const models = require('./models')
 const cryptoApi = require('./utils/cryptoApi')
 const router = require('express').Router()
-const crypto = require(`crypto`)
 const { StatusCodes } = require('http-status-codes')
-const Joi = require('joi')
 const utils = require('./utils/utils')
-function randomNumber(max) {
-    return Math.floor(Math.random() * max)
-}
 
 const app = express()
 

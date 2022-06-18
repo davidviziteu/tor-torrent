@@ -58,9 +58,9 @@ exports.prepReturnOnion = hops => {
     finalOnion.onionLayer = undefined
 
     let allHops = hops.concat([{
-        ip: config.ip,
+        ip: global.ip,
         port: config.port,
-        publicKey: publicKeyString
+        publicKey: global.publicKeyString
     }])
 
     let portsOrder = []

@@ -27,3 +27,78 @@ Listening on localhost:10000...
 ok init
 dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
+
+
+1655556046537
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data

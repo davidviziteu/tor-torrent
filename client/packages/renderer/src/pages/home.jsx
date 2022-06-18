@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+import { createSignal, createEffect } from 'solid-js';
 import { useNavigate } from 'solid-app-router';
 import TopBar from '../components/TopBar'
 import TorrentItem from '@/components/home/TorrentItem';
@@ -6,13 +6,12 @@ import LeftBar from '@/components/LeftBar';
 import RightPanel from '@/components/home/RightPanel.jsx';
 import routeAccordingly from '@/routeAccordingly';
 import fetchBackendData from '@/routines';
+
+
 export default function Home() {
   console.log('home navigate');
   const nav = useNavigate()
   const [torrents, setTorrents] = createSignal([]); 
-  // const addTorrent = value => {
-  //   return setTorrents([...torrents(), value]);
-  // };
   setInterval(() => fetchBackendData(nav), 1000 * 60)
   const removeTorrent = async torrHashToRemove => {
     console.log(`removing torrent ${torrHashToRemove}`);
@@ -24,7 +23,24 @@ export default function Home() {
     return
   }
 
-  async function refreshTorrentList () {
+
+  const [rightPanelData, setRightPanelData] = createSignal(
+    {
+      'Onion layers: ': 3,
+      'Fake announces / torrent: ': 5,
+      'Onions relayed: ': 30,
+      'Onions discarded: ': 4,
+      'Pieces Uploaded: ': 4,
+      'Messages sent: ': 4,
+      'Messages responses: ': 1,
+      'Max pieces / message: ': 1,
+      'Tracker: ': 'localhost:8080',
+      'Tracker session (mins): ': 30,
+      'Direct tracker contact: ': 'Yes',
+    }
+  ) 
+
+  async function refreshAllData () {
     window.data = await fetch('http://localhost:10000/load').then(res => res.json())
     let arr = []
     //for values of object
@@ -35,13 +51,15 @@ export default function Home() {
     }
     setTorrents(arr)
     routeAccordingly(nav)
+    setRightPanelData(window.data.stats)
   }
-  refreshTorrentList();
-  setInterval(refreshTorrentList, 2000) //1 min
+  window.refreshAllData = refreshAllData
+  refreshAllData();
+  setInterval(refreshAllData, 3000) //1 min
 
   return (
     <div class="container">
-      <LeftBar refreshTorrentList={refreshTorrentList} />
+      <LeftBar />
       <main id="main-ui">
         <section id="left-main-section">
           <div id="torrent-filter-buttons">
@@ -62,7 +80,7 @@ export default function Home() {
           </div>
         </section>
         <section id="right-main-section">
-          <RightPanel/>
+          <RightPanel getter={rightPanelData} />
         </section>
       </main>
     </div>

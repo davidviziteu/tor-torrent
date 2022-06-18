@@ -1,5 +1,3 @@
-import { createSignal, For } from 'solid-js';
-
 function TableRow(props) {
     const { leftText, rightTextGetter } = props;
     // console.log('rightTextGetter');
@@ -16,42 +14,41 @@ function TableRow(props) {
     )
 }
 
-export default function RightPanel() {
+export default function RightPanel(props) {
     const leftPanelData = [
-        'Onions routed: ',
-        'Data routed: ',
+        'Onion layers: ',
+        'Fake announces / torrent: ',
+        'Onions relayed: ',
         'Onions discarded: ',
-        'Data discarded: ',
+        'Messages sent: ',
+        'Messages responses: ',
+        'Pieces Uploaded: ',
+        'Max pieces / message: ',
+        'Tracker: ',
+        'Tracker session (mins): ',
         'Direct tracker contact: ',
-        'Endpoint tracker contact: ',
-        'Fake announces: ',
-        'Route length: ',
-        'Leaking probability: ',
-        'Nodes reached (STUN): ',
-        'Nodes reached (TURN): ',
     ]
-    const [getter, setter] = createSignal(
-        {
-            'Onions routed: ': 30,
-            'Data routed: ': '30MB',
-            'Onions discarded: ': 4,
-            'Data discarded: ': '60MB',
-            'Direct tracker contact: ': 'Yes',
-            'Endpoint tracker contact: ': 'Yes',
-            'Fake announces: ': 5,
-            'Route length: ': 3,
-            'Leaking probability: ': 0.1,
-            'Nodes reached (STUN): ': 50,
-            'Nodes reached (TURN): ': 20,
-
-        }
-    ) 
-
-    
+    // const [get, setRightPanelData] = createSignal(
+    //     {
+    //         'Onion layers: ': 3,
+    //         'Fake announces / torrent: ': 5,
+    //         'Onions relayed: ': 30,
+    //         'Onions discarded: ': 4,
+    //         'Pieces Uploaded: ': 4,
+    //         'Messages sent: ': 4,
+    //         'Messages responses: ': 1,
+    //         'Max pieces / message: ': 1,
+    //         'Tracker: ': 'localhost:8080',
+    //         'Tracker session (mins): ': 30,
+    //         'Direct tracker contact: ': 'Yes',
+    //     }
+    // ) 
+    console.log(props);
+    console.log('rightPanelData');
     return (
         <div class="panel">
             {leftPanelData.map(stringId => (
-                <TableRow leftText={stringId} rightTextGetter={getter} />
+                <TableRow leftText={stringId} rightTextGetter={props.getter} />
             ))}
         </div>
     );

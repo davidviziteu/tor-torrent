@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain, dialog, contextBridge } from 'electron'
+import { app, BrowserWindow, shell, ipcMain, dialog, Menu, Tray } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 import fs from 'fs'
@@ -15,13 +15,15 @@ if (!app.requestSingleInstanceLock()) {
 
 let win: BrowserWindow | null = null
 
-async function createWindow() {
+
+
+
+async function createWindow() {  
   const path = require('path')
   const { spawn } = require("child_process");
   let file: number
   let backendServerProcess: any
-  //https://www.npmjs.com/package/get-port-electron
-  //daca mai e timp...
+
   file = fs.openSync('./backendlog.txt', 'a')
   try {
     backendServerProcess = spawn("node", [path.resolve('client_server.js')], { stdio: ['ignore', file, file], windowsHide: true });
@@ -67,9 +69,27 @@ async function createWindow() {
     autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.cjs'),
-      nodeIntegration: true,
+      nodeIntegration: true
     },
   })
+
+  win.webContents.session.webRequest.onBeforeSendHeaders(
+    (details, callback) => {
+      callback({ requestHeaders: { Origin: '*', ...details.requestHeaders } });
+    },
+  );
+  
+  win.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        'Access-Control-Allow-Origin': ['*'],
+        // We use this to bypass headers
+        'Access-Control-Allow-Headers': ['*'],
+        ...details.responseHeaders,
+      },
+    });
+  });
+
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
   } else {
@@ -94,6 +114,15 @@ async function createWindow() {
 }
 
 app.whenReady().then(() => {
+  let tray = new Tray(process.cwd() + '/build/icon.ico')
+  tray.setToolTip('Torano client')
+  tray.setContextMenu(Menu.buildFromTemplate([
+    {
+      label: 'Exit', type: 'normal', click: () => {
+        app.exit();
+      }
+    },
+  ]))
   createWindow()
   console.log('App is ready');
   ipcMain.handle('dialog', async (event, method, params) => {
@@ -123,10 +152,10 @@ ipcMain.on('maximize', () => {
 })
 
 app.on('second-instance', () => {
-  if (win) {
-    if (win.isMinimized()) win.restore()
-    win.focus()
-  }
+  // if (win) {
+  //   if (win.isMinimized()) win.restore()
+  //   win.focus()
+  // }
 })
 
 app.on('activate', () => {

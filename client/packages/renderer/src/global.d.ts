@@ -23,6 +23,7 @@ interface ITorrentListItem{
 interface IBackendDataOject {
   trackerAddress: string | null;
   torrents: { string: ITorrentListItem };
+  stats: Object;
 }
 
 
@@ -31,11 +32,14 @@ declare global {
     // Expose some Api through preload script
     fs: typeof import('fs')
     ipcRenderer: import('electron').IpcRenderer
+    _backend_port: number
     backend_port: number
     spawn: typeof import('child_process').spawn
     removeLoading: () => void
     data: IBackendDataOject;
-    cwd: string;
-    ParseTorrentFile: any
+    cwd: string
+    ParseTorrentFile: any,
+    refreshAllData: () => void,
+    promptUser: any,
   }
 }

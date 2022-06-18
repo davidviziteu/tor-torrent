@@ -41,7 +41,7 @@ export default function Home() {
   ) 
 
   async function refreshAllData () {
-    window.data = await fetch('http://localhost:10000/load').then(res => res.json())
+    window.data = await fetch(`http://localhost:${window.backend_port?window.backend_port:10000}/load`).then(res => res.json())
     let arr = []
     //for values of object
     if (!window.data || !window.data.torrents)

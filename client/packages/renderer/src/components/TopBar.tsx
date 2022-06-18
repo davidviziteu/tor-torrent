@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js';
 // const { ipcRenderer } = window.require("electron");
 // const { ipcRenderer } = require("electron");
 export default function TopBar() {
-
+    const [port, setPort] = createSignal(window.backend_port);
     return (
         <div id="top-bar" class="drag">
             <div id="app-title" class="no-drag">
@@ -20,13 +20,14 @@ export default function TopBar() {
                             window.backend_port = port.value;
                         else
                             console.log(`value < 1000`);
-                        
+                        setPort(window.backend_port)
+                        window.refreshAllData()
                         port.value = "";
                     }
                 }}/>
             </div>
             <div class="top-right-button-group">
-                <button class="top-right-buttons no-drag" ondblclick={(e) => {
+                <button class="top-right-buttons no-drag" title={`B port: ${port()}`} ondblclick={(e) => {
                     let port = document.getElementById("change-port") as HTMLInputElement;
                     if(port.style.display == "none"){
                         port.style.display = "";

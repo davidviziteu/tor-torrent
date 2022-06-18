@@ -12,9 +12,9 @@ try {
 global.config = config
 global.port = config.port
 configurations = {
-    "announcesPerTorrent": 3,
-    "circuitLength": 3,
-    "maxPiecesPerMessage": 10,
+    "announcesPerTorrent": config.announces ? config.announces : 3,
+    "circuitLength": config.circuitLen ? config.circuitLen : 3,
+    "maxPiecesPerMessage": config.maxPieces ? config.maxPieces : 3,
     "dev": true
 }
 

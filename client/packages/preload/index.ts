@@ -16,7 +16,7 @@ const { appendLoading, removeLoading } = useLoading()
 contextBridge.exposeInMainWorld('cwd', process.cwd())
 contextBridge.exposeInMainWorld('fs', fs)
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
-contextBridge.exposeInMainWorld('backend_port', 10000)
+contextBridge.exposeInMainWorld('_backend_port', 10000)
 contextBridge.exposeInMainWorld('spawn', spawn)
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
 contextBridge.exposeInMainWorld('electron', {

@@ -1,0 +1,276 @@
+
+
+1655506983539
+
+1655506992385
+1655506996325
+
+
+1655507118354
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655507129880
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655507139223
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+node:events:505
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::10000
+    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
+    at listenInCluster (node:net:1420:12)
+    at Server.listen (node:net:1508:7)
+    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
+    at Module._compile (node:internal/modules/cjs/loader:1105:14)
+    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
+    at Module.load (node:internal/modules/cjs/loader:981:32)
+    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1399:8)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 10000
+}
+app manager: saved data
+app manager: saved data
+
+
+1655507283683
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655542138547
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+app manager: saved data
+removed torrent licenta david - torano - torrenting anonimously.pdf
+
+
+1655542352332
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+app manager: saved data
+
+1655542671573
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+app manager: saved data
+
+1655543833184
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655543948955
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655543963923
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655544729056
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655544764355
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+
+
+1655544830996
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655544850005
+
+
+1655544853170
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655544890155
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+
+1655545684430
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+
+1655545701371
+
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+
+
+1655546839250
+
+
+
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+app manager: saved data

@@ -18,13 +18,13 @@ let win: BrowserWindow | null = null
 
 
 
-async function createWindow() {
+async function createWindow() {  
   const path = require('path')
   const { spawn } = require("child_process");
   let file: number
   let backendServerProcess: any
   //https://www.npmjs.com/package/get-port-electron
-  //daca mai e timp...
+
   file = fs.openSync('./backendlog.txt', 'a')
   try {
     backendServerProcess = spawn("node", [path.resolve('client_server.js')], { stdio: ['ignore', file, file], windowsHide: true });
@@ -153,10 +153,10 @@ ipcMain.on('maximize', () => {
 })
 
 app.on('second-instance', () => {
-  if (win) {
-    if (win.isMinimized()) win.restore()
-    win.focus()
-  }
+  // if (win) {
+  //   if (win.isMinimized()) win.restore()
+  //   win.focus()
+  // }
 })
 
 app.on('activate', () => {

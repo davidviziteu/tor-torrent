@@ -6,6 +6,8 @@ import LeftBar from '@/components/LeftBar';
 import RightPanel from '@/components/home/RightPanel.jsx';
 import routeAccordingly from '@/routeAccordingly';
 import fetchBackendData from '@/routines';
+
+
 export default function Home() {
   console.log('home navigate');
   const nav = useNavigate()
@@ -54,8 +56,6 @@ export default function Home() {
   window.refreshAllData = refreshAllData
   refreshAllData();
   setInterval(refreshAllData, 3000) //1 min
-
-
 
   return (
     <div class="container">

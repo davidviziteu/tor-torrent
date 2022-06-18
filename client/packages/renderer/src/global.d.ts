@@ -32,12 +32,14 @@ declare global {
     // Expose some Api through preload script
     fs: typeof import('fs')
     ipcRenderer: import('electron').IpcRenderer
+    _backend_port: number
     backend_port: number
     spawn: typeof import('child_process').spawn
     removeLoading: () => void
     data: IBackendDataOject;
-    cwd: string;
+    cwd: string
     ParseTorrentFile: any,
-    refreshAllData: () => void;
+    refreshAllData: () => void,
+    promptUser: any,
   }
 }

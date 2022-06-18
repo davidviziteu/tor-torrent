@@ -32,6 +32,7 @@ function electronIntegration() {
 
 render(() => {
   onMount(async () => {
+    window.backend_port = window._backend_port
     await new Promise((resolve) => setTimeout(resolve, 1000));
     window.removeLoading();
   });

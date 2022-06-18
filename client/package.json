@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "crc-32": "^1.2.2",
     "create-torrent": "^5.0.2",
+    "electron-prompt": "^1.7.0",
     "electron-store": "^8.0.1",
     "express": "^4.17.3",
     "get-port": "^6.1.2",
@@ -48,6 +49,6 @@
   },
   "env": {
     "//": "Used in build scripts",
-    "PORT": 3345
+    "PORT": 3370
   }
 }

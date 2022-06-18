@@ -5,10 +5,37 @@ export default function TopBar() {
 
     return (
         <div id="top-bar" class="drag">
-            <div id="app-title" class="drag">
+            <div id="app-title" class="no-drag">
                 Torano
             </div>
+            <div>
+                <input style="display: none" class="no-drag" type="number" id="change-port" onkeypress={(key) => {
+                    if (key.key === "Enter") {
+                        let port = document.getElementById("change-port") as HTMLInputElement;
+                        port.style.display = "none";
+                        console.log(`backend_port: ${port.value}`);
+                        //@ts-ignore
+                        if(port.value > 1000)                            
+                        //@ts-ignore
+                            window.backend_port = port.value;
+                        else
+                            console.log(`value < 1000`);
+                        
+                        port.value = "";
+                    }
+                }}/>
+            </div>
             <div class="top-right-button-group">
+                <button class="top-right-buttons no-drag" ondblclick={(e) => {
+                    let port = document.getElementById("change-port") as HTMLInputElement;
+                    if(port.style.display == "none"){
+                        port.style.display = "";
+                    }
+                    else {
+                        port.style.display = "none";
+                    }
+                }}>
+                </button>
                 <button class="top-right-buttons no-drag" onClick={(e) => {
                     e.preventDefault();
                     window.ipcRenderer.send('minimize');

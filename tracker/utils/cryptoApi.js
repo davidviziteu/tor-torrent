@@ -63,18 +63,6 @@ exports.decryptTextAes = (text, key) => {
     return decrypted.toString();
 }
 
-exports.logTimestamp = msg => {
-    let now = new Date()
-    console.log(`${msg} ${now.getMinutes()}m ${now.getSeconds()}s ${now.getMilliseconds()}ms`)
-}
-
-exports.getRandomArbitrary = (min, max) => {
-    return Math.random() * (max - min) + min;
-}
-
-exports.generateId = (ipaddr) => {
-    return CRC32.str(ipaddr + this.getRandomArbitrary(100, 1000))
-}
 
 
 exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
@@ -159,13 +147,3 @@ exports.sendDataEncrypted = (res, key, data) => {
     }
 }
 
-exports.randomOfArray = (array, count = 30) => {
-    if (array.length <= count) {
-        return array
-    }
-    let dataToReturn = []
-    for (let index = 0; index < count; index++) {
-        dataToReturn.push(array[this.getRandomArbitrary(0, array.length - 1)])
-    }
-    return dataToReturn
-}

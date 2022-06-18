@@ -15,7 +15,7 @@ class AppManager {
 
     setTrackerAddress(trackerAddress) {
         global.trackerAddress = trackerAddress;
-        data.trackerAddress = trackerAddress;
+        this.data.trackerAddress = trackerAddress;
         routines.startRefreshingLoop()
         return this
     }

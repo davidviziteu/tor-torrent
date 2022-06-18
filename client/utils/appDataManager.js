@@ -57,8 +57,6 @@ class AppManager {
 
 
         try {
-            let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
-            fs.writeFileSync(metainfoFilePath, metainfoContent);
             let preq = []
             let precv = []
             for (let i = 0; i < parsedTorrent.files.length; i++) {
@@ -68,7 +66,6 @@ class AppManager {
             this.data.torrents[parsedTorrent.infoHash] = {
                 hash: parsedTorrent.infoHash,
                 filesPath: downloadPath,
-                metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
@@ -105,13 +102,10 @@ class AppManager {
         this.data.trackerAddress = parsedTorrent.announce[0]
         try {
             //copy metainfo file to "."
-            let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
-            fs.writeFileSync(metainfoFilePath, rawTorrent);
 
             this.data.torrents[parsedTorrent.infoHash] = {
                 infoHash: parsedTorrent.infoHash,
                 filesPath: filesPath,
-                metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: true,
@@ -140,11 +134,6 @@ class AppManager {
     removeTorrent(hash) {
         let targetTorrent = this.getTorrent(hash);
         if (targetTorrent) {
-            try {
-                fs.unlinkSync(`./${targetTorrent.metainfoFilePath}`);
-            } catch (error) {
-                console.log('error unlinking metainfo file' + targetTorrent.metainfoFilePath);
-            }
             delete this.data.torrents[hash];
             this.saveProgress()
             return console.log(`removed torrent ${targetTorrent.parsedTorrent.name}`);
@@ -177,7 +166,10 @@ class AppManager {
                 if (Object.hasOwnProperty.call(this.data.torrents, key)) {
                     if (!this.data.torrents[key].isFolder) {
                         try {
-                            this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r');
+                            if (this.data.torrents[key].completed)
+                                this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r');
+                            else
+                                this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r+');
                         } catch (error) {
                             console.log(error);
                             console.log('Error opening file. path: ' + this.data.torrents[key].filesPath);

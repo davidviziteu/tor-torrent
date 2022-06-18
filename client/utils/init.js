@@ -33,9 +33,6 @@ global.trackerPbKey = undefined
 
 console.log('ok init');
 
-if (!fs.existsSync(`./.toranofiles`)) {
-    fs.mkdirSync(`./.toranofiles`);
-}
 
 
 

@@ -3,6 +3,7 @@ const createTorrent = require('create-torrent')
 const AppManager = require('../utils/appDataManager');
 const AppStatsManager = require('../utils/appStatsManager');
 const { StatusCodes } = require('http-status-codes')
+const fs = require('fs')
 const cors = require('cors');
 // router.use(cors())
 router.post(`/load-torrent`, (req, res) => {
@@ -96,8 +97,8 @@ router.get('/load', async (req, res) => {
         torrentsObject[key] = {
             hash: value.hash,
             completed: value.completed,
-            piecesReceived: value.piecesReceived.reduce((acc, cur) => acc + (cur ? 1 : 0), 0),
-            requestesSend: value.requestesSend,
+            piecesReceived: value.completed ? undefined : value.piecesReceived.reduce((acc, cur) => acc + (cur ? 1 : 0), 0),
+            requestesSend: value.completed ? undefined : value.requestesSend,
             parsedTorrent: {
                 length: value.parsedTorrent.length,
                 pieceLength: value.parsedTorrent.pieceLength,

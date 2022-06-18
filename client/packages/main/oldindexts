@@ -81,6 +81,11 @@ async function createWindow() {
     newWindow.show();
   });
 
+  newWindow.on('closed', () => {
+   
+  });
+
+
   newWindow.on('close', () => {
     windows.delete(newWindow);
     //@ts-ignore

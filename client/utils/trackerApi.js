@@ -1,20 +1,21 @@
 const fetch = require('node-fetch');
 const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = require('./cryptoApi')
-
+const utils = require('./utils')
+const comm = require('./comm')
 //done
 exports.fetchHops = async () => {
     if (!trackerAddress) {
-        global.trackerError = 'tracker address is not known'
+        global.trackerError = 'Tracker address is not known'
         console.log(`trackerAddress is not defined`)
     }
     try {
-        aesKey = generateAesKey()
+        let aesKey = generateAesKey()
         const r = await fetch(global.trackerAddress + `/scrape/relay`,
             {
                 headers: { "Content-Type": "application/json" },
                 method: `POST`,
                 body: JSON.stringify({
-                    encryptedKey: encrpytTextRsa(aesKey, global.trackerPbKey),
+                    encryptedKey: encrpytTextRsa(JSON.stringify(aesKey), global.trackerPbKey),
                 })
             })
         const response = await (r).json()
@@ -22,13 +23,15 @@ exports.fetchHops = async () => {
         if (!response.encryptedData || response.error) {
             console.log(`error tracker didnt return relay list`);
             console.log(`\terror: ${response.error}`);
-            throw `error tracker didnt return relay list`
+            global.trackerError = `Tracker did not return relay list. Click to retry.`
+            global.progressLoaded = false
         }
         global.trackerError = undefined
         return JSON.parse(decryptTextAes(response.encryptedData, aesKey))
     } catch (error) {
-        global.trackerError = 'tracker seems to be unreachable, retrying...'
-        console.error(error)
+        global.trackerError = 'Tracker did not return relay list. Click to retry.'
+        global.progressLoaded = false
+        console.log(error)
         console.log(`error at fetching relay list from tracker`);
     }
 }
@@ -62,9 +65,11 @@ exports.announceAsNode = async () => {
             console.log(`announce as node failed, tracker error`);
             return undefined
         }
-        reponse = JSON.parse(decryptTextAes(response.encryptedData, key))
-        global.myIp = response.publicIp
-        global.config.ip = response.publicIp
+        let decryptedData = decryptTextAes(response.encryptedData, key)
+        let _decrData = JSON.parse(decryptedData)
+        global.myIp = _decrData.publicIp
+        global.ip = _decrData.publicIp
+        global.config.ip = _decrData.publicIp
         global.relayNode = true
         console.log(`announce as node ok`);
         global.trackerError = undefined
@@ -75,27 +80,65 @@ exports.announceAsNode = async () => {
     }
 }
 
-exports.announcePiece = async (data) => {
-    //check
+//infohashes is an array of strings
+exports.announceLeeching = async (infoHashes) => {
+    if (!trackerAddress) {
+        global.trackerError = 'tracker address is not known'
+        console.log(`trackerAddress is not defined`)
+    }
+
+    let dataToEncrypt = []
+
+    let hops = await this.fetchHops()
+
+    for (let i = 0; i < infoHashes.length; i++) {
+        let infoHash = infoHashes[i]
+        dataToEncrypt[infoHash] = []
+        for (let i = 0; i < global.announcesPerTorrent; i++) {
+            let hopsArr = []
+            for (let index = 0; index < global.circuitLength; index++) {
+                let random = utils.getRandomInteger(0, hops.length - 1)
+                hopsArr.push(hops[random])
+            }
+
+            let replyOnion = comm.prepReplyOnion(hopsArr, infoHash, 'upload')
+            dataToEncrypt.push({
+                replyOnions: replyOnion,
+                infoHash: infoHash,
+            })
+        }
+    }
+
     try {
-        const response = await fetch(`http://localhost:6969/announce/piece`,
+        const key = generateAesKey()
+        let dataToSend = encrpytTextAes(dataToEncrypt, key)
+        const response = await (await fetch(trackerAddress + `/announce`,
             {
                 headers: {
                     "Content-Type": "application/json"
                 },
                 method: `POST`,
-                body: data
-            })
-        if (response.status != 200) {
-            console.log(await response.text());
+                body: JSON.stringify({
+                    encryptedKey: encrpytTextRsa(key, global.trackerPbKey),
+                    encryptedData: dataToSend
+                })
+            })).json()
+        if (!response.encryptedData) {
+            console.log(`announcing leecing, tracker error`);
             return undefined
         }
-        return 'ok'
+        reponse = JSON.parse(decryptTextAes(response.encryptedData, key))
+        if (reponse.error) {
+            console.log(`announcing leecing, tracker error`);
+            return undefined
+        }
+        global.trackerError = undefined
     } catch (error) {
+        global.trackerError = 'tracker seems to be unreachable, retrying...'
         console.error(error)
-        console.log(`error at announce piece`);
-        return error
+        console.log(`\t ^ error at announce as leecher`);
     }
+
 }
 
 

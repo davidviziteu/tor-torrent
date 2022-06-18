@@ -60,6 +60,7 @@ router.post('/announce/relay', (req, res) => {
 
 //ok
 router.post('/announce', (req, res) => {
+    console.log('announce torrent')
     let data = cryptoApi.decryptValidateBody(req, res, models.leecherAnnounceSchema)
     if (!data) return
 
@@ -71,6 +72,10 @@ router.post('/announce', (req, res) => {
             else
                 global.leechersMap.set(data.infoHash, data)
         }
+        else {
+            global.leechersMap.set(data.infoHash, data)
+        }
+        console.log('\tannounce torrent added.')
         return cryptoApi.sendDataEncrypted(res, data.key, {
             error: null
         })
@@ -91,6 +96,14 @@ router.post('/scrape/relay', (req, res) => {
     let dataToReturn = utils.randomOfArray(relayArr, global.maxRelayNodesReturned)
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
+
+router.get('/scrape/relay/count', (req, res) => {
+    const relayArr = Object.values(global.relaysMap)
+    return res.status(200).json({
+        relayNodes: relayArr.length
+    })
+})
+
 
 //ok
 router.post('/scrape', (req, res) => {

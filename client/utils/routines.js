@@ -1,7 +1,6 @@
 const crypto = require("crypto");
 const fetch = require('node-fetch');
-const EventEmitter = require('node:events');
-const myEmitter = new EventEmitter();
+const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
 const { announceAsNode, getTrackerPublicKey } = require('./trackerApi')
 const utils = require(`./cryptoApi`)
 
@@ -64,7 +63,7 @@ const refreshProcedure = async () => {
         await getTrackerPublicKey()
         await refreshOwnPbKey()
         await announceAsNode()
-        myEmitter.emit('tracker key refreshed')
+        eventEmitter.emit(trackerRefreshSessionEv)
     } catch (error) {
         if (error == 'keys generation error') {
             global.keysError = 'unable to generate public own key...'
@@ -93,11 +92,9 @@ exports.startRefreshingLoop = async () => {
         timeoutId = setTimeout(async () => {
             await refreshProcedure()
             console.log('refresh');
-            myEmitter.emit('refreshed')
             refreshIntervalId = setInterval(async () => {
                 await refreshProcedure()
                 console.log('refresh');
-                myEmitter.emit('refreshed')
             }, refreshObject.refreshPeriodMs)
         }, refreshObject.timeLeftMs + 10)
         global.refreshLoopStarted = true

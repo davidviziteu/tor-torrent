@@ -31,7 +31,7 @@ export default function TopBar() {
                 }}/>
             </div>
             <div class="top-right-button-group">
-                <button class="top-right-buttons no-drag" title={`B port: ${port()}`} ondblclick={(e) => {
+                <button class="top-right-buttons no-drag" title={`Backend port: ${port()}`} ondblclick={(e) => {
                     let port = document.getElementById("change-port") as HTMLInputElement;
                     if(port.style.display == "none"){
                         port.style.display = "";

@@ -8,7 +8,7 @@ exports.relayNodeAnnouceSchema = Joi.object().keys({
 
 const leecherAnnounceObject = Joi.object().keys({
     infoHash: Joi.string().required(),
-    replyOnions: Joi.array().min(1).required(),
+    replyOnions: Joi.required(),
 })
 
 exports.leecherAnnounceSchema = Joi.array().items(leecherAnnounceObject).min(1).required()

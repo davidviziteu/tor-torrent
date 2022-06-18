@@ -3,9 +3,10 @@ const parseTorrent = require('parse-torrent')
 const trackerApi = require('./trackerApi')
 const routines = require('./routines')
 const statsManager = require('./appStatsManager')
-
+const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
+let eventSubscribed = false
 let appManagerInstance = null
-let progressLoaded = false
+global.progressLoaded = false
 class AppManager {
     constructor() {
         this.data = {
@@ -79,7 +80,8 @@ class AppManager {
                 requestesSend: 0,
                 fd: fd
             }
-            //TODO begin announce procedures and download
+            trackerApi.announceLeeching([parsedTorrent.infoHash])
+            //begin dowload procedure
             this.saveProgress()
             return true;
         } catch (error) {
@@ -117,7 +119,7 @@ class AppManager {
                 requestesSend: 0,
                 fd: fd
             }
-            //begin announce procedures
+            trackerApi.announceLeeching([parsedTorrent.infoHash])
             console.log(`created torrent ${parsedTorrent.name}`);
             this.saveProgress()
             return undefined;
@@ -157,7 +159,7 @@ class AppManager {
     }
 
     loadProgress() {
-        if (progressLoaded)
+        if (global.progressLoaded)
             return this.data
 
         try {
@@ -193,8 +195,13 @@ class AppManager {
             this.removeTorrent(toRemove[i])
         }
         if (this.data.trackerAddress) {
-            routines.startRefreshingLoop()
             this.setTrackerAddress(trackerAddress)
+            routines.startRefreshingLoop()
+            if (!eventSubscribed)
+                eventEmitter.on(trackerRefreshSessionEv, () => {
+                    this.announceAllTorrents()
+                })
+            eventSubscribed = true
         }
         return this.data
 
@@ -202,7 +209,13 @@ class AppManager {
 
     announceAllTorrents() {
         //neeed some relay nodes
-
+        let torrentHashes = []
+        for (const key in this.data.torrents) {
+            if (Object.hasOwnProperty.call(this.data.torrents, key)) {
+                torrentHashes.push(key)
+            }
+        }
+        trackerApi.announceLeeching(torrentHashes)
     }
 
 }

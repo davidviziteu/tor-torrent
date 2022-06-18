@@ -58,33 +58,37 @@ router.post('/announce/relay', (req, res) => {
     console.log(`\trelay added. port: ${data.port}`)
 })
 
+let replyOnions = 0
 //ok
 router.post('/announce', (req, res) => {
     console.log('announce torrent')
     let data = cryptoApi.decryptValidateBody(req, res, models.leecherAnnounceSchema)
     if (!data) return
-
-    try {
-        if (global.leechersMap.has(data.infoHash)) {
-            let leechers = global.leechersMap.get(data.infoHash)
-            if (leechers)
-                global.leechersMap.set(data.infoHash, [...leechers, ...data])
-            else
-                global.leechersMap.set(data.infoHash, data)
+    for (let i = 0; i < data.length; i++) {
+        let torrent = data[i]
+        try {
+            if (global.leechersMap.has(torrent.infoHash)) {
+                let leechers = global.leechersMap.get(torrent.infoHash)
+                if (leechers)
+                    global.leechersMap.set(torrent.infoHash, [...leechers, ...torrent.replyOnions])
+                else
+                    global.leechersMap.set(torrent.infoHash, torrent.replyOnions)
+            }
+            else {
+                global.leechersMap.set(data.infoHash, torrent.replyOnions)
+            }
+            console.log('\tannounce torrent added.')
+            replyOnions++
+            return cryptoApi.sendDataEncrypted(res, data.key, {
+                error: null
+            })
+        } catch (error) {
+            console.log(error);
+            console.log(`error when adding leecher to leechersMap for infoHash: ${data.infoHash}`);
+            cryptoApi.sendDataEncrypted(res, data.key, {
+                error: error
+            })
         }
-        else {
-            global.leechersMap.set(data.infoHash, data)
-        }
-        console.log('\tannounce torrent added.')
-        return cryptoApi.sendDataEncrypted(res, data.key, {
-            error: null
-        })
-    } catch (error) {
-        console.log(error);
-        console.log(`error when adding leecher to leechersMap for infoHash: ${data.infoHash}`);
-        cryptoApi.sendDataEncrypted(res, data.key, {
-            error: error
-        })
     }
 })
 
@@ -96,6 +100,7 @@ router.post('/scrape/relay', (req, res) => {
     let dataToReturn = utils.randomOfArray(relayArr, global.maxRelayNodesReturned)
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
+
 
 router.get('/scrape/relay/count', (req, res) => {
     const relayArr = Object.values(global.relaysMap)
@@ -123,6 +128,13 @@ router.post('/scrape', (req, res) => {
     })
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
+
+router.get('/scrape/count', (req, res) => {
+    return res.status(200).json({
+        replyOnions: replyOnions
+    })
+})
+
 
 router.all('/*', (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({

@@ -7,13 +7,14 @@ const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
 let eventSubscribed = false
 let appManagerInstance = null
 global.progressLoaded = false
-
+const torrentsManager = require('./toranosManager')
 class AppManager {
     constructor() {
         this.data = {
             trackerAddress: null,
             torrents: {}
         };
+        torrentsManager.setAppManager(this)
     }
 
     setTrackerAddress(trackerAddress) {
@@ -67,7 +68,7 @@ class AppManager {
             let preq = []
             let precv = []
             for (let i = 0; i < parsedTorrent.files.length; i++) {
-                preq.push(0)
+                preq.push(0) //se putea face cu new array si .fill() 
                 precv.push(0)
             }
             this.data.torrents[parsedTorrent.infoHash] = {
@@ -208,20 +209,26 @@ class AppManager {
 
     }
 
-    async scrapeAnnounceAll() {
-
-        //scrape all needed torrents, then announce all
+    getIncompleteTorrentsHashes() {
         let toScrape = []
         for (const key in this.data.torrents)
             if (Object.hasOwnProperty.call(this.data.torrents, key))
                 if (!this.data.torrents[key].completed)
                     toScrape.push(key)
+        return toScrape
+    }
+
+    async scrapeAnnounceAll() {
+
+        //scrape all needed torrents, then announce all
+        let toScrape = this.getIncompleteTorrentsHashes()
 
         //begin procedure 
 
         if (toScrape.length > 0) {
             let leechers = await trackerApi.getLeechers(toScrape)
             console.log('leechers fetched');
+            torrentsManager.startDownloading(leechers)
         }
 
         let torrentHashes = []
@@ -232,6 +239,16 @@ class AppManager {
         }
         //tracker has some delay after announce; 
         await trackerApi.announceLeeching(torrentHashes)
+    }
+
+    getIncompleteTorrents() {
+        let retlist = []
+        for (const [key, value] of Object.entries(this.data.torrents)) {
+            if (value.completed)
+                continue
+            retlist.push(value)
+        }
+        return retlist
     }
 }
 

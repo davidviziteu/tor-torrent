@@ -29,19 +29,20 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
  */
 exports.prepReplyOnion = (hops, infoHash, type, rememberFirstROKey = true) => {
     currentHits++
-    if (currentHits == refreshMapHitsCount) {
-        let mapKeys = [...encriptionKeysArrayMap.keys()]
-        for (const key in mapKeys) {
-            try {
-                let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
-                if (hoursDiff > mapCacheTimeHours)
-                    encriptionKeysArrayMap.delete(key)
-            } catch (error) {
-                continue //in case there are other keys. ex: announce key
-            }
-        }
-        currentHits = 0
-    }
+    //TODO trebuie refacut asta
+    // if (currentHits == refreshMapHitsCount) {
+    //     let mapKeys = [...encriptionKeysArrayMap.keys()]
+    //     for (const key in mapKeys) {
+    //         try {
+    //             let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
+    //             if (hoursDiff > mapCacheTimeHours)
+    //                 encriptionKeysArrayMap.delete(key)
+    //         } catch (error) {
+    //             continue //in case there are other keys. ex: announce key
+    //         }
+    //     }
+    //     currentHits = 0
+    // }
     let aesKeys = []
     for (let index = 0; index < hops.length + 1; index++) {
         aesKeys.push(cryptoApi.generateAesKey())
@@ -99,7 +100,7 @@ exports.prepReplyOnion = (hops, infoHash, type, rememberFirstROKey = true) => {
 
     return {
         onion: cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj),
-        ecryptedAesKey: cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
+        encryptedAesKey: cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
         port: allHops[i].port,
         ip: allHops[i].ip,
         encryptExternalPayload: aesKeys[allHops.length - i - 1] //last aes key
@@ -115,7 +116,7 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
     if (returnData) {
         finalOnion.next.ip = returnData.ip
         finalOnion.next.port = returnData.port
-        finalOnion.next.encryptedAesKey = returnData.ecryptedAesKey
+        finalOnion.next.encryptedAesKey = returnData.encryptedAesKey
         finalOnion.onionLayer = returnData.onion
         finalOnion.encryptExternalPayload = returnData.encryptExternalPayload
     }

@@ -16,6 +16,7 @@ class AppStatsManager {
             'Tracker: ': 'localhost:8080',
             'Tracker session (mins): ': 0,
             'Direct tracker contact: ': 'Yes',
+            'Relay nodes count: ': 0,
         }
     }
     setOnionLayers(layers) {
@@ -57,6 +58,11 @@ class AppStatsManager {
         }
         this.data['Tracker: '] = url
     }
+
+    setRelayNodesCount(count) {
+        this.data['Relay nodes count: '] = count
+    }
+
     getData() {
         return this.data
     }

@@ -3,12 +3,8 @@ exports.logTimestamp = msg => {
     console.log(`${msg} ${now.getMinutes()}m ${now.getSeconds()}s ${now.getMilliseconds()}ms`)
 }
 
-exports.getRandomArbitrary = (min, max) => {
-    return Math.random() * (max - min) + min;
-}
-
-exports.getRandomInteger = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+exports.randInt = (max) => {
+    return Math.floor(Math.random() * max);
 }
 
 exports.sleep = (ms) => {
@@ -21,7 +17,7 @@ exports.randomOfArray = (array, count = 30) => {
     }
     let dataToReturn = []
     for (let index = 0; index < count; index++) {
-        dataToReturn.push(array[this.getRandomArbitrary(0, array.length - 1)])
+        dataToReturn.push(array[this.randInt(0, array.length - 1)])
     }
     return dataToReturn
 }
@@ -29,7 +25,7 @@ exports.randomOfArray = (array, count = 30) => {
 exports.randomOfArrayExtend = (array, count) => {
     let dataToReturn = []
     for (let index = 0; index < count; index++) {
-        dataToReturn.push(array[this.getRandomArbitrary(0, array.length - 1)])
+        dataToReturn.push(array[this.randInt(0, array.length - 1)])
     }
     return dataToReturn
 }

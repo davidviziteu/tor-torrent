@@ -112,7 +112,7 @@ exports.announceLeeching = async (infoHashes) => {
         for (let i = 0; i < global.announcesPerTorrent; i++) {
             let hopsArr = []
             for (let index = 0; index < global.circuitLength; index++) {
-                let random = utils.getRandomInteger(0, hops.length - 1)
+                let random = utils.randInt(0, hops.length - 1)
                 hopsArr.push(hops[random])
             }
 

@@ -27,6 +27,7 @@ export default function RightPanel(props) {
         'Tracker: ',
         'Tracker session (mins): ',
         'Direct tracker contact: ',
+        'Relay nodes count: ',
     ]
     // const [get, setRightPanelData] = createSignal(
     //     {

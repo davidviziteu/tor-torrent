@@ -3,6 +3,8 @@ const models = require(`../models`)
 const cryptoApi = require(`../utils/cryptoApi`)
 const { StatusCodes } = require('http-status-codes')
 const AppStatsManager = require('../utils/appStatsManager')
+const comm = require('../utils/comm')
+const utils = require('../utils/utils')
 let id = 0
 router.post(`/relay`, async function routeOnion(req, res) {
     console.log(`/relay`);
@@ -13,7 +15,7 @@ router.post(`/relay`, async function routeOnion(req, res) {
     let currentId = ++id
     let prevPubKey
     try {
-        prevPubKey = await cryptoApi.comm.getPublicKey(req.ip, req.body.requesterPort)
+        prevPubKey = await comm.getPublicKey(req.ip, req.body.requesterPort)
     } catch (error) {
         console.log(error)
         console.log(`cannot fetch prev node's publickey`)
@@ -35,12 +37,12 @@ router.post(`/relay`, async function routeOnion(req, res) {
 
         if (!onion.message) { //means its onion to be forwarded
             if (onion.encryptExternalPayload) {
-                cryptoApi.logTimestamp(`return msg`)
+                utils.logTimestamp(`return msg`)
                 currentTransitCell.externalPayload = cryptoApi.encrpytTextAes(currentTransitCell.externalPayload, onion.encryptExternalPayload)
                 await new Promise(r => setTimeout(r, 500));
             }
             else {
-                cryptoApi.logTimestamp(`fwd msg`)
+                utils.logTimestamp(`fwd msg`)
                 await new Promise(r => setTimeout(r, 500));
             }
             let transitCell = new models.TransitCell()
@@ -48,7 +50,7 @@ router.post(`/relay`, async function routeOnion(req, res) {
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             console.log(`[${config.port}][id: ${currentId}] got onion to fwd to ${onion.next.ip}:${onion.next.port}`)
-            let response = await cryptoApi.comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
+            let response = await comm.sendOnion(onion.next.ip, onion.next.port, transitCell)
             console.log(`[${config.port}][id: ${currentId}] onion fwd reponse message: ${response}`)
             return res.status(200).end(cryptoApi.encrpytTextRsa(response, prevPubKey))
         }
@@ -73,13 +75,13 @@ router.post(`/relay`, async function routeOnion(req, res) {
         //...
         // if ul asta de jos a fost folosit pt teste mai mult.
         let transitCell = new models.TransitCell()
-        if (onion.onionLayer) { // reply onion
-            cryptoApi.logTimestamp(`got a message for me with a return onion: "${onion.message}" `)
+        if (onion.onionLayer) { // reply onion - DEV
+            utils.logTimestamp(`got a message for me with a return onion: "${onion.message}" `)
             transitCell.externalPayload = cryptoApi.encrpytTextAes('yes?', onion.encryptExternalPayload)
             transitCell.onion = onion.onionLayer
             transitCell.encryptedAesKey = onion.next.encryptedAesKey
             await new Promise(r => setTimeout(r, 2000))
-            let nextNodeResponse = await cryptoApi.comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
+            let nextNodeResponse = await comm.sendOnion(onion.next.ip, onion.next.port, transitCell).catch(err => {
                 console.log(`error occured when sending response: ${err}`)
             })
 
@@ -89,8 +91,8 @@ router.post(`/relay`, async function routeOnion(req, res) {
             //TODO - update
             let key = onion.message.key
             console.log(`[RESPONSE] reply onion for key: ${key}`)
-            let decryptedData = cryptoApi.comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
-            cryptoApi.logTimestamp(`[DECR]: ${decryptedData}`)
+            let decryptedData = comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
+            utils.logTimestamp(`[PAYLOAD]: ${decryptedData}`)
         }
     } catch (error) {
         console.log(error)

@@ -19,9 +19,6 @@ function _getIndexesOfNotReceivedPieces(piecesReceived) {
     return indexes
 }
 
-function isLastPiece(pieceIndex, parsedTorrent) {
-    return pieceIndex === parsedTorrent.pieces.len - 1
-}
 
 
 
@@ -31,6 +28,10 @@ class TorrentManager {
     constructor() {
         this.appManager
         this.intervalId = null
+    }
+
+    _isLastPiece(pieceIndex, parsedTorrent) {
+        return pieceIndex === parsedTorrent.pieces.length - 1
     }
 
     setAppManager(appManager) {
@@ -105,9 +106,10 @@ class TorrentManager {
         else
             this.loopingFunction()
 
-        this.intervalId = setInterval(() => {
-            getInstance().loopingFunction()
-        }, 10000);
+        if (!this.intervalId)
+            this.intervalId = setInterval(() => {
+                getInstance().loopingFunction()
+            }, 10000);
         return this.intervalId
     }
 
@@ -132,15 +134,17 @@ class TorrentManager {
             let pieceIndex = requestPieces[i]
             if (torrentObject.completed || torrentObject.piecesReceived[pieceIndex]) {
                 try {
-                    let buf = Buffer.alloc(pieceLen)
+                    let isLastPiece = this._isLastPiece(pieceIndex, torrentObject.parsedTorrent)
+                    let buf = Buffer.alloc(isLastPiece ? torrentObject.parsedTorrent.lastPieceLength : pieceLen)
                     fs.readSync(torrentObject.fd, buf, 0,
-                        isLastPiece(pieceIndex, torrentObject.parsedTorrent) ? torrentObject.parsedTorrent.lastPieceLength : pieceLen,
+                        isLastPiece ? torrentObject.parsedTorrent.lastPieceLength : pieceLen,
                         pieceIndex * pieceLen)
                     pieces.push({
                         pieceIndex: pieceIndex,
                         piece: buf.toString('hex')
                     })
                 } catch (error) {
+                    console.log(error);
                     console.log(`error reading piece`);
                     continue
                 }

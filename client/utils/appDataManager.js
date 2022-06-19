@@ -77,7 +77,7 @@ class AppManager {
                 fd: fd
             }
             trackerApi.announceLeeching([parsedTorrent.infoHash])
-            //begin dowload procedure
+            torrentsManager.startDownloading()
             this.saveProgress()
             return true;
         } catch (error) {

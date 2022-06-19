@@ -2,7 +2,7 @@ const router = require(`express`).Router()
 const trackerApi = require(`../utils/trackerApi`)
 const AppManager = require('../utils/appDataManager');
 const { StatusCodes } = require('http-status-codes')
-
+const fetch = require('node-fetch')
 router.get('/dev', (req, res) => {
     return res.status(200).json({
         "client ip": req.ip,
@@ -89,6 +89,24 @@ router.post('/override-tracker-url/', async (req, res) => {
 router.get('/fetch-hops', async (req, res) => {
     res.status(200).json({
         hops: await trackerApi.fetchHops()
+    })
+})
+
+router.post('/fetch-leechers', async (req, res) => {
+    const { torrentHashArr } = req.body
+    if (!torrentHashArr) return res.status(StatusCodes.BAD_REQUEST).json({ error: 'no torrent hash provided' })
+    let leechers = await fetch(`http://localhost:6969/scrape`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            encryptedKey: 'postman',
+            encryptedData: JSON.stringify(torrentHashArr)
+        })
+    })
+    return res.status(200).json({
+        trackerReponse: await leechers.json()
     })
 })
 

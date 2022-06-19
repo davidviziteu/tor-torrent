@@ -80,6 +80,7 @@ exports.startRefreshingLoop = async () => {
     if (global.refreshLoopStarted) {
         return;
     }
+    global.refreshLoopStarted = true
     try {
         await refreshProcedure()
         let refreshObject = await getRefreshPeriod()
@@ -97,8 +98,8 @@ exports.startRefreshingLoop = async () => {
                 console.log('refresh');
             }, refreshObject.refreshPeriodMs)
         }, refreshObject.timeLeftMs + 10)
-        global.refreshLoopStarted = true
     } catch (error) {
+        global.refreshLoopStarted = false
         console.log('error at startRefreshingLoop');
         clearInterval(refreshIntervalId)
         clearTimeout(timeoutId)

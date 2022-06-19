@@ -72,10 +72,10 @@ router.post('/announce', (req, res) => {
                 if (leechers)
                     global.leechersMap.set(torrent.infoHash, [...leechers, ...torrent.replyOnions])
                 else
-                    global.leechersMap.set(torrent.infoHash, torrent.replyOnions)
+                    global.leechersMap.set(torrent.infoHash, [torrent.replyOnions])
             }
             else {
-                global.leechersMap.set(data.infoHash, torrent.replyOnions)
+                global.leechersMap.set(torrent.infoHash, [torrent.replyOnions])
             }
             console.log('\tannounce torrent added.')
             replyOnions++
@@ -117,7 +117,8 @@ router.post('/scrape', (req, res) => {
 
     //data is an array of infohashes
     let dataToReturn = {}
-    data.forEach(infoHash => {
+    for (let index = 0; index < data.length; index++) {
+        const infoHash = data[index];
         if (global.leechersMap.has(infoHash)) {
             let leechers = global.leechersMap.get(infoHash)
             if (leechers)
@@ -125,7 +126,7 @@ router.post('/scrape', (req, res) => {
             else
                 dataToReturn[infoHash] = []
         }
-    })
+    }
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
 

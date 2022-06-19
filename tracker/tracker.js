@@ -78,16 +78,13 @@ router.post('/announce', (req, res) => {
                 global.leechersMap.set(torrent.infoHash, [torrent.replyOnions])
             }
             console.log('\tannounce torrent added.')
-            replyOnions++
+            replyOnions += torrent.replyOnions.length
             return cryptoApi.sendDataEncrypted(res, data.key, {
                 error: null
             })
         } catch (error) {
             console.log(error);
-            console.log(`error when adding leecher to leechersMap for infoHash: ${data.infoHash}`);
-            cryptoApi.sendDataEncrypted(res, data.key, {
-                error: error
-            })
+            console.log(`error when adding leecher to leechersMap for infoHash: ${torrent.infoHash}`);
         }
     }
 })

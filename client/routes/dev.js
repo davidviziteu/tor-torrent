@@ -95,18 +95,22 @@ router.get('/fetch-hops', async (req, res) => {
 router.post('/fetch-leechers', async (req, res) => {
     const { torrentHashArr } = req.body
     if (!torrentHashArr) return res.status(StatusCodes.BAD_REQUEST).json({ error: 'no torrent hash provided' })
-    let leechers = await fetch(`http://localhost:6969/scrape`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            encryptedKey: 'postman',
-            encryptedData: JSON.stringify(torrentHashArr)
-        })
-    })
+    // let leechers = await fetch(`http://localhost:6969/scrape`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //         encryptedKey: 'postman',
+    //         encryptedData: JSON.stringify(torrentHashArr)
+    //     })
+    // })
+    // return res.status(200).json({
+    //     trackerReponse: await leechers.json()
+    // })
+    let leechers = await trackerApi.getLeechers(torrentHashArr)
     return res.status(200).json({
-        trackerReponse: await leechers.json()
+        trackerReponse: leechers
     })
 })
 

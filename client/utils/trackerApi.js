@@ -93,7 +93,10 @@ exports.announceLeeching = async (infoHashes) => {
 
     for (let i = 0; i < infoHashes.length; i++) {
         let infoHash = infoHashes[i]
-        dataToEncrypt[infoHash] = []
+        let announceObject = {
+            infoHash: infoHash,
+            replyOnions: []
+        }
         for (let i = 0; i < global.announcesPerTorrent; i++) {
             let hopsArr = []
             for (let index = 0; index < global.circuitLength; index++) {
@@ -102,11 +105,9 @@ exports.announceLeeching = async (infoHashes) => {
             }
 
             let replyOnion = comm.prepReplyOnion(hopsArr, infoHash, 'upload')
-            dataToEncrypt.push({
-                replyOnions: replyOnion,
-                infoHash: infoHash,
-            })
+            announceObject.replyOnions.push(replyOnion)
         }
+        dataToEncrypt.push(announceObject)
     }
 
     try {
@@ -147,32 +148,10 @@ exports.getLeechers = async (infoHashes) => {
         console.log(`trackerAddress is not defined`)
     }
 
-    let dataToEncrypt = []
-
-    let hops = await this.fetchHops()
-
-    for (let i = 0; i < infoHashes.length; i++) {
-        let infoHash = infoHashes[i]
-        dataToEncrypt[infoHash] = []
-        for (let i = 0; i < global.announcesPerTorrent; i++) {
-            let hopsArr = []
-            for (let index = 0; index < global.circuitLength; index++) {
-                let random = utils.getRandomInteger(0, hops.length - 1)
-                hopsArr.push(hops[random])
-            }
-
-            let replyOnion = comm.prepReplyOnion(hopsArr, infoHash, 'upload')
-            dataToEncrypt.push({
-                replyOnions: replyOnion,
-                infoHash: infoHash,
-            })
-        }
-    }
-
     try {
         const key = generateAesKey()
-        let dataToSend = encrpytTextAes(dataToEncrypt, key)
-        const response = await (await fetch(trackerAddress + `/announce`,
+        let dataToSend = encrpytTextAes(infoHashes, key)
+        const response = await (await fetch(trackerAddress + `/scrape`,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -184,15 +163,17 @@ exports.getLeechers = async (infoHashes) => {
                 })
             })).json()
         if (!response.encryptedData) {
-            console.log(`announcing leecing, tracker error`);
+            console.log(`scraping leechers, tracker data validation error`);
             return undefined
         }
         reponse = JSON.parse(decryptTextAes(response.encryptedData, key))
         if (reponse.error) {
-            console.log(`announcing leecing, tracker error`);
+            console.log(error);
+            console.log(`scraping leechers, tracker error`);
             return undefined
         }
         global.trackerError = undefined
+        return reponse
     } catch (error) {
         global.trackerError = 'tracker seems to be unreachable, retrying...'
         console.error(error)

@@ -59,7 +59,7 @@ router.post(`/relay`, async function routeOnion(req, res) {
         }
 
         //onion for me
-        res.status(200).end(cryptoApi.encrpytTextRsa('ok', prevPubKey))
+        res.status(200).end(cryptoApi.encrpytTextRsa('ack', prevPubKey))
     } catch (error) {
         //Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
         //  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
@@ -71,8 +71,9 @@ router.post(`/relay`, async function routeOnion(req, res) {
         console.log(`got an onion for me`);
         //store the return onion while prep-ing an answer
         //...
+        // if ul asta de jos a fost folosit pt teste mai mult.
         let transitCell = new models.TransitCell()
-        if (onion.onionLayer) { // return onion
+        if (onion.onionLayer) { // reply onion
             cryptoApi.logTimestamp(`got a message for me with a return onion: "${onion.message}" `)
             transitCell.externalPayload = cryptoApi.encrpytTextAes('yes?', onion.encryptExternalPayload)
             transitCell.onion = onion.onionLayer
@@ -84,9 +85,10 @@ router.post(`/relay`, async function routeOnion(req, res) {
 
             console.log(`reponse: ${nextNodeResponse}`);
         }
-        if (onion.message.startsWith(`key `)) {
-            let key = onion.message.slice(4)
-            console.log(`[RESPONSE] reponse onion for key: ${key}`)
+        if (onion.message && onion.message.key) {
+            //TODO - update
+            let key = onion.message.key
+            console.log(`[RESPONSE] reply onion for key: ${key}`)
             let decryptedData = cryptoApi.comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
             cryptoApi.logTimestamp(`[DECR]: ${decryptedData}`)
         }

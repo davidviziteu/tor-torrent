@@ -7,6 +7,7 @@ const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
 let eventSubscribed = false
 let appManagerInstance = null
 global.progressLoaded = false
+
 class AppManager {
     constructor() {
         this.data = {
@@ -217,8 +218,11 @@ class AppManager {
                     toScrape.push(key)
 
         //begin procedure 
-        let leechers = await trackerApi.getLeechers(toScrape)
-        console.log('');
+
+        if (toScrape.length > 0) {
+            let leechers = await trackerApi.getLeechers(toScrape)
+            console.log('');
+        }
 
         let torrentHashes = []
         for (const key in this.data.torrents) {

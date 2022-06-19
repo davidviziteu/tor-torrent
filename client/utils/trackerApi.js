@@ -91,6 +91,17 @@ exports.announceLeeching = async (infoHashes) => {
 
     let hops = await this.fetchHops()
 
+    if (!hops || hops.length == 0) {
+        global.trackerError = 'no relay nodes available, retrying in 5 seconds...'
+        console.log(`no relay nodes available`);
+        //wait 30 seconds and try again
+        setTimeout(() => {
+            this.announceLeeching(infoHashes)
+        }, 5000)
+        return
+    }
+
+
     for (let i = 0; i < infoHashes.length; i++) {
         let infoHash = infoHashes[i]
         let announceObject = {
@@ -144,15 +155,17 @@ exports.announceLeeching = async (infoHashes) => {
 }
 
 exports.getLeechers = async (infoHashes) => {
+    //wait 5 seconds
+
     if (!trackerAddress) {
         global.trackerError = 'tracker address is not known'
         console.log(`trackerAddress is not defined`)
     }
-
+    let response
     try {
         const key = generateAesKey()
         let dataToSend = encrpytTextAes(JSON.stringify(infoHashes), key)
-        let response = await (await fetch(trackerAddress + `/scrape`,
+        response = await (await fetch(trackerAddress + `/scrape`,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -164,15 +177,17 @@ exports.getLeechers = async (infoHashes) => {
                 })
             })).json()
         if (!response.encryptedData) {
+            console.log(`response: ${JSON.stringify(response)}`);
             console.log(`scraping leechers, tracker data validation error`);
             return undefined
         }
         reponse = JSON.parse(decryptTextAes(response.encryptedData, key))
         if (reponse.error) {
-            console.log(error);
+            console.log(reponse.error);
             console.log(`scraping leechers, tracker error`);
             return undefined
         }
+        console.log('scraped leechers ok');
         global.trackerError = undefined
         // return response
         let filteredResponse = {}
@@ -192,7 +207,7 @@ exports.getLeechers = async (infoHashes) => {
                     }
                 }
                 if (found)
-                    continue //dont add
+                    continue //dont add, the RO is mine
                 filteredResponse[hash].push(hashLeechersArr[i])
             }
         }
@@ -200,7 +215,8 @@ exports.getLeechers = async (infoHashes) => {
         return filteredResponse
     } catch (error) {
         global.trackerError = 'tracker seems to be unreachable, retrying...'
-        console.error(error)
+        console.log(error)
+        console.log(`response ${JSON.stringify(response)}`);
         console.log(`\t ^ error at announce as leecher`);
     }
 }

@@ -1,5 +1,6 @@
 
 const crypto = require("crypto");
+
 exports.encrpytTextRsa = (text, publicKey) => {
     //works with string public key as well
 
@@ -88,7 +89,7 @@ exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
                 data = JSON.parse(encryptedData)
             key = encryptedKey
         } catch (error) {
-            res.json({
+            this.sendDataEncrypted(res, key, {
                 error: "json parse failed"
             })
             return null
@@ -101,7 +102,7 @@ exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
         } catch (error) {
             console.log(error)
             if (global.dev)
-                res.status(200).json({
+                this.sendDataEncrypted(res, key, {
                     error: 'invalid key',
                 })
             return null
@@ -112,7 +113,7 @@ exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
         const { error, value } = schema.validate(data)
         if (error) {
             if (global.dev)
-                res.status(200).json({
+                this.sendDataEncrypted(res, key, {
                     error: error,
                 })
             return null

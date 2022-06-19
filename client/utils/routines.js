@@ -64,6 +64,7 @@ const refreshProcedure = async () => {
         await getTrackerPublicKey()
         await refreshOwnPbKey()
         await announceAsNode()
+        // await new Promise(resolve => setTimeout(resolve, 5000)); //tracker time to update its session
         eventEmitter.emit(trackerRefreshSessionEv)
     } catch (error) {
         if (error == 'keys generation error') {

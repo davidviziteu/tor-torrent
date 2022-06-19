@@ -17,7 +17,7 @@ export default function Home() {
     console.log(`removing torrent ${torrHashToRemove}`);
     setTorrents(torrents().filter(torrItem => torrItem != torrHashToRemove))
     console.log(`torrents after removing: ${torrents()}`);
-    fetch(`http://localhost:10000/delete-torrent/${torrHashToRemove}`)
+    fetch(`http://localhost:${window.backend_port}/delete-torrent/${torrHashToRemove}`)
     delete window.data.torrents[torrHashToRemove]
     routeAccordingly(nav)
     return
@@ -41,7 +41,7 @@ export default function Home() {
   ) 
 
   async function refreshAllData () {
-    window.data = await fetch('http://localhost:10000/load').then(res => res.json())
+    window.data = await fetch(`http://localhost:${window.backend_port?window.backend_port:10000}/load`).then(res => res.json())
     let arr = []
     //for values of object
     if (!window.data || !window.data.torrents)
@@ -52,6 +52,17 @@ export default function Home() {
     setTorrents(arr)
     routeAccordingly(nav)
     setRightPanelData(window.data.stats)
+
+    if (window.data.keysError && window.data.trackerError)
+      window.setError(` -- ${window.data.keysError}; ${window.data.trackerError}`)
+    else
+    if (window.data.keysError)
+      window.setError(` -- ${window.data.keysError}`)
+    else
+    if (window.data.trackerError)
+      window.setError(` -- ${window.data.trackerError}`)
+    else
+      window.setError('')
   }
   window.refreshAllData = refreshAllData
   refreshAllData();

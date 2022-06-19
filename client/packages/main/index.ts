@@ -152,10 +152,10 @@ ipcMain.on('maximize', () => {
 })
 
 app.on('second-instance', () => {
-  // if (win) {
-  //   if (win.isMinimized()) win.restore()
-  //   win.focus()
-  // }
+  if (win) {
+    if (win.isMinimized()) win.restore()
+    win.focus()
+  }
 })
 
 app.on('activate', () => {

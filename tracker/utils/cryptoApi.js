@@ -1,5 +1,6 @@
 
 const crypto = require("crypto");
+
 exports.encrpytTextRsa = (text, publicKey) => {
     //works with string public key as well
 
@@ -63,18 +64,6 @@ exports.decryptTextAes = (text, key) => {
     return decrypted.toString();
 }
 
-exports.logTimestamp = msg => {
-    let now = new Date()
-    console.log(`${msg} ${now.getMinutes()}m ${now.getSeconds()}s ${now.getMilliseconds()}ms`)
-}
-
-exports.getRandomArbitrary = (min, max) => {
-    return Math.random() * (max - min) + min;
-}
-
-exports.generateId = (ipaddr) => {
-    return CRC32.str(ipaddr + this.getRandomArbitrary(100, 1000))
-}
 
 
 exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
@@ -100,7 +89,7 @@ exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
                 data = JSON.parse(encryptedData)
             key = encryptedKey
         } catch (error) {
-            res.json({
+            this.sendDataEncrypted(res, key, {
                 error: "json parse failed"
             })
             return null
@@ -113,7 +102,7 @@ exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
         } catch (error) {
             console.log(error)
             if (global.dev)
-                res.status(200).json({
+                this.sendDataEncrypted(res, key, {
                     error: 'invalid key',
                 })
             return null
@@ -124,7 +113,7 @@ exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
         const { error, value } = schema.validate(data)
         if (error) {
             if (global.dev)
-                res.status(200).json({
+                this.sendDataEncrypted(res, key, {
                     error: error,
                 })
             return null
@@ -159,13 +148,3 @@ exports.sendDataEncrypted = (res, key, data) => {
     }
 }
 
-exports.randomOfArray = (array, count = 30) => {
-    if (array.length <= count) {
-        return array
-    }
-    let dataToReturn = []
-    for (let index = 0; index < count; index++) {
-        dataToReturn.push(array[this.getRandomArbitrary(0, array.length - 1)])
-    }
-    return dataToReturn
-}

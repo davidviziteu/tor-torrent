@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { Link, useRoutes, useLocation, useNavigate } from "solid-app-router";
 import fetchBackendData from './routines'
 import routeAccordingly from "./routeAccordingly";
@@ -32,9 +32,10 @@ const App: Component = () => {
       navigate('/welcome');
     }
   }
-
- 
-  
+  const [getError, setError] = createSignal('')
+  window.setError = setError
+  window.getError = getError
+  window.backend_port = 10000
   return (
     <>
       <TopBar />

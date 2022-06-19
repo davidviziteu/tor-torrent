@@ -3,6 +3,7 @@ const createTorrent = require('create-torrent')
 const AppManager = require('../utils/appDataManager');
 const AppStatsManager = require('../utils/appStatsManager');
 const { StatusCodes } = require('http-status-codes')
+const fs = require('fs')
 const cors = require('cors');
 // router.use(cors())
 router.post(`/load-torrent`, (req, res) => {
@@ -34,12 +35,9 @@ router.post(`/create-torrent`, (req, res) => {
         error: `sourcePath or destPath is missing`
     })
     //test if file exists
-    fs.access(sourcePath, fs.constants.R_OK, (err) => {
-        if (err) {
-            return res.status(StatusCodes.BAD_REQUEST).json({
-                error: `file ${sourcePath} not found`
-            })
-        }
+
+    try {
+        fs.accessSync(sourcePath, fs.constants.R_OK)
         createTorrent(sourcePath, {
             comment: 'torano',
             announceList: [[global.trackerAddress]],
@@ -54,16 +52,16 @@ router.post(`/create-torrent`, (req, res) => {
             // `torrent` is a Buffer with the contents of the new .torrent file
             try {
                 let exists = AppManager.createTorrent(sourcePath, torrent)
-                if (exists == 'exists') {
-                    fs.writeFile(destPath, torrent, (err) => {
-                        if (err) {
-                            console.log(error);
-                            console.log(`error fs.writeFile(destPath, torrent`);
-                            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                                error: `error writing file ${destPath}: ${JSON.stringify(err)}`
-                            })
-                        }
-                    })
+                if (exists != 'exists') {
+                    try {
+                        fs.writeFileSync(destPath, torrent)
+                    } catch (error) {
+                        console.log(error);
+                        console.log(`error fs.writeFile(destPath, torrent`);
+                        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                            error: `error writing file ${destPath}: ${JSON.stringify(err)}`
+                        })
+                    }
                 }
             } catch (error) {
                 console.log(error);
@@ -76,7 +74,12 @@ router.post(`/create-torrent`, (req, res) => {
             return res.status(StatusCodes.OK).end()
         })
 
-    })
+    } catch (error) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            error: `file ${sourcePath} not found`
+        })
+    }
+
 })
 
 
@@ -96,10 +99,10 @@ router.get('/load', async (req, res) => {
         torrentsObject[key] = {
             hash: value.hash,
             completed: value.completed,
-            piecesReceived: value.piecesReceived.reduce((acc, cur) => acc + (cur ? 1 : 0), 0),
-            requestesSend: value.requestesSend,
+            piecesReceived: value.completed ? undefined : value.piecesReceived.reduce((acc, cur) => acc + (cur ? 1 : 0), 0),
+            requestesSend: value.completed ? undefined : value.requestesSend,
             parsedTorrent: {
-                length: value.parsedTorrent.length,
+                length: value.parsedTorrent.pieces.length,
                 pieceLength: value.parsedTorrent.pieceLength,
                 name: value.parsedTorrent.name,
             }
@@ -108,7 +111,9 @@ router.get('/load', async (req, res) => {
     return res.status(200).json({
         trackerAddress: data.trackerAddress,
         torrents: torrentsObject,
-        stats: AppStatsManager.getData()
+        stats: AppStatsManager.getData(),
+        ...global.trackerError && { trackerError: global.trackerError },
+        ...global.keysError && { keysError: global.keysError },
     })
 })
 

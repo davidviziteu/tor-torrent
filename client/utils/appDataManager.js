@@ -1,19 +1,27 @@
 const fs = require('fs')
 const parseTorrent = require('parse-torrent')
-
-let downloaderInstance = null
-let progressLoaded = false
+const trackerApi = require('./trackerApi')
+const routines = require('./routines')
+const statsManager = require('./appStatsManager')
+const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
+let eventSubscribed = false
+let appManagerInstance = null
+global.progressLoaded = false
+const torrentsManager = require('./toranosManager')
 class AppManager {
     constructor() {
         this.data = {
             trackerAddress: null,
             torrents: {}
         };
+        torrentsManager.setAppManager(this)
     }
 
     setTrackerAddress(trackerAddress) {
         global.trackerAddress = trackerAddress;
-        data.trackerAddress = trackerAddress;
+        this.data.trackerAddress = trackerAddress;
+        statsManager.setTrackerAddress(trackerAddress);
+        routines.startRefreshingLoop()
         return this
     }
 
@@ -34,7 +42,7 @@ class AppManager {
 
         try {
             parsedTorrent = parseTorrent(metainfoContent)
-            this.data.trackerAddress = parsedTorrent.announce[0]
+            this.setTrackerAddress(parsedTorrent.announce[0])
         } catch (error) {
             console.log(error);
             console.log('Error parsing metainfo file. path: ' + metainfoPath);
@@ -57,27 +65,19 @@ class AppManager {
 
 
         try {
-            let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
-            fs.writeFileSync(metainfoFilePath, metainfoContent);
-            let preq = []
-            let precv = []
-            for (let i = 0; i < parsedTorrent.files.length; i++) {
-                preq.push(0)
-                precv.push(0)
-            }
             this.data.torrents[parsedTorrent.infoHash] = {
                 hash: parsedTorrent.infoHash,
                 filesPath: downloadPath,
-                metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
-                piecesRequested: preq,
-                piecesReceived: precv,
+                piecesRequested: new Array(parsedTorrent.pieces.length).fill(0),
+                piecesReceived: new Array(parsedTorrent.pieces.length).fill(0),
                 requestesSend: 0,
                 fd: fd
             }
-            //TODO begin announce procedures and download
+            trackerApi.announceLeeching([parsedTorrent.infoHash])
+            torrentsManager.startDownloading()
             this.saveProgress()
             return true;
         } catch (error) {
@@ -105,20 +105,17 @@ class AppManager {
         this.data.trackerAddress = parsedTorrent.announce[0]
         try {
             //copy metainfo file to "."
-            let metainfoFilePath = `./.toranofiles/${parsedTorrent.infoHash}`;
-            fs.writeFileSync(metainfoFilePath, rawTorrent);
 
             this.data.torrents[parsedTorrent.infoHash] = {
                 infoHash: parsedTorrent.infoHash,
                 filesPath: filesPath,
-                metainfoFilePath: metainfoFilePath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: true,
                 requestesSend: 0,
                 fd: fd
             }
-            //begin announce procedures
+            trackerApi.announceLeeching([parsedTorrent.infoHash])
             console.log(`created torrent ${parsedTorrent.name}`);
             this.saveProgress()
             return undefined;
@@ -140,11 +137,6 @@ class AppManager {
     removeTorrent(hash) {
         let targetTorrent = this.getTorrent(hash);
         if (targetTorrent) {
-            try {
-                fs.unlinkSync(`./${targetTorrent.metainfoFilePath}`);
-            } catch (error) {
-                console.log('error unlinking metainfo file' + targetTorrent.metainfoFilePath);
-            }
             delete this.data.torrents[hash];
             this.saveProgress()
             return console.log(`removed torrent ${targetTorrent.parsedTorrent.name}`);
@@ -154,7 +146,7 @@ class AppManager {
 
     saveProgress() {
         try {
-            fs.writeFileSync(`./.data${global.port}.json`, JSON.stringify(this.data));
+            fs.writeFileSync(global.storagePath, JSON.stringify(this.data));
             console.log('app manager: saved data');
         } catch (error) {
             console.log(error);
@@ -163,48 +155,119 @@ class AppManager {
     }
 
     loadProgress() {
-        if (progressLoaded)
+        if (global.progressLoaded)
             return this.data
+
         try {
-            if (fs.existsSync(`./.data${global.port}.json`)) {
-                this.data = JSON.parse(fs.readFileSync(`./.data${global.port}.json`));
-            }
-            if (!this.data.torrents)
-                this.data.torrents = {}
-            // in this.data.torrents
-            let toRemove = []
-            for (const key in this.data.torrents) {
-                if (Object.hasOwnProperty.call(this.data.torrents, key)) {
-                    if (!this.data.torrents[key].isFolder) {
-                        try {
+            this.data = JSON.parse(fs.readFileSync(global.storagePath));
+        } catch (error) {
+            console.log(error);
+            console.log('Error loading data_port_.json, creating new file');
+            fs.writeFileSync(global.storagePath, JSON.stringify(this.data));
+        }
+
+        if (!this.data.torrents)
+            this.data.torrents = {}
+        // in this.data.torrents
+        let toRemove = []
+        for (const key in this.data.torrents) {
+            if (Object.hasOwnProperty.call(this.data.torrents, key)) {
+                if (!this.data.torrents[key].isFolder) {
+                    try {
+                        if (this.data.torrents[key].completed)
                             this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r');
-                        } catch (error) {
-                            console.log(error);
-                            console.log('Error opening file. path: ' + this.data.torrents[key].filesPath);
-                            console.log('removing torrent');
-                            toRemove.push(key)
-                        }
+                        else
+                            this.data.torrents[key].fd = fs.openSync(this.data.torrents[key].filesPath, 'r+');
+                    } catch (error) {
+                        console.log(error);
+                        console.log('Error opening file. path: ' + this.data.torrents[key].filesPath);
+                        console.log('removing torrent');
+                        toRemove.push(key)
                     }
                 }
             }
-            for (let i = 0; i < toRemove.length; i++) {
-                this.removeTorrent(toRemove[i])
-            }
-            return this.data
-        } catch (error) {
-            console.log(error);
-            console.log('Error loading data_port_.json');
         }
+        for (let i = 0; i < toRemove.length; i++) {
+            this.removeTorrent(toRemove[i])
+        }
+        if (this.data.trackerAddress) {
+            this.setTrackerAddress(trackerAddress)
+            routines.startRefreshingLoop()
+            if (!eventSubscribed)
+                eventEmitter.on(trackerRefreshSessionEv, () => {
+                    this.scrapeAnnounceAll()
+                })
+            eventSubscribed = true
+        }
+        return this.data
+
     }
 
+    getIncompleteTorrentsHashes() {
+        let toScrape = []
+        for (const key in this.data.torrents)
+            if (Object.hasOwnProperty.call(this.data.torrents, key))
+                if (!this.data.torrents[key].completed)
+                    toScrape.push(key)
+        return toScrape
+    }
+
+    async scrapeAnnounceAll() {
+
+        //scrape all needed torrents, then announce all
+        let toScrape = this.getIncompleteTorrentsHashes()
+
+        //begin procedure 
+
+        if (toScrape.length > 0) {
+            let leechers = await trackerApi.getLeechers(toScrape)
+            console.log('leechers fetched');
+            torrentsManager.startDownloading(leechers)
+        }
+
+        let torrentHashes = []
+        for (const key in this.data.torrents) {
+            if (Object.hasOwnProperty.call(this.data.torrents, key)) {
+                torrentHashes.push(key)
+            }
+        }
+        //tracker has some delay after announce; 
+        if (torrentHashes.length > 0)
+            trackerApi.announceLeeching(torrentHashes)
+    }
+
+    getIncompleteTorrents() {
+        let retlist = []
+        for (const [key, value] of Object.entries(this.data.torrents)) {
+            if (value.completed)
+                continue
+            retlist.push(value)
+        }
+        return retlist
+    }
+
+    setPieceRecvd(infoHash, pieceIndex) {
+        if (!this.data.torrents[infoHash])
+            return
+        this.data.torrents[infoHash].piecesReceived[pieceIndex] = true
+        if (this.data.torrents[infoHash].piecesReceived.every(x => x)) {
+            this.data.torrents[infoHash].completed = true
+            delete this.data.torrents[infoHash].piecesReceived
+            delete this.data.torrents[infoHash].piecesRequested
+        }
+        this.saveProgress()
+    }
 }
 
 
 function getInstance() {
-    if (downloaderInstance === null) {
-        downloaderInstance = new AppManager();
+    if (appManagerInstance === null) {
+        appManagerInstance = new AppManager();
+        setInterval(() => {
+            appManagerInstance.saveProgress()
+        }, 1000 * 60);
     }
-    return downloaderInstance;
+    return appManagerInstance;
 }
 
 module.exports = getInstance();

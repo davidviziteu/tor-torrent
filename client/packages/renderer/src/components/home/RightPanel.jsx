@@ -27,6 +27,7 @@ export default function RightPanel(props) {
         'Tracker: ',
         'Tracker session (mins): ',
         'Direct tracker contact: ',
+        'Relay nodes count: ',
     ]
     // const [get, setRightPanelData] = createSignal(
     //     {
@@ -43,8 +44,6 @@ export default function RightPanel(props) {
     //         'Direct tracker contact: ': 'Yes',
     //     }
     // ) 
-    console.log(props);
-    console.log('rightPanelData');
     return (
         <div class="panel">
             {leftPanelData.map(stringId => (

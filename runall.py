@@ -3,6 +3,7 @@ import json
 import sys
 import multiprocessing
 import subprocess
+import time
 
 def checkdir():
     os.system(f'start /B start cmd.exe @cmd /k cd')
@@ -33,6 +34,7 @@ with open('makefiles/setup.json') as config_file:
     data = json.load(config_file)
     tracker = multiprocessing.Process(target=tracker)
     tracker.run()
+    time.sleep(1) 
     if 'tracker' not in sys.argv:
         for client_args in data['clients']:
             cli = multiprocessing.Process(target=client, args=(str(client_args),))

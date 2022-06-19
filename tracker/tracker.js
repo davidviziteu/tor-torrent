@@ -1,17 +1,12 @@
-console.log(`\n\n\n\n\n\n\n\n\n\n\n`);
+console.log(`\n\n\n\n\n\n\n\n`);
 require('./utils/init')
 const express = require('express')
 const bodyParser = require('body-parser')
 const models = require('./models')
 const cryptoApi = require('./utils/cryptoApi')
 const router = require('express').Router()
-const crypto = require(`crypto`)
 const { StatusCodes } = require('http-status-codes')
-const Joi = require('joi')
-
-function randomNumber(max) {
-    return Math.floor(Math.random() * max)
-}
+const utils = require('./utils/utils')
 
 const app = express()
 
@@ -23,6 +18,7 @@ app.use((req, res, next) => {
     next()
 })
 
+//ok
 router.post('/session', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res, null, true)
     if (!data) return
@@ -33,14 +29,17 @@ router.post('/session', (req, res) => {
     })
 })
 
+//ok
 router.get('/public-key', (req, res) => {
     return res.status(200).json({
         publicKey: global.publicKeyString
     })
 })
 
+//ok
 router.post('/announce/relay', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res, models.trackerAnnounceSchema)
+    console.log('announce relay')
+    let data = cryptoApi.decryptValidateBody(req, res, models.relayNodeAnnouceSchema)
     if (!data) return
 
     if (req.isLocalIp)
@@ -48,56 +47,92 @@ router.post('/announce/relay', (req, res) => {
     else
         data.ip = req.ip
     console.log(`new peer: ${data.ip}:${data.port}`)
-    relaysArray.push(data)
+    global.relaysMap[`${data.ip}:${data.port}`] = {
+        publicKey: data.publicKey,
+        port: data.port,
+        ip: data.ip
+    }
     cryptoApi.sendDataEncrypted(res, data.key, {
         publicIp: data.ip
+    })
+    console.log(`\trelay added. port: ${data.port}`)
+})
+
+let replyOnions = 0
+//ok
+router.post('/announce', (req, res) => {
+    console.log('announce torrent')
+    let data = cryptoApi.decryptValidateBody(req, res, models.leecherAnnounceSchema)
+    if (!data) return
+    for (let i = 0; i < data.length; i++) {
+        let torrent = data[i]
+        try {
+            if (global.leechersMap.has(torrent.infoHash)) {
+                let leechers = global.leechersMap.get(torrent.infoHash)
+                if (leechers)
+                    global.leechersMap.set(torrent.infoHash, [...leechers, ...torrent.replyOnions])
+                else
+                    global.leechersMap.set(torrent.infoHash, [...torrent.replyOnions])
+            }
+            else {
+                global.leechersMap.set(torrent.infoHash, [...torrent.replyOnions])
+            }
+            console.log('\tannounce torrent added.')
+            replyOnions += torrent.replyOnions.length
+            return cryptoApi.sendDataEncrypted(res, data.key, {
+                error: null
+            })
+        } catch (error) {
+            console.log(error);
+            console.log(`error when adding leecher to leechersMap for infoHash: ${torrent.infoHash}`);
+        }
+    }
+})
+
+//ok
+router.post('/scrape/relay', (req, res) => {
+    let data = cryptoApi.decryptValidateBody(req, res, null, true)
+    if (!data) return
+    const relayArr = Object.values(global.relaysMap)
+    let dataToReturn = utils.randomOfArray(relayArr, global.maxRelayNodesReturned)
+    cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
+})
+
+
+router.get('/scrape/relay/count', (req, res) => {
+    const relayArr = Object.values(global.relaysMap)
+    return res.status(200).json({
+        relayNodes: relayArr.length
     })
 })
 
 
-router.post('/announce/', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res, models.trackerTorrentAnnounceSchema.validate)
+//ok
+router.post('/scrape', (req, res) => {
+    let data = cryptoApi.decryptValidateBody(req, res, models.leecherRequestSchema)
     if (!data) return
-    try {
-        if (global.torrentsLeechers.has(data.infoHash)) {
-            let leechers = global.torrentsLeechers.get(data.infoHash)
-            if (leechers)
-                global.torrentsLeechers.set(data.infoHash, [...leechers, ...data])
-            else
-                global.torrentsLeechers.set(data.infoHash, data)
-        }
-        return res.status(200).end()
-    } catch (error) {
-        console.log(error);
-        console.log(`error when adding leecher to torrentsLeechers for infoHash: ${data.infoHash}`);
-        cryptoApi.sendDataEncrypted(res, data.key, {
-            error: error
-        })
-    }
-})
 
-router.post('/scrape/relay', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res, null, true)
-    if (!data) return
-    let dataToReturn = cryptoApi.randomOfArray(global.relaysArray, global.maxRelayNodesReturned)
+    //data is an array of infohashes
+    let dataToReturn = {}
+    for (let index = 0; index < data.length; index++) {
+        const infoHash = data[index];
+        if (global.leechersMap.has(infoHash)) {
+            let leechers = global.leechersMap.get(infoHash)
+            if (leechers)
+                dataToReturn[infoHash] = utils.randomOfArray(leechers, global.maxLeecherNodesReturned)
+            else
+                dataToReturn[infoHash] = []
+        }
+    }
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
 
-router.post('/scrape', (req, res) => {
-    let data = cryptoApi.decryptValidateBody(req, res)
-    if (!data) return
-    if (global.torrentsLeechers.has(data.infoHash)) {
-        let leechers = global.torrentsLeechers.get(data.infoHash)
-        let dataToReturn = cryptoApi.randomOfArray(leechers, global.maxLeechersReturned)
-        cryptoApi.sendDataEncrypted(res, data.key, {
-            leechersArray: dataToReturn
-        })
-    }
-    else
-        cryptoApi.sendDataEncrypted(res, data.key, {
-            leechersArray: []
-        })
+router.get('/scrape/count', (req, res) => {
+    return res.status(200).json({
+        replyOnions: replyOnions
+    })
 })
+
 
 router.all('/*', (req, res) => {
     res.status(StatusCodes.NOT_FOUND).json({

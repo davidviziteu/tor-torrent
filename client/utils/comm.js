@@ -14,7 +14,6 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     for (const key of keysArray) {
         encryptedPayload = cryptoApi.decryptTextAes(encryptedPayload, key)
     }
-    encriptionKeysArrayMap.delete(mapKey)
     return encryptedPayload
 }
 /**
@@ -27,21 +26,22 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
  * @param {*} hops array of {ip, port, publicKey} that represents the path of a transit cell in the network
  * @returns an ecrypted return onion that contains aes keys to encrypt a cell's external payload
  */
-exports.prepReturnOnion = hops => {
+exports.prepReplyOnion = (hops, infoHash, type, rememberFirstROKey = true) => {
     currentHits++
-    if (currentHits == refreshMapHitsCount) {
-        let mapKeys = [...encriptionKeysArrayMap.keys()]
-        for (const key in mapKeys) {
-            try {
-                let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
-                if (hoursDiff > mapCacheTimeHours)
-                    encriptionKeysArrayMap.delete(key)
-            } catch (error) {
-                continue //in case there are other keys. ex: announce key
-            }
-        }
-        currentHits = 0
-    }
+    //TODO trebuie refacut asta
+    // if (currentHits == refreshMapHitsCount) {
+    //     let mapKeys = [...encriptionKeysArrayMap.keys()]
+    //     for (const key in mapKeys) {
+    //         try {
+    //             let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
+    //             if (hoursDiff > mapCacheTimeHours)
+    //                 encriptionKeysArrayMap.delete(key)
+    //         } catch (error) {
+    //             continue //in case there are other keys. ex: announce key
+    //         }
+    //     }
+    //     currentHits = 0
+    // }
     let aesKeys = []
     for (let index = 0; index < hops.length + 1; index++) {
         aesKeys.push(cryptoApi.generateAesKey())
@@ -51,16 +51,20 @@ exports.prepReturnOnion = hops => {
 
 
     let finalOnion = new models.Onion()
-    finalOnion.message = `key ${mapKey}`
+    finalOnion.message = {
+        key: mapKey,
+        infoHash: infoHash,
+        type: type
+    }
     finalOnion.next.ip = undefined
     finalOnion.next.port = undefined
     finalOnion.next.encryptedAesKey = undefined
     finalOnion.onionLayer = undefined
 
     let allHops = hops.concat([{
-        ip: config.ip,
+        ip: global.ip,
         port: config.port,
-        publicKey: publicKeyString
+        publicKey: global.publicKeyString
     }])
 
     let portsOrder = []
@@ -90,10 +94,12 @@ exports.prepReturnOnion = hops => {
         prevAesKeyObj = cryptoApi.generateAesKey()
     }
 
+    if (rememberFirstROKey)
+        global.myReplyOnionsKeys.push(JSON.stringify(aesKeys[allHops.length - i - 1]))
 
     return {
         onion: cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj),
-        ecryptedAesKey: cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
+        encryptedAesKey: cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey),
         port: allHops[i].port,
         ip: allHops[i].ip,
         encryptExternalPayload: aesKeys[allHops.length - i - 1] //last aes key
@@ -109,7 +115,7 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
     if (returnData) {
         finalOnion.next.ip = returnData.ip
         finalOnion.next.port = returnData.port
-        finalOnion.next.encryptedAesKey = returnData.ecryptedAesKey
+        finalOnion.next.encryptedAesKey = returnData.encryptedAesKey
         finalOnion.onionLayer = returnData.onion
         finalOnion.encryptExternalPayload = returnData.encryptExternalPayload
     }

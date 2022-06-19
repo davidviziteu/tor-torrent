@@ -28,7 +28,7 @@ export default function TorrentItem(props) {
             setCurrentRatio(`${torrentItem.requestesSend > 0 ? pcsRecv / torrentItem.requestesSend : '-'}`)
             percent = (pcsRecv / torrentItem.parsedTorrent.length) * 100;
         }
-        setCurrentProgress(percent)
+        setCurrentProgress(percent.toFixed(2))
     }
 
     updateData()

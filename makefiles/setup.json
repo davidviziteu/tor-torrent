@@ -7,32 +7,50 @@
     {
       "ip": "localhost",
       "port": 6001,
-      "announceCount": 3
+      "announces": 3,
+      "circuitLen": 2,
+      "maxPieces": 10,
+      "path": "D:/toranos/testdata"
     },
     {
       "ip": "localhost",
       "port": 6002,
-      "announceCount": 4
+      "announces": 4,
+      "circuitLen": 1,
+      "maxPieces": 10,
+      "path": "D:/toranos/testdata"
     },
     {
       "ip": "localhost",
       "port": 6003,
-      "announceCount": 2
+      "announces": 2,
+      "circuitLen": 2,
+      "maxPieces": 10,
+      "path": "D:/toranos/testdata"
     },
     {
       "ip": "localhost",
       "port": 6004,
-      "announceCount": 1
+      "announces": 1,
+      "circuitLen": 2,
+      "maxPieces": 10,
+      "path": "D:/toranos/testdata"
     },
     {
       "ip": "localhost",
       "port": 6005,
-      "announceCount": 10
+      "announces": 10,
+      "circuitLen": 2,
+      "maxPieces": 10,
+      "path": "D:/toranos/testdata"
     },
     {
       "ip": "localhost",
       "port": 6006,
-      "announceCount": 3
+      "announces": 3,
+      "circuitLen": 2,
+      "maxPieces": 10,
+      "path": "D:/toranos/testdata"
     }
   ]
 }

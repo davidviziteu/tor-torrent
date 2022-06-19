@@ -40,6 +40,7 @@ const refreshOwnPbKey = async () => {
         const { publicKey, privateKey } = crypto.generateKeyPairSync(`rsa`, {
             modulusLength: configurations.modulusLength ? configurations.modulusLength : 2048,
         })
+        global.myReplyOnionsKeys = []
         global.publicKey = publicKey
         global.privateKey = privateKey
         global.publicKeyString = publicKey.export({

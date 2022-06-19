@@ -27,7 +27,7 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
  * @param {*} hops array of {ip, port, publicKey} that represents the path of a transit cell in the network
  * @returns an ecrypted return onion that contains aes keys to encrypt a cell's external payload
  */
-exports.prepReplyOnion = (hops, infoHash, type) => {
+exports.prepReplyOnion = (hops, infoHash, type, rememberFirstROKey = true) => {
     currentHits++
     if (currentHits == refreshMapHitsCount) {
         let mapKeys = [...encriptionKeysArrayMap.keys()]
@@ -94,6 +94,8 @@ exports.prepReplyOnion = (hops, infoHash, type) => {
         prevAesKeyObj = cryptoApi.generateAesKey()
     }
 
+    if (rememberFirstROKey)
+        global.myReplyOnionsKeys.push(JSON.stringify(aesKeys[allHops.length - i - 1]))
 
     return {
         onion: cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj),

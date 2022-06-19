@@ -134,6 +134,7 @@ exports.announceLeeching = async (infoHashes) => {
             return undefined
         }
         global.trackerError = undefined
+        return
     } catch (error) {
         global.trackerError = 'tracker seems to be unreachable, retrying...'
         console.error(error)
@@ -150,8 +151,8 @@ exports.getLeechers = async (infoHashes) => {
 
     try {
         const key = generateAesKey()
-        let dataToSend = encrpytTextAes(infoHashes, key)
-        const response = await (await fetch(trackerAddress + `/scrape`,
+        let dataToSend = encrpytTextAes(JSON.stringify(infoHashes), key)
+        let response = await (await fetch(trackerAddress + `/scrape`,
             {
                 headers: {
                     "Content-Type": "application/json"
@@ -173,7 +174,30 @@ exports.getLeechers = async (infoHashes) => {
             return undefined
         }
         global.trackerError = undefined
-        return reponse
+        // return response
+        let filteredResponse = {}
+        //filter my Reply onions
+        for (const [key, value] of Object.entries(reponse)) {
+            let hash = key
+            filteredResponse[hash] = []
+            let hashLeechersArr = value
+            for (let i = 0; i < hashLeechersArr.length; i++) {
+                //check if leecher.encryptExternalPayload is in global.myReplyOnionsKeys
+                let found = false
+                for (let index = 0; index < global.myReplyOnionsKeys.length; index++) {
+                    const myKey = global.myReplyOnionsKeys[index]
+                    if (JSON.stringify(hashLeechersArr[i].encryptExternalPayload) === myKey) {
+                        found = true
+                        break
+                    }
+                }
+                if (found)
+                    continue //dont add
+                filteredResponse[hash].push(hashLeechersArr[i])
+            }
+        }
+
+        return filteredResponse
     } catch (error) {
         global.trackerError = 'tracker seems to be unreachable, retrying...'
         console.error(error)

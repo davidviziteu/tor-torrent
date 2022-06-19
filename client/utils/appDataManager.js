@@ -208,6 +208,7 @@ class AppManager {
     }
 
     async scrapeAnnounceAll() {
+
         //scrape all needed torrents, then announce all
         let toScrape = []
         for (const key in this.data.torrents)
@@ -215,8 +216,9 @@ class AppManager {
                 if (!this.data.torrents[key].completed)
                     toScrape.push(key)
 
-        let leechers = await trackerApi.getLeechers(toScrape)
         //begin procedure 
+        let leechers = await trackerApi.getLeechers(toScrape)
+        console.log('');
 
         let torrentHashes = []
         for (const key in this.data.torrents) {
@@ -224,9 +226,9 @@ class AppManager {
                 torrentHashes.push(key)
             }
         }
-        trackerApi.announceLeeching(torrentHashes)
+        //tracker has some delay after announce
+        await trackerApi.announceLeeching(torrentHashes)
     }
-
 }
 
 

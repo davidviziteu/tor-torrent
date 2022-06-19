@@ -72,10 +72,10 @@ router.post('/announce', (req, res) => {
                 if (leechers)
                     global.leechersMap.set(torrent.infoHash, [...leechers, ...torrent.replyOnions])
                 else
-                    global.leechersMap.set(torrent.infoHash, [torrent.replyOnions])
+                    global.leechersMap.set(torrent.infoHash, [...torrent.replyOnions])
             }
             else {
-                global.leechersMap.set(torrent.infoHash, [torrent.replyOnions])
+                global.leechersMap.set(torrent.infoHash, [...torrent.replyOnions])
             }
             console.log('\tannounce torrent added.')
             replyOnions += torrent.replyOnions.length

@@ -35,7 +35,7 @@ const App: Component = () => {
   const [getError, setError] = createSignal('')
   window.setError = setError
   window.getError = getError
-  
+  window.backend_port = 10000
   return (
     <>
       <TopBar />

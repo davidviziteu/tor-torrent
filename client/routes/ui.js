@@ -35,12 +35,9 @@ router.post(`/create-torrent`, (req, res) => {
         error: `sourcePath or destPath is missing`
     })
     //test if file exists
-    fs.access(sourcePath, fs.constants.R_OK, (err) => {
-        if (err) {
-            return res.status(StatusCodes.BAD_REQUEST).json({
-                error: `file ${sourcePath} not found`
-            })
-        }
+
+    try {
+        fs.accessSync(sourcePath, fs.constants.R_OK)
         createTorrent(sourcePath, {
             comment: 'torano',
             announceList: [[global.trackerAddress]],
@@ -55,16 +52,16 @@ router.post(`/create-torrent`, (req, res) => {
             // `torrent` is a Buffer with the contents of the new .torrent file
             try {
                 let exists = AppManager.createTorrent(sourcePath, torrent)
-                if (exists == 'exists') {
-                    fs.writeFile(destPath, torrent, (err) => {
-                        if (err) {
-                            console.log(error);
-                            console.log(`error fs.writeFile(destPath, torrent`);
-                            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                                error: `error writing file ${destPath}: ${JSON.stringify(err)}`
-                            })
-                        }
-                    })
+                if (exists != 'exists') {
+                    try {
+                        fs.writeFileSync(destPath, torrent)
+                    } catch (error) {
+                        console.log(error);
+                        console.log(`error fs.writeFile(destPath, torrent`);
+                        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                            error: `error writing file ${destPath}: ${JSON.stringify(err)}`
+                        })
+                    }
                 }
             } catch (error) {
                 console.log(error);
@@ -77,7 +74,12 @@ router.post(`/create-torrent`, (req, res) => {
             return res.status(StatusCodes.OK).end()
         })
 
-    })
+    } catch (error) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            error: `file ${sourcePath} not found`
+        })
+    }
+
 })
 
 

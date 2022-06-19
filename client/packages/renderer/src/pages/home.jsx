@@ -17,7 +17,7 @@ export default function Home() {
     console.log(`removing torrent ${torrHashToRemove}`);
     setTorrents(torrents().filter(torrItem => torrItem != torrHashToRemove))
     console.log(`torrents after removing: ${torrents()}`);
-    fetch(`http://localhost:10000/delete-torrent/${torrHashToRemove}`)
+    fetch(`http://localhost:${window.backend_port}/delete-torrent/${torrHashToRemove}`)
     delete window.data.torrents[torrHashToRemove]
     routeAccordingly(nav)
     return

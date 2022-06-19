@@ -199,7 +199,7 @@ class AppManager {
             routines.startRefreshingLoop()
             if (!eventSubscribed)
                 eventEmitter.on(trackerRefreshSessionEv, () => {
-                    this.announceAllTorrents()
+                    this.scrapeAnnounceAll()
                 })
             eventSubscribed = true
         }
@@ -207,8 +207,17 @@ class AppManager {
 
     }
 
-    announceAllTorrents() {
-        //neeed some relay nodes
+    async scrapeAnnounceAll() {
+        //scrape all needed torrents, then announce all
+        let toScrape = []
+        for (const key in this.data.torrents)
+            if (Object.hasOwnProperty.call(this.data.torrents, key))
+                if (!this.data.torrents[key].completed)
+                    toScrape.push(key)
+
+        let leechers = await trackerApi.getLeechers(toScrape)
+        //begin procedure 
+
         let torrentHashes = []
         for (const key in this.data.torrents) {
             if (Object.hasOwnProperty.call(this.data.torrents, key)) {

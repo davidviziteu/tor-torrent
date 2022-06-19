@@ -29,3 +29,12 @@ exports.randomOfArrayExtend = (array, count) => {
     }
     return dataToReturn
 }
+
+exports.randomStringPadding = () => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,./;?><!@#$%^&*()_+-=[]{}|';
+    for (var i = 0; i < 5; i++) {
+        result += characters.charAt(this.randInt(characters.length));
+    }
+    return result;
+}

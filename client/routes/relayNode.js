@@ -5,6 +5,8 @@ const { StatusCodes } = require('http-status-codes')
 const statsManager = require('../utils/appStatsManager')
 const comm = require('../utils/comm')
 const utils = require('../utils/utils')
+const torrentsManager = require('../utils/toranosManager')
+
 let id = 0
 router.post(`/relay`, async function routeOnion(req, res) {
     console.log(`/relay`);
@@ -30,8 +32,7 @@ router.post(`/relay`, async function routeOnion(req, res) {
         statsManager.incrementOnionDiscarded()
         console.log(error)
         console.log(`error while decryptiong aes key`)
-        res.status(StatusCodes.BAD_REQUEST).end(`error while decryptiong aes key`)
-        return
+        return res.status(200).end(cryptoApi.encrpytTextRsa(`failed ${utils.randomStringPadding()}`, prevPubKey))
     }
     try {
         onion = JSON.parse(cryptoApi.decryptTextAes(req.body.onion, aesKey))
@@ -58,20 +59,15 @@ router.post(`/relay`, async function routeOnion(req, res) {
             return res.status(200).end(cryptoApi.encrpytTextRsa(response, prevPubKey))
         }
 
-        // if (onion.message.type == 'announce') {
-        //     let result = await trackerApi.announcePiece(JSON.stringify(onion.message))
-        //     return res.status(200).end(cryptoApi.encrpytTextRsa(result, prevPubKey))
-        // }
-
         //onion for me
-        res.status(200).end(cryptoApi.encrpytTextRsa('ack', prevPubKey))
+        res.status(200).end(cryptoApi.encrpytTextRsa(`ack ${utils.randomStringPadding()}`, prevPubKey))
     } catch (error) {
         //Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
         //  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
         //inseamna ca am dat decode la ceva ce a fost criptat cu alta cheie
         statsManager.incrementOnionDiscarded()
         console.log(error)
-        return res.status(200).end(cryptoApi.encrpytTextRsa('failed', prevPubKey))
+        return res.status(200).end(cryptoApi.encrpytTextRsa(`failed ${utils.randomStringPadding()}`, prevPubKey))
     }
     try {
         console.log(`got an onion for me`);
@@ -84,9 +80,26 @@ router.post(`/relay`, async function routeOnion(req, res) {
             let key = onion.message.key
             console.log(`[RESPONSE] reply onion for key: ${key}`)
             let decryptedData = comm.decryptPayloadForKey(key, currentTransitCell.externalPayload)
-            utils.logTimestamp(`[PAYLOAD]: ${decryptedData}`)
+            // utils.logTimestamp(`[PAYLOAD]: ${decryptedData}`)
+
+            switch (onion.message.type) {
+                case 'upload':
+                    torrentsManager.handlePiecesRequest(decryptedData, onion.message.infoHash)
+                    console.log('pieces uploaded');
+                    statsManager.incrementMessagesResponses()
+                    break
+                case 'pieces':
+                    torrentsManager.handlePiecesDownload(decryptedData, onion.message.infoHash)
+                    console.log('pieces received');
+                    statsManager.incrementMessagesResponses()
+                    break
+                default:
+                    console.log(`onion message type not recognized: ${onion.message.type}`);
+                    statsManager.incrementOnionDiscarded()
+            }
         }
     } catch (error) {
+        statsManager.incrementOnionDiscarded()
         console.log(error)
     }
 })

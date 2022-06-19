@@ -245,6 +245,18 @@ class AppManager {
         }
         return retlist
     }
+
+    setPieceRecvd(infoHash, pieceIndex) {
+        if (!this.data.torrents[infoHash])
+            return
+        this.data.torrents[infoHash].piecesReceived[pieceIndex] = true
+        if (this.data.torrents[infoHash].piecesReceived.every(x => x)) {
+            this.data.torrents[infoHash].completed = true
+            delete this.data.torrents[infoHash].piecesReceived
+            delete this.data.torrents[infoHash].piecesRequested
+        }
+        this.saveProgress()
+    }
 }
 
 

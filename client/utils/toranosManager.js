@@ -5,6 +5,7 @@ const trackerApi = require('./trackerApi')
 const statsManager = require('./appStatsManager')
 const utils = require('./utils')
 const peerMessages = require('./peerMessages')
+const sha1 = require('simple-sha1')
 let inst = null
 
 
@@ -16,6 +17,10 @@ function _getIndexesOfNotReceivedPieces(piecesReceived) {
         }
     }
     return indexes
+}
+
+function isLastPiece(pieceIndex, parsedTorrent) {
+    return pieceIndex === parsedTorrent.pieces.len - 1
 }
 
 
@@ -47,7 +52,10 @@ class TorrentManager {
 
         let leechers = await trackerApi.getLeechers(toScrape)
         let availableRelayNodes = await trackerApi.fetchHops()
-
+        if (!availableRelayNodes) {
+            console.log('no relay nodes available, trying again later');
+            return
+        }
         statsManager.setRelayNodesCount(availableRelayNodes.length)
 
         if (availableRelayNodes.length <= 1) {
@@ -103,8 +111,79 @@ class TorrentManager {
         return this.intervalId
     }
 
-}
+    async handlePiecesRequest(message, infoHash) {
+        //wait 20 seconds
 
+        try {
+            message = JSON.parse(message)
+        } catch (error) {
+            throw 'invalid json content message on piece request'
+        }
+
+        const { requestPieces, replyOnion } = message
+        console.log(`received pieces request for ${infoHash}`);
+        const torrentObject = this.appManager.getTorrent(infoHash)
+        let pieces = [] //{piece index, piece }
+        if (!torrentObject) throw 'piece request for unknown torrent' //handled in catch of calling fn
+
+        let _min = Math.min(requestPieces.length, global.maxPiecesPerMessage)
+        let pieceLen = torrentObject.parsedTorrent.pieceLength
+        for (let i = 0; i < _min; i++) {
+            let pieceIndex = requestPieces[i]
+            if (torrentObject.completed || torrentObject.piecesReceived[pieceIndex]) {
+                try {
+                    let buf = Buffer.alloc(pieceLen)
+                    fs.readSync(torrentObject.fd, buf, 0,
+                        isLastPiece(pieceIndex, torrentObject.parsedTorrent) ? torrentObject.parsedTorrent.lastPieceLength : pieceLen,
+                        pieceIndex * pieceLen)
+                    pieces.push({
+                        pieceIndex: pieceIndex,
+                        piece: buf.toString('hex')
+                    })
+                } catch (error) {
+                    console.log(`error reading piece`);
+                    continue
+                }
+            }
+        }
+        peerMessages.sendPieces(pieces, replyOnion)
+    }
+
+
+    async handlePiecesDownload(message, infoHash) {
+        let parsedMessage
+        try {
+            parsedMessage = JSON.parse(JSON.parse(message))
+        } catch (error) {
+            throw 'invalid json content message on piece download'
+        }
+        const { pieces } = parsedMessage
+        const torrentObject = this.appManager.getTorrent(infoHash)
+        if (!torrentObject) throw 'piece provided for unknown torrent' //handled in catch of calling fn
+        for (let i = 0; i < pieces.length; i++) {
+            const { pieceIndex, piece } = pieces[i]
+            if (torrentObject.completed || torrentObject.piecesReceived[pieceIndex])
+                continue
+            try {
+                let buf = Buffer.from(piece, 'hex')
+                let pieceSha1 = sha1.sync(buf)
+                if (pieceSha1 !== torrentObject.parsedTorrent.pieces[pieceIndex]) {
+                    console.log(`piece ${pieceIndex} sha1 mismatch`);
+                    continue
+                }
+                fs.writeSync(torrentObject.fd, buf, 0, buf.length, pieceIndex * torrentObject.parsedTorrent.pieceLength)
+                this.appManager.setPieceRecvd(infoHash, pieceIndex)
+            } catch (error) {
+                console.log(`error writing piece`);
+                continue
+            }
+        }
+
+    }
+
+
+
+}
 
 function getInstance() {
     if (inst === null) {
@@ -112,5 +191,4 @@ function getInstance() {
     }
     return inst;
 }
-
 module.exports = getInstance();

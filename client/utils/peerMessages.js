@@ -10,8 +10,12 @@ exports.sendPiecesRequest = async (piecesArr, ro, to) => {
         requestPieces: piecesArr,
         replyOnion: ro
     }
-
-    transitCell.externalPayload = cryptoApi.encrpytTextAes(JSON.stringify(message), to.encryptExternalPayload)
+    try {
+        transitCell.externalPayload = cryptoApi.encrpytTextAes(JSON.stringify(message), to.encryptExternalPayload)
+    } catch (error) {
+        console.log(`failed to encrypt message for pieces request`);
+        return
+    }
     transitCell.onion = to.onion
     transitCell.encryptedAesKey = to.encryptedAesKey
     try {
@@ -30,7 +34,12 @@ exports.sendPieces = async (piecesArr, to) => {
         pieces: piecesArr
     })
 
-    transitCell.externalPayload = cryptoApi.encrpytTextAes(JSON.stringify(message), to.encryptExternalPayload)
+    try {
+        transitCell.externalPayload = cryptoApi.encrpytTextAes(JSON.stringify(message), to.encryptExternalPayload)
+    } catch (error) {
+        console.log(`failed to encrypt message for pieces upload`);
+        return
+    }
     transitCell.onion = to.onion
     transitCell.encryptedAesKey = to.encryptedAesKey
     try {

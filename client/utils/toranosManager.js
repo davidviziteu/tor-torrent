@@ -78,7 +78,7 @@ class TorrentManager {
                     'pieces', //message for me
                     false,
                 );
-                peerMessages.sendROPieceRequest(requestPieces, ROforSeeder, replyOnionsArr[i])
+                peerMessages.sendPiecesRequest(requestPieces, ROforSeeder, replyOnionsArr[i])
             }
         }
 

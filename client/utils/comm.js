@@ -14,7 +14,6 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     for (const key of keysArray) {
         encryptedPayload = cryptoApi.decryptTextAes(encryptedPayload, key)
     }
-    encriptionKeysArrayMap.delete(mapKey)
     return encryptedPayload
 }
 /**

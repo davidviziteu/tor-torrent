@@ -65,20 +65,14 @@ class AppManager {
 
 
         try {
-            let preq = []
-            let precv = []
-            for (let i = 0; i < parsedTorrent.files.length; i++) {
-                preq.push(0) //se putea face cu new array si .fill() 
-                precv.push(0)
-            }
             this.data.torrents[parsedTorrent.infoHash] = {
                 hash: parsedTorrent.infoHash,
                 filesPath: downloadPath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
-                piecesRequested: preq,
-                piecesReceived: precv,
+                piecesRequested: new Array(parsedTorrent.pieces.length).fill(0),
+                piecesReceived: new Array(parsedTorrent.pieces.length).fill(0),
                 requestesSend: 0,
                 fd: fd
             }
@@ -238,7 +232,8 @@ class AppManager {
             }
         }
         //tracker has some delay after announce; 
-        await trackerApi.announceLeeching(torrentHashes)
+        if (torrentHashes.length > 0)
+            trackerApi.announceLeeching(torrentHashes)
     }
 
     getIncompleteTorrents() {

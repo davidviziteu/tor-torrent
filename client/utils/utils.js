@@ -17,7 +17,7 @@ exports.randomOfArray = (array, count = 30) => {
     }
     let dataToReturn = []
     for (let index = 0; index < count; index++) {
-        dataToReturn.push(array[this.randInt(0, array.length - 1)])
+        dataToReturn.push(array[this.randInt(array.length - 1)])
     }
     return dataToReturn
 }

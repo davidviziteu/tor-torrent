@@ -142,6 +142,7 @@ exports.announceLeeching = async (infoHashes) => {
         }
         reponse = JSON.parse(decryptTextAes(response.encryptedData, key))
         if (reponse.error) {
+            console.log(reponse.error);
             console.log(`announcing leecing, tracker error`);
             return undefined
         }

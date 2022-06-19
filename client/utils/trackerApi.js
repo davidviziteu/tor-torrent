@@ -29,10 +29,10 @@ exports.fetchHops = async () => {
         global.trackerError = undefined
         return JSON.parse(decryptTextAes(response.encryptedData, aesKey))
     } catch (error) {
-        global.trackerError = 'Tracker did not return relay list. Click to retry.'
+        global.trackerError = 'Tracker did not respond. Retrying... (Click to retry now)'
         global.progressLoaded = false
         console.log(error)
-        console.log(`error at fetching relay list from tracker`);
+        console.log(`error at fetching relay list from tracker. Tracker did not respond`);
     }
 }
 
@@ -92,7 +92,8 @@ exports.announceLeeching = async (infoHashes) => {
     let hops = await this.fetchHops()
 
     if (!hops || hops.length == 0) {
-        global.trackerError = 'no relay nodes available, retrying in 5 seconds...'
+        if (!global.trackerError)
+            global.trackerError = 'no relay nodes available, retrying in 5 seconds...'
         console.log(`no relay nodes available`);
         //wait 30 seconds and try again
         setTimeout(() => {

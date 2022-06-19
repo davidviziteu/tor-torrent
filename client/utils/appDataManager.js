@@ -221,7 +221,7 @@ class AppManager {
 
         if (toScrape.length > 0) {
             let leechers = await trackerApi.getLeechers(toScrape)
-            console.log('');
+            console.log('leechers fetched');
         }
 
         let torrentHashes = []
@@ -230,7 +230,7 @@ class AppManager {
                 torrentHashes.push(key)
             }
         }
-        //tracker has some delay after announce
+        //tracker has some delay after announce; 
         await trackerApi.announceLeeching(torrentHashes)
     }
 }

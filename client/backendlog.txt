@@ -1,366 +1,6 @@
 
 
-1655551569947
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-
-1655551858900
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-
-
-1655551908656
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-
-
-1655556046537
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-
-
-1655582454511
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-app manager: saved data
-removed torrent licenta david - torano - torrenting anonimously.pdf
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-app manager: saved data
-
-
-1655582974616
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-app manager: saved data
-
-
-1655583043885
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-
-
-1655583443365
-
-
-error at startRefreshingLoop
-ok init
-dev mode enabled, tracker addr localhost
-(node:14144) Warning: Accessing non-existent property 'saveProgress' of module exports inside circular dependency
-(Use `node --trace-warnings ...` to show where the warning was created)
-Listening on localhost:10000...
-C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:80
-        AppManager.saveProgress()
-                   ^
-
-TypeError: AppManager.saveProgress is not a function
-    at Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:80:20)
-    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:192:18)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:31:12)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Module.require (node:internal/modules/cjs/loader:1005:19)
-    at require (node:internal/modules/cjs/helpers:102:18)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:3:1)
-child process exited with code 1
-
-1655585176375
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:57:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:63:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:77:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-app manager: saved data
-app manager: saved data
-app manager: saved data
-
-
-1655585428429
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655585450760
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655585475702
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655586929083
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655587161339
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655587246215
+1655761288765
 
 
 ok init
@@ -368,1345 +8,388 @@ dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
 own public key refreshed
 announce as node ok
-tracker session time: 5 minutes
-refreshing every 5 minutes in 257590 ms
-app manager: saved data
-app manager: saved data
-app manager: saved data
-created torrent Calcul Numeric 2022.xlsx
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-
-
-1655587607874
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-own public key refreshed
-announce as node ok
-tracker session time: 5 minutes
-refreshing every 5 minutes in 196168 ms
-app manager: saved data
-app manager: saved data
-
-
-1655587752226
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-own public key refreshed
-announce as node ok
-tracker session time: 5 minutes
-refreshing every 5 minutes in 51691 ms
-
-
-1655587784915
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-own public key refreshed
-announce as node ok
-tracker session time: 5 minutes
-refreshing every 5 minutes in 19085 ms
-
-
-1655587845161
-
-
-C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:20
-        statsManager.setTrackerAddress(trackerAddress);
-                     ^
-
-TypeError: statsManager.setTrackerAddress is not a function
-    at AppManager.setTrackerAddress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:20:22)
-    at AppManager.loadProgress (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\appDataManager.js:197:18)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\init.js:31:12)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Module.require (node:internal/modules/cjs/loader:1005:19)
-    at require (node:internal/modules/cjs/helpers:102:18)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:3:1)
-child process exited with code 1
-1655587889641
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655587923191
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655588286188
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655588606113
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655590411068
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655590484518
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655594292762
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655643156962
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655645045315
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655645793714
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655645888021
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655649299815
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-
-
-1655652340951
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655652566131
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-1655652589091
-
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655652938088
-
-
-ok init
-dev mode enabled, tracker addr localhost
-Listening on localhost:10000...
-own public key refreshed
-announce as node ok
+scraped leechers ok
+leechers fetched
 tracker session time: 2 minutes
-refreshing every 2 minutes in 32867 ms
+refreshing every 2 minutes in 78128 ms
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
 app manager: saved data
-removed torrent Draft.Licenta.David.pdf
-app manager: saved data
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
 own public key refreshed
 announce as node ok
 refresh
 scraped leechers ok
 leechers fetched
-created torrent Draft.Licenta.David.pdf
-app manager: saved data
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
 scraped leechers ok
-leechers fetched
-app manager: saved data
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
+scraped leechers ok
+no leechers found at the moment for 7a9372a9f15a55b389a03f881911ed2e94837b48
 
 
-1655653282278
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655660320179
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655664003076
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655664432282
-
-
-ok init
-dev mode enabled, tracker addr localhost
-node:events:505
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: listen EADDRINUSE: address already in use :::10000
-    at Server.setupListenHandle [as _listen2] (node:net:1372:16)
-    at listenInCluster (node:net:1420:12)
-    at Server.listen (node:net:1508:7)
-    at Function.listen (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\express\lib\application.js:635:24)
-    at Object.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\client_server.js:22:9)
-    at Module._compile (node:internal/modules/cjs/loader:1105:14)
-    at Object.Module._extensions..js (node:internal/modules/cjs/loader:1159:10)
-    at Module.load (node:internal/modules/cjs/loader:981:32)
-    at Function.Module._load (node:internal/modules/cjs/loader:822:12)
-    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)
-Emitted 'error' event on Server instance at:
-    at emitErrorNT (node:net:1399:8)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  code: 'EADDRINUSE',
-  errno: -4091,
-  syscall: 'listen',
-  address: '::',
-  port: 10000
-}
-child process exited with code 1
-
-1655695709363
+1655761400084
 
 
 ok init
 dev mode enabled, tracker addr localhost
 Listening on localhost:10000...
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
-FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
-    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
-    at ClientRequest.emit (node:events:527:28)
-    at Socket.socketErrorListener (node:_http_client:454:9)
-    at Socket.emit (node:events:527:28)
-    at emitErrorNT (node:internal/streams/destroy:157:8)
-    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
-    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
-  type: 'system',
-  errno: 'ECONNREFUSED',
-  code: 'ECONNREFUSED'
-}
-error at fetching public key from tracker
-own public key refreshed
-TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
-    at new NodeError (node:internal/errors:372:5)
-    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
-    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
-    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
-    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
-    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
-    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
-  code: 'ERR_INVALID_ARG_TYPE'
-}
-error at announce
-trackerAddress or pb key is not defined. cannot get refresh period
-error at startRefreshingLoop
 own public key refreshed
 announce as node ok
+scraped leechers ok
+leechers fetched
 tracker session time: 2 minutes
-refreshing every 2 minutes in 116957 ms
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
-own public key refreshed
-announce as node ok
-refresh
-app manager: saved data
-app manager: saved data
+refreshing every 2 minutes in 86748 ms
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed S!4I@
+reponse: failed %6Jfg
+reponse: failed B_?8<
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed jXG[I
+reponse: failed (|;;V
+reponse: failed 6NmD@
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed +>lN^
+reponse: failed Rxdbn
+reponse: failed #+]<d
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed Mtlt1
+reponse: failed O&ISg
+reponse: failed Q3bY2
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed B%O-3
+reponse: failed XvUSA
+reponse: failed mda!N
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed mkNCB
+reponse: failed g9kvY
+reponse: failed 1TkI=
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed @u-?{
+reponse: failed DCpN]
+reponse: failed AiA7{
+app manager: saved data
+scraped leechers ok
+/relay
+/relay
+/relay
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+Error: error:04099079:rsa routines:RSA_padding_check_PKCS1_OAEP_mgf1:oaep decoding error
+    at Object.privateDecrypt (node:internal/crypto/cipher:79:12)
+    at Object.exports.decrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:21:34)
+    at routeOnion (C:\Users\David\OneDrive\facultate\tor-torrent\client\routes\relayNode.js:29:28)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  library: 'rsa routines',
+  function: 'RSA_padding_check_PKCS1_OAEP_mgf1',
+  reason: 'oaep decoding error',
+  code: 'ERR_OSSL_RSA_OAEP_DECODING_ERROR'
+}
+error while decryptiong aes key
+reponse: failed Y4T2A
+reponse: failed Wm%kc
+reponse: failed s-v#E
+
+1655761474445
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+scraped leechers ok
+leechers fetched
+tracker session time: 2 minutes
+refreshing every 2 minutes in 12442 ms

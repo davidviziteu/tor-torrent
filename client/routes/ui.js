@@ -101,6 +101,7 @@ router.get('/load', async (req, res) => {
             completed: value.completed,
             piecesReceived: value.completed ? undefined : value.piecesReceived.reduce((acc, cur) => acc + (cur ? 1 : 0), 0),
             requestesSend: value.completed ? undefined : value.requestesSend,
+            size: value.parsedTorrent.length,
             parsedTorrent: {
                 length: value.parsedTorrent.pieces.length,
                 pieceLength: value.parsedTorrent.pieceLength,

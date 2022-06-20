@@ -16,7 +16,12 @@ export default function TorrentItem(props) {
             return
         }
         let parsedTor = torrentItem.parsedTorrent;
-        setSize(prettyBytes(parsedTor.length));
+        try {
+            setSize(prettyBytes(torrentItem.size));
+        } catch (error) {
+            setSize('-');
+
+        }
         setName(parsedTor.name);
         let percent
         if (torrentItem.completed) {

@@ -1,10 +1,12 @@
 const models = require('../models')
 const cryptoApi = require('./cryptoApi')
 const fetch = require(`node-fetch`)
-
+const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
 
 let encriptionKeysArrayMap = new Map() //cache for payload encryption keys
-
+eventEmitter.on(trackerRefreshSessionEv, () => {
+    encriptionKeysArrayMap = new Map()
+})
 exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     let keysArray = encriptionKeysArrayMap.get(mapKey)
     if (!keysArray)

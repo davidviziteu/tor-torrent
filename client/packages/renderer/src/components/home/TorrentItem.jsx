@@ -30,7 +30,7 @@ export default function TorrentItem(props) {
         }
         else {
             let pcsRecv = torrentItem.piecesReceived
-            setCurrentRatio(`${torrentItem.requestesSend > 0 ? pcsRecv / torrentItem.requestesSend : '-'}`)
+            setCurrentRatio(`${torrentItem.requestsSend > 0 ? (torrentItem.requestsSend / pcsRecv).toFixed(2) : '-'}`)
             percent = (pcsRecv / torrentItem.parsedTorrent.length) * 100;
         }
         setCurrentProgress(percent.toFixed(2))
@@ -48,13 +48,15 @@ export default function TorrentItem(props) {
                 <FileSvg setDeleteSvg={setDeleteSvg} getFileSvg={getFileSvg} getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} />
                 <DeleteSvg getDeleteSvg={getDeleteSvg} setFileSvg={setFileSvg} setDeleteSvg={setDeleteSvg} delF={removeTorrent} delFArg={torrentHash} />
                     <div class="file-data">
-                    <div class="file-name-div" onDblClick={
-                        () => {
+                    <div class="file-name-div" id={torrentHash}  onDblClick={
+                        (e) => {
                             console.log('name clicked');
-                            window.data.torrents[torrentHash].parsedTorrent.files.forEach(file => {
-                                console.log(file.name);
-                            }
-                            )
+
+                            let filepath = window.data.torrents[e.target.id].path
+                            //remove the file from the path
+                            filepath = filepath.substring(0, filepath.lastIndexOf('/'))
+                            //@ts-ignore
+                            window.shell.openPath(filepath)
                         }
                     }>{name()}</div>
                     <div class="file-size-div">{size()}</div>
@@ -71,7 +73,7 @@ export default function TorrentItem(props) {
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </span>
-            <span>{currentRatio()}</span>
+            <span style="font-size: small">{currentRatio()}</span>
         </div>
     );
 }

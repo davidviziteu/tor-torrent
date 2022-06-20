@@ -17,7 +17,7 @@ interface ITorrentListItem{
   parsedTorrent: IParsedTorrent;
   piecesRequested: boolean[];
   piecesRecieved: boolean[];
-  requestesSend: number
+  requestsSend: number
 }
 
 interface IBackendDataOject {

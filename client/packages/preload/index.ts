@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, shell } from 'electron'
 import { domReady } from './utils'
 import { useLoading } from './loading'
 import { spawn } from 'child_process'
@@ -15,6 +15,7 @@ const { appendLoading, removeLoading } = useLoading()
 // --------- Expose some API to the Renderer process. ---------
 contextBridge.exposeInMainWorld('cwd', process.cwd())
 contextBridge.exposeInMainWorld('fs', fs)
+contextBridge.exposeInMainWorld('shell', shell)
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
 contextBridge.exposeInMainWorld('_backend_port', 10000)
 contextBridge.exposeInMainWorld('spawn', spawn)

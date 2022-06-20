@@ -81,7 +81,9 @@ class TorrentManager {
                     'pieces', //message for me
                     false,
                 );
-                peerMessages.sendPiecesRequest(requestPieces, ROforSeeder, replyOnionsArr[i])
+                let res = peerMessages.sendPiecesRequest(requestPieces, ROforSeeder, replyOnionsArr[i])
+                if (res)
+                    this.appManager.incrementPiecesReq(infoHash, 1)
             }
         }
 

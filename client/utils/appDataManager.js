@@ -71,9 +71,9 @@ class AppManager {
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
-                piecesRequested: new Array(parsedTorrent.pieces.length).fill(0),
+                piecesRequested: 0,
                 piecesReceived: new Array(parsedTorrent.pieces.length).fill(0),
-                requestesSend: 0,
+                requestsSend: 0,
                 fd: fd
             }
             trackerApi.announceLeeching([parsedTorrent.infoHash])
@@ -110,7 +110,7 @@ class AppManager {
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: true,
-                requestesSend: 0,
+                requestsSend: 0,
                 fd: fd
             }
             trackerApi.announceLeeching([parsedTorrent.infoHash])
@@ -250,7 +250,6 @@ class AppManager {
         if (this.data.torrents[infoHash].piecesReceived.every(x => x)) {
             this.data.torrents[infoHash].completed = true
             delete this.data.torrents[infoHash].piecesReceived
-            delete this.data.torrents[infoHash].piecesRequested
             try {
                 fs.closeSync(this.data.torrents[infoHash].fd)
                 this.data.torrents[infoHash].fd = fs.openSync(this.data.torrents[infoHash].filesPath, 'r')
@@ -260,6 +259,12 @@ class AppManager {
             }
         }
         this.saveProgress()
+    }
+
+    incrementPiecesReq(infoHash, count) {
+        if (!this.data.torrents[infoHash])
+            return
+        this.data.torrents[infoHash].piecesRequested += count
     }
 }
 

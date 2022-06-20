@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
 const { announceAsNode, getTrackerPublicKey } = require('./trackerApi')
 const utils = require(`./cryptoApi`)
-
+const statsManager = require('./appStatsManager')
 
 const getRefreshPeriod = async () => {
     if (!trackerAddress || !global.trackerPbKey) {
@@ -87,6 +87,7 @@ exports.startRefreshingLoop = async () => {
         await refreshProcedure()
         let refreshObject = await getRefreshPeriod()
         console.log(`tracker session time: ${refreshObject.refreshPeriodMs / 60000} minutes`);
+        statsManager.setTrackerSession(refreshObject.refreshPeriodMs / 60000)
         if (refreshObject.timeLeftMs < 3000) {
             await utils.sleep(refreshObject.timeLeftMs + 100)
             refreshObject = await getRefreshPeriod()

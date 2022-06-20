@@ -1,0 +1,128 @@
+
+\subsubsection*{}
+Each new Torano client that wants to participate in the network will first have to register itself periodically as a relaying node with it's freshly generated public key and it's publicly opened port with a HTTP POST request to the \verb|/announce/node| route of the tracker. The body of the request must include the required data, encrypted with the tracker's public key. In our implementation, we transmit the request's data as a JSON object. This announce must be made without other intermediary nodes, as the tracker will extract from the request's data the endpoint's IP address.
+
+For a Torano client to announce itself periodically as part of a swarm, it must make a HTTP POST request to the \verb|/announce| route of the tracker, containing a body with the following data, encrypted with the tracker's public key:
+\begin{itemize}[leftmargin=1.5cm,labelindent=0cm]
+    \item a list of reply onions 
+    \item the SHA1 hash of the corresponding ".torano" file
+\end{itemize}
+
+\subsubsection*{Scraping the tracker}
+To scrape the tracker for any information (swarms or relay nodes or update time) a Torano client must do it securely, by encrypting any data with it's public key. Any scraping request is possible in practice to be done anonymously, but an external authority may hold the exit node responsible for excessively engaging with the tracker. To prevent this kind of abusive behaviour, we have taken the decision that a peer must contact the tracker by itself in order to obtain data from it.
+
+For a Torano client to scrape relaying endpoints, it must send an HTTP POST request to the \verb|/scrape/relay| route of the tracker, with a body encrypted with the tracker's public key that contains a key to encrypt the response data offered by the tracker. In our implementation, the tracker will return a list of up to 30 relay endpoints of the network. 
+
+For a Torano client to scrape the leechers, it must make a HTTP POST request to the \verb|/scrape| route of the tracker, containing a body with the following data, encrypted with the tracker's public key:
+\begin{itemize}[leftmargin=1.5cm,labelindent=0cm]
+    \item a key to encrypt the response data 
+    \item the SHA1 hash of the corresponding file(s)
+\end{itemize}
+
+
+\subsection{The client}
+Each Torano client must generate a pair of symmetric keys before performing and announce, and must know the location of the tracker. 
+
+For the core functionalities, each Torano client application is a HTTP server that publicly exposes at an available port the following routes:
+
+\begin{itemize}[leftmargin=1.5cm,labelindent=0cm]
+    \item POST /relay - the endpoint that handles the relaying functionality
+    \item GET /public-key - an endpoint that exposes the public key of the client
+\end{itemize}
+
+In order to integrate the user interface with the core functionalities, in our application we added more routes that are accessible only locally. As these are not part of the protocol specification, they will not be explicitly mentioned.
+
+As the thesis specifies, a client application must act as a relay node that will unpack a received onion. If the content of the onion is another onion, the client should pass it down to the next node of it's circuit. Otherwise, the message of that onion should be read and interpreted accordingly.
+
+% \subsection{The web server}
+% users can access it to download ".torano" files.
+
+
+\section{Tracker interaction}
+
+
+\section{Onions and reply onions} \label{section:cells:implementation}
+
+In all the following Algorithms, where we used the $ Encr $ or $ Decr $ notations, we did not intend to specify a cryptographic system, since any system that provides encryption and decryption of a message is supported. In our implementation, we selected the 'aes-256-cbc' asymmetric algorithm. 
+
+
+
+
+To build an onion, Alice must have:
+
+\begin{itemize}[leftmargin=1.5cm,labelindent=0cm]
+    \item a list of active volunteers (their addresses and public keys) that are willing to relay her onion 
+    \item a communication partner - Bob (B) - and his address and public key
+    \item a message $M$ to send
+\end{itemize}
+
+
+
+An $ onions $'s structure must have following data:
+\begin{itemize}[leftmargin=1.5cm,labelindent=0cm]
+    \item $ nextNode $ - must contain relevant data for relaying the next onion to the next node in the circuit. Can be empty if the onion reached Alice's communication partner, Bob.
+    \item $ message $ - encrypted or not. The message can be unprotected when the onion reaches the destination node (Bob or a relay node).  
+    \item $ encryptExternalPayload $ - an asymmetric key to be used to encrypt the external payload (this field may be empty)
+    \item $ nextOnion $ - the next encrypted onion; the data that must be forwarded to the next node in the circuit. Can be empty if the onion reached Alice's communication partner, Bob.
+\end{itemize}
+
+\vspace{5mm} %5mm vertical space
+
+A cell is composed of:
+\begin{itemize}[leftmargin=1.5cm,labelindent=0cm]
+    \item $encryptedOnion$ - Example: $SymEncr_{Bob}(cell)$
+    \item $externalPayload$ - may be empty or random
+\end{itemize}
+
+\vspace{5mm} %5mm vertical space
+
+The steps of building a reply onion from Alice's perspective are presented in the Algorithm \ref{alg:create:onion} from the Appendix section of this thesis.
+
+% \begin{algorithm2e}
+% % \caption{An algorithm to build an onion}\label{alg:build-cell}
+
+% \end{algorithm2e}
+
+
+\subsubsection*{Reply onion}
+
+To build a reply onion, Alice must have a list of active volunteers (their addresses and public keys) that are willing to relay an onion.
+
+The pseudo-code of building a reply onion from Alice's perspective is presented in the Algorithm \ref{alg:create:reply:onion} from the Appendix section of this thesis.
+
+The $ currentOnion $ variable is now ready to be used as a reply onion. The $ next $ variable contains the first node of the reply circuit. The $ encryptExternalPayload $ variable contains a key that the starter node of the reply circuit must use to encrypt the $ externalPayload $ of the onion it is ought to relay. {Alice must store the $ arrayOfKeysId $ variable value and it's corresponding $ arrayOfKeys $ to be able to decrypt a reply onion's external payload.} 
+
+\subsubsection*{Reading messages and relying onions}
+
+To reply to Alice using the reply onion provided by her, Bob must use the Algorithm \ref{alg:reply:to:alice}. Here, Bob's privacy is at risk, as Alice's reply onion might be not well-intended. To protect himself, he must designate a relay node of the network to start the reply circuit, as in Algorithm \ref{alg:proxi:start:reply}.
+
+Lastly, the pseudo-code that a node (both Alice and Bob) must implement in order to relay onions and to be able to communicate is written in Algorithm \ref{alg:relay:onion} from the Appendix section of this thesis. In the "if" block at the line \ref{alg:line:reply:onion} it is shown how can Alice read the response Bob sent her.
+
+In our implementation, any variable that can be referred to as a 'structure' is a dictionary with each field named as presented. \label{algs:use:JSONs:implementation}
+
+\section{The metainfo file}
+The metainfo file helps peers identify and validate the authenticity of a torrent and it's pieces.
+
+Presently, it is a file with the ".torano" extension containing a dictionary. The metainfo file should be created, interpreted and contains information just as in the BitTorrent protocol implementations. The exact content structure of a ".torrent" file can be found in the BEP2 \cite{bittorrent}. The key information this file contains is:
+\begin{itemize}
+    \item the name of the torrent
+    \item the size of the files
+    \item the number of pieces the files are split into
+    \item the piece size
+    \item the SHA1 hash of each piece 
+\end{itemize}
+
+A different metainfo file structure or encoding for the Torano protocol is beyond the scope of this thesis, and it might not be needed, as existing ".torrent" files have been used in the provided implementation, with the mention that the original tracker URL in the "announce" field has been changed to the URL of our custom tracker and the extension has been changed to ".torano". 
+
+Besides the "announce" field, a ".torano" file can contain other relevant fields. For example, if future implementation will commit to a different tracker entity design, obviously, the metainfo file should contain their location in a field that describes their use-case. Splitting the metainfo file into multiple files will inevitable abrupt the learning curve of the protocol, making the \ref{adoption} goal harder to be achieved. 
+
+\section{Peer to peer communication protocol}
+The BitTorrent peer to peer communication method is using the TCP/IP protocol, and it firstly performs a handshake process between the peers and then the exchange of pieces begins. As our anonymous communication design is comparable to the UDP/IP protocol, a simplified communication method is needed. For a leecher to request pieces of a file from another peer, it must send a message containing the torrent-hash, the list of needed pieces and a reply onion (used by the uploader to respond). The uploader will send the pieces it is willing to, in one or more messages. 
+
+Theoretically, a leecher can ask for the whole torrent files from a seeder, but it is impractical for him, as the download speed will decrease. The downloading client must individually optimize it's connections for the maximum download speed, and the uploading one must individually manage the maximum number of pieces offered in a response message, to prevent an observer from tracking any abnormal sized onion.  
+% During the research phase of the thesis, we found out that each available BitTorrent client implements it's own communication pattern related to this aspect. For example, a µTorrent client might not be able to upload to or download from a Deluge client. Due to the large number of the users of various BitTorrent clients, this detail does not affect the users in any way. 
+
+% To delay the 
+
+\section{Creating and publishing}
+Publishing a new group of files only requires the creation of a ".torano" file and an announce operation for a given file stored locally. To do so, in the Torano client, a user can just use the "publish" button from the left bar and chose the location of the file(s) he wants to share. The client will generate a corresponding ".torano" file and will ask the user where to save it, so it can be distributed to other interested peers.

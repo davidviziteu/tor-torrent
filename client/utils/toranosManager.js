@@ -8,7 +8,6 @@ const peerMessages = require('./peerMessages')
 const sha1 = require('simple-sha1')
 let inst = null
 
-
 function _getIndexesOfNotReceivedPieces(piecesReceived) {
     let indexes = []
     for (let i = 0; i < piecesReceived.length; i++) {
@@ -18,11 +17,6 @@ function _getIndexesOfNotReceivedPieces(piecesReceived) {
     }
     return indexes
 }
-
-
-
-
-
 
 class TorrentManager {
     constructor() {
@@ -109,13 +103,11 @@ class TorrentManager {
         if (!this.intervalId)
             this.intervalId = setInterval(() => {
                 getInstance().loopingFunction()
-            }, 10000);
+            }, 8000); //8 seconds to not uselessly overload the network
         return this.intervalId
     }
 
     async handlePiecesRequest(message, infoHash) {
-        //wait 20 seconds
-
         try {
             message = JSON.parse(message)
         } catch (error) {

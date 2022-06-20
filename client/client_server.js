@@ -7,7 +7,6 @@ const cors = require('cors');
 const devRouter = require('./routes/dev')
 const uiRouter = require('./routes/ui')
 const relayRouter = require('./routes/relayNode')
-// app.use(cors())
 app.use(express.json({ limit: '50mb' }));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

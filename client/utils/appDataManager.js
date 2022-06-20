@@ -104,8 +104,6 @@ class AppManager {
 
         this.data.trackerAddress = parsedTorrent.announce[0]
         try {
-            //copy metainfo file to "."
-
             this.data.torrents[parsedTorrent.infoHash] = {
                 infoHash: parsedTorrent.infoHash,
                 filesPath: filesPath,
@@ -218,7 +216,6 @@ class AppManager {
         let toScrape = this.getIncompleteTorrentsHashes()
 
         //begin procedure 
-
         if (toScrape.length > 0) {
             let leechers = await trackerApi.getLeechers(toScrape)
             console.log('leechers fetched');
@@ -254,6 +251,13 @@ class AppManager {
             this.data.torrents[infoHash].completed = true
             delete this.data.torrents[infoHash].piecesReceived
             delete this.data.torrents[infoHash].piecesRequested
+            try {
+                fs.closeSync(this.data.torrents[infoHash].fd)
+                this.data.torrents[infoHash].fd = fs.openSync(this.data.torrents[infoHash].filesPath, 'r')
+            } catch (error) {
+                console.log(error);
+                log('Error opening the files as read only. path: ' + this.data.torrents[infoHash].filesPath);
+            }
         }
         this.saveProgress()
     }

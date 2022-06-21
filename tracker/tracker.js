@@ -41,7 +41,6 @@ router.get('/public-key', (req, res) => {
 
 //ok
 router.post('/announce/relay', (req, res) => {
-    console.log('announce relay')
     let data = cryptoApi.decryptValidateBody(req, res, models.relayNodeAnnouceSchema)
     if (!data || !data.key) {
         console.log(`/announce/relay request has no data or key decrpytion failed`);
@@ -61,7 +60,7 @@ router.post('/announce/relay', (req, res) => {
     cryptoApi.sendDataEncrypted(res, data.key, {
         publicIp: data.ip
     })
-    console.log(`\trelay added. port: ${data.port}`)
+    console.log(`relay added. ${data.ip} : ${data.port}`)
 })
 
 let replyOnions = 0
@@ -85,7 +84,7 @@ router.post('/announce', (req, res) => {
             else {
                 global.leechersMap.set(torrent.infoHash, [...torrent.replyOnions])
             }
-            console.log('\tannounce torrent added.')
+            console.log(`[${torrent.infoHash}] info hash announce.`)
             replyOnions += torrent.replyOnions.length
             return cryptoApi.sendDataEncrypted(res, data.key, {
                 error: null
@@ -110,7 +109,7 @@ router.post('/scrape/relay', (req, res) => {
 })
 
 
-router.get('/scrape/relay/count', (req, res) => { //DEBUG
+router.get('/scrape/relay/count', (req, res) => { //statistics, not used in application
     const relayArr = Object.values(global.relaysMap)
     return res.status(200).json({
         relayNodes: relayArr.length
@@ -126,7 +125,6 @@ router.post('/scrape', (req, res) => {
         return
     }
 
-    //data is an array of infohashes
     let dataToReturn = {}
     for (let index = 0; index < data.length; index++) {
         const infoHash = data[index];

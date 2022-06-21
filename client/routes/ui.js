@@ -86,6 +86,7 @@ router.post(`/create-torrent`, (req, res) => {
 
 
 router.get('/exit', async (req, res) => {
+    AppManager.saveProgress()
     process.exit(0)
 })
 

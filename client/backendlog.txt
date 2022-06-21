@@ -3563,3 +3563,490 @@ error at fetching public key from tracker
 trackerAddress or pb key is not defined. cannot get refresh period
 error at startRefreshingLoop
 app manager: saved data
+
+
+1655827761881
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 43343 ms
+
+
+1655838012809
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 87302 ms
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+created torrent Torano Client setup.zip
+app manager: saved data
+/relay
+/relay
+/relay
+return msg 3m 12s 703ms
+return msg 3m 12s 704ms
+return msg 3m 12s 705ms
+app manager: saved data
+[10000][id: 1] got onion to fwd to localhost:10000
+[10000][id: 2] got onion to fwd to localhost:10000
+[10000][id: 3] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 13s 221ms
+return msg 3m 13s 222ms
+return msg 3m 13s 223ms
+[10000][id: 4] got onion to fwd to localhost:10000
+[10000][id: 5] got onion to fwd to localhost:10000
+[10000][id: 6] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 13s 728ms
+return msg 3m 13s 729ms
+return msg 3m 13s 730ms
+[10000][id: 7] got onion to fwd to localhost:10000
+[10000][id: 8] got onion to fwd to localhost:10000
+[10000][id: 9] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838172815
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172816
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172817
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[10000][id: 7] onion fwd reponse message: ack mP.?i
+[10000][id: 8] onion fwd reponse message: ack lN15/
+[10000][id: 9] onion fwd reponse message: ack o&/*r
+[10000][id: 4] onion fwd reponse message: ack mP.?i
+[10000][id: 5] onion fwd reponse message: ack lN15/
+[10000][id: 6] onion fwd reponse message: ack o&/*r
+[10000][id: 1] onion fwd reponse message: ack mP.?i
+[10000][id: 2] onion fwd reponse message: ack lN15/
+[10000][id: 3] onion fwd reponse message: ack o&/*r
+/relay
+/relay
+/relay
+return msg 3m 20s 687ms
+return msg 3m 20s 688ms
+return msg 3m 20s 689ms
+[10000][id: 13] got onion to fwd to localhost:10000
+[10000][id: 14] got onion to fwd to localhost:10000
+[10000][id: 15] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 21s 199ms
+return msg 3m 21s 200ms
+return msg 3m 21s 201ms
+[10000][id: 16] got onion to fwd to localhost:10000
+[10000][id: 17] got onion to fwd to localhost:10000
+[10000][id: 18] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 21s 705ms
+return msg 3m 21s 706ms
+return msg 3m 21s 707ms
+[10000][id: 19] got onion to fwd to localhost:10000
+[10000][id: 20] got onion to fwd to localhost:10000
+[10000][id: 21] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838172815
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172816
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172817
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[10000][id: 19] onion fwd reponse message: ack k-Mcu
+[10000][id: 20] onion fwd reponse message: ack MkpNw
+[10000][id: 21] onion fwd reponse message: ack 8gM5,
+[10000][id: 16] onion fwd reponse message: ack k-Mcu
+[10000][id: 17] onion fwd reponse message: ack MkpNw
+[10000][id: 18] onion fwd reponse message: ack 8gM5,
+[10000][id: 13] onion fwd reponse message: ack k-Mcu
+[10000][id: 14] onion fwd reponse message: ack MkpNw
+[10000][id: 15] onion fwd reponse message: ack 8gM5,
+/relay
+/relay
+/relay
+return msg 3m 28s 699ms
+return msg 3m 28s 700ms
+return msg 3m 28s 701ms
+[10000][id: 25] got onion to fwd to localhost:10000
+[10000][id: 26] got onion to fwd to localhost:10000
+[10000][id: 27] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 29s 213ms
+return msg 3m 29s 214ms
+return msg 3m 29s 215ms
+[10000][id: 28] got onion to fwd to localhost:10000
+[10000][id: 29] got onion to fwd to localhost:10000
+[10000][id: 30] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 29s 734ms
+return msg 3m 29s 735ms
+return msg 3m 29s 736ms
+[10000][id: 31] got onion to fwd to localhost:10000
+[10000][id: 32] got onion to fwd to localhost:10000
+[10000][id: 33] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838172815
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172816
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172817
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[10000][id: 31] onion fwd reponse message: ack klpE0
+[10000][id: 32] onion fwd reponse message: ack ?PEKJ
+[10000][id: 33] onion fwd reponse message: ack pDh9b
+[10000][id: 28] onion fwd reponse message: ack klpE0
+[10000][id: 29] onion fwd reponse message: ack ?PEKJ
+[10000][id: 30] onion fwd reponse message: ack pDh9b
+[10000][id: 25] onion fwd reponse message: ack klpE0
+[10000][id: 26] onion fwd reponse message: ack ?PEKJ
+[10000][id: 27] onion fwd reponse message: ack pDh9b
+/relay
+/relay
+/relay
+return msg 3m 36s 704ms
+return msg 3m 36s 705ms
+return msg 3m 36s 705ms
+[10000][id: 37] got onion to fwd to localhost:10000
+[10000][id: 38] got onion to fwd to localhost:10000
+[10000][id: 39] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 37s 216ms
+return msg 3m 37s 217ms
+return msg 3m 37s 218ms
+[10000][id: 40] got onion to fwd to localhost:10000
+[10000][id: 41] got onion to fwd to localhost:10000
+[10000][id: 42] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 3m 37s 734ms
+return msg 3m 37s 735ms
+return msg 3m 37s 736ms
+[10000][id: 43] got onion to fwd to localhost:10000
+[10000][id: 44] got onion to fwd to localhost:10000
+[10000][id: 45] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838172815
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172816
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838172817
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[10000][id: 43] onion fwd reponse message: ack &gRuy
+[10000][id: 44] onion fwd reponse message: ack q&r3K
+[10000][id: 45] onion fwd reponse message: ack @BE){
+[10000][id: 40] onion fwd reponse message: ack &gRuy
+[10000][id: 41] onion fwd reponse message: ack q&r3K
+[10000][id: 42] onion fwd reponse message: ack @BE){
+[10000][id: 37] onion fwd reponse message: ack &gRuy
+[10000][id: 38] onion fwd reponse message: ack q&r3K
+[10000][id: 39] onion fwd reponse message: ack @BE){
+own public key refreshed
+announce as node ok
+refresh
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838220623
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838220624
+onion discarded
+[RESPONSE] reply onion for key: 1655838220624
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838220624
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838220623
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838220624
+onion discarded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838220624
+onion discarded
+[RESPONSE] reply onion for key: 1655838220624
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838220623
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+app manager: saved data
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+app manager: saved data
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838580642
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838580643
+onion discarded
+[RESPONSE] reply onion for key: 1655838580643
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+own public key refreshed
+announce as node ok
+refresh
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838700690
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700691
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700692
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838700690
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700691
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700692
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838700690
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700691
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700692
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655838700692
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700690
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838700691
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+app manager: saved data
+
+1655838747268
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 72876 ms
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+onion discarded
+onion discarded
+onion discarded
+[RESPONSE] reply onion for key: 1655838747667
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838747668
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838747669
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+onion discarded
+onion discarded
+onion discarded
+[RESPONSE] reply onion for key: 1655838747667
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838747668
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded
+[RESPONSE] reply onion for key: 1655838747669
+received pieces request for 7bfdef874e1d09d56759c74ee457834249931f12
+pieces uploaded

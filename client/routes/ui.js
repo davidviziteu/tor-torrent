@@ -3,6 +3,7 @@ const createTorrent = require('create-torrent')
 const AppManager = require('../utils/appDataManager');
 const AppStatsManager = require('../utils/appStatsManager');
 const { StatusCodes } = require('http-status-codes')
+const { startRefreshingLoop } = require('../utils/routines')
 const fs = require('fs')
 const cors = require('cors');
 // router.use(cors())
@@ -92,6 +93,7 @@ router.get('/exit', async (req, res) => {
 
 router.get('/load', async (req, res) => {
     const data = AppManager.loadProgress()
+    startRefreshingLoop()
     //iterate values of data object
     let torrentsObject = {
     }

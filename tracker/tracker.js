@@ -21,7 +21,10 @@ app.use((req, res, next) => {
 //ok
 router.post('/session', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res, null, true)
-    if (!data) return
+    if (!data || !data.key) {
+        console.log(`/session request has no data or key decrpytion failed`);
+        return
+    }
 
     cryptoApi.sendDataEncrypted(res, data.key, {
         timeLeftMs: (global.lastSessionRefresh + global.sessionDurationMinutes) - Date.now(),
@@ -40,7 +43,10 @@ router.get('/public-key', (req, res) => {
 router.post('/announce/relay', (req, res) => {
     console.log('announce relay')
     let data = cryptoApi.decryptValidateBody(req, res, models.relayNodeAnnouceSchema)
-    if (!data) return
+    if (!data || !data.key) {
+        console.log(`/announce/relay request has no data or key decrpytion failed`);
+        return
+    }
 
     if (req.isLocalIp)
         data.ip = `localhost`
@@ -61,9 +67,11 @@ router.post('/announce/relay', (req, res) => {
 let replyOnions = 0
 //ok
 router.post('/announce', (req, res) => {
-    console.log('announce torrent')
     let data = cryptoApi.decryptValidateBody(req, res, models.leecherAnnounceSchema)
-    if (!data) return
+    if (!data || !data.key) {
+        console.log(`/announce request has no data or key decrpytion failed`);
+        return
+    }
     for (let i = 0; i < data.length; i++) {
         let torrent = data[i]
         try {
@@ -92,14 +100,17 @@ router.post('/announce', (req, res) => {
 //ok
 router.post('/scrape/relay', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res, null, true)
-    if (!data) return
+    if (!data || !data.key) {
+        console.log(`/scrape/relay request has no data or key decrpytion failed`);
+        return
+    }
     const relayArr = Object.values(global.relaysMap)
     let dataToReturn = utils.randomOfArray(relayArr, global.maxRelayNodesReturned)
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
 
 
-router.get('/scrape/relay/count', (req, res) => {
+router.get('/scrape/relay/count', (req, res) => { //DEBUG
     const relayArr = Object.values(global.relaysMap)
     return res.status(200).json({
         relayNodes: relayArr.length
@@ -110,7 +121,10 @@ router.get('/scrape/relay/count', (req, res) => {
 //ok
 router.post('/scrape', (req, res) => {
     let data = cryptoApi.decryptValidateBody(req, res, models.leecherRequestSchema)
-    if (!data) return
+    if (!data || !data.key) {
+        console.log(`/scrape request has no data or key decrpytion failed`);
+        return
+    }
 
     //data is an array of infohashes
     let dataToReturn = {}
@@ -127,7 +141,7 @@ router.post('/scrape', (req, res) => {
     cryptoApi.sendDataEncrypted(res, data.key, dataToReturn)
 })
 
-router.get('/scrape/count', (req, res) => {
+router.get('/scrape/count', (req, res) => { //DEBUG
     return res.status(200).json({
         replyOnions: replyOnions
     })

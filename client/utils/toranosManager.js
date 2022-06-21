@@ -46,6 +46,8 @@ class TorrentManager {
         }
 
         let leechers = await trackerApi.getLeechers(toScrape)
+        if (!leechers) return
+
         let availableRelayNodes = await trackerApi.fetchHops()
         if (!availableRelayNodes) {
             console.log('no relay nodes available, trying again later');

@@ -2922,3 +2922,644 @@ refresh
 app manager: saved data
 app manager: saved data
 removed torrent Draft.Licenta.David.pdf
+
+
+1655823226780
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+app manager: saved data
+app manager: saved data
+announce as node ok
+error tracker didnt return refresh period
+error: [object Object]
+error tracker didnt return refresh period
+error at fetching refresh period from tracker
+error at startRefreshingLoop
+app manager: saved data
+app manager: saved data
+app manager: saved data
+
+1655823605367
+
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+
+
+1655823659528
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 119941 ms
+app manager: saved data
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+app manager: saved data
+
+
+1655823923693
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+
+
+1655824512432
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+TypeError [ERR_INVALID_ARG_TYPE]: The "key.key" property must be of type string or an instance of ArrayBuffer, Buffer, TypedArray, DataView, KeyObject, or CryptoKey. Received undefined
+    at new NodeError (node:internal/errors:372:5)
+    at prepareAsymmetricKey (node:internal/crypto/keys:538:13)
+    at preparePublicOrPrivateKey (node:internal/crypto/keys:562:10)
+    at Object.publicEncrypt (node:internal/crypto/cipher:70:9)
+    at exports.encrpytTextRsa (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\cryptoApi.js:8:34)
+    at exports.announceAsNode (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\trackerApi.js:60:35)
+    at refreshProcedure (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:66:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Object.exports.startRefreshingLoop (C:\Users\David\OneDrive\facultate\tor-torrent\client\utils\routines.js:87:9) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+error at announce
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+
+
+1655825077915
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 95974 ms
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+app manager: saved data
+
+
+1655825542880
+
+
+ok init
+dev mode enabled, tracker addr localhost
+Listening on localhost:10000...
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+app manager: saved data

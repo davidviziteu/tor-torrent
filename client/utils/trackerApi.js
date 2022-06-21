@@ -3,11 +3,40 @@ const { encrpytTextAes, generateAesKey, encrpytTextRsa, decryptTextAes } = requi
 const utils = require('./utils')
 const comm = require('./comm')
 //done
+
+
+//done
+exports.getTrackerPublicKey = async () => {
+    if (!trackerAddress) {
+        global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
+        console.log(`trackerAddress is not defined`)
+    }
+    try {
+        const response = await (await fetch(global.trackerAddress + `/public-key`)).json()
+        global.trackerPbKey = response.publicKey
+        global.trackerError = undefined
+        return response.publicKey
+    } catch (error) {
+        global.trackerError = 'Tracker did not respond. Retrying... (Click to retry now)'
+        console.error(error)
+        console.log(`error at fetching public key from tracker`);
+    }
+}
+
+
 exports.fetchHops = async () => {
     if (!trackerAddress) {
         global.trackerError = 'Tracker address is not known'
         console.log(`trackerAddress is not defined`)
     }
+
+    if (!global.trackerPbKey) {
+        await this.getTrackerPublicKey()
+        if (!global.trackerPbKey) {
+            return
+        }
+    }
+
     try {
         let aesKey = generateAesKey()
         const r = await fetch(global.trackerAddress + `/scrape/relay`,
@@ -39,8 +68,14 @@ exports.fetchHops = async () => {
 //done
 exports.announceAsNode = async () => {
     if (!trackerAddress) {
-        global.trackerError = 'tracker address is not known'
+        global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
         console.log(`tracker address is not defined`);
+    }
+    if (!global.trackerPbKey) {
+        await this.getTrackerPublicKey()
+        if (!global.trackerPbKey) {
+            return
+        }
     }
 
     try {
@@ -74,7 +109,7 @@ exports.announceAsNode = async () => {
         console.log(`announce as node ok`);
         global.trackerError = undefined
     } catch (error) {
-        global.trackerError = 'tracker seems to be unreachable, retrying...'
+        global.trackerError = 'Tracker did not respond. Retrying... (Click to retry now)'
         console.error(error)
         console.log(`error at announce`);
     }
@@ -83,8 +118,15 @@ exports.announceAsNode = async () => {
 //infohashes is an array of strings
 exports.announceLeeching = async (infoHashes) => {
     if (!trackerAddress) {
-        global.trackerError = 'tracker address is not known'
+        global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
         console.log(`trackerAddress is not defined`)
+    }
+
+    if (!global.trackerPbKey) {
+        await this.getTrackerPublicKey()
+        if (!global.trackerPbKey) {
+            return
+        }
     }
 
     let dataToEncrypt = []
@@ -93,7 +135,7 @@ exports.announceLeeching = async (infoHashes) => {
 
     if (!hops || hops.length == 0) {
         if (!global.trackerError)
-            global.trackerError = 'no relay nodes available, retrying in 5 seconds...'
+            global.trackerError = 'No relay nodes available, retrying... (Click to retry now)'
         console.log(`no relay nodes available`);
         //wait 30 seconds and try again
         setTimeout(() => {
@@ -149,7 +191,7 @@ exports.announceLeeching = async (infoHashes) => {
         global.trackerError = undefined
         return
     } catch (error) {
-        global.trackerError = 'tracker seems to be unreachable, retrying...'
+        global.trackerError = 'Tracker did not respond. Retrying... (Click to retry now)'
         console.error(error)
         console.log(`\t ^ error at announce as leecher`);
     }
@@ -160,9 +202,17 @@ exports.getLeechers = async (infoHashes) => {
     //wait 5 seconds
 
     if (!trackerAddress) {
-        global.trackerError = 'tracker address is not known'
+        global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
         console.log(`trackerAddress is not defined`)
     }
+
+    if (!global.trackerPbKey) {
+        await this.getTrackerPublicKey()
+        if (!global.trackerPbKey) {
+            return
+        }
+    }
+
     let response
     try {
         const key = generateAesKey()
@@ -216,28 +266,10 @@ exports.getLeechers = async (infoHashes) => {
 
         return filteredResponse
     } catch (error) {
-        global.trackerError = 'tracker seems to be unreachable, retrying...'
+        global.trackerError = 'Tracker did not respond. Retrying... (Click to retry now)'
         console.log(error)
         console.log(`response ${JSON.stringify(response)}`);
         console.log(`\t ^ error at announce as leecher`);
     }
 }
 
-
-//done
-exports.getTrackerPublicKey = async () => {
-    if (!trackerAddress) {
-        global.trackerError = 'tracker address is not known'
-        console.log(`trackerAddress is not defined`)
-    }
-    try {
-        const response = await (await fetch(global.trackerAddress + `/public-key`)).json()
-        global.trackerPbKey = response.publicKey
-        global.trackerError = undefined
-        return response.publicKey
-    } catch (error) {
-        global.trackerError = 'tracker seems to be unreachable, retrying...'
-        console.error(error)
-        console.log(`error at fetching public key from tracker`);
-    }
-}

@@ -29,8 +29,9 @@ router.post(`/relay`, async function routeOnion(req, res) {
         aesKey = cryptoApi.decrpytTextRsa(currentTransitCell.encryptedAesKey)
     } catch (error) {
         statsManager.incrementOnionDiscarded()
-        console.log(error)
-        console.log(`error while decryptiong aes key`)
+        // console.log(error)
+        // console.log(`error while decryptiong aes key`)
+        console.log(`onion discarded`);
         return res.status(200).end(cryptoApi.encrpytTextRsa(`failed ${utils.randomStringPadding()}`, prevPubKey))
     }
     try {
@@ -58,8 +59,9 @@ router.post(`/relay`, async function routeOnion(req, res) {
         //onion for me
         res.status(200).end(cryptoApi.encrpytTextRsa(`ack ${utils.randomStringPadding()}`, prevPubKey))
     } catch (error) {
-        statsManager.incrementOnionDiscarded()
-        console.log(error)
+        // statsManager.incrementOnionDiscarded()
+        // console.log(error)
+        console.log(`onion discarded`);
         return res.status(200).end(cryptoApi.encrpytTextRsa(`failed ${utils.randomStringPadding()}`, prevPubKey))
     }
     try {
@@ -87,7 +89,8 @@ router.post(`/relay`, async function routeOnion(req, res) {
         }
     } catch (error) {
         statsManager.incrementOnionDiscarded()
-        console.log(error)
+        // console.log(error)
+        console.log(`onion discarded`);
     }
 })
 

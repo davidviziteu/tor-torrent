@@ -158,6 +158,8 @@ class AppManager {
 
         try {
             this.data = JSON.parse(fs.readFileSync(global.storagePath));
+            if (this.data.trackerAddress)
+                this.setTrackerAddress(this.data.trackerAddress)
         } catch (error) {
             console.log(error);
             console.log('Error loading data_port_.json, creating new file');

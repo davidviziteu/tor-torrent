@@ -79,7 +79,7 @@ const refreshProcedure = async () => {
 }
 //poate poti sa dai emitter ul ca param
 exports.startRefreshingLoop = async () => {
-    if (global.refreshLoopStarted) {
+    if (global.refreshLoopStarted || !global.trackerAddress) {
         return;
     }
     global.refreshLoopStarted = true

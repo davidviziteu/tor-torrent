@@ -7,7 +7,7 @@ const comm = require('./comm')
 
 //done
 exports.getTrackerPublicKey = async () => {
-    if (!trackerAddress) {
+    if (!global.trackerAddress) {
         global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
         console.log(`trackerAddress is not defined`)
     }
@@ -25,7 +25,7 @@ exports.getTrackerPublicKey = async () => {
 
 
 exports.fetchHops = async () => {
-    if (!trackerAddress) {
+    if (!global.trackerAddress) {
         global.trackerError = 'Tracker address is not known'
         console.log(`trackerAddress is not defined`)
     }
@@ -62,12 +62,13 @@ exports.fetchHops = async () => {
         global.progressLoaded = false
         console.log(error)
         console.log(`error at fetching relay list from tracker. Tracker did not respond`);
+        this.getTrackerPublicKey()
     }
 }
 
 //done
 exports.announceAsNode = async () => {
-    if (!trackerAddress) {
+    if (!global.trackerAddress) {
         global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
         console.log(`tracker address is not defined`);
     }
@@ -112,12 +113,13 @@ exports.announceAsNode = async () => {
         global.trackerError = 'Tracker did not respond. Retrying... (Click to retry now)'
         console.error(error)
         console.log(`error at announce`);
+        this.getTrackerPublicKey()
     }
 }
 
 //infohashes is an array of strings
 exports.announceLeeching = async (infoHashes) => {
-    if (!trackerAddress) {
+    if (!global.trackerAddress) {
         global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
         console.log(`trackerAddress is not defined`)
     }
@@ -194,6 +196,7 @@ exports.announceLeeching = async (infoHashes) => {
         global.trackerError = 'Tracker did not respond. Retrying... (Click to retry now)'
         console.error(error)
         console.log(`\t ^ error at announce as leecher`);
+        this.getTrackerPublicKey()
     }
 
 }
@@ -201,7 +204,7 @@ exports.announceLeeching = async (infoHashes) => {
 exports.getLeechers = async (infoHashes) => {
     //wait 5 seconds
 
-    if (!trackerAddress) {
+    if (!global.trackerAddress) {
         global.trackerError = 'Tracker address is not known. Please load a ".torano" file.'
         console.log(`trackerAddress is not defined`)
     }
@@ -270,6 +273,7 @@ exports.getLeechers = async (infoHashes) => {
         console.log(error)
         console.log(`response ${JSON.stringify(response)}`);
         console.log(`\t ^ error at announce as leecher`);
+        this.getTrackerPublicKey()
     }
 }
 

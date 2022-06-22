@@ -145,3 +145,1201 @@ onion discarded
 reponse: failed pSm5d
 reponse: failed Oi<tV
 reponse: failed ri%G@
+
+
+1655923619629
+
+
+ok init
+Listening on localhost:10000...
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+leechers fetched
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+leechers fetched
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+app manager: saved data
+removed torrent David_Bachelor_Thesis.pdf
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+own public key refreshed
+FetchError: request to http://localhost:6969/public-key failed, reason: connect ECONNREFUSED 127.0.0.1:6969
+    at ClientRequest.<anonymous> (C:\Users\David\OneDrive\facultate\tor-torrent\client\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:527:28)
+    at Socket.socketErrorListener (node:_http_client:454:9)
+    at Socket.emit (node:events:527:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  type: 'system',
+  errno: 'ECONNREFUSED',
+  code: 'ECONNREFUSED'
+}
+error at fetching public key from tracker
+trackerAddress or pb key is not defined. cannot get refresh period
+error at startRefreshingLoop
+all torrents downloaded
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 119294 ms
+app manager: saved data
+/relay
+/relay
+/relay
+return msg 48m 0s 896ms
+return msg 48m 0s 898ms
+return msg 48m 0s 899ms
+[10000][id: 1] got onion to fwd to localhost:10000
+[10000][id: 2] got onion to fwd to localhost:10000
+[10000][id: 3] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 48m 1s 409ms
+return msg 48m 1s 410ms
+return msg 48m 1s 412ms
+[10000][id: 4] got onion to fwd to localhost:6001
+[10000][id: 5] got onion to fwd to localhost:6001
+[10000][id: 6] got onion to fwd to localhost:6001
+[10000][id: 4] onion fwd reponse message: ack PN5g{
+[10000][id: 1] onion fwd reponse message: ack PN5g{
+[10000][id: 5] onion fwd reponse message: ack -T(9l
+[10000][id: 2] onion fwd reponse message: ack -T(9l
+[10000][id: 6] onion fwd reponse message: ack ]}q]K
+[10000][id: 3] onion fwd reponse message: ack ]}q]K
+/relay
+/relay
+/relay
+/relay
+/relay
+return msg 48m 24s 293ms
+return msg 48m 24s 294ms
+return msg 48m 24s 296ms
+return msg 48m 24s 297ms
+return msg 48m 24s 298ms
+[10000][id: 7] got onion to fwd to localhost:10000
+[10000][id: 8] got onion to fwd to localhost:10000
+[10000][id: 9] got onion to fwd to localhost:10000
+[10000][id: 10] got onion to fwd to localhost:6002
+[10000][id: 11] got onion to fwd to localhost:6002
+onion discarded
+onion discarded
+/relay
+/relay
+/relay
+return msg 48m 24s 806ms
+return msg 48m 24s 807ms
+return msg 48m 24s 808ms
+[10000][id: 12] got onion to fwd to localhost:6001
+[10000][id: 13] got onion to fwd to localhost:6001
+[10000][id: 14] got onion to fwd to localhost:6001
+[10000][id: 12] onion fwd reponse message: ack J7mUo
+[10000][id: 7] onion fwd reponse message: ack J7mUo
+[10000][id: 13] onion fwd reponse message: ack WI_o[
+[10000][id: 8] onion fwd reponse message: ack WI_o[
+[10000][id: 14] onion fwd reponse message: ack Wg4SQ
+[10000][id: 9] onion fwd reponse message: ack Wg4SQ
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+return msg 48m 39s 253ms
+return msg 48m 39s 254ms
+return msg 48m 39s 255ms
+return msg 48m 39s 256ms
+return msg 48m 39s 257ms
+return msg 48m 39s 258ms
+return msg 48m 39s 259ms
+return msg 48m 39s 260ms
+return msg 48m 39s 261ms
+[10000][id: 15] got onion to fwd to localhost:10000
+[10000][id: 16] got onion to fwd to localhost:10000
+[10000][id: 17] got onion to fwd to localhost:10000
+[10000][id: 18] got onion to fwd to localhost:6002
+[10000][id: 19] got onion to fwd to localhost:6002
+[10000][id: 20] got onion to fwd to localhost:10000
+[10000][id: 21] got onion to fwd to localhost:10000
+[10000][id: 22] got onion to fwd to localhost:10000
+[10000][id: 23] got onion to fwd to localhost:10000
+onion discarded
+onion discarded
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+return msg 48m 39s 777ms
+return msg 48m 39s 778ms
+return msg 48m 39s 779ms
+return msg 48m 39s 780ms
+return msg 48m 39s 781ms
+return msg 48m 39s 783ms
+return msg 48m 39s 784ms
+[10000][id: 24] got onion to fwd to localhost:6001
+[10000][id: 25] got onion to fwd to localhost:6001
+[10000][id: 26] got onion to fwd to localhost:6001
+[10000][id: 27] got onion to fwd to localhost:6003
+[10000][id: 28] got onion to fwd to localhost:6003
+[10000][id: 29] got onion to fwd to localhost:6003
+[10000][id: 30] got onion to fwd to localhost:6003
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+[10000][id: 20] onion fwd reponse message: failed v<nFP
+[10000][id: 21] onion fwd reponse message: failed 06VSl
+[10000][id: 22] onion fwd reponse message: failed sGVNn
+[10000][id: 23] onion fwd reponse message: failed !H{l|
+[10000][id: 24] onion fwd reponse message: ack uhv]n
+[10000][id: 15] onion fwd reponse message: ack uhv]n
+[10000][id: 25] onion fwd reponse message: ack |kR/.
+[10000][id: 16] onion fwd reponse message: ack |kR/.
+[10000][id: 26] onion fwd reponse message: ack nx5[L
+[10000][id: 17] onion fwd reponse message: ack nx5[L
+app manager: saved data
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+return msg 49m 3s 565ms
+return msg 49m 3s 566ms
+return msg 49m 3s 567ms
+return msg 49m 3s 568ms
+return msg 49m 3s 570ms
+return msg 49m 3s 570ms
+return msg 49m 3s 571ms
+return msg 49m 3s 572ms
+return msg 49m 3s 574ms
+return msg 49m 3s 575ms
+return msg 49m 3s 576ms
+return msg 49m 3s 577ms
+return msg 49m 3s 578ms
+return msg 49m 3s 579ms
+return msg 49m 3s 580ms
+[10000][id: 31] got onion to fwd to localhost:10000
+[10000][id: 32] got onion to fwd to localhost:10000
+[10000][id: 33] got onion to fwd to localhost:10000
+[10000][id: 34] got onion to fwd to localhost:6002
+[10000][id: 35] got onion to fwd to localhost:6002
+[10000][id: 36] got onion to fwd to localhost:10000
+[10000][id: 37] got onion to fwd to localhost:10000
+[10000][id: 38] got onion to fwd to localhost:10000
+[10000][id: 39] got onion to fwd to localhost:10000
+[10000][id: 40] got onion to fwd to localhost:10000
+[10000][id: 41] got onion to fwd to localhost:10000
+[10000][id: 42] got onion to fwd to localhost:10000
+[10000][id: 43] got onion to fwd to localhost:10000
+[10000][id: 44] got onion to fwd to localhost:10000
+[10000][id: 45] got onion to fwd to localhost:10000
+onion discarded
+onion discarded
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+return msg 49m 4s 102ms
+return msg 49m 4s 103ms
+return msg 49m 4s 104ms
+return msg 49m 4s 104ms
+return msg 49m 4s 105ms
+return msg 49m 4s 106ms
+return msg 49m 4s 107ms
+return msg 49m 4s 108ms
+return msg 49m 4s 109ms
+return msg 49m 4s 110ms
+return msg 49m 4s 110ms
+return msg 49m 4s 111ms
+return msg 49m 4s 112ms
+[10000][id: 46] got onion to fwd to localhost:6001
+[10000][id: 47] got onion to fwd to localhost:6001
+[10000][id: 48] got onion to fwd to localhost:6001
+[10000][id: 49] got onion to fwd to localhost:6003
+[10000][id: 50] got onion to fwd to localhost:6003
+[10000][id: 51] got onion to fwd to localhost:6003
+[10000][id: 52] got onion to fwd to localhost:6003
+[10000][id: 53] got onion to fwd to localhost:6004
+[10000][id: 54] got onion to fwd to localhost:6004
+[10000][id: 55] got onion to fwd to localhost:6004
+[10000][id: 56] got onion to fwd to localhost:6004
+[10000][id: 57] got onion to fwd to localhost:6004
+[10000][id: 58] got onion to fwd to localhost:6004
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+[10000][id: 36] onion fwd reponse message: failed <[g-n
+[10000][id: 37] onion fwd reponse message: failed +wVO{
+[10000][id: 38] onion fwd reponse message: failed zyuHI
+[10000][id: 39] onion fwd reponse message: failed LSJOb
+[10000][id: 40] onion fwd reponse message: failed @h*AO
+[10000][id: 41] onion fwd reponse message: failed L=l&n
+[10000][id: 42] onion fwd reponse message: failed p.iZv
+[10000][id: 43] onion fwd reponse message: failed 19k%;
+[10000][id: 44] onion fwd reponse message: failed >(J-0
+[10000][id: 45] onion fwd reponse message: failed |p[qK
+[10000][id: 46] onion fwd reponse message: ack .3|ls
+[10000][id: 31] onion fwd reponse message: ack .3|ls
+[10000][id: 47] onion fwd reponse message: ack $7r,;
+[10000][id: 32] onion fwd reponse message: ack $7r,;
+[10000][id: 48] onion fwd reponse message: ack cO<Vu
+[10000][id: 33] onion fwd reponse message: ack cO<Vu
+own public key refreshed
+announce as node ok
+refresh
+created torrent VarlanCosminNicolae_ViziteuDavidAndrei_TEZA.pdf
+app manager: saved data
+app manager: saved data
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+app manager: saved data
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923869654
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869655
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923869656
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+app manager: saved data
+own public key refreshed
+announce as node ok
+refresh
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923989666
+onion discarded
+[RESPONSE] reply onion for key: 1655923989666
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923989665
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655923989665
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655923989666
+onion discarded
+[RESPONSE] reply onion for key: 1655923989666
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+app manager: saved data
+app manager: saved data
+
+
+1655924108267
+
+
+ok init
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 70693 ms
+app manager: saved data
+removed torrent VarlanCosminNicolae_ViziteuDavidAndrei_TEZA.pdf
+created torrent VarlanCosminNicolae_ViziteuDavidAndrei_TEZA.pdf
+app manager: saved data
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924108679
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108680
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108681
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132765
+onion discarded
+[RESPONSE] reply onion for key: 1655924132765
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132766
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924108679
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108680
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108681
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132765
+onion discarded
+[RESPONSE] reply onion for key: 1655924132765
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132766
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924108679
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108680
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108681
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132765
+onion discarded
+[RESPONSE] reply onion for key: 1655924132765
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132766
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+app manager: saved data
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924108679
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108680
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108681
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132765
+onion discarded
+[RESPONSE] reply onion for key: 1655924132765
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132766
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+/relay
+/relay
+/relay
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924108679
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108680
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924108681
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132765
+onion discarded
+[RESPONSE] reply onion for key: 1655924132765
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924132766
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+own public key refreshed
+announce as node ok
+refresh
+/relay
+/relay
+/relay
+return msg 56m 24s 608ms
+return msg 56m 24s 609ms
+return msg 56m 24s 610ms
+[10000][id: 31] got onion to fwd to localhost:10000
+[10000][id: 32] got onion to fwd to localhost:10000
+[10000][id: 33] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 25s 130ms
+return msg 56m 25s 130ms
+return msg 56m 25s 131ms
+[10000][id: 34] got onion to fwd to localhost:10000
+[10000][id: 35] got onion to fwd to localhost:10000
+[10000][id: 36] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 25s 643ms
+return msg 56m 25s 645ms
+return msg 56m 25s 646ms
+[10000][id: 37] got onion to fwd to localhost:10000
+[10000][id: 38] got onion to fwd to localhost:10000
+[10000][id: 39] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924179439
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+onion discarded
+[RESPONSE] reply onion for key: 1655924179440
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[10000][id: 37] onion fwd reponse message: ack Ho</T
+[10000][id: 38] onion fwd reponse message: ack u,Raj
+[10000][id: 39] onion fwd reponse message: ack Ws}3,
+[10000][id: 34] onion fwd reponse message: ack Ho</T
+[10000][id: 35] onion fwd reponse message: ack u,Raj
+[10000][id: 36] onion fwd reponse message: ack Ws}3,
+[10000][id: 31] onion fwd reponse message: ack Ho</T
+[10000][id: 32] onion fwd reponse message: ack u,Raj
+[10000][id: 33] onion fwd reponse message: ack Ws}3,
+/relay
+/relay
+/relay
+return msg 56m 32s 614ms
+return msg 56m 32s 615ms
+return msg 56m 32s 616ms
+[10000][id: 43] got onion to fwd to localhost:10000
+[10000][id: 44] got onion to fwd to localhost:10000
+[10000][id: 45] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 33s 123ms
+return msg 56m 33s 124ms
+return msg 56m 33s 125ms
+[10000][id: 46] got onion to fwd to localhost:10000
+[10000][id: 47] got onion to fwd to localhost:10000
+[10000][id: 48] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 33s 636ms
+return msg 56m 33s 636ms
+return msg 56m 33s 638ms
+[10000][id: 49] got onion to fwd to localhost:10000
+[10000][id: 50] got onion to fwd to localhost:10000
+[10000][id: 51] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924179439
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+onion discarded
+[RESPONSE] reply onion for key: 1655924179440
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[10000][id: 49] onion fwd reponse message: ack XKziZ
+[10000][id: 50] onion fwd reponse message: ack CY)Ag
+[10000][id: 51] onion fwd reponse message: ack ]<jl+
+[10000][id: 46] onion fwd reponse message: ack XKziZ
+[10000][id: 47] onion fwd reponse message: ack CY)Ag
+[10000][id: 48] onion fwd reponse message: ack ]<jl+
+[10000][id: 43] onion fwd reponse message: ack XKziZ
+[10000][id: 44] onion fwd reponse message: ack CY)Ag
+[10000][id: 45] onion fwd reponse message: ack ]<jl+
+/relay
+/relay
+/relay
+return msg 56m 40s 620ms
+return msg 56m 40s 621ms
+return msg 56m 40s 622ms
+[10000][id: 55] got onion to fwd to localhost:10000
+[10000][id: 56] got onion to fwd to localhost:10000
+[10000][id: 57] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 41s 136ms
+return msg 56m 41s 137ms
+return msg 56m 41s 138ms
+[10000][id: 58] got onion to fwd to localhost:10000
+[10000][id: 59] got onion to fwd to localhost:10000
+[10000][id: 60] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 41s 655ms
+return msg 56m 41s 655ms
+return msg 56m 41s 656ms
+[10000][id: 61] got onion to fwd to localhost:10000
+[10000][id: 62] got onion to fwd to localhost:10000
+[10000][id: 63] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924179439
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+onion discarded
+[10000][id: 61] onion fwd reponse message: ack B)#&R
+[10000][id: 62] onion fwd reponse message: ack jzAxM
+[10000][id: 63] onion fwd reponse message: ack Tltrt
+[10000][id: 58] onion fwd reponse message: ack B)#&R
+[10000][id: 59] onion fwd reponse message: ack jzAxM
+[10000][id: 60] onion fwd reponse message: ack Tltrt
+[10000][id: 55] onion fwd reponse message: ack B)#&R
+[10000][id: 56] onion fwd reponse message: ack jzAxM
+[10000][id: 57] onion fwd reponse message: ack Tltrt
+/relay
+/relay
+/relay
+return msg 56m 48s 626ms
+return msg 56m 48s 627ms
+return msg 56m 48s 628ms
+[10000][id: 67] got onion to fwd to localhost:10000
+[10000][id: 68] got onion to fwd to localhost:10000
+[10000][id: 69] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 49s 139ms
+return msg 56m 49s 140ms
+return msg 56m 49s 141ms
+[10000][id: 70] got onion to fwd to localhost:10000
+[10000][id: 71] got onion to fwd to localhost:10000
+[10000][id: 72] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 49s 651ms
+return msg 56m 49s 652ms
+return msg 56m 49s 653ms
+[10000][id: 73] got onion to fwd to localhost:10000
+[10000][id: 74] got onion to fwd to localhost:10000
+[10000][id: 75] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924179439
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+onion discarded
+[RESPONSE] reply onion for key: 1655924179440
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[10000][id: 73] onion fwd reponse message: ack I/,^8
+[10000][id: 74] onion fwd reponse message: ack Toxe{
+[10000][id: 75] onion fwd reponse message: ack pX<;n
+[10000][id: 70] onion fwd reponse message: ack I/,^8
+[10000][id: 71] onion fwd reponse message: ack Toxe{
+[10000][id: 72] onion fwd reponse message: ack pX<;n
+[10000][id: 67] onion fwd reponse message: ack I/,^8
+[10000][id: 68] onion fwd reponse message: ack Toxe{
+[10000][id: 69] onion fwd reponse message: ack pX<;n
+/relay
+/relay
+/relay
+return msg 56m 56s 633ms
+return msg 56m 56s 634ms
+return msg 56m 56s 635ms
+[10000][id: 79] got onion to fwd to localhost:10000
+[10000][id: 80] got onion to fwd to localhost:10000
+[10000][id: 81] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 57s 144ms
+return msg 56m 57s 145ms
+return msg 56m 57s 146ms
+[10000][id: 82] got onion to fwd to localhost:10000
+[10000][id: 83] got onion to fwd to localhost:10000
+[10000][id: 84] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 56m 57s 657ms
+return msg 56m 57s 658ms
+return msg 56m 57s 659ms
+[10000][id: 85] got onion to fwd to localhost:10000
+[10000][id: 86] got onion to fwd to localhost:10000
+[10000][id: 87] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924179439
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+onion discarded
+[RESPONSE] reply onion for key: 1655924179440
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[10000][id: 85] onion fwd reponse message: ack L3ym.
+[10000][id: 86] onion fwd reponse message: ack OYoB1
+[10000][id: 87] onion fwd reponse message: ack RYQF&
+[10000][id: 82] onion fwd reponse message: ack L3ym.
+[10000][id: 83] onion fwd reponse message: ack OYoB1
+[10000][id: 84] onion fwd reponse message: ack RYQF&
+[10000][id: 79] onion fwd reponse message: ack L3ym.
+[10000][id: 80] onion fwd reponse message: ack OYoB1
+[10000][id: 81] onion fwd reponse message: ack RYQF&
+/relay
+/relay
+/relay
+return msg 57m 4s 633ms
+return msg 57m 4s 634ms
+return msg 57m 4s 634ms
+[10000][id: 91] got onion to fwd to localhost:10000
+[10000][id: 92] got onion to fwd to localhost:10000
+[10000][id: 93] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 57m 5s 151ms
+return msg 57m 5s 152ms
+return msg 57m 5s 153ms
+[10000][id: 94] got onion to fwd to localhost:10000
+[10000][id: 95] got onion to fwd to localhost:10000
+[10000][id: 96] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+return msg 57m 5s 670ms
+return msg 57m 5s 671ms
+return msg 57m 5s 673ms
+[10000][id: 97] got onion to fwd to localhost:10000
+[10000][id: 98] got onion to fwd to localhost:10000
+[10000][id: 99] got onion to fwd to localhost:10000
+/relay
+/relay
+/relay
+[RESPONSE] reply onion for key: 1655924179439
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+received pieces request for 52be4924c9c6016fb7909ca96ad858ad6f2fd8e8
+pieces uploaded
+[RESPONSE] reply onion for key: 1655924179440
+onion discarded
+[10000][id: 97] onion fwd reponse message: ack Q#s{X
+[10000][id: 98] onion fwd reponse message: ack +&!(V
+[10000][id: 99] onion fwd reponse message: ack 5)I.L
+[10000][id: 94] onion fwd reponse message: ack Q#s{X
+[10000][id: 95] onion fwd reponse message: ack +&!(V
+[10000][id: 96] onion fwd reponse message: ack 5)I.L
+[10000][id: 91] onion fwd reponse message: ack Q#s{X
+[10000][id: 92] onion fwd reponse message: ack +&!(V
+[10000][id: 93] onion fwd reponse message: ack 5)I.L
+app manager: saved data
+
+
+1655924253532
+
+
+ok init
+Listening on localhost:10000...
+own public key refreshed
+announce as node ok
+tracker session time: 2 minutes
+refreshing every 2 minutes in 45415 ms
+app manager: saved data
+removed torrent VarlanCosminNicolae_ViziteuDavidAndrei_TEZA.pdf
+app manager: saved data
+scraped leechers ok
+/relay
+/relay
+/relay
+/relay
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+reponse: failed +_h<#
+reponse: failed )>$fw
+reponse: failed /D$4S
+reponse: failed 3<2JL
+scraped leechers ok
+/relay
+/relay
+/relay
+/relay
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+reponse: failed 0jlEf
+reponse: failed NF]6,
+reponse: failed tHPHG
+reponse: failed 2/x@b
+scraped leechers ok
+/relay
+/relay
+/relay
+/relay
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+reponse: failed 3@&#l
+reponse: failed T){kG
+reponse: failed {<f4p
+reponse: failed 0[DoZ
+scraped leechers ok
+/relay
+/relay
+/relay
+/relay
+onion discarded
+onion discarded
+onion discarded
+onion discarded
+reponse: failed RSiS4
+reponse: failed ?j>A$
+reponse: failed ;@iRW
+reponse: failed oET2l
+own public key refreshed
+announce as node ok
+refresh
+scraped leechers ok
+leechers fetched
+scraped leechers ok
+reponse: ack 2*6kK
+/relay
+[RESPONSE] reply onion for key: 1655924301612
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack xYG0q
+/relay
+[RESPONSE] reply onion for key: 1655924309619
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+app manager: saved data
+scraped leechers ok
+reponse: ack Z6FbM
+/relay
+[RESPONSE] reply onion for key: 1655924317626
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack 4t@*2
+/relay
+[RESPONSE] reply onion for key: 1655924325633
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack 4/Bz-
+/relay
+[RESPONSE] reply onion for key: 1655924333634
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack rRRY*
+/relay
+[RESPONSE] reply onion for key: 1655924341635
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack +|Y#R
+/relay
+[RESPONSE] reply onion for key: 1655924349645
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack _y,}S
+/relay
+[RESPONSE] reply onion for key: 1655924357657
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack +JQY/
+/relay
+[RESPONSE] reply onion for key: 1655924365670
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+app manager: saved data
+reponse: ack D?*dW
+/relay
+[RESPONSE] reply onion for key: 1655924373671
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack *O}J@
+/relay
+[RESPONSE] reply onion for key: 1655924381676
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+scraped leechers ok
+reponse: ack -;xL^
+/relay
+[RESPONSE] reply onion for key: 1655924389688
+app manager: saved data
+app manager: saved data
+app manager: saved data
+pieces received
+all torrents downloaded
+own public key refreshed
+announce as node ok
+refresh
+app manager: saved data
+app manager: saved data

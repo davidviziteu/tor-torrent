@@ -9,7 +9,7 @@
       "port": 6001,
       "announces": 3,
       "circuitLen": 2,
-      "maxPieces": 10,
+      "maxPieces": 50,
       "path": "D:/toranos/testdata"
     },
     {
@@ -17,7 +17,7 @@
       "port": 6002,
       "announces": 1,
       "circuitLen": 1,
-      "maxPieces": 60,
+      "maxPieces": 70,
       "path": "D:/toranos/testdata"
     },
     {
@@ -25,7 +25,7 @@
       "port": 6003,
       "announces": 2,
       "circuitLen": 2,
-      "maxPieces": 70,
+      "maxPieces": 60,
       "path": "D:/toranos/testdata"
     },
     {
@@ -41,7 +41,7 @@
       "port": 6005,
       "announces": 10,
       "circuitLen": 2,
-      "maxPieces": 10,
+      "maxPieces": 90,
       "path": "D:/toranos/testdata"
     },
     {
@@ -49,7 +49,7 @@
       "port": 6006,
       "announces": 3,
       "circuitLen": 2,
-      "maxPieces": 10,
+      "maxPieces": 70,
       "path": "D:/toranos/testdata"
     }
   ]

@@ -1,12 +1,12 @@
 const models = require('../models')
 const cryptoApi = require('./cryptoApi')
 const fetch = require(`node-fetch`)
-const { AbortError } = require(`node-fetch`)
+const { eventEmitter, trackerRefreshSessionEv } = require('./eventsManager')
 
 let encriptionKeysArrayMap = new Map() //cache for payload encryption keys
-let currentHits = 0;
-let refreshMapHitsCount = 10 //at 100 hits map should be refreshed
-let mapCacheTimeHours = 1 //termenul de valabilitate al unui item in encr_keys_map. in ore.
+eventEmitter.on(trackerRefreshSessionEv, () => {
+    encriptionKeysArrayMap = new Map()
+})
 exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     let keysArray = encriptionKeysArrayMap.get(mapKey)
     if (!keysArray)
@@ -16,32 +16,10 @@ exports.decryptPayloadForKey = (mapKey, encryptedPayload) => {
     }
     return encryptedPayload
 }
-/**
- * adds in the encriptionKeysArrayMap a key - time when computed and a value - array of AES keys
- *                                          that the response payload should be encrypted with)
- * refreshes the map cache every 100 insertions: deletes the values that were computed more than 
- *                                                                      {mapCacheTimeHours} hours
- * the hops are being iterated in reverse order. 
- * the aes keys array are generated and iterated in the same order
- * @param {*} hops array of {ip, port, publicKey} that represents the path of a transit cell in the network
- * @returns an ecrypted return onion that contains aes keys to encrypt a cell's external payload
- */
+
+
 exports.prepReplyOnion = (hops, infoHash, type, rememberFirstROKey = true) => {
-    currentHits++
-    //TODO trebuie refacut asta
-    // if (currentHits == refreshMapHitsCount) {
-    //     let mapKeys = [...encriptionKeysArrayMap.keys()]
-    //     for (const key in mapKeys) {
-    //         try {
-    //             let hoursDiff = Math.abs(Date.parse(key) - Date.now()) / 36e5;
-    //             if (hoursDiff > mapCacheTimeHours)
-    //                 encriptionKeysArrayMap.delete(key)
-    //         } catch (error) {
-    //             continue //in case there are other keys. ex: announce key
-    //         }
-    //     }
-    //     currentHits = 0
-    // }
+
     let aesKeys = []
     for (let index = 0; index < hops.length + 1; index++) {
         aesKeys.push(cryptoApi.generateAesKey())
@@ -81,7 +59,6 @@ exports.prepReplyOnion = (hops, infoHash, type, rememberFirstROKey = true) => {
         currentOnion = new models.Onion()
         currentOnion.onionLayer = cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
         currentOnion.next.encryptedAesKey = cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), hop.publicKey)
-        currentOnion.next.aesPublicKey = hop.publicKey
         currentOnion.next.ip = hop.ip
         currentOnion.next.port = hop.port
         portsOrder = [hop.port].concat(portsOrder)
@@ -140,7 +117,6 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
         currentOnion = new models.Onion()
         currentOnion.onionLayer = cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
         currentOnion.next.encryptedAesKey = cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), hop.publicKey)
-        currentOnion.next.aesPublicKey = hop.publicKey //dev
         currentOnion.next.ip = hop.ip
         currentOnion.next.port = hop.port
         portsOrder = [hop.port].concat(portsOrder)
@@ -157,7 +133,6 @@ exports.prepTransitCell = (hops, destip, destport, destPbKey, message, payload, 
     transitCell.externalPayload = payload
     transitCell.onion = cryptoApi.encrpytTextAes(JSON.stringify(prevOnion), prevAesKeyObj)
     transitCell.encryptedAesKey = cryptoApi.encrpytTextRsa(JSON.stringify(prevAesKeyObj), allHops[i].publicKey)
-    transitCell.aesPublicKey = allHops[i].publicKey
     keysOrder = [allHops[i].publicKey].concat(keysOrder)
     portsOrder = [allHops[i].port].concat(portsOrder) //for debugging
     console.log(portsOrder);
@@ -203,7 +178,6 @@ exports.sendOnion = async (ip, port, body, timeout = 5000) => {
             }
             resolve(response)
         }).catch(error => {
-            //add error handling in case of connreset error
             if (error.type && error.type == 'aborted') {
                 return reject('timeout');
             }

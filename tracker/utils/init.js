@@ -14,7 +14,7 @@ global.port = configurations.port ? configurations.port : 6969
 global.sessionDurationMinutes = configurations.sessionDurationMinutes ? configurations.sessionDurationMinutes * 60000 : 30 * 60000
 global.maxRelayNodesReturned = configurations.maxRelayNodesReturned ? configurations.maxRelayNodesReturned : 30
 global.maxLeechersReturned = configurations.maxLeechersReturned ? configurations.maxLeechersReturned : 30
-global.dev = configurations.dev ? configurations.dev : false
+// global.dev = configurations.dev ? configurations.dev : false
 
 function refreshAll() {
     try {

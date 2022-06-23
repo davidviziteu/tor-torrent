@@ -22,10 +22,12 @@ exports.sendPiecesRequest = async (piecesArr, ro, to) => {
         let nextNodeResponse = await comm.sendOnion(to.ip, to.port, transitCell)
         console.log(`reponse: ${nextNodeResponse}`);
         statsManager.incrementMessagesSent();
+        return true
     } catch (error) {
         console.log(error);
         console.log(`failed to send onion to ${to.ip}:${to.port}`);
     }
+    return false
 }
 
 exports.sendPieces = async (piecesArr, to) => {

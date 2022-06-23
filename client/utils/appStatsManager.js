@@ -50,6 +50,7 @@ class AppStatsManager {
         this.data['Direct tracker contact: '] = bool ? 'Yes' : 'No'
     }
     setTrackerAddress(url) {
+        if (!url) return
         if (url.includes('http://')) {
             url = url.replace('http://', '')
         }

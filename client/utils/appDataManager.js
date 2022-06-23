@@ -71,9 +71,9 @@ class AppManager {
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: false,
-                piecesRequested: new Array(parsedTorrent.pieces.length).fill(0),
+                piecesRequested: 0,
                 piecesReceived: new Array(parsedTorrent.pieces.length).fill(0),
-                requestesSend: 0,
+                requestsSend: 0,
                 fd: fd
             }
             trackerApi.announceLeeching([parsedTorrent.infoHash])
@@ -104,15 +104,13 @@ class AppManager {
 
         this.data.trackerAddress = parsedTorrent.announce[0]
         try {
-            //copy metainfo file to "."
-
             this.data.torrents[parsedTorrent.infoHash] = {
                 infoHash: parsedTorrent.infoHash,
                 filesPath: filesPath,
                 parsedTorrent: parsedTorrent,
                 isFolder: isFolder,
                 completed: true,
-                requestesSend: 0,
+                requestsSend: 0,
                 fd: fd
             }
             trackerApi.announceLeeching([parsedTorrent.infoHash])
@@ -160,6 +158,8 @@ class AppManager {
 
         try {
             this.data = JSON.parse(fs.readFileSync(global.storagePath));
+            if (this.data.trackerAddress)
+                this.setTrackerAddress(this.data.trackerAddress)
         } catch (error) {
             console.log(error);
             console.log('Error loading data_port_.json, creating new file');
@@ -218,7 +218,6 @@ class AppManager {
         let toScrape = this.getIncompleteTorrentsHashes()
 
         //begin procedure 
-
         if (toScrape.length > 0) {
             let leechers = await trackerApi.getLeechers(toScrape)
             console.log('leechers fetched');
@@ -253,9 +252,21 @@ class AppManager {
         if (this.data.torrents[infoHash].piecesReceived.every(x => x)) {
             this.data.torrents[infoHash].completed = true
             delete this.data.torrents[infoHash].piecesReceived
-            delete this.data.torrents[infoHash].piecesRequested
+            try {
+                fs.closeSync(this.data.torrents[infoHash].fd)
+                this.data.torrents[infoHash].fd = fs.openSync(this.data.torrents[infoHash].filesPath, 'r')
+            } catch (error) {
+                console.log(error);
+                log('Error opening the files as read only. path: ' + this.data.torrents[infoHash].filesPath);
+            }
         }
         this.saveProgress()
+    }
+
+    incrementPiecesReq(infoHash, count) {
+        if (!this.data.torrents[infoHash])
+            return
+        this.data.torrents[infoHash].piecesRequested += count
     }
 }
 

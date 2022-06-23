@@ -1,10 +1,10 @@
 {
-  "name": "vite-solid-electronn",
-  "productName": "Electronn",
+  "name": "david-viziteu-torano-client-batchelor-thesis",
+  "productName": "Torano client",
   "private": true,
   "version": "1.0.0",
-  "description": "Vite SolidJS Electron boilerplatenn.",
-  "author": "ch99q <64793a1a@gmail.connnm>",
+  "description": "Implementaion of the Torano protocol.",
+  "author": "David Viziteu <viziteu.david@gmail.com>, Cosmin Varlan ",
   "license": "MIT",
   "main": "dist/main/index.cjs",
   "scripts": {

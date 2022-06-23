@@ -100,7 +100,7 @@ exports.decryptValidateBody = (req, res, schema = null, keyOnly = false) => {
             if (encryptedData)
                 data = JSON.parse(this.decryptTextAes(encryptedData, key))
         } catch (error) {
-            console.log(error)
+            console.log('decryption error')
             if (global.dev)
                 this.sendDataEncrypted(res, key, {
                     error: 'invalid key',

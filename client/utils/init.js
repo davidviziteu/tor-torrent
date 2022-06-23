@@ -14,8 +14,8 @@ global.port = config.port
 configurations = {
     "announcesPerTorrent": config.announces ? config.announces : 3,
     "circuitLength": config.circuitLen ? config.circuitLen : 3,
-    "maxPiecesPerMessage": config.maxPieces ? config.maxPieces : 3,
-    "dev": true
+    "maxPiecesPerMessage": config.maxPieces ? config.maxPieces : 5,
+    "dev": false
 }
 global.keysError = null
 global.refreshLoopStarted = false

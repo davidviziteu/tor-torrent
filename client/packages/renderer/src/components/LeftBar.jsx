@@ -165,7 +165,8 @@ export default function LeftBar(props) {
         <div id="menu-bar" class="drag">
             <button class="no-drag menu-bar-button" title='Load a .torano file' onClick={openToranoFile}>📁</button>
             <button class="no-drag menu-bar-button" title='Create and load new .torano file' onClick={createToranoFile}>➕</button>
-            <button class="no-drag menu-bar-button" title='Exit application' onClick={() => {
+            <button class="no-drag menu-bar-button" title='Exit application' onClick={async () => {
+                await fetch(`http://localhost:${window.backend_port}/quit`)
                 window.ipcRenderer.send('close');
             }}>❌</button>
         </div>

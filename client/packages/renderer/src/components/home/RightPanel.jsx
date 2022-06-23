@@ -8,7 +8,7 @@ function TableRow(props) {
                 {leftText}
             </div>
             <div class="right-panel-line-right-text">
-             {rightTextGetter()[leftText]}
+                {rightTextGetter()[leftText]}
             </div>
         </div>
     )
@@ -23,7 +23,7 @@ export default function RightPanel(props) {
         'Messages sent: ',
         'Messages responses: ',
         'Pieces Uploaded: ',
-        'Max pieces / message: ',
+        'Max pieces sent / message: ',
         'Tracker: ',
         'Tracker session (mins): ',
         'Direct tracker contact: ',
